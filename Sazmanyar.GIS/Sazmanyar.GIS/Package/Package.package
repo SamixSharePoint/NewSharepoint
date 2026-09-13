@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="e3407547-3b9c-4fe6-9663-a8cf9205e182" solutionId="e3407547-3b9c-4fe6-9663-a8cf9205e182" resetWebServer="false" sharePointProductVersion="16.0" name="Sazmanyar.GIS" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="cb61dbbd-8811-4b4d-afba-0781cd7783c6" />
+    <featureReference itemId="89a68ac0-c1ad-4ecb-9b38-90561d5752e0" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="3ec80f7c-c2ca-472c-87b6-6f89a74a1d89" />
+    <projectItemReference itemId="fbdb8d8c-fe29-4cc3-affb-7471335cd1b5" />
+  </projectItems>
+</package>

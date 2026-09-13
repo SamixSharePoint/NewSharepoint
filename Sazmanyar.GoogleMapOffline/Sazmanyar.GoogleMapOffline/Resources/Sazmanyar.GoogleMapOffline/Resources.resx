@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="_SettingsActionDescription_LabelText" xml:space="preserve">
+    <value>GoogleMapOffline</value>
+  </data>
+  <data name="_SettingsActionTitle_LabelText" xml:space="preserve">
+    <value>GoogleMapOffline</value>
+  </data>
+  <data name="_SettingsAdress_Of_Image_Location" xml:space="preserve">
+    <value>تخصیص آدرس تصاویر </value>
+  </data>
+  <data name="_Settingsdraggable" xml:space="preserve">
+    <value>امکان استفاده از قابلیت درگ و دراپت</value>
+  </data>
+  <data name="_SettingsenableScrollWheelZoom" xml:space="preserve">
+    <value>امکان استفاده از اسکرول موس</value>
+  </data>
+  <data name="_Settingsfilterd_by_column" xml:space="preserve">
+    <value>تعیین ستون جهت دسته بندی</value>
+  </data>
+  <data name="_SettingsIsCenField" xml:space="preserve">
+    <value>نام ستون امکان نمایش در مرکز در لیست می باشد</value>
+  </data>
+  <data name="_SettingsLatField" xml:space="preserve">
+    <value>نام ستون Latitude در لیست می باشد</value>
+  </data>
+  <data name="_SettingsListName" xml:space="preserve">
+    <value>نام لیست اطلاعات نقشه می باشد</value>
+  </data>
+  <data name="_SettingsLongField" xml:space="preserve">
+    <value>نام ستون Longitude در لیست می باشد</value>
+  </data>
+  <data name="_SettingsmaxinumLevel" xml:space="preserve">
+    <value>تخصیص سطح بلای زون</value>
+  </data>
+  <data name="_SettingsmininumLevel" xml:space="preserve">
+    <value>تخصیص سطح پایین زون</value>
+  </data>
+  <data name="_SettingsnavigationControl" xml:space="preserve">
+    <value>امکان استفاده از ابزار پیمایش</value>
+  </data>
+  <data name="_SettingsscaleControl" xml:space="preserve">
+    <value>امکان استفاده از مقیاس در نقشه</value>
+  </data>
+  <data name="_SettingsShowByAdminPrevilage" xml:space="preserve">
+    <value>امکان نمایش با دسترسی مدیر سایت</value>
+  </data>
+  <data name="_SettingsTitleField" xml:space="preserve">
+    <value>نام ستون عنوان در لیست می باشد</value>
+  </data>
+  <data name="_SettingsZoomLevel" xml:space="preserve">
+    <value>تخصیص زون پیشفرض</value>
+  </data>
+  <data name="_WebpartDescription" xml:space="preserve">
+    <value>GoogleMapOfflineWebpart Description</value>
+  </data>
+  <data name="_WebpartTitle" xml:space="preserve">
+    <value>GoogleMapOffline</value>
+  </data>
+  <data name="_SettingsJSDrowMarkerAddressUrl" xml:space="preserve">
+    <value>آدرس فایل جاوا اسکریپت رسم شکلک(DrowMarker.js)</value>
+  </data>
+  <data name="_SettingsStateField" xml:space="preserve">
+    <value>نام ستون وضعیت در لیست می باشد</value>
+  </data>
+  <data name="_SettingsBaseWebUrlInfo" xml:space="preserve">
+    <value>آدرس وب مربوط به سایت لیست مورد نظر را تعیین کنید(برای اشاره به سایت خالی از / استفاده کنید)ه</value>
+  </data>
+  <data name="_SettingsShouldRemovedFromBaseUrl" xml:space="preserve">
+    <value>تعیین آدرس برای حذف از لینک ها</value>
+  </data>
+  <data name="_SettingsShowAllMarkerForFirstTime" xml:space="preserve">
+    <value>آیا باید همهء مارکرهای موجود برای اولین بار نشان داده شوند؟</value>
+  </data>
+  <data name="_SettingsCheckList_by_column1" xml:space="preserve">
+    <value>تعیین ستون اول جهت جستجو انتخابی در لیست می باشد(chb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsCheckList_by_column2" xml:space="preserve">
+    <value>تعیین ستون دوم جهت جستجو انتخابی در لیست می باشد(chb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsCheckList_by_column3" xml:space="preserve">
+    <value>تعیین ستون سوم جهت جستجو انتخابی در لیست می باشد(chb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_Settingsfilterd_by_column1" xml:space="preserve">
+    <value>تعیین ستون اول جهت جستجو موردی در لیست می باشد(cmb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_Settingsfilterd_by_column2" xml:space="preserve">
+    <value>تعیین ستون دوم جهت جستجو موردی در لیست می باشد(cmb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_Settingsfilterd_by_column3" xml:space="preserve">
+    <value>تعیین ستون سوم جهت جستجو موردی در لیست می باشد(cmb مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsListUrlHelper1" xml:space="preserve">
+    <value>First List Helper Url</value>
+  </data>
+  <data name="_SettingsListUrlHelper2" xml:space="preserve">
+    <value>Second List Helper Url</value>
+  </data>
+  <data name="_SettingsListUrlHelper3" xml:space="preserve">
+    <value>Third List Helper Url</value>
+  </data>
+  <data name="_SettingsListUrlHelper4" xml:space="preserve">
+    <value>Forth List Helper Url</value>
+  </data>
+  <data name="_SettingsListUrlHelper5" xml:space="preserve">
+    <value>Fifth List Helper Url</value>
+  </data>
+  <data name="_SettingsSearched_by_column1" xml:space="preserve">
+    <value>تعیین ستون اول جهت جستجو متنی در لیست می باشد(txt مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsSearched_by_column2" xml:space="preserve">
+    <value>تعیین ستون دوم جهت جستجو متنی در لیست می باشد(txt مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsSearched_by_column3" xml:space="preserve">
+    <value>تعیین ستون سوم جهت جستجو متنی در لیست می باشد(txt مقدار خالی به منزلهء عدم نمایش می باشد)</value>
+  </data>
+  <data name="_SettingsSearchResultField1" xml:space="preserve">
+    <value>فیلد اول جهت نمایش در نتایج جستجو</value>
+  </data>
+  <data name="_SettingsSearchResultField2" xml:space="preserve">
+    <value>فیلد دوم جهت نمایش در نتایج جستجو</value>
+  </data>
+  <data name="_SettingsShowAllMarkerForFirstTime1" xml:space="preserve">
+    <value>آیا باید همهء مارکرهای موجود برای اولین بار نشان داده شوند؟</value>
+  </data>
+  <data name="_SettingsShowSearchPanel" xml:space="preserve">
+    <value>آیا پنل جستجو نشان داده شود؟</value>
+  </data>
+  <data name="_SettingsView_nameField" xml:space="preserve">
+    <value>نام ویو مربوط به لیست</value>
+  </data>
+  <data name="_SettingsMaxSearchResult" xml:space="preserve">
+    <value>حداکثر تعداد نتایج جستجو</value>
+  </data>
+  <data name="_SettingsShowContextMenu" xml:space="preserve">
+    <value>نمایش ContextMenu </value>
+  </data>
+  <data name="_SettingsFiltered_In_QueryString" xml:space="preserve">
+    <value>اطلاعات فیلتر در کوئری استرینگ</value>
+  </data>
+  <data name="_SettingsRelationalColumnBetweenListsAndViews" xml:space="preserve">
+    <value>نام ستون مشترک بین لیست ها (InternalColumnName) و ویو مورد نظر</value>
+  </data>
+  <data name="_SettingsSqlQueryConnectionString" xml:space="preserve">
+    <value>متن ارتباط با بانک - Connection String - در صورت عدم وجود مقدار اطلاعات با سطح دسترسی کاربر جاری به صورت اتوماتیک از بانک واکشی می شود</value>
+  </data>
+  <data name="_SettingsSqlQueryViewName" xml:space="preserve">
+    <value>کوئری موجود در بانک اطلاعاتی</value>
+  </data>
+  <data name="_SettingsAdress_ascxPath" xml:space="preserve">
+    <value>آدرس لود مربوط به کنترل صفحه</value>
+  </data>
+  <data name="_SettingsIsOuterJoin" xml:space="preserve">
+    <value>آیا Joinاز نوع OuterJoin است؟</value>
+  </data>
+  <data name="_SettingsJSDrowDetailInfoAddressUrl" xml:space="preserve">
+    <value>آدرس جاوا اسکریپت مربوط به نمایش جزئیات در جستجو</value>
+  </data>
+  <data name="_Settings_InfoWindowAnchor_X" xml:space="preserve">
+    <value>Info Window Anchor X</value>
+  </data>
+  <data name="_Settings_InfoWindowAnchor_Y" xml:space="preserve">
+    <value>Info Window Anchor Y</value>
+  </data>
+  <data name="_Settings_MarkerAnchorIcon_X" xml:space="preserve">
+    <value>Marker Anchor Icon X</value>
+  </data>
+  <data name="_Settings_MarkerAnchorIcon_Y" xml:space="preserve">
+    <value>Marker Anchor Icon Y</value>
+  </data>
+  <data name="_Settings_MarkerIcon_X" xml:space="preserve">
+    <value>Marker Icon X</value>
+  </data>
+  <data name="_Settings_MarkerIcon_Y" xml:space="preserve">
+    <value>Marker Icon Y</value>
+  </data>
+  <data name="_Settings_MarkerShadowIcon_X" xml:space="preserve">
+    <value>Marker Shadow Icon X</value>
+  </data>
+  <data name="_Settings_MarkerShadowIcon_Y" xml:space="preserve">
+    <value>Marker Shadow Icon Y</value>
+  </data>
+  <data name="_SettingsView_name" xml:space="preserve">
+    <value>ناو ویو مربوط به لیست می باشد</value>
+  </data>
+  <data name="_SettingsUseNewVersion" xml:space="preserve">
+    <value>استفاده از ورژن جدید</value>
+  </data>
+  <data name="_SettingsRelationalColumnForloadInMapPoint" xml:space="preserve">
+    <value>نام ستون های تفکیک شده با کاما برای لود در Mapapoint</value>
+  </data>
+</root>

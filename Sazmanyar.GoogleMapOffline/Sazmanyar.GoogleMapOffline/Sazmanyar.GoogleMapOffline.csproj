@@ -1,0 +1,575 @@
+﻿<Project ToolsVersion="17.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2544AC6F-1303-4E25-9E97-C7D52441BEDA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sazmanyar.GoogleMapOffline</RootNamespace>
+    <AssemblyName>Sazmanyar.GoogleMapOffline</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetOfficeVersion>16.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>14.0</MinimumOfficeToolsVersion>
+    <SandboxedSolution>False</SandboxedSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Classes.cs" />
+    <Compile Include="CONTROLTEMPLATES\Sazmanyar.GoogleMapOffline\JSFilteredGoogleMapOnfflineWebpartUserControl.ascx.cs">
+      <DependentUpon>JSFilteredGoogleMapOnfflineWebpartUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CONTROLTEMPLATES\Sazmanyar.GoogleMapOffline\JSFilteredGoogleMapOnfflineWebpartUserControl.ascx.designer.cs">
+      <DependentUpon>JSFilteredGoogleMapOnfflineWebpartUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Feature_GoogleMapOffline\Feature_GoogleMapOffline.EventReceiver.cs">
+      <DependentUpon>Feature_GoogleMapOffline.feature</DependentUpon>
+    </Compile>
+    <Compile Include="FilteredGoogleMapOfflineWebpart\FilteredGoogleMapOfflineWebpart.cs" />
+    <Compile Include="FilteredGoogleMapOfflineWebpart\FilteredGoogleMapOfflineWebpartUserControl.ascx.cs">
+      <DependentUpon>FilteredGoogleMapOfflineWebpartUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FilteredGoogleMapOfflineWebpart\FilteredGoogleMapOfflineWebpartUserControl.ascx.designer.cs">
+      <DependentUpon>FilteredGoogleMapOfflineWebpartUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Sazmanyar.GoogleMapOffline\ApplicationPage_ForloaddingMarkerData.aspx.cs">
+      <DependentUpon>ApplicationPage_ForloaddingMarkerData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Sazmanyar.GoogleMapOffline\ApplicationPage_ForloaddingMarkerData.aspx.designer.cs">
+      <DependentUpon>ApplicationPage_ForloaddingMarkerData.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Sazmanyar.GoogleMapOffline\Resources.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CONTROLTEMPLATES\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d17e7d3f-7760-404e-b8c0-904fb0c4dbd1}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Feature_GoogleMapOffline\Feature_GoogleMapOffline.feature">
+      <FeatureId>{81e3a757-fe1b-4785-88b2-e5db54530ff4}</FeatureId>
+    </None>
+    <None Include="FilteredGoogleMapOfflineWebpart\FilteredGoogleMapOfflineWebpart.webpart" />
+    <None Include="FilteredGoogleMapOfflineWebpart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{30da4cab-4956-4b87-8ff5-b0d5ed3e1eaf}</SharePointProjectItemId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{590688f5-9539-4684-b37f-5954fdc39ec5}</SharePointProjectItemId>
+    </None>
+    <None Include="key.snk" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d3dc7c46-2b07-44f9-9afa-345f6da0d7b9}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{4ebb56e5-df78-4315-b0a9-93a51f1018fe}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Resources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{54a8667b-1c75-4b3e-ab01-743622d66812}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CONTROLTEMPLATES\Sazmanyar.GoogleMapOffline\JSFilteredGoogleMapOnfflineWebpartUserControl.ascx" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\css\gmo-ui.css" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\css\SlideToggle.css" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\Base.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\DrowDetailInfo.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\DrowMarker.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\jquery-1.3.2.min.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\json2.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\main.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\mod_apiiw.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\mod_exdom.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\mod_poly.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\MPolyDragControl.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\SlideToggle.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\Temp_DrowDetailInfo.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\ToolBars.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\adsense.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\gc.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\legacy_gc.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\main.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_adsense.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_api_directions_module.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_api_infowindow.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_arrow.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_cb_api.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_controls.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_display_manager.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_drag.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_earth.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_extended_dom.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_gc.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_gears.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_jslinker.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_keyboard.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_kml_api.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_kml_util.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_legacy_api_gc.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_log.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_lyrs.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_marker_manager.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_mspe.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_nl.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_panoramio_iw.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_poly.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_scrollwheel.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_tbr.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_touch.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_traffic_api.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_trends_api.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_uri_renderer.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_wikipedia_iw.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_youtube_iw.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2.api\mod_zoom.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\maps2\main.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\140g\suggest\main.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\iw2.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\iw_close.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\iw_fullscreen.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\iw_minus.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\iw_plus.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\mapcontrols2.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\maps_samix.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\marker.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\markerff.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\markerTransparent.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\marker_shadow.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\poweredby.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\ruler.js" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\shadow50.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\transparent.gif" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\mapfiles\transparent.png" />
+    <Content Include="Resources\Sazmanyar.GoogleMapOffline\Resources.fa-IR.resx" />
+    <Content Include="Resources\Sazmanyar.GoogleMapOffline\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Feature_GoogleMapOffline\Feature_GoogleMapOffline.Template.xml">
+      <DependentUpon>Feature_GoogleMapOffline.feature</DependentUpon>
+    </Content>
+    <Content Include="FilteredGoogleMapOfflineWebpart\Elements.xml" />
+    <Content Include="FilteredGoogleMapOfflineWebpart\FilteredGoogleMapOfflineWebpartUserControl.ascx" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\0\0\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\1\0\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\1\0\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\1\1\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\1\1\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\0\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\0\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\0\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\0\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\1\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\1\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\1\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\1\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\2\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\2\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\2\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\2\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\3\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\3\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\3\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\2\3\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\0\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\1\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\2\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\3\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\4\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\5\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\6\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\3\7\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\0\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\10\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\11\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\12\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\13\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\14\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\15\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\1\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\2\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\3\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\4\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\5\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\6\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\7\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\8\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\0.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\1.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\10.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\11.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\12.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\13.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\14.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\15.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\2.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\4.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\6.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\7.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\8.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Google Maps Image\4\9\9.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Logo128.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Logo16.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Logo32.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Logo64.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iw3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iws3.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iw_close.gif" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iw_fullscreen.gif" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iw_minus.gif" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\iw_plus.gif" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\mapcontrols3d5.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\marker.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\markerTransparent.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\openhand_8_8.cur" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\poweredby.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\shadow50.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\MapToolbar\transparent.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Marker\Blue\marker.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Marker\Green\marker.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Marker\iconMe.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Marker\Red\marker.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Marker\shadow.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\Back.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\left-arrow.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\Minus.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\msg-close.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\Plus.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\right-arrow.png" />
+    <Content Include="Images\Sazmanyar.GoogleMapOffline\Search\search_network.png" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\ApplicationPage_ForloaddingMarkerData.aspx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

@@ -1,0 +1,615 @@
+@charset "UTF-8";
+/* ظاهر مشترک وب‌پارت‌های نقشهٔ GIS: پنل نتایج جستجو، نوار بالای نقشه، لیست پیشنهاد نام پروژه،
+   پنجرهٔ اطلاعات (InfoWindow) و ردیف نقشه/پنل. توسط همهٔ کنترل‌های ShowAllKoridorInfo استفاده می‌شود.
+   قاعده: هیچ font-family تعریف نمی‌شود؛ فونت از تم سایت ارث می‌رسد. */
+
+/* لیست پیشنهاد نام پروژه (jQuery UI autocomplete) هم‌شکل با کارت‌ها */
+.ui-autocomplete {
+    z-index: 100;
+    direction: rtl;
+    text-align: right;
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 6px;
+    margin-top: 4px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+    .ui-autocomplete .ui-menu-item {
+        margin: 0;
+        padding: 0;
+    }
+
+        .ui-autocomplete .ui-menu-item a {
+            display: block;
+            padding: 7px 10px;
+            margin: 1px 0;
+            border: 0;
+            border-radius: 8px;
+            background: none;
+            color: #1f2937;
+            font-size: 13px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+            .ui-autocomplete .ui-menu-item a.ui-state-focus,
+            .ui-autocomplete .ui-menu-item a.ui-state-active,
+            .ui-autocomplete .ui-menu-item a:hover {
+                background: #eff4ff;
+                color: #2f6fdd;
+                border: 0;
+                margin: 1px 0;
+            }
+
+.gm-style-mtc {
+    display: none;
+}
+
+/* ==== پنل کناری نتایج جستجو / گزارش‌ها ==== */
+.gis-panel {
+    width: 320px;
+    height: 750px;
+    box-sizing: border-box;
+    direction: rtl;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    overflow: hidden;
+    margin-left: 8px;
+}
+
+.gis-panel-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.gis-panel-head {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef0f3;
+    background: #f8fafc;
+}
+
+.gis-counts {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    min-height: 24px;
+}
+
+.gis-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    color: #374151;
+}
+
+    .gis-chip svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .gis-chip b {
+        color: #2f6fdd;
+        font-size: 13px;
+    }
+
+.gis-toolbar {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.gis-tool {
+    flex: 1;
+    height: 34px;
+    min-width: 0;
+    padding: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    color: #4b5563;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+    .gis-tool:hover {
+        background: #eff4ff;
+        color: #2f6fdd;
+        border-color: #c7d7f7;
+    }
+
+    .gis-tool.gis-tool-danger:hover {
+        background: #fff1f1;
+        color: #d33;
+        border-color: #f3c2c2;
+    }
+
+    .gis-tool svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* اسکریپت دکمه‌های بی‌ربط را با visibility پنهان می‌کند؛ جای خالی‌شان نماند */
+    .gis-toolbar .gis-tool[style*="hidden"] {
+        display: none;
+    }
+
+.gis-list {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 6px;
+}
+
+.gis-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+}
+
+    .gis-item:hover {
+        background: #f3f6fb;
+    }
+
+    .gis-item input[type=checkbox] {
+        margin: 0;
+        flex: none;
+        cursor: pointer;
+    }
+
+.gis-swatch {
+    flex: none;
+    display: inline-block;
+}
+
+.gis-item-route .gis-swatch {
+    width: 26px;
+    height: 5px;
+    border-radius: 3px;
+}
+
+.gis-item-station .gis-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, .15);
+}
+
+.gis-item-area .gis-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    opacity: .75;
+}
+
+.gis-item-text {
+    flex: 1;
+    min-width: 0;
+    display: block;
+    color: #1f2937;
+    text-decoration: none;
+}
+
+    .gis-item-text:hover {
+        color: #2f6fdd;
+        text-decoration: none;
+    }
+
+.gis-item-title {
+    display: block;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gis-item-sub {
+    display: block;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #6b7280;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gis-msg {
+    padding: 18px 12px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+    .gis-msg.gis-msg-wait {
+        color: #2f6fdd;
+    }
+
+.gis-reports {
+    padding: 12px;
+    overflow: auto;
+}
+
+.gis-reports-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 4px 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eef0f3;
+}
+
+.gis-report-link {
+    display: block;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    color: #2f6fdd;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+    .gis-report-link:hover {
+        background: #eff4ff;
+        text-decoration: none;
+    }
+
+/* ==== ردیف نقشه + پنل کناری: نقشه همیشه فضای باقی‌مانده را پر می‌کند ==== */
+.gis-map-row {
+    display: flex;
+    direction: rtl;
+    align-items: stretch;
+    width: 100%;
+}
+
+.gis-side {
+    flex: none;
+}
+
+.gis-map {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 750px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* ==== پنجرهٔ اطلاعات (InfoWindow) روی نقشه ==== */
+.gm-style .gm-style-iw-c {
+    border-radius: 12px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
+    padding: 12px 14px;
+}
+
+.gis-iw {
+    direction: rtl;
+    text-align: right;
+    color: #374151;
+}
+
+    .gis-iw table {
+        border-collapse: collapse;
+    }
+
+    .gis-iw td {
+        padding: 4px 8px;
+        font-size: 12px;
+        line-height: 1.7;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    /* ستون‌های جدول اصلی و جدول فیلدهای تخصصی از بالا هم‌تراز باشند */
+    .gis-iw > table > tbody > tr > td {
+        vertical-align: top;
+    }
+
+    .gis-iw b {
+        color: #111827;
+        font-weight: 600;
+    }
+
+    /* ردیف اول جدول داخلی = مبدا/مقصد (یا نام ایستگاه/مالکیت): تیتر پنجره */
+    .gis-iw table table tr:first-child td {
+        font-size: 13px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .gis-iw table table tr:first-child + tr td {
+        padding-top: 8px;
+    }
+
+    .gis-iw a {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 3px 12px;
+        margin: 2px 0;
+        line-height: 1.6;
+        border-radius: 999px;
+        background: #eff4ff;
+        color: #2f6fdd;
+        font-size: 12px;
+        text-decoration: none;
+        transition: background .15s, color .15s;
+    }
+
+        .gis-iw a:hover {
+            background: #2f6fdd;
+            color: #fff;
+            text-decoration: none;
+        }
+
+    /* جدول فیلدهای تخصصی (فیبر/رادیویی/...) در ستون کناری پنجره */
+    .gis-iw table[border] {
+        border: 1px solid #e5e7eb !important;
+        border-radius: 8px;
+        background: #f8fafc;
+    }
+
+        .gis-iw table[border] td {
+            border: 0;
+            border-bottom: 1px solid #eef0f3;
+        }
+
+        .gis-iw table[border] tr:last-child td {
+            border-bottom: 0;
+        }
+
+/* ==== نوار بالای نقشه: دپارتمان / نام پروژه / راهنمای رنگ ==== */
+.gis-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    direction: rtl;
+    padding: 10px 12px;
+    margin: 0 0 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+}
+
+.gis-fields {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* دکمهٔ باز/بستن پنل جستجو — هم‌ردیف با فیلدها، نه شناور روی آن‌ها */
+.gis-toggles {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-left: 12px;
+    border-left: 1px solid #e5e7eb;
+}
+
+.gis-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    min-width: 0;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+    .gis-toggle svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .gis-toggle:hover {
+        background: #eff4ff;
+        border-color: #c7d7f7;
+        color: #2f6fdd;
+    }
+
+    /* وقتی پنل باز است اسکریپت title را «بستن ...» می‌کند */
+    .gis-toggle[title^="بستن"] {
+        background: #2f6fdd;
+        border-color: #2f6fdd;
+        color: #fff;
+    }
+
+.gis-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gis-field-label {
+    font-size: 13px;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.gis-topbar .gis-select,
+.gis-topbar .gis-input {
+    height: 34px;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    padding: 0 10px;
+    margin: 0;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.gis-topbar .gis-select {
+    min-width: 170px;
+}
+
+.gis-topbar .gis-input {
+    width: 320px;
+    padding-left: 62px;
+}
+
+    .gis-topbar .gis-select:focus,
+    .gis-topbar .gis-input:focus {
+        border-color: #2f6fdd;
+        box-shadow: 0 0 0 3px rgba(47, 111, 221, .15);
+    }
+
+.gis-input-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+    .gis-input-wrap.is-valid .gis-input {
+        border-color: #16a34a;
+    }
+
+    .gis-input-wrap.is-invalid .gis-input {
+        border-color: #dc2626;
+    }
+
+    .gis-input-wrap.is-valid .gis-input:focus {
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, .15);
+    }
+
+    .gis-input-wrap.is-invalid .gis-input:focus {
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, .15);
+    }
+
+.gis-status {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+    .gis-status svg {
+        width: 12px;
+        height: 12px;
+        display: none;
+    }
+
+.gis-input-wrap.is-valid .gis-status {
+    display: inline-flex;
+    background: #16a34a;
+}
+
+.gis-input-wrap.is-invalid .gis-status {
+    display: inline-flex;
+    background: #dc2626;
+}
+
+.gis-input-wrap.is-valid .gis-status-ok,
+.gis-input-wrap.is-invalid .gis-status-no {
+    display: block;
+}
+
+.gis-clear {
+    position: absolute;
+    left: 34px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+    .gis-clear:hover {
+        background: #f3f4f6;
+        color: #374151;
+    }
+
+    .gis-clear svg {
+        width: 12px;
+        height: 12px;
+    }
+
+.gis-input-wrap.has-value .gis-clear {
+    display: inline-flex;
+}
+
+.gis-hint {
+    font-size: 11px;
+    color: #6b7280;
+    white-space: nowrap;
+}
+
+    .gis-hint.is-valid {
+        color: #16a34a;
+    }
+
+    .gis-hint.is-invalid {
+        color: #dc2626;
+    }
+
+.gis-legend {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.gis-legend-title {
+    color: #6b7280;
+}
+
+.gis-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+    .gis-legend-item i {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, .12);
+    }

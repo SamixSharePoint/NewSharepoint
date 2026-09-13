@@ -1,0 +1,191 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="/_layouts/15/Sazmanyar.GIS/Script/css/easy-responsive-tabs.css" />
+    <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/_layouts/15/Sazmanyar.GIS/Script/js/easyResponsiveTabs.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/Script/js/Jalali.js"
+    charset="utf-8"></script>
+    <script type="text/javascript">
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        $(document).ready(function () {
+
+            try {
+
+                var UrlVars = getUrlVars()
+
+                var strCurrentWebUrl = UrlVars["CurrentWebUrl"];
+                var Station_ID = UrlVars["Station_ID"];
+
+                $.ajax({
+
+                    type: 'POST',
+                    url: strCurrentWebUrl + '/_layouts/15/Sazmanyar.GIS/ApplicationPage_FetchingData.aspx/FetchAllCoridorInfoFromDataBase_ByStation_ID',
+                    data: "{'Station_ID':'" + Station_ID + "'}",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (strHtmlOutput) {
+                        if (strHtmlOutput.d != '' && strHtmlOutput.d != null && strHtmlOutput.d.length > 0) {
+                            $('#verticalTab').html(GenerateTabHTML(strHtmlOutput.d));
+                            $('#verticalTab').easyResponsiveTabs({
+                                type: 'vertical',
+                                width: 'auto',
+                                fit: true
+                            });
+                        }
+                    },
+                    error: function (MSG) {
+                        alert('error' + MSG);
+                    }
+                });
+            } catch (e) {
+
+            }
+
+
+        });
+
+        function GenerateTabHTML(ObjAllRoutInfoCollection) {
+
+
+            var HTMl_LI_INNER = "";
+            var HTMl_DIV_INNER = "";
+            for (var i = 0; i < ObjAllRoutInfoCollection.length; i++) {
+
+                var ObjAllRoutInfo = ObjAllRoutInfoCollection[i];
+                //-----------------------------------------
+                HTMl_LI_INNER = HTMl_LI_INNER + " <li>" + ObjAllRoutInfo.ProgramName + "</li>";
+                //-----------------------------------------
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<div style='padding: 5px;' >";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<table cellpadding ='5' >";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "نام ایستگاه : <b>" + ObjAllRoutInfo.StationFrom_Title + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "مالکیت: <b>" + ObjAllRoutInfo.StationFrom_OwnerShip + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "درصد پیشرفت: <b>" + ObjAllRoutInfo.StationFrom_PercentCompleted + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "تاریخ شروع: <b>" + ConvertGDateObjToJ(ObjAllRoutInfo.StationFrom_StartDate) + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "تاریخ پایان: <b>" + ConvertGDateObjToJ(ObjAllRoutInfo.StationFrom_FinishDate) + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "مدت زمان: <b>" + ObjAllRoutInfo.StationFrom_Duration + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "انحراف مدت زمان: <b>" + ObjAllRoutInfo.StationFrom_DurationVariance + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<tr>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "<td>";
+                try {
+
+                    HTMl_DIV_INNER = HTMl_DIV_INNER + "انحراف هزینه: <b>" + ObjAllRoutInfo.StationFrom_CostVariance + "</b>";
+                } catch (e) {
+
+                }
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</td>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</tr>";
+
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</table>";
+                HTMl_DIV_INNER = HTMl_DIV_INNER + "</div>";
+                //-----------------------------------------
+            }
+
+
+            var HTMl_UL_MAIN = "";
+            HTMl_UL_MAIN = HTMl_UL_MAIN + " <ul class='resp-tabs-list'>";
+            HTMl_UL_MAIN = HTMl_UL_MAIN + HTMl_LI_INNER;
+            HTMl_UL_MAIN = HTMl_UL_MAIN + "</ul>";
+
+            var HTMl_DIV_MAIN = "";
+            HTMl_DIV_MAIN = HTMl_DIV_MAIN + " <div class='resp-tabs-container'>";
+            HTMl_DIV_MAIN = HTMl_DIV_MAIN + HTMl_DIV_INNER;
+            HTMl_DIV_MAIN = HTMl_DIV_MAIN + "</div>";
+
+            return HTMl_UL_MAIN + HTMl_DIV_MAIN;
+        }
+
+    </script>
+</head>
+<body>
+    <div id="verticalTab">
+    </div>
+</body>
+</html>

@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC724F80-82F6-4EA4-A6A5-EACB9EE7EAA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sazmanyar.GIS</RootNamespace>
+    <AssemblyName>Sazmanyar.GIS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetOfficeVersion>16.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumOfficeToolsVersion>14.0</MinimumOfficeToolsVersion>
+    <SandboxedSolution>False</SandboxedSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Client.ServerRuntime" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Feature_Sazmanyar_GIS_Web\Feature_Sazmanyar_GIS_Web.EventReceiver.cs">
+      <DependentUpon>Feature_Sazmanyar_GIS_Web.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ClsHelpper.cs" />
+    <Compile Include="Helper\clsRouteForJson.cs" />
+    <Compile Include="Layouts\Sazmanyar.GIS\ApplicationPage_FetchingData.aspx.cs">
+      <DependentUpon>ApplicationPage_FetchingData.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Sazmanyar.GIS\ApplicationPage_FetchingData.aspx.designer.cs">
+      <DependentUpon>ApplicationPage_FetchingData.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfo.cs" />
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_AbOBargh.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_AbOBargh.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_admin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_admin.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_adminLeaflet.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_adminLeaflet.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_Bonyad.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_Bonyad.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_endUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_endUser.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_New.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_New.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_NewTajamoee.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_NewTajamoee.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_Tajamoee.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_Tajamoee.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
+    <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
+      <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.designer.cs">
+      <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx.cs">
+      <DependentUpon>ShowAllPolyganInfoUserControl_EndUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx.designer.cs">
+      <DependentUpon>ShowAllPolyganInfoUserControl_EndUser.ascx.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Features\Feature_Sazmanyar_GIS_Site\Feature_Sazmanyar_GIS_Site.feature">
+      <FeatureId>{cb61dbbd-8811-4b4d-afba-0781cd7783c6}</FeatureId>
+    </None>
+    <None Include="Features\Feature_Sazmanyar_GIS_Web\Feature_Sazmanyar_GIS_Web.feature">
+      <FeatureId>{89a68ac0-c1ad-4ecb-9b38-90561d5752e0}</FeatureId>
+    </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3ec80f7c-c2ca-472c-87b6-6f89a74a1d89}</SharePointProjectItemId>
+    </None>
+    <None Include="key.snk" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fbdb8d8c-fe29-4cc3-affb-7471335cd1b5}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{e3407547-3b9c-4fe6-9663-a8cf9205e182}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="ShowAllKoridorInfo\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b9d02bac-3705-4926-837b-399e33f4551c}</SharePointProjectItemId>
+    </None>
+    <None Include="ShowAllKoridorInfo\ShowAllKoridorInfo.webpart" />
+    <None Include="ShowAllPolyganInfo\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8a0b0f5a-edc0-4241-917f-36bfbf174803}</SharePointProjectItemId>
+    </None>
+    <None Include="ShowAllPolyganInfo\ShowAllPolyganInfo.webpart" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Sazmanyar.GIS\" />
+    <Folder Include="Layouts\Sazmanyar.GIS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Feature_Sazmanyar_GIS_Site\Feature_Sazmanyar_GIS_Site.Template.xml">
+      <DependentUpon>Feature_Sazmanyar_GIS_Site.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Feature_Sazmanyar_GIS_Web\Feature_Sazmanyar_GIS_Web.Template.xml">
+      <DependentUpon>Feature_Sazmanyar_GIS_Web.feature</DependentUpon>
+    </Content>
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Back.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Circle.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Black\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Black\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Black\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Brown\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Brown\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Brown\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Circle.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Gray\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Gray\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Gray\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Green\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Green\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Green\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Pin.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Pink\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Pink\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Pink\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Red\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Red\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Red\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Yellow\marker.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Yellow\polyGan.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\Yellow\polyline.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Marker\anicon.gif" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Pin.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Reports.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\SEO.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Del.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Del1.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Route.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Route1.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Sath.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Sath1.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Sath3.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_Sath4.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_pin.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Search_pin1.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Stem\Stem1.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Stem\Stem2.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Stem\Stem3.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\Stem\stem7.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\anicon.gif" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\cb_scout2.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\google_white2.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\mapcnt6.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\mapcnt6_hdpi.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\sv2.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\sv2_hdpi.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\sv3.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\api-3\images\sv3_hdpi.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\cb\target_locking.gif" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\closedhand_8_8.cur" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\iconMe.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\left-Reports.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\left-arrow.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\mm_20_red.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\mm_20_shadow.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\msg-close.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\openhand_8_8.cur" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\right-Reports.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\right-arrow.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\search_network.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\transparent.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\undo_poly.png" />
+    <Content Include="Images\Sazmanyar.GIS\GoogleMap\GISlegend.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\DorbinNotSelected.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\DorbinSelected.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\DotNotSelected.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\General\DotSelected.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\General\Error.jpg" />
+    <Content Include="Images\Sazmanyar.GIS\General\Error.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\Error2.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\GreenPin.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\Next.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\Okey.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinNotSelected.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinNotSelected_20.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinNotSelected_30.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinSelected.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinSelected_20.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\PinSelected_30.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\Prev.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\RedPin.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\Search.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\TradodShomar.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\blue-pushpin.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\loading\Load.gif" />
+    <Content Include="Images\Sazmanyar.GIS\General\loading\bottom-left.gif" />
+    <Content Include="Images\Sazmanyar.GIS\General\loading\bottom-right.gif" />
+    <Content Include="Images\Sazmanyar.GIS\General\loading\top-left.gif" />
+    <Content Include="Images\Sazmanyar.GIS\General\loading\top-right.gif" />
+    <Content Include="Images\Sazmanyar.GIS\General\nokey.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\red-pushpin.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\sort_down_red.png" />
+    <Content Include="Images\Sazmanyar.GIS\General\sort_up_red.png" />
+    <Content Include="Images\Sazmanyar.GIS\LoadFromDataBase.jpg" />
+    <Content Include="Layouts\Sazmanyar.GIS\ApplicationPage_FetchingData.aspx" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\bg.jpg" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\bg_col.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\bg_col_right.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\bg_col_sep.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\bullet.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\fancybox-x.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\fancybox-y.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\fancybox.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\css\jquery.fancybox-1.3.4.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Fansy\js\jquery.fancybox-1.3.4.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\FilterInstgah.html" />
+    <Content Include="Layouts\Sazmanyar.GIS\FilterMaseer.html" />
+    <Content Include="Layouts\Sazmanyar.GIS\FilterSath.html" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\awesome-bootstrap-checkbox.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker.fa.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker3.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-select.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-slider.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\docs.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\gis-filter.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\gis-ui.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\gis-ui.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\query-builder.default.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\selectize.default.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\css\style.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootbox.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap-datepicker.Persian.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap-datepicker.en.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap-select.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap-slider.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\bootstrap.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsIstgah.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsMaseer.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsSath.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\docs.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\html5shiv.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\jquery-1.11.2.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\moment.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\query-builder.standalone.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\query-builder.standalone1.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\query-builder.standalone1.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\respond.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\selectize.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\sql-parser.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\ForShowIframInfo.htm" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\GISBase.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\adsense.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\common.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\controls.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\drive.xml" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\epoly.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\extmaptypecontrol.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\geometry.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\infowindow.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\main.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\map.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\marker.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\onion.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\overlay.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\poly.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\stats.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\urchin.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\util.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\zombie.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\EWindow.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\HideAllRiboon.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\SlideToggle.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\active-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\dark-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\hover-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\menuarrow.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\normal-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\rowhover-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\status-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\theme.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\title-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\aqua\today-bg.gif" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\easy-responsive-tabs.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\jquery-ui-1.10.3.custom.min.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\jquery-ui.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\responsive.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\responsiveBase.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\css\style.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\BaseScriptForCoridorForAdmin.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\BaseScriptForCoridorForEndUser.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\BaseScriptForCoridorForTajamoee.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\DrowSnapShotMarker.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\EWindow.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\calendar-fa.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\calendar-setup.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\calendar.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\easyResponsiveTabs.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\elabel.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jQuery.print.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jalaali.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jalali.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jdate.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-1.11.0.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-1.11.2.min.js.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-1.7.1.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-1.8.3.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-1.9.1.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\leaflet.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\leaflet-routing-machine.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\BaseScriptForCoridorForAdminLeaflet.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\images\marker-icon.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\images\marker-icon-2x.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\images\marker-shadow.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\images\layers.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\images\layers-2x.png" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\leaflet.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Leaflet\leaflet-routing-machine.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery-ui.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery.autocomplete-min.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\jquery1.7.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\json2.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\tlabel.2.05.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\verticaltabs.pack.js" />
+    <Content Include="ShowAllKoridorInfo\Elements.xml" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx" />
+    <Content Include="ShowAllPolyganInfo\Elements.xml" />
+    <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
+    <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+</Project>

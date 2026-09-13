@@ -1,0 +1,524 @@
+@charset "UTF-8";
+/* ظاهر مشترک وب‌پارت نقشهٔ آفلاین (Sazmanyar.GoogleMapOffline) — هم‌خانواده با gis-ui.css پروژهٔ GIS:
+   نوار بالای نقشه، پنل جستجو/نتایج، ردیف نتایج، پنجرهٔ جزئیات (msg-modal)، InfoWindow و منوی راست‌کلیک.
+   قاعده: هیچ font-family تعریف نمی‌شود؛ فونت از تم سایت ارث می‌رسد. */
+
+/* ---- نوار بالای نقشه: دکمهٔ باز/بستن پنل ---- */
+.gmo-topbar {
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    margin: 0 0 8px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+}
+
+.gmo-toggle,
+.gmo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 34px;
+    min-width: 0;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+    .gmo-toggle svg,
+    .gmo-btn svg {
+        width: 16px;
+        height: 16px;
+        flex: none;
+    }
+
+    .gmo-toggle:hover,
+    .gmo-btn:hover {
+        background: #eff4ff;
+        border-color: #c7d7f7;
+        color: #2f6fdd;
+    }
+
+    /* اسکریپت قدیمی هنگام باز بودن پنل، title را «بستن ...» می‌کند */
+    .gmo-toggle[title^="بستن"] {
+        background: #2f6fdd;
+        border-color: #2f6fdd;
+        color: #fff;
+    }
+
+.gmo-btn-primary {
+    background: #2f6fdd;
+    border-color: #2f6fdd;
+    color: #fff;
+    font-weight: bold;
+}
+
+    .gmo-btn-primary:hover {
+        background: #255cc0;
+        border-color: #255cc0;
+        color: #fff;
+    }
+
+.gmo-btn-block {
+    width: 100%;
+}
+
+/* ---- ردیف نقشه + پنل: نقشه فضای باقی‌مانده را پر می‌کند ---- */
+.gmo-row {
+    display: flex;
+    direction: rtl;
+    align-items: stretch;
+    width: 100%;
+}
+
+.gmo-side {
+    flex: none;
+}
+
+.gmo-map {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 560px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* ---- پنل جستجو / نتایج ---- */
+.gmo-panel {
+    width: 320px;
+    height: 560px;
+    box-sizing: border-box;
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+    overflow: hidden;
+    margin-left: 8px;
+}
+
+    /* اسکریپت‌های قدیمی دو بخش «گزینه‌ها» و «نتایج» را با visibility عوض می‌کنند؛
+       بخش پنهان نباید فضا بگیرد */
+    .gmo-panel > [style*="hidden"] {
+        display: none !important;
+    }
+
+/* اسکریپت قدیمی پنل را با display:block باز می‌کند (نه flex)؛ هر بخش خودش تمام ارتفاع پنل را می‌گیرد
+   تا هدر/بدنهٔ اسکرول‌شونده/پاورقی درست بچینند. در هر لحظه فقط یک بخش نمایان است. */
+.gmo-panel-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+}
+
+.gmo-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    background: #f8fafc;
+    border-bottom: 1px solid #eef0f3;
+    font-size: 13px;
+    font-weight: bold;
+    color: #111827;
+}
+
+    .gmo-panel-head svg {
+        width: 16px;
+        height: 16px;
+        color: #2f6fdd;
+        vertical-align: middle;
+        margin-left: 6px;
+    }
+
+.gmo-panel-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 10px 12px;
+}
+
+.gmo-panel-foot {
+    flex: none;
+    padding: 10px 12px;
+    border-top: 1px solid #eef0f3;
+    background: #f8fafc;
+}
+
+/* فرم فیلتر (جدول‌های تولیدشده توسط ASP.NET) */
+.gmo-form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.gmo-form td {
+    padding: 4px 2px;
+    vertical-align: middle;
+    font-size: 13px;
+    color: #374151;
+    text-align: right;
+}
+
+.gmo-form input[type=text],
+.gmo-form select {
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    margin: 0;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 13px;
+    outline: none;
+}
+
+    .gmo-form input[type=text]:focus,
+    .gmo-form select:focus {
+        border-color: #2f6fdd;
+        box-shadow: 0 0 0 3px rgba(47, 111, 221, .15);
+    }
+
+.gmo-form input[type=checkbox] {
+    margin: 0 0 0 4px;
+    vertical-align: middle;
+}
+
+.gmo-form label {
+    font-size: 12px;
+    color: #374151;
+    vertical-align: middle;
+}
+
+/* فرم فیلتر بالای نقشه (نسخهٔ JS وب‌پارت): جدول داخل نوار بالایی */
+.gmo-form-inline {
+    display: block;
+}
+
+    .gmo-form-inline table {
+        width: auto;
+    }
+
+    .gmo-form-inline td.gmo-form-label {
+        white-space: nowrap;
+        padding-left: 8px;
+    }
+
+    .gmo-form-inline input[type=text],
+    .gmo-form-inline select {
+        width: 260px;
+    }
+
+.gmo-check-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0 4px;
+    font-size: 12px;
+    color: #374151;
+}
+
+    .gmo-check-row img {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+/* ---- لیست نتایج ---- */
+.gmo-list {
+    padding: 4px 0;
+}
+
+.gmo-count {
+    display: inline-block;
+    margin: 0 0 8px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #eff4ff;
+    color: #374151;
+    font-size: 12px;
+}
+
+    .gmo-count b {
+        color: #2f6fdd;
+    }
+
+.gmo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    margin-bottom: 2px;
+}
+
+    .gmo-item:hover {
+        background: #f3f6fb;
+    }
+
+.gmo-item-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.gmo-item-icon-off {
+    display: inline-block;
+    border-radius: 50%;
+    background: #e5e7eb;
+    cursor: default;
+}
+
+.gmo-item-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.gmo-item-title {
+    display: block;
+    color: #1f2937;
+    font-size: 13px;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .gmo-item-title:hover {
+        color: #2f6fdd;
+        text-decoration: none;
+    }
+
+.gmo-item-num {
+    display: inline-block;
+    min-width: 18px;
+    margin-left: 6px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 11px;
+    text-align: center;
+}
+
+.gmo-item-sub {
+    display: block;
+    color: #6b7280;
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gmo-msg {
+    padding: 18px 12px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+    .gmo-msg.gmo-msg-wait {
+        color: #2f6fdd;
+    }
+
+/* ---- پنجرهٔ جزئیات (msg-modal / msg-content) ---- */
+.msg-modal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgba(17, 24, 39, .55);
+    z-index: 2110000000;
+}
+
+.msg-content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    max-width: calc(100% - 32px);
+    direction: rtl;
+    text-align: right;
+    color: #1f2937;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
+    z-index: 2120000000;
+    overflow: hidden;
+}
+
+    .msg-content .close {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #fff;
+        background: rgba(255, 255, 255, .18);
+        z-index: 1;
+    }
+
+        .msg-content .close:hover {
+            background: rgba(255, 255, 255, .32);
+        }
+
+        .msg-content .close svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .msg-content .close img {
+            display: none;
+        }
+
+    .msg-content .title {
+        margin: 0;
+        padding: 12px 44px 12px 16px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        background: #2f6fdd;
+    }
+
+    .msg-content .body {
+        padding: 12px 16px 14px;
+        font-size: 13px;
+        color: #1f2937;
+    }
+
+        .msg-content .body .header {
+            margin: 0 0 10px;
+            padding: 6px 10px;
+            border-right: 3px solid #2f6fdd;
+            background: #f8fafc;
+            color: #2f6fdd;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .msg-content .body ul {
+            margin: 0;
+            padding-right: 18px;
+        }
+
+        .msg-content .body li {
+            color: #374151;
+            margin-bottom: 5px;
+        }
+
+    .msg-content .bodyscroll {
+        overflow-y: auto;
+        max-height: 260px;
+    }
+
+    .msg-content .footer {
+        text-align: left;
+    }
+
+        .msg-content .footer input {
+            font-size: 11px;
+        }
+
+/* محتوای جزئیات و InfoWindow (خروجی DrowDetailInfo.js / DrowMarker.js) */
+.gmo-iw {
+    direction: rtl;
+    text-align: right;
+    color: #374151;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+    .gmo-iw img {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    .gmo-iw h2 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .gmo-iw p {
+        margin: 0 0 8px;
+    }
+
+    .gmo-iw a {
+        display: inline-block;
+        padding: 3px 12px;
+        margin: 2px 0;
+        border-radius: 999px;
+        background: #eff4ff;
+        color: #2f6fdd;
+        font-size: 12px;
+        text-decoration: none;
+    }
+
+        .gmo-iw a:hover {
+            background: #2f6fdd;
+            color: #fff;
+            text-decoration: none;
+        }
+
+.gm-style .gm-style-iw-c {
+    border-radius: 12px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
+    padding: 12px 14px;
+}
+
+/* ---- منوی راست‌کلیک روی نقشه ---- */
+.gmo-ctx {
+    min-width: 190px;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+}
+
+    .gmo-ctx a {
+        display: block;
+        padding: 7px 10px;
+        border-radius: 8px;
+        color: #1f2937;
+        font-size: 13px;
+        text-decoration: none;
+    }
+
+        .gmo-ctx a:hover {
+            background: #eff4ff;
+            color: #2f6fdd;
+            text-decoration: none;
+        }

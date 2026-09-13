@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="ShowAllKoridorInfoUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="ShowAllKoridorInfo\" Type="ElementManifest" />
+    <ProjectItemFile Source="ShowAllKoridorInfo.webpart" Target="ShowAllKoridorInfo\" Type="ElementFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_admin.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_New.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_endUser.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_NewTajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_Tajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_Bonyad.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_AbOBargh.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_adminLeaflet.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+  </Files>
+  <SafeControls>
+    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="Sazmanyar.GIS.ShowAllKoridorInfo" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+  </SafeControls>
+</ProjectItem>

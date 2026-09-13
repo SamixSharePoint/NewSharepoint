@@ -1,0 +1,21 @@
+﻿#SlideToggle 
+{
+    position: relative;
+    margin-top: 10px;
+    padding: 6px;
+}
+#ToggleButton {
+    background-color: white;
+    padding: 0 3px;
+    position: absolute;
+    top: -3px;
+}
+#ToggleButtonImg 
+{
+    padding: 3px;
+}
+#SlideToggleContent 
+{
+    /*border: 1px solid gray;*/
+    padding: 10px 0px 5px;
+}

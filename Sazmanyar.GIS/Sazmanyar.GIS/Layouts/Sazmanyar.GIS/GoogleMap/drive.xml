@@ -1,0 +1,3382 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<markers>
+  <line name="Antigua" colour="#0000FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.52803" lat="14.611625"/>
+    <point lng="-90.573349" lat="14.634214"/>
+    <point lng="-90.598755" lat="14.634879"/>
+    <point lng="-90.600815" lat="14.632886"/>
+    <point lng="-90.606308" lat="14.626906"/>
+    <point lng="-90.604248" lat="14.620262"/>
+    <point lng="-90.609741" lat="14.617604"/>
+    <point lng="-90.614548" lat="14.62292"/>
+    <point lng="-90.624161" lat="14.612289"/>
+    <point lng="-90.624161" lat="14.608302"/>
+    <point lng="-90.625534" lat="14.605645"/>
+    <point lng="-90.633087" lat="14.606973"/>
+    <point lng="-90.637207" lat="14.601658"/>
+    <point lng="-90.6427" lat="14.600993"/>
+    <point lng="-90.655746" lat="14.61096"/>
+    <point lng="-90.666733" lat="14.609631"/>
+    <point lng="-90.668621" lat="14.599565"/>
+    <point lng="-90.666218" lat="14.596408"/>
+    <point lng="-90.665359" lat="14.590594"/>
+    <point lng="-90.661583" lat="14.589763"/>
+    <point lng="-90.66227" lat="14.587438"/>
+    <point lng="-90.663986" lat="14.583783"/>
+    <point lng="-90.672398" lat="14.5783"/>
+    <point lng="-90.679436" lat="14.57747"/>
+    <point lng="-90.688019" lat="14.573316"/>
+    <point lng="-90.69231" lat="14.567003"/>
+    <point lng="-90.697803" lat="14.566172"/>
+    <point lng="-90.700722" lat="14.565342"/>
+    <point lng="-90.703468" lat="14.561686"/>
+    <point lng="-90.710163" lat="14.559526"/>
+    <point lng="-90.719261" lat="14.559194"/>
+    <point lng="-90.727329" lat="14.557865"/>
+    <point lng="-90.734196" lat="14.557865"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Antigua</b></div>Distance: 45 km<br>Driving time: 45 mins]]></infowindow>
+    <route>
+      <segment number="1">
+        <dirs>Head west on Calzada Roosevelt</dirs>
+        <time>about 15 mins</time>
+        <dist>4.6 km</dist>
+      </segment>
+      <segment number="2">
+        <dirs>
+          Continue on Carretera Interamericana/Pan American Hwy
+        </dirs>
+        <time>about 12 mins</time>
+        <dist>15 km</dist>
+      </segment>
+      <segment number="3">
+        <dirs>
+          Look for turnoff at San Lucas and follow signs from there
+        </dirs>
+        <time>about 15 mins</time>
+        <dist>13.5 km</dist>
+      </segment>
+    </route>
+  </line>
+  <line name="El Rancho junction" colour="#000000" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to El Rancho junction</b></div> Distance: 86 km<br>Driving time: 1 hr 40 mins]]></infowindow>
+    <route>
+      <segment number="1">
+        <dirs>Head west on CA9</dirs>
+        <time>about 1 hour 40 mins</time>
+        <dist>86 km</dist>
+      </segment>
+    </route>
+  </line>
+  <line name="San Pedro La Laguna" colour="#FF00FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.533524" lat="14.614947"/>
+    <point lng="-90.574036" lat="14.634879"/>
+    <point lng="-90.599442" lat="14.636872"/>
+    <point lng="-90.606308" lat="14.625577"/>
+    <point lng="-90.606995" lat="14.618269"/>
+    <point lng="-90.614548" lat="14.624248"/>
+    <point lng="-90.618668" lat="14.616276"/>
+    <point lng="-90.624161" lat="14.61096"/>
+    <point lng="-90.624161" lat="14.606309"/>
+    <point lng="-90.626221" lat="14.60498"/>
+    <point lng="-90.633774" lat="14.608967"/>
+    <point lng="-90.635834" lat="14.602987"/>
+    <point lng="-90.639954" lat="14.601658"/>
+    <point lng="-90.652313" lat="14.609631"/>
+    <point lng="-90.680466" lat="14.61096"/>
+    <point lng="-90.690765" lat="14.632886"/>
+    <point lng="-90.695572" lat="14.632886"/>
+    <point lng="-90.695572" lat="14.642851"/>
+    <point lng="-90.702438" lat="14.637536"/>
+    <point lng="-90.707245" lat="14.659459"/>
+    <point lng="-90.724411" lat="14.658795"/>
+    <point lng="-90.727844" lat="14.654809"/>
+    <point lng="-90.734024" lat="14.652816"/>
+    <point lng="-90.741577" lat="14.656802"/>
+    <point lng="-90.74501" lat="14.6382"/>
+    <point lng="-90.774536" lat="14.641522"/>
+    <point lng="-90.797882" lat="14.64883"/>
+    <point lng="-90.818481" lat="14.659459"/>
+    <point lng="-90.832214" lat="14.658795"/>
+    <point lng="-90.8535" lat="14.670087"/>
+    <point lng="-90.860367" lat="14.65348"/>
+    <point lng="-90.887146" lat="14.638865"/>
+    <point lng="-90.894012" lat="14.641522"/>
+    <point lng="-90.896759" lat="14.636207"/>
+    <point lng="-90.900192" lat="14.638865"/>
+    <point lng="-90.901566" lat="14.632886"/>
+    <point lng="-90.919418" lat="14.630892"/>
+    <point lng="-90.951691" lat="14.66743"/>
+    <point lng="-90.951004" lat="14.704626"/>
+    <point lng="-90.955811" lat="14.714588"/>
+    <point lng="-90.960617" lat="14.718573"/>
+    <point lng="-90.969543" lat="14.746464"/>
+    <point lng="-90.977783" lat="14.747792"/>
+    <point lng="-90.977783" lat="14.758416"/>
+    <point lng="-90.98877" lat="14.768376"/>
+    <point lng="-90.98671" lat="14.786966"/>
+    <point lng="-90.977097" lat="14.79626"/>
+    <point lng="-90.979156" lat="14.798252"/>
+    <point lng="-90.986023" lat="14.798916"/>
+    <point lng="-90.994949" lat="14.808874"/>
+    <point lng="-90.996323" lat="14.814848"/>
+    <point lng="-91.003189" lat="14.820822"/>
+    <point lng="-91.005936" lat="14.819495"/>
+    <point lng="-91.005249" lat="14.824141"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.027908" lat="14.823478"/>
+    <point lng="-91.044388" lat="14.838081"/>
+    <point lng="-91.044388" lat="14.845382"/>
+    <point lng="-91.049194" lat="14.844054"/>
+    <point lng="-91.047134" lat="14.850028"/>
+    <point lng="-91.050568" lat="14.850028"/>
+    <point lng="-91.050568" lat="14.856001"/>
+    <point lng="-91.055374" lat="14.854674"/>
+    <point lng="-91.058807" lat="14.859983"/>
+    <point lng="-91.086273" lat="14.826133"/>
+    <point lng="-91.0952" lat="14.829452"/>
+    <point lng="-91.09726" lat="14.835426"/>
+    <point lng="-91.109619" lat="14.836089"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.117172" lat="14.838081"/>
+    <point lng="-91.127472" lat="14.836753"/>
+    <point lng="-91.137772" lat="14.840072"/>
+    <point lng="-91.130219" lat="14.8487"/>
+    <point lng="-91.136398" lat="14.850028"/>
+    <point lng="-91.140518" lat="14.847373"/>
+    <point lng="-91.145325" lat="14.8487"/>
+    <point lng="-91.148758" lat="14.856665"/>
+    <point lng="-91.173477" lat="14.844054"/>
+    <point lng="-91.177597" lat="14.84339"/>
+    <point lng="-91.17897" lat="14.838744"/>
+    <point lng="-91.183777" lat="14.835426"/>
+    <point lng="-91.18515" lat="14.828124"/>
+    <point lng="-91.190643" lat="14.830115"/>
+    <point lng="-91.200256" lat="14.825469"/>
+    <point lng="-91.203003" lat="14.814848"/>
+    <point lng="-91.208496" lat="14.815512"/>
+    <point lng="-91.213303" lat="14.80821"/>
+    <point lng="-91.220169" lat="14.812193"/>
+    <point lng="-91.222229" lat="14.805554"/>
+    <point lng="-91.231842" lat="14.80821"/>
+    <point lng="-91.252441" lat="14.800907"/>
+    <point lng="-91.255188" lat="14.792941"/>
+    <point lng="-91.266861" lat="14.798252"/>
+    <point lng="-91.273727" lat="14.79626"/>
+    <point lng="-91.2854" lat="14.800907"/>
+    <point lng="-91.292267" lat="14.798252"/>
+    <point lng="-91.29364" lat="14.791613"/>
+    <point lng="-91.290894" lat="14.773023"/>
+    <point lng="-91.292953" lat="14.767048"/>
+    <point lng="-91.295013" lat="14.741816"/>
+    <point lng="-91.30394" lat="14.728534"/>
+    <point lng="-91.292953" lat="14.714588"/>
+    <point lng="-91.28952" lat="14.692671"/>
+    <point lng="-91.279221" lat="14.692007"/>
+    <point lng="-91.272354" lat="14.693999"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to San Pedro la Laguna</b></div> Distance: 157 km<br>Driving time: 3hrs]]></infowindow>
+    <route>
+      <segment number="1">
+        <dirs>Head west on Calzada Roosevelt</dirs>
+        <time>about 15 mins</time>
+        <dist>4.6 km</dist>
+      </segment>
+      <segment number="2">
+        <dirs>Continue to follow Pan American Hwy</dirs>
+        <time>about 1 hour 30 mins</time>
+        <dist>113 km</dist>
+      </segment>
+      <segment number="3">
+        <dirs>Veer left at Los Encuentros</dirs>
+        <time>about 15 mins</time>
+        <dist>22.5 km</dist>
+      </segment>
+      <segment number="4">
+        <dirs>Turn left at km 148.5</dirs>
+        <time></time>
+        <dist></dist>
+      </segment>
+      <segment number="5">
+        <dirs>
+          Follow main road from there.
+        </dirs>
+        <time>about 1 hour</time>
+        <dist>14.2 km</dist>
+      </segment>
+    </route>
+  </line>
+  <line name="Panajachel" colour="#FF00FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.533524" lat="14.614947"/>
+    <point lng="-90.574036" lat="14.634879"/>
+    <point lng="-90.599442" lat="14.636872"/>
+    <point lng="-90.606308" lat="14.625577"/>
+    <point lng="-90.606995" lat="14.618269"/>
+    <point lng="-90.614548" lat="14.624248"/>
+    <point lng="-90.618668" lat="14.616276"/>
+    <point lng="-90.624161" lat="14.61096"/>
+    <point lng="-90.624161" lat="14.606309"/>
+    <point lng="-90.626221" lat="14.60498"/>
+    <point lng="-90.633774" lat="14.608967"/>
+    <point lng="-90.635834" lat="14.602987"/>
+    <point lng="-90.639954" lat="14.601658"/>
+    <point lng="-90.652313" lat="14.609631"/>
+    <point lng="-90.680466" lat="14.61096"/>
+    <point lng="-90.690765" lat="14.632886"/>
+    <point lng="-90.695572" lat="14.632886"/>
+    <point lng="-90.695572" lat="14.642851"/>
+    <point lng="-90.702438" lat="14.637536"/>
+    <point lng="-90.707245" lat="14.659459"/>
+    <point lng="-90.724411" lat="14.658795"/>
+    <point lng="-90.727844" lat="14.654809"/>
+    <point lng="-90.734024" lat="14.652816"/>
+    <point lng="-90.741577" lat="14.656802"/>
+    <point lng="-90.74501" lat="14.6382"/>
+    <point lng="-90.774536" lat="14.641522"/>
+    <point lng="-90.797882" lat="14.64883"/>
+    <point lng="-90.818481" lat="14.659459"/>
+    <point lng="-90.832214" lat="14.658795"/>
+    <point lng="-90.8535" lat="14.670087"/>
+    <point lng="-90.860367" lat="14.65348"/>
+    <point lng="-90.887146" lat="14.638865"/>
+    <point lng="-90.894012" lat="14.641522"/>
+    <point lng="-90.896759" lat="14.636207"/>
+    <point lng="-90.900192" lat="14.638865"/>
+    <point lng="-90.901566" lat="14.632886"/>
+    <point lng="-90.919418" lat="14.630892"/>
+    <point lng="-90.951691" lat="14.66743"/>
+    <point lng="-90.951004" lat="14.704626"/>
+    <point lng="-90.955811" lat="14.714588"/>
+    <point lng="-90.960617" lat="14.718573"/>
+    <point lng="-90.969543" lat="14.746464"/>
+    <point lng="-90.977783" lat="14.747792"/>
+    <point lng="-90.977783" lat="14.758416"/>
+    <point lng="-90.98877" lat="14.768376"/>
+    <point lng="-90.98671" lat="14.786966"/>
+    <point lng="-90.977097" lat="14.79626"/>
+    <point lng="-90.979156" lat="14.798252"/>
+    <point lng="-90.986023" lat="14.798916"/>
+    <point lng="-90.994949" lat="14.808874"/>
+    <point lng="-90.996323" lat="14.814848"/>
+    <point lng="-91.003189" lat="14.820822"/>
+    <point lng="-91.005936" lat="14.819495"/>
+    <point lng="-91.005249" lat="14.824141"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.027908" lat="14.823478"/>
+    <point lng="-91.044388" lat="14.838081"/>
+    <point lng="-91.044388" lat="14.845382"/>
+    <point lng="-91.049194" lat="14.844054"/>
+    <point lng="-91.047134" lat="14.850028"/>
+    <point lng="-91.050568" lat="14.850028"/>
+    <point lng="-91.050568" lat="14.856001"/>
+    <point lng="-91.055374" lat="14.854674"/>
+    <point lng="-91.058807" lat="14.859983"/>
+    <point lng="-91.086273" lat="14.826133"/>
+    <point lng="-91.0952" lat="14.829452"/>
+    <point lng="-91.09726" lat="14.835426"/>
+    <point lng="-91.109619" lat="14.836089"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.117172" lat="14.838081"/>
+    <point lng="-91.127472" lat="14.836753"/>
+    <point lng="-91.137772" lat="14.840072"/>
+    <point lng="-91.130219" lat="14.8487"/>
+    <point lng="-91.136398" lat="14.850028"/>
+    <point lng="-91.140518" lat="14.847373"/>
+    <point lng="-91.145325" lat="14.8487"/>
+    <point lng="-91.148758" lat="14.856665"/>
+    <point lng="-91.173477" lat="14.844054"/>
+    <point lng="-91.180344" lat="14.814848"/>
+    <point lng="-91.181717" lat="14.79958"/>
+    <point lng="-91.183777" lat="14.786966"/>
+    <point lng="-91.181717" lat="14.780327"/>
+    <point lng="-91.18515" lat="14.777007"/>
+    <point lng="-91.175537" lat="14.75908"/>
+    <point lng="-91.17691" lat="14.75576"/>
+    <point lng="-91.172104" lat="14.753104"/>
+    <point lng="-91.167984" lat="14.756424"/>
+    <point lng="-91.162491" lat="14.756424"/>
+    <point lng="-91.161804" lat="14.743144"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Panajachel</b></div> Distance: 116 km<br>Driving time: 3 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on Calzada Roosevelt</dirs>
+      <time>about 15 mins</time>
+      <dist>4.6 km</dist>
+      <dirs>Continue to follow Pan American Hwy</dirs>
+      <time>about 1 hour 30 mins</time>
+      <dist>113 km</dist>
+      <dirs>Veer left at Los Encuentros</dirs>
+      <time>about 5 mins</time>
+      <dist>3.1 km</dist>
+      <dirs>Look for left turn to Solola</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Follow signs from there</dirs>
+      <time>about 30 mins</time>
+      <dist>17.2 km</dist>
+    </route>
+  </line>
+  <line name="Coban" colour="#FF00FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-90.095444" lat="14.915062"/>
+    <point lng="-90.116043" lat="14.917052"/>
+    <point lng="-90.131149" lat="14.910417"/>
+    <point lng="-90.139389" lat="14.912408"/>
+    <point lng="-90.146942" lat="14.906436"/>
+    <point lng="-90.162048" lat="14.905109"/>
+    <point lng="-90.174408" lat="14.901127"/>
+    <point lng="-90.188141" lat="14.911081"/>
+    <point lng="-90.196381" lat="14.911081"/>
+    <point lng="-90.201187" lat="14.934966"/>
+    <point lng="-90.214233" lat="14.933639"/>
+    <point lng="-90.222473" lat="14.959512"/>
+    <point lng="-90.234833" lat="14.967473"/>
+    <point lng="-90.239639" lat="14.967473"/>
+    <point lng="-90.249939" lat="14.976759"/>
+    <point lng="-90.249939" lat="14.994668"/>
+    <point lng="-90.239639" lat="15.002627"/>
+    <point lng="-90.22934" lat="15.018544"/>
+    <point lng="-90.215607" lat="15.022524"/>
+    <point lng="-90.217667" lat="15.03645"/>
+    <point lng="-90.195694" lat="15.057669"/>
+    <point lng="-90.194321" lat="15.081538"/>
+    <point lng="-90.184708" lat="15.085516"/>
+    <point lng="-90.183334" lat="15.096124"/>
+    <point lng="-90.190201" lat="15.103416"/>
+    <point lng="-90.189514" lat="15.119989"/>
+    <point lng="-90.180588" lat="15.133246"/>
+    <point lng="-90.186081" lat="15.158432"/>
+    <point lng="-90.21286" lat="15.193555"/>
+    <point lng="-90.205994" lat="15.202169"/>
+    <point lng="-90.2108" lat="15.216746"/>
+    <point lng="-90.216293" lat="15.213433"/>
+    <point lng="-90.2211" lat="15.219396"/>
+    <point lng="-90.216293" lat="15.224697"/>
+    <point lng="-90.282898" lat="15.251197"/>
+    <point lng="-90.298691" lat="15.28498"/>
+    <point lng="-90.31517" lat="15.297564"/>
+    <point lng="-90.322037" lat="15.306174"/>
+    <point lng="-90.322037" lat="15.316771"/>
+    <point lng="-90.420914" lat="15.335975"/>
+    <point lng="-90.427094" lat="15.353854"/>
+    <point lng="-90.420914" lat="15.363786"/>
+    <point lng="-90.418854" lat="15.379013"/>
+    <point lng="-90.403748" lat="15.412776"/>
+    <point lng="-90.407181" lat="15.425352"/>
+    <point lng="-90.410614" lat="15.435943"/>
+    <point lng="-90.395508" lat="15.448518"/>
+    <point lng="-90.393448" lat="15.469696"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Coban</b></div> Distance: 213 km<br>Driving time: 4 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Turn left at El Rancho</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA 14</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Follow signs from there</dirs>
+      <time>about 1 hour 37 mins</time>
+      <dist>123 km</dist>
+    </route>
+  </line>
+  <line name="Rio Hondo" colour="#0000FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Rio Hondo</b></div> Distance: 126 km<br>Driving time: 2 hrs 20 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 41 mins</time>
+      <dist>51.8 km</dist>
+    </route>
+  </line>
+  <line name="Chiquimula" colour="#880000" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.594193" lat="15.039765"/>
+    <point lng="-89.550247" lat="14.964819"/>
+    <point lng="-89.534454" lat="14.952215"/>
+    <point lng="-89.525528" lat="14.934303"/>
+    <point lng="-89.529648" lat="14.918379"/>
+    <point lng="-89.522781" lat="14.901127"/>
+    <point lng="-89.520035" lat="14.882547"/>
+    <point lng="-89.511795" lat="14.874584"/>
+    <point lng="-89.509735" lat="14.864629"/>
+    <point lng="-89.518661" lat="14.857328"/>
+    <point lng="-89.526215" lat="14.818831"/>
+    <point lng="-89.531708" lat="14.804227"/>
+    <point lng="-89.544067" lat="14.800244"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Chiquimula</b></div> Distance: 169 km<br>Driving time: 2 hrs 50 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 41 mins</time>
+      <dist>51.8 km</dist>
+      <dirs>Turn right at Rio Hondo</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA 10</dirs>
+      <time>about 24 mins</time>
+      <dist>32.3 km</dist>
+      <dirs>Follow signs from there. Town is on right side of road.</dirs>
+      <time></time>
+      <dist></dist>
+    </route>
+  </line>
+  <line name="Esquipulas" colour="#880088" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.594193" lat="15.039765"/>
+    <point lng="-89.550247" lat="14.964819"/>
+    <point lng="-89.534454" lat="14.952215"/>
+    <point lng="-89.525528" lat="14.934303"/>
+    <point lng="-89.529648" lat="14.918379"/>
+    <point lng="-89.522781" lat="14.901127"/>
+    <point lng="-89.520035" lat="14.882547"/>
+    <point lng="-89.511795" lat="14.874584"/>
+    <point lng="-89.509735" lat="14.864629"/>
+    <point lng="-89.518661" lat="14.857328"/>
+    <point lng="-89.526215" lat="14.818831"/>
+    <point lng="-89.531708" lat="14.804227"/>
+    <point lng="-89.544067" lat="14.800244"/>
+    <point lng="-89.538574" lat="14.785638"/>
+    <point lng="-89.511108" lat="14.74248"/>
+    <point lng="-89.505615" lat="14.731855"/>
+    <point lng="-89.498749" lat="14.727206"/>
+    <point lng="-89.498749" lat="14.708611"/>
+    <point lng="-89.497375" lat="14.694664"/>
+    <point lng="-89.500809" lat="14.678723"/>
+    <point lng="-89.489136" lat="14.655473"/>
+    <point lng="-89.478149" lat="14.637536"/>
+    <point lng="-89.45961" lat="14.608302"/>
+    <point lng="-89.452057" lat="14.595677"/>
+    <point lng="-89.456863" lat="14.589032"/>
+    <point lng="-89.456863" lat="14.5784"/>
+    <point lng="-89.448624" lat="14.572419"/>
+    <point lng="-89.454117" lat="14.557798"/>
+    <point lng="-89.424591" lat="14.551817"/>
+    <point lng="-89.414291" lat="14.547165"/>
+    <point lng="-89.358673" lat="14.559128"/>
+    <point lng="-89.3367" lat="14.560457"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Esquipulas</b></div> Distance: 222 km<br>Driving time: 3 hrs 30 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 41 mins</time>
+      <dist>51.8 km</dist>
+      <dirs>Turn right at Rio Hondo</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA 10</dirs>
+      <time>about 24 mins</time>
+      <dist>32.3 km</dist>
+      <dirs>Pass turnoff for Chiquimula</dirs>
+      <time>about 25 mins</time>
+      <dist>32.1 km</dist>
+      <dirs>Take turnoff to left and follow signs</dirs>
+      <time>about 13 mins</time>
+      <dist>13.3 km</dist>
+    </route>
+  </line>
+  <line name="Copan Ruinas (Honduras)" colour="#0000FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.594193" lat="15.039765"/>
+    <point lng="-89.550247" lat="14.964819"/>
+    <point lng="-89.534454" lat="14.952215"/>
+    <point lng="-89.525528" lat="14.934303"/>
+    <point lng="-89.529648" lat="14.918379"/>
+    <point lng="-89.522781" lat="14.901127"/>
+    <point lng="-89.520035" lat="14.882547"/>
+    <point lng="-89.511795" lat="14.874584"/>
+    <point lng="-89.509735" lat="14.864629"/>
+    <point lng="-89.518661" lat="14.857328"/>
+    <point lng="-89.526215" lat="14.818831"/>
+    <point lng="-89.531708" lat="14.804227"/>
+    <point lng="-89.544067" lat="14.800244"/>
+    <point lng="-89.538574" lat="14.784974"/>
+    <point lng="-89.518661" lat="14.757088"/>
+    <point lng="-89.504242" lat="14.732519"/>
+    <point lng="-89.473343" lat="14.738495"/>
+    <point lng="-89.463043" lat="14.741152"/>
+    <point lng="-89.458923" lat="14.747792"/>
+    <point lng="-89.444504" lat="14.755096"/>
+    <point lng="-89.421158" lat="14.775679"/>
+    <point lng="-89.417038" lat="14.797588"/>
+    <point lng="-89.408112" lat="14.801571"/>
+    <point lng="-89.390945" lat="14.821486"/>
+    <point lng="-89.386139" lat="14.814184"/>
+    <point lng="-89.350433" lat="14.828788"/>
+    <point lng="-89.35318" lat="14.842063"/>
+    <point lng="-89.337387" lat="14.853346"/>
+    <point lng="-89.307175" lat="14.864629"/>
+    <point lng="-89.300995" lat="14.860647"/>
+    <point lng="-89.294128" lat="14.865956"/>
+    <point lng="-89.280396" lat="14.870602"/>
+    <point lng="-89.25499" lat="14.865293"/>
+    <point lng="-89.24675" lat="14.854674"/>
+    <point lng="-89.199371" lat="14.855337"/>
+    <point lng="-89.187698" lat="14.842063"/>
+    <point lng="-89.184265" lat="14.834762"/>
+    <point lng="-89.169159" lat="14.842063"/>
+    <point lng="-89.161606" lat="14.840736"/>
+    <point lng="-89.155426" lat="14.839408"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Copan Ruinas</b></div> Distance: 240 km<br>Driving time: 4hrs 10 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 41 mins</time>
+      <dist>51.8 km</dist>
+      <dirs>Turn right at Rio Hondo</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA 10</dirs>
+      <time>about 34 mins</time>
+      <dist>42.0 km</dist>
+      <dirs>Turn left at Vado Hondo on to CA11, continmue to Guatemala/Honduras border</dirs>
+      <time>about 32 mins</time>
+      <dist>41.9 km</dist>
+      <dirs>Follow road. Look for turnoff to town on left</dirs>
+      <time>about 7 mins</time>
+      <dist>9.2 km</dist>
+    </route>
+  </line>
+  <line name="La Ruidosa junction" colour="#880000" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.473343" lat="15.086842"/>
+    <point lng="-89.458237" lat="15.085516"/>
+    <point lng="-89.429398" lat="15.096787"/>
+    <point lng="-89.416351" lat="15.116674"/>
+    <point lng="-89.401245" lat="15.119326"/>
+    <point lng="-89.390945" lat="15.123303"/>
+    <point lng="-89.386139" lat="15.121314"/>
+    <point lng="-89.368973" lat="15.132583"/>
+    <point lng="-89.349747" lat="15.131257"/>
+    <point lng="-89.328461" lat="15.147165"/>
+    <point lng="-89.322968" lat="15.162408"/>
+    <point lng="-89.311981" lat="15.163734"/>
+    <point lng="-89.297562" lat="15.184278"/>
+    <point lng="-89.285202" lat="15.18494"/>
+    <point lng="-89.274216" lat="15.199519"/>
+    <point lng="-89.244003" lat="15.209458"/>
+    <point lng="-89.211044" lat="15.234635"/>
+    <point lng="-89.198685" lat="15.234635"/>
+    <point lng="-89.189072" lat="15.23331"/>
+    <point lng="-89.178772" lat="15.240597"/>
+    <point lng="-89.172592" lat="15.240597"/>
+    <point lng="-89.156113" lat="15.247885"/>
+    <point lng="-89.141006" lat="15.24391"/>
+    <point lng="-89.117661" lat="15.255172"/>
+    <point lng="-89.091568" lat="15.255172"/>
+    <point lng="-89.079208" lat="15.270408"/>
+    <point lng="-89.069595" lat="15.274382"/>
+    <point lng="-89.069595" lat="15.28233"/>
+    <point lng="-89.063416" lat="15.286967"/>
+    <point lng="-89.066162" lat="15.297564"/>
+    <point lng="-89.039383" lat="15.336637"/>
+    <point lng="-89.04213" lat="15.343921"/>
+    <point lng="-89.035263" lat="15.363123"/>
+    <point lng="-88.986511" lat="15.425352"/>
+    <point lng="-88.939133" lat="15.449842"/>
+    <point lng="-88.930206" lat="15.46374"/>
+    <point lng="-88.910294" lat="15.465725"/>
+    <point lng="-88.905487" lat="15.470357"/>
+    <point lng="-88.879395" lat="15.484254"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to La Ruidosa junction</b></div> Distance: 295 km<br>Driving time: 4 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 2 hrs</time>
+      <dist>154 km</dist>
+    </route>
+  </line>
+  <line name="Rio Dulce" colour="#888888" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.473343" lat="15.086842"/>
+    <point lng="-89.458237" lat="15.085516"/>
+    <point lng="-89.429398" lat="15.096787"/>
+    <point lng="-89.416351" lat="15.116674"/>
+    <point lng="-89.401245" lat="15.119326"/>
+    <point lng="-89.390945" lat="15.123303"/>
+    <point lng="-89.386139" lat="15.121314"/>
+    <point lng="-89.368973" lat="15.132583"/>
+    <point lng="-89.349747" lat="15.131257"/>
+    <point lng="-89.328461" lat="15.147165"/>
+    <point lng="-89.322968" lat="15.162408"/>
+    <point lng="-89.311981" lat="15.163734"/>
+    <point lng="-89.297562" lat="15.184278"/>
+    <point lng="-89.285202" lat="15.18494"/>
+    <point lng="-89.274216" lat="15.199519"/>
+    <point lng="-89.244003" lat="15.209458"/>
+    <point lng="-89.211044" lat="15.234635"/>
+    <point lng="-89.198685" lat="15.234635"/>
+    <point lng="-89.189072" lat="15.23331"/>
+    <point lng="-89.178772" lat="15.240597"/>
+    <point lng="-89.172592" lat="15.240597"/>
+    <point lng="-89.156113" lat="15.247885"/>
+    <point lng="-89.141006" lat="15.24391"/>
+    <point lng="-89.117661" lat="15.255172"/>
+    <point lng="-89.091568" lat="15.255172"/>
+    <point lng="-89.079208" lat="15.270408"/>
+    <point lng="-89.069595" lat="15.274382"/>
+    <point lng="-89.069595" lat="15.28233"/>
+    <point lng="-89.063416" lat="15.286967"/>
+    <point lng="-89.066162" lat="15.297564"/>
+    <point lng="-89.039383" lat="15.336637"/>
+    <point lng="-89.04213" lat="15.343921"/>
+    <point lng="-89.035263" lat="15.363123"/>
+    <point lng="-88.986511" lat="15.425352"/>
+    <point lng="-88.939133" lat="15.449842"/>
+    <point lng="-88.930206" lat="15.46374"/>
+    <point lng="-88.910294" lat="15.465725"/>
+    <point lng="-88.905487" lat="15.470357"/>
+    <point lng="-88.879395" lat="15.484254"/>
+    <point lng="-88.889008" lat="15.506884"/>
+    <point lng="-88.91922" lat="15.570392"/>
+    <point lng="-88.941193" lat="15.606107"/>
+    <point lng="-88.976898" lat="15.637849"/>
+    <point lng="-89.013977" lat="15.665619"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Rio Dulce</b></div> Distance: 325 km<br>Driving time: 4 hrs 30 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 2 hrs</time>
+      <dist>154 km</dist>
+      <dirs>Turn left at La Ruidosa Junction</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA13, town is across bridge.</dirs>
+      <time>about 20 mins</time>
+      <dist>26.4 km</dist>
+    </route>
+  </line>
+  <line name="Flores (via Rio Dulce)" colour="#8800FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.473343" lat="15.086842"/>
+    <point lng="-89.458237" lat="15.085516"/>
+    <point lng="-89.429398" lat="15.096787"/>
+    <point lng="-89.416351" lat="15.116674"/>
+    <point lng="-89.401245" lat="15.119326"/>
+    <point lng="-89.390945" lat="15.123303"/>
+    <point lng="-89.386139" lat="15.121314"/>
+    <point lng="-89.368973" lat="15.132583"/>
+    <point lng="-89.349747" lat="15.131257"/>
+    <point lng="-89.328461" lat="15.147165"/>
+    <point lng="-89.322968" lat="15.162408"/>
+    <point lng="-89.311981" lat="15.163734"/>
+    <point lng="-89.297562" lat="15.184278"/>
+    <point lng="-89.285202" lat="15.18494"/>
+    <point lng="-89.274216" lat="15.199519"/>
+    <point lng="-89.244003" lat="15.209458"/>
+    <point lng="-89.211044" lat="15.234635"/>
+    <point lng="-89.198685" lat="15.234635"/>
+    <point lng="-89.189072" lat="15.23331"/>
+    <point lng="-89.178772" lat="15.240597"/>
+    <point lng="-89.172592" lat="15.240597"/>
+    <point lng="-89.156113" lat="15.247885"/>
+    <point lng="-89.141006" lat="15.24391"/>
+    <point lng="-89.117661" lat="15.255172"/>
+    <point lng="-89.091568" lat="15.255172"/>
+    <point lng="-89.079208" lat="15.270408"/>
+    <point lng="-89.069595" lat="15.274382"/>
+    <point lng="-89.069595" lat="15.28233"/>
+    <point lng="-89.063416" lat="15.286967"/>
+    <point lng="-89.066162" lat="15.297564"/>
+    <point lng="-89.039383" lat="15.336637"/>
+    <point lng="-89.04213" lat="15.343921"/>
+    <point lng="-89.035263" lat="15.363123"/>
+    <point lng="-88.986511" lat="15.425352"/>
+    <point lng="-88.939133" lat="15.449842"/>
+    <point lng="-88.930206" lat="15.46374"/>
+    <point lng="-88.910294" lat="15.465725"/>
+    <point lng="-88.905487" lat="15.470357"/>
+    <point lng="-88.879395" lat="15.484254"/>
+    <point lng="-88.889008" lat="15.506884"/>
+    <point lng="-88.91922" lat="15.570392"/>
+    <point lng="-88.941193" lat="15.606107"/>
+    <point lng="-88.976898" lat="15.637849"/>
+    <point lng="-89.013977" lat="15.665619"/>
+    <point lng="-88.976898" lat="15.637849"/>
+    <point lng="-89.013977" lat="15.665619"/>
+    <point lng="-89.03595" lat="15.67223"/>
+    <point lng="-89.059296" lat="15.747583"/>
+    <point lng="-89.103241" lat="15.775338"/>
+    <point lng="-89.112854" lat="15.774017"/>
+    <point lng="-89.130707" lat="15.791196"/>
+    <point lng="-89.199371" lat="15.849332"/>
+    <point lng="-89.23645" lat="15.877073"/>
+    <point lng="-89.237823" lat="15.931223"/>
+    <point lng="-89.272156" lat="15.958952"/>
+    <point lng="-89.280396" lat="15.973476"/>
+    <point lng="-89.277649" lat="15.989318"/>
+    <point lng="-89.302368" lat="15.998559"/>
+    <point lng="-89.307861" lat="16.0144"/>
+    <point lng="-89.332581" lat="16.028919"/>
+    <point lng="-89.354553" lat="16.085667"/>
+    <point lng="-89.364166" lat="16.10282"/>
+    <point lng="-89.421844" lat="16.181969"/>
+    <point lng="-89.434204" lat="16.21362"/>
+    <point lng="-89.421844" lat="16.24131"/>
+    <point lng="-89.412231" lat="16.316449"/>
+    <point lng="-89.388885" lat="16.328311"/>
+    <point lng="-89.412231" lat="16.333582"/>
+    <point lng="-89.44519" lat="16.388925"/>
+    <point lng="-89.446564" lat="16.420542"/>
+    <point lng="-89.425964" lat="16.467958"/>
+    <point lng="-89.439697" lat="16.554858"/>
+    <point lng="-89.508362" lat="16.593029"/>
+    <point lng="-89.538574" lat="16.604873"/>
+    <point lng="-89.552307" lat="16.624612"/>
+    <point lng="-89.588013" lat="16.623297"/>
+    <point lng="-89.625092" lat="16.641718"/>
+    <point lng="-89.658051" lat="16.643034"/>
+    <point lng="-89.680023" lat="16.668032"/>
+    <point lng="-89.725342" lat="16.679872"/>
+    <point lng="-89.804993" lat="16.771935"/>
+    <point lng="-89.822845" lat="16.821894"/>
+    <point lng="-89.810486" lat="16.863954"/>
+    <point lng="-89.810486" lat="16.899435"/>
+    <point lng="-89.89563" lat="16.921771"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Flores (via Rio Dulce)</b></div> Distance: 488 km<br>Driving time: 8 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 2 hrs</time>
+      <dist>154 km</dist>
+      <dirs>Turn left at La Ruidosa Junction</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA13, passing Rio Dulce</dirs>
+      <time>about 20 mins</time>
+      <dist>26.4 km</dist>
+      <dirs>Pass Santa Ana, continue to fork in road</dirs>
+      <time>about 2 hours 29 mins</time>
+      <dist>195 km</dist>
+      <dirs>Take left fork.Town is on an island across a causeway to the right.</dirs>
+      <time>about 12 mins</time>
+      <dist>10.6 km</dist>
+    </route>
+  </line>
+  <line name="Puerto Barrios" colour="#8800FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.473343" lat="15.086842"/>
+    <point lng="-89.458237" lat="15.085516"/>
+    <point lng="-89.429398" lat="15.096787"/>
+    <point lng="-89.416351" lat="15.116674"/>
+    <point lng="-89.401245" lat="15.119326"/>
+    <point lng="-89.390945" lat="15.123303"/>
+    <point lng="-89.386139" lat="15.121314"/>
+    <point lng="-89.368973" lat="15.132583"/>
+    <point lng="-89.349747" lat="15.131257"/>
+    <point lng="-89.328461" lat="15.147165"/>
+    <point lng="-89.322968" lat="15.162408"/>
+    <point lng="-89.311981" lat="15.163734"/>
+    <point lng="-89.297562" lat="15.184278"/>
+    <point lng="-89.285202" lat="15.18494"/>
+    <point lng="-89.274216" lat="15.199519"/>
+    <point lng="-89.244003" lat="15.209458"/>
+    <point lng="-89.211044" lat="15.234635"/>
+    <point lng="-89.198685" lat="15.234635"/>
+    <point lng="-89.189072" lat="15.23331"/>
+    <point lng="-89.178772" lat="15.240597"/>
+    <point lng="-89.172592" lat="15.240597"/>
+    <point lng="-89.156113" lat="15.247885"/>
+    <point lng="-89.141006" lat="15.24391"/>
+    <point lng="-89.117661" lat="15.255172"/>
+    <point lng="-89.091568" lat="15.255172"/>
+    <point lng="-89.079208" lat="15.270408"/>
+    <point lng="-89.069595" lat="15.274382"/>
+    <point lng="-89.069595" lat="15.28233"/>
+    <point lng="-89.063416" lat="15.286967"/>
+    <point lng="-89.066162" lat="15.297564"/>
+    <point lng="-89.039383" lat="15.336637"/>
+    <point lng="-89.04213" lat="15.343921"/>
+    <point lng="-89.035263" lat="15.363123"/>
+    <point lng="-88.986511" lat="15.425352"/>
+    <point lng="-88.939133" lat="15.449842"/>
+    <point lng="-88.930206" lat="15.46374"/>
+    <point lng="-88.910294" lat="15.465725"/>
+    <point lng="-88.905487" lat="15.470357"/>
+    <point lng="-88.879395" lat="15.484254"/>
+    <point lng="-88.869095" lat="15.484254"/>
+    <point lng="-88.847122" lat="15.503443"/>
+    <point lng="-88.822403" lat="15.502781"/>
+    <point lng="-88.80455" lat="15.512706"/>
+    <point lng="-88.794937" lat="15.521969"/>
+    <point lng="-88.764725" lat="15.529908"/>
+    <point lng="-88.760605" lat="15.536524"/>
+    <point lng="-88.698807" lat="15.547108"/>
+    <point lng="-88.667908" lat="15.560338"/>
+    <point lng="-88.655548" lat="15.559015"/>
+    <point lng="-88.645248" lat="15.576875"/>
+    <point lng="-88.619843" lat="15.575552"/>
+    <point lng="-88.60611" lat="15.586134"/>
+    <point lng="-88.584824" lat="15.58415"/>
+    <point lng="-88.576584" lat="15.592087"/>
+    <point lng="-88.575211" lat="15.612588"/>
+    <point lng="-88.569717" lat="15.619863"/>
+    <point lng="-88.559418" lat="15.623169"/>
+    <point lng="-88.552551" lat="15.653586"/>
+    <point lng="-88.575897" lat="15.681353"/>
+    <point lng="-88.575897" lat="15.693913"/>
+    <point lng="-88.588943" lat="15.699863"/>
+    <point lng="-88.594437" lat="15.721015"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Puerto Barrios</b></div> Distance: 295 km<br>Driving time: 4 hrs 30 mins]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Continue straight on CA9 at El Rancho</dirs>
+      <time>about 2 hrs</time>
+      <dist>154 km</dist>
+      <dirs>Continue past La Ruidosa junction</dirs>
+      <time>about 44 mins</time>
+      <dist>55.3 km</dist>
+      <dirs>Follow signs. Town is on left.</dirs>
+      <time></time>
+      <dist></dist>
+    </route>
+  </line>
+  <line name="Flores (via Coban)" colour="#FF00FF" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-90.095444" lat="14.915062"/>
+    <point lng="-90.116043" lat="14.917052"/>
+    <point lng="-90.131149" lat="14.910417"/>
+    <point lng="-90.139389" lat="14.912408"/>
+    <point lng="-90.146942" lat="14.906436"/>
+    <point lng="-90.162048" lat="14.905109"/>
+    <point lng="-90.174408" lat="14.901127"/>
+    <point lng="-90.188141" lat="14.911081"/>
+    <point lng="-90.196381" lat="14.911081"/>
+    <point lng="-90.201187" lat="14.934966"/>
+    <point lng="-90.214233" lat="14.933639"/>
+    <point lng="-90.222473" lat="14.959512"/>
+    <point lng="-90.234833" lat="14.967473"/>
+    <point lng="-90.239639" lat="14.967473"/>
+    <point lng="-90.249939" lat="14.976759"/>
+    <point lng="-90.249939" lat="14.994668"/>
+    <point lng="-90.239639" lat="15.002627"/>
+    <point lng="-90.22934" lat="15.018544"/>
+    <point lng="-90.215607" lat="15.022524"/>
+    <point lng="-90.217667" lat="15.03645"/>
+    <point lng="-90.195694" lat="15.057669"/>
+    <point lng="-90.194321" lat="15.081538"/>
+    <point lng="-90.184708" lat="15.085516"/>
+    <point lng="-90.183334" lat="15.096124"/>
+    <point lng="-90.190201" lat="15.103416"/>
+    <point lng="-90.189514" lat="15.119989"/>
+    <point lng="-90.180588" lat="15.133246"/>
+    <point lng="-90.186081" lat="15.158432"/>
+    <point lng="-90.21286" lat="15.193555"/>
+    <point lng="-90.205994" lat="15.202169"/>
+    <point lng="-90.2108" lat="15.216746"/>
+    <point lng="-90.216293" lat="15.213433"/>
+    <point lng="-90.2211" lat="15.219396"/>
+    <point lng="-90.216293" lat="15.224697"/>
+    <point lng="-90.282898" lat="15.251197"/>
+    <point lng="-90.298691" lat="15.28498"/>
+    <point lng="-90.31517" lat="15.297564"/>
+    <point lng="-90.322037" lat="15.306174"/>
+    <point lng="-90.322037" lat="15.316771"/>
+    <point lng="-90.420914" lat="15.335975"/>
+    <point lng="-90.427094" lat="15.353854"/>
+    <point lng="-90.420914" lat="15.363786"/>
+    <point lng="-90.418854" lat="15.379013"/>
+    <point lng="-90.403748" lat="15.412776"/>
+    <point lng="-90.407181" lat="15.425352"/>
+    <point lng="-90.410614" lat="15.435943"/>
+    <point lng="-90.395508" lat="15.448518"/>
+    <point lng="-90.393448" lat="15.469696"/>
+    <point lng="-90.384178" lat="15.477571"/>
+    <point lng="-90.374565" lat="15.486835"/>
+    <point lng="-90.371132" lat="15.487496"/>
+    <point lng="-90.371132" lat="15.489812"/>
+    <point lng="-90.367012" lat="15.492128"/>
+    <point lng="-90.367355" lat="15.498414"/>
+    <point lng="-90.363922" lat="15.498414"/>
+    <point lng="-90.356369" lat="15.503708"/>
+    <point lng="-90.352936" lat="15.50867"/>
+    <point lng="-90.353966" lat="15.513302"/>
+    <point lng="-90.357399" lat="15.513963"/>
+    <point lng="-90.357399" lat="15.522564"/>
+    <point lng="-90.347443" lat="15.528849"/>
+    <point lng="-90.339546" lat="15.52918"/>
+    <point lng="-90.330448" lat="15.536094"/>
+    <point lng="-90.331135" lat="15.547174"/>
+    <point lng="-90.337143" lat="15.547373"/>
+    <point lng="-90.341949" lat="15.546381"/>
+    <point lng="-90.347443" lat="15.552996"/>
+    <point lng="-90.350533" lat="15.552334"/>
+    <point lng="-90.353279" lat="15.556965"/>
+    <point lng="-90.349159" lat="15.556965"/>
+    <point lng="-90.351219" lat="15.560934"/>
+    <point lng="-90.348129" lat="15.564572"/>
+    <point lng="-90.378685" lat="15.583423"/>
+    <point lng="-90.379715" lat="15.592682"/>
+    <point lng="-90.388298" lat="15.597973"/>
+    <point lng="-90.420227" lat="15.607893"/>
+    <point lng="-90.421944" lat="15.610538"/>
+    <point lng="-90.439796" lat="15.621119"/>
+    <point lng="-90.442543" lat="15.630046"/>
+    <point lng="-90.43293" lat="15.636328"/>
+    <point lng="-90.429153" lat="15.641948"/>
+    <point lng="-90.428123" lat="15.652528"/>
+    <point lng="-90.431557" lat="15.65947"/>
+    <point lng="-90.42366" lat="15.663437"/>
+    <point lng="-90.408554" lat="15.687303"/>
+    <point lng="-90.415421" lat="15.707795"/>
+    <point lng="-90.42778" lat="15.713744"/>
+    <point lng="-90.422974" lat="15.72498"/>
+    <point lng="-90.430527" lat="15.734167"/>
+    <point lng="-90.425377" lat="15.759611"/>
+    <point lng="-90.415077" lat="15.768202"/>
+    <point lng="-90.402031" lat="15.764567"/>
+    <point lng="-90.405121" lat="15.777453"/>
+    <point lng="-90.395164" lat="15.781748"/>
+    <point lng="-90.394135" lat="15.788686"/>
+    <point lng="-90.367355" lat="15.788025"/>
+    <point lng="-90.344696" lat="15.7834"/>
+    <point lng="-90.293884" lat="15.809696"/>
+    <point lng="-90.288391" lat="15.869148"/>
+    <point lng="-90.262299" lat="15.888961"/>
+    <point lng="-90.230026" lat="15.896093"/>
+    <point lng="-90.2108" lat="15.886187"/>
+    <point lng="-90.143509" lat="15.884866"/>
+    <point lng="-90.099564" lat="15.87496"/>
+    <point lng="-90.09613" lat="15.900716"/>
+    <point lng="-90.109177" lat="15.925148"/>
+    <point lng="-90.126343" lat="15.938354"/>
+    <point lng="-90.149689" lat="15.997107"/>
+    <point lng="-90.165482" lat="16.010968"/>
+    <point lng="-90.181961" lat="16.011628"/>
+    <point lng="-90.181961" lat="16.080917"/>
+    <point lng="-90.177841" lat="16.331474"/>
+    <point lng="-90.127716" lat="16.331474"/>
+    <point lng="-90.109177" lat="16.40065"/>
+    <point lng="-90.128403" lat="16.484946"/>
+    <point lng="-90.127029" lat="16.500748"/>
+    <point lng="-90.165482" lat="16.524447"/>
+    <point lng="-90.186424" lat="16.519773"/>
+    <point lng="-90.191231" lat="16.527015"/>
+    <point lng="-90.184021" lat="16.54018"/>
+    <point lng="-90.166855" lat="16.54742"/>
+    <point lng="-90.173721" lat="16.571772"/>
+    <point lng="-90.173721" lat="16.577366"/>
+    <point lng="-90.170803" lat="16.590166"/>
+    <point lng="-90.178871" lat="16.606123"/>
+    <point lng="-90.17767" lat="16.61221"/>
+    <point lng="-90.183334" lat="16.638955"/>
+    <point lng="-90.163422" lat="16.665269"/>
+    <point lng="-90.165482" lat="16.681056"/>
+    <point lng="-90.152435" lat="16.703418"/>
+    <point lng="-90.154495" lat="16.721174"/>
+    <point lng="-90.119476" lat="16.781007"/>
+    <point lng="-90.076218" lat="16.815847"/>
+    <point lng="-90.041885" lat="16.81979"/>
+    <point lng="-90.037766" lat="16.827677"/>
+    <point lng="-90.029526" lat="16.831621"/>
+    <point lng="-90.022659" lat="16.831621"/>
+    <point lng="-89.99588" lat="16.855937"/>
+    <point lng="-89.9897" lat="16.873022"/>
+    <point lng="-89.967728" lat="16.88025"/>
+    <point lng="-89.955368" lat="16.878278"/>
+    <point lng="-89.946442" lat="16.886163"/>
+    <point lng="-89.940948" lat="16.884849"/>
+    <point lng="-89.936142" lat="16.88682"/>
+    <point lng="-89.929962" lat="16.901176"/>
+    <point lng="-89.913998" lat="16.912837"/>
+    <point lng="-89.9049" lat="16.920227"/>
+    <point lng="-89.89666" lat="16.918914"/>
+    <point lng="-89.89563" lat="16.921213"/>
+    <point lng="-89.891853" lat="16.92072"/>
+    <point lng="-89.890823" lat="16.929588"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Flores (via Coban)</b></div> Distance: 403 km<br>Driving time: 10 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on CA9</dirs>
+      <time>about 1 hour 40 mins</time>
+      <dist>86 km</dist>
+      <dirs>Turn left at El Rancho</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA 14</dirs>
+      <time>about 1 hour 37 mins</time>
+      <dist>123 km</dist>
+      <dirs>Bypass Coban, heading for Chisec</dirs>
+      <time>about 56 mins</time>
+      <dist>72.8 km</dist>
+      <dirs>Past Chisec look for turnoff to left</dirs>
+      <time>about 22 mins</time>
+      <dist>28.3 km</dist>
+      <dirs>Continue to Sayaxche, put car on ferry to cross river</dirs>
+      <time>about 1 hour 9 mins</time>
+      <dist>90.2 km</dist>
+      <dirs>Follow road and signs from there.</dirs>
+      <time>about 55 mins</time>
+      <dist>64.9 km</dist>
+    </route>
+  </line>
+  <line name="Quetzaltenango" colour="#00FF00" width="5" opacity="0.6" category="Guatemala City">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.148071" lat="14.855337"/>
+    <point lng="-91.141205" lat="14.8487"/>
+    <point lng="-91.132278" lat="14.849364"/>
+    <point lng="-91.130219" lat="14.848037"/>
+    <point lng="-91.137772" lat="14.840736"/>
+    <point lng="-91.117859" lat="14.838081"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.108246" lat="14.836089"/>
+    <point lng="-91.096573" lat="14.835426"/>
+    <point lng="-91.093826" lat="14.828788"/>
+    <point lng="-91.08696" lat="14.826133"/>
+    <point lng="-91.058807" lat="14.858656"/>
+    <point lng="-91.051254" lat="14.852683"/>
+    <point lng="-91.049881" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.838744"/>
+    <point lng="-91.028595" lat="14.822814"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.005936" lat="14.823478"/>
+    <point lng="-90.985336" lat="14.79958"/>
+    <point lng="-90.97435" lat="14.797588"/>
+    <point lng="-90.988083" lat="14.768376"/>
+    <point lng="-90.977097" lat="14.756424"/>
+    <point lng="-90.97641" lat="14.746464"/>
+    <point lng="-90.968857" lat="14.747792"/>
+    <point lng="-90.962677" lat="14.720565"/>
+    <point lng="-90.955811" lat="14.713924"/>
+    <point lng="-90.951004" lat="14.705954"/>
+    <point lng="-90.951004" lat="14.665437"/>
+    <point lng="-90.918045" lat="14.632221"/>
+    <point lng="-90.900192" lat="14.63355"/>
+    <point lng="-90.891953" lat="14.640858"/>
+    <point lng="-90.887833" lat="14.637536"/>
+    <point lng="-90.862427" lat="14.650159"/>
+    <point lng="-90.852127" lat="14.669423"/>
+    <point lng="-90.832214" lat="14.659459"/>
+    <point lng="-90.816422" lat="14.658795"/>
+    <point lng="-90.798569" lat="14.64883"/>
+    <point lng="-90.745697" lat="14.635543"/>
+    <point lng="-90.74295" lat="14.656137"/>
+    <point lng="-90.729904" lat="14.652152"/>
+    <point lng="-90.723038" lat="14.65813"/>
+    <point lng="-90.703812" lat="14.656137"/>
+    <point lng="-90.701065" lat="14.640858"/>
+    <point lng="-90.691452" lat="14.6382"/>
+    <point lng="-90.694199" lat="14.631557"/>
+    <point lng="-90.684586" lat="14.623584"/>
+    <point lng="-90.678406" lat="14.610296"/>
+    <point lng="-90.651627" lat="14.608302"/>
+    <point lng="-90.64064" lat="14.600329"/>
+    <point lng="-90.631027" lat="14.608302"/>
+    <point lng="-90.623474" lat="14.608302"/>
+    <point lng="-90.613861" lat="14.620262"/>
+    <point lng="-90.609055" lat="14.617604"/>
+    <point lng="-90.606308" lat="14.626242"/>
+    <point lng="-90.600128" lat="14.629564"/>
+    <point lng="-90.600815" lat="14.634879"/>
+    <point lng="-90.570602" lat="14.634214"/>
+    <point lng="-90.529404" lat="14.612289"/>
+    <infowindow><![CDATA[<div align="center"><b>Guatemala City to Quetzaltenango</b></div> Distance: 206 km<br>Driving time: 3 hrs]]></infowindow>
+    <route>
+      <dirs>Head west on Calzada Roosevelt</dirs>
+      <time>about 15 mins</time>
+      <dist>4.6 km</dist>
+      <dirs>Continue to follow Pan American Hwy</dirs>
+      <time>about 1 hour 30 mins</time>
+      <dist>113 km</dist>
+      <dirs>Veer left at Los Encuentros</dirs>
+      <time></time>
+      <dist></dist>
+      <dirs>Continue on CA1</dirs>
+      <time>44 mins</time>
+      <dist>56 km</dist>
+      <dirs>Look for turnoff to underpass on left</dirs>
+      <time>about 4 mins</time>
+      <dist>2.8 km</dist>
+      <dirs>Continue straight at roundabout with statue of migrant</dirs>
+      <time>about 6 mins</time>
+      <dist>4.4 km</dist>
+      <dirs>Coming off the ring road, turn right</dirs>
+      <time>about 1 min</time>
+      <dist>1 km</dist>
+      <dirs>Turn right to go under non-functioning overpass</dirs>
+      <time>about 6 mins</time>
+      <dist>6.4 km</dist>
+      <dirs>Turn left at roundabout with statue of Mayan warrior</dirs>
+      <time></time>
+      <dist></dist>
+    </route>
+  </line>
+  <line name="Guatemala City" colour="#00FF00" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.148071" lat="14.855337"/>
+    <point lng="-91.141205" lat="14.8487"/>
+    <point lng="-91.132278" lat="14.849364"/>
+    <point lng="-91.130219" lat="14.848037"/>
+    <point lng="-91.137772" lat="14.840736"/>
+    <point lng="-91.117859" lat="14.838081"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.108246" lat="14.836089"/>
+    <point lng="-91.096573" lat="14.835426"/>
+    <point lng="-91.093826" lat="14.828788"/>
+    <point lng="-91.08696" lat="14.826133"/>
+    <point lng="-91.058807" lat="14.858656"/>
+    <point lng="-91.051254" lat="14.852683"/>
+    <point lng="-91.049881" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.838744"/>
+    <point lng="-91.028595" lat="14.822814"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.005936" lat="14.823478"/>
+    <point lng="-90.985336" lat="14.79958"/>
+    <point lng="-90.97435" lat="14.797588"/>
+    <point lng="-90.988083" lat="14.768376"/>
+    <point lng="-90.977097" lat="14.756424"/>
+    <point lng="-90.97641" lat="14.746464"/>
+    <point lng="-90.968857" lat="14.747792"/>
+    <point lng="-90.962677" lat="14.720565"/>
+    <point lng="-90.955811" lat="14.713924"/>
+    <point lng="-90.951004" lat="14.705954"/>
+    <point lng="-90.951004" lat="14.665437"/>
+    <point lng="-90.918045" lat="14.632221"/>
+    <point lng="-90.900192" lat="14.63355"/>
+    <point lng="-90.891953" lat="14.640858"/>
+    <point lng="-90.887833" lat="14.637536"/>
+    <point lng="-90.862427" lat="14.650159"/>
+    <point lng="-90.852127" lat="14.669423"/>
+    <point lng="-90.832214" lat="14.659459"/>
+    <point lng="-90.816422" lat="14.658795"/>
+    <point lng="-90.798569" lat="14.64883"/>
+    <point lng="-90.745697" lat="14.635543"/>
+    <point lng="-90.74295" lat="14.656137"/>
+    <point lng="-90.729904" lat="14.652152"/>
+    <point lng="-90.723038" lat="14.65813"/>
+    <point lng="-90.703812" lat="14.656137"/>
+    <point lng="-90.701065" lat="14.640858"/>
+    <point lng="-90.691452" lat="14.6382"/>
+    <point lng="-90.694199" lat="14.631557"/>
+    <point lng="-90.684586" lat="14.623584"/>
+    <point lng="-90.678406" lat="14.610296"/>
+    <point lng="-90.651627" lat="14.608302"/>
+    <point lng="-90.64064" lat="14.600329"/>
+    <point lng="-90.631027" lat="14.608302"/>
+    <point lng="-90.623474" lat="14.608302"/>
+    <point lng="-90.613861" lat="14.620262"/>
+    <point lng="-90.609055" lat="14.617604"/>
+    <point lng="-90.606308" lat="14.626242"/>
+    <point lng="-90.600128" lat="14.629564"/>
+    <point lng="-90.600815" lat="14.634879"/>
+    <point lng="-90.570602" lat="14.634214"/>
+    <point lng="-90.529404" lat="14.612289"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to Guatemala City</b></div> Distance: 206 km<br>Driving time: 3 hrs]]></infowindow>
+  </line>
+  <line name="Antigua" colour="#FF0000" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.148071" lat="14.855337"/>
+    <point lng="-91.141205" lat="14.8487"/>
+    <point lng="-91.132278" lat="14.849364"/>
+    <point lng="-91.130219" lat="14.848037"/>
+    <point lng="-91.137772" lat="14.840736"/>
+    <point lng="-91.117859" lat="14.838081"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.108246" lat="14.836089"/>
+    <point lng="-91.096573" lat="14.835426"/>
+    <point lng="-91.093826" lat="14.828788"/>
+    <point lng="-91.08696" lat="14.826133"/>
+    <point lng="-91.058807" lat="14.858656"/>
+    <point lng="-91.051254" lat="14.852683"/>
+    <point lng="-91.049881" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.838744"/>
+    <point lng="-91.028595" lat="14.822814"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.005936" lat="14.823478"/>
+    <point lng="-90.985336" lat="14.79958"/>
+    <point lng="-90.97435" lat="14.797588"/>
+    <point lng="-90.988083" lat="14.768376"/>
+    <point lng="-90.977097" lat="14.756424"/>
+    <point lng="-90.97641" lat="14.746464"/>
+    <point lng="-90.968857" lat="14.747792"/>
+    <point lng="-90.962677" lat="14.720565"/>
+    <point lng="-90.955811" lat="14.713924"/>
+    <point lng="-90.951004" lat="14.705954"/>
+    <point lng="-90.951004" lat="14.665437"/>
+    <point lng="-90.918045" lat="14.632221"/>
+    <point lng="-90.900192" lat="14.63355"/>
+    <point lng="-90.891953" lat="14.640858"/>
+    <point lng="-90.887833" lat="14.637536"/>
+    <point lng="-90.862427" lat="14.650159"/>
+    <point lng="-90.852127" lat="14.669423"/>
+    <point lng="-90.832214" lat="14.659459"/>
+    <point lng="-90.816422" lat="14.658795"/>
+    <point lng="-90.798569" lat="14.64883"/>
+    <point lng="-90.774536" lat="14.641389"/>
+    <point lng="-90.766983" lat="14.606176"/>
+    <point lng="-90.755997" lat="14.601259"/>
+    <point lng="-90.748444" lat="14.593285"/>
+    <point lng="-90.750504" lat="14.59096"/>
+    <point lng="-90.741577" lat="14.577669"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to Antigua</b></div> Distance: 170 km<br>Driving time: 3 hrs]]></infowindow>
+  </line>
+  <line name="Chichicastenango" colour="#0000FF" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.148071" lat="14.855337"/>
+    <point lng="-91.150475" lat="14.863899"/>
+    <point lng="-91.121635" lat="14.885135"/>
+    <point lng="-91.121292" lat="14.896084"/>
+    <point lng="-91.109619" lat="14.902388"/>
+    <point lng="-91.105843" lat="14.914"/>
+    <point lng="-91.101379" lat="14.912341"/>
+    <point lng="-91.096916" lat="14.917318"/>
+    <point lng="-91.104469" lat="14.918976"/>
+    <point lng="-91.104469" lat="14.924948"/>
+    <point lng="-91.112709" lat="14.940871"/>
+    <point lng="-91.110306" lat="14.94651"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to Chichicastenango</b></div> Distance: 94 km<br>Driving time: 1 hr 20 mins]]></infowindow>
+  </line>
+  <line name="Huehuetenango" colour="#0000FF" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.511307" lat="14.859319"/>
+    <point lng="-91.49826" lat="14.86662"/>
+    <point lng="-91.488647" lat="14.864629"/>
+    <point lng="-91.469421" lat="14.865293"/>
+    <point lng="-91.456375" lat="14.882547"/>
+    <point lng="-91.457062" lat="14.889847"/>
+    <point lng="-91.450882" lat="14.910417"/>
+    <point lng="-91.444702" lat="14.908426"/>
+    <point lng="-91.437149" lat="14.92236"/>
+    <point lng="-91.439896" lat="14.936293"/>
+    <point lng="-91.446762" lat="14.935629"/>
+    <point lng="-91.448822" lat="14.945581"/>
+    <point lng="-91.482468" lat="14.983392"/>
+    <point lng="-91.492767" lat="14.984719"/>
+    <point lng="-91.499634" lat="15.000638"/>
+    <point lng="-91.499634" lat="15.013239"/>
+    <point lng="-91.507187" lat="15.019208"/>
+    <point lng="-91.51062" lat="15.028492"/>
+    <point lng="-91.505814" lat="15.037776"/>
+    <point lng="-91.511993" lat="15.040429"/>
+    <point lng="-91.492081" lat="15.052364"/>
+    <point lng="-91.50444" lat="15.065626"/>
+    <point lng="-91.505814" lat="15.07756"/>
+    <point lng="-91.51886" lat="15.078886"/>
+    <point lng="-91.513367" lat="15.086179"/>
+    <point lng="-91.516113" lat="15.086179"/>
+    <point lng="-91.525726" lat="15.090157"/>
+    <point lng="-91.514053" lat="15.100764"/>
+    <point lng="-91.5271" lat="15.103416"/>
+    <point lng="-91.52092" lat="15.111371"/>
+    <point lng="-91.523666" lat="15.114023"/>
+    <point lng="-91.521606" lat="15.118"/>
+    <point lng="-91.526413" lat="15.118"/>
+    <point lng="-91.52504" lat="15.123966"/>
+    <point lng="-91.536713" lat="15.125954"/>
+    <point lng="-91.536026" lat="15.139211"/>
+    <point lng="-91.529846" lat="15.143188"/>
+    <point lng="-91.536713" lat="15.150479"/>
+    <point lng="-91.546326" lat="15.151141"/>
+    <point lng="-91.553192" lat="15.162408"/>
+    <point lng="-91.557999" lat="15.163071"/>
+    <point lng="-91.555939" lat="15.175"/>
+    <point lng="-91.550446" lat="15.178976"/>
+    <point lng="-91.547699" lat="15.188254"/>
+    <point lng="-91.52916" lat="15.202169"/>
+    <point lng="-91.50856" lat="15.221384"/>
+    <point lng="-91.499634" lat="15.223372"/>
+    <point lng="-91.505127" lat="15.229997"/>
+    <point lng="-91.505127" lat="15.234635"/>
+    <point lng="-91.488647" lat="15.247885"/>
+    <point lng="-91.483841" lat="15.257159"/>
+    <point lng="-91.472855" lat="15.265771"/>
+    <point lng="-91.479034" lat="15.270408"/>
+    <point lng="-91.474915" lat="15.279019"/>
+    <point lng="-91.468735" lat="15.28498"/>
+    <point lng="-91.463928" lat="15.281668"/>
+    <point lng="-91.459122" lat="15.286967"/>
+    <point lng="-91.465988" lat="15.302201"/>
+    <point lng="-91.469421" lat="15.310148"/>
+    <point lng="-91.472855" lat="15.320082"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to Huehuetenango</b></div> Distance: 90 km<br>Driving time: 1 hr 45 mins]]></infowindow>
+  </line>
+  <line name="Panajachel" colour="#0000FF" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.17691" lat="14.824805"/>
+    <point lng="-91.180344" lat="14.807546"/>
+    <point lng="-91.18309" lat="14.785638"/>
+    <point lng="-91.18103" lat="14.779663"/>
+    <point lng="-91.184464" lat="14.777007"/>
+    <point lng="-91.176224" lat="14.756424"/>
+    <point lng="-91.170044" lat="14.753768"/>
+    <point lng="-91.163864" lat="14.75576"/>
+    <point lng="-91.161804" lat="14.74248"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to Panajachel</b></div> Distance: 99 km<br>Driving time: 1 hr 40 mins]]></infowindow>
+  </line>
+  <line name="San Pedro La Laguna" colour="#FF00FF" width="5" opacity="0.6" category="Quetzaltenango">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.290894" lat="14.776343"/>
+    <point lng="-91.294327" lat="14.76572"/>
+    <point lng="-91.294327" lat="14.7458"/>
+    <point lng="-91.30394" lat="14.726542"/>
+    <point lng="-91.29364" lat="14.715916"/>
+    <point lng="-91.288834" lat="14.693335"/>
+    <point lng="-91.277161" lat="14.691343"/>
+    <point lng="-91.270294" lat="14.693999"/>
+    <infowindow><![CDATA[<div align="center"><b>Quetzaltenango to San Pedro la Laguna</b></div> Distance: 77 km<br>Driving time: 2 hrs]]></infowindow>
+  </line>
+  <line name="Guatemala City" colour="#0000FF" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.52803" lat="14.611625"/>
+    <point lng="-90.573349" lat="14.634214"/>
+    <point lng="-90.598755" lat="14.634879"/>
+    <point lng="-90.600815" lat="14.632886"/>
+    <point lng="-90.606308" lat="14.626906"/>
+    <point lng="-90.604248" lat="14.620262"/>
+    <point lng="-90.609741" lat="14.617604"/>
+    <point lng="-90.614548" lat="14.62292"/>
+    <point lng="-90.624161" lat="14.612289"/>
+    <point lng="-90.624161" lat="14.608302"/>
+    <point lng="-90.625534" lat="14.605645"/>
+    <point lng="-90.633087" lat="14.606973"/>
+    <point lng="-90.637207" lat="14.601658"/>
+    <point lng="-90.6427" lat="14.600993"/>
+    <point lng="-90.655746" lat="14.61096"/>
+    <point lng="-90.666733" lat="14.609631"/>
+    <point lng="-90.668621" lat="14.599565"/>
+    <point lng="-90.666218" lat="14.596408"/>
+    <point lng="-90.665359" lat="14.590594"/>
+    <point lng="-90.661583" lat="14.589763"/>
+    <point lng="-90.66227" lat="14.587438"/>
+    <point lng="-90.663986" lat="14.583783"/>
+    <point lng="-90.672398" lat="14.5783"/>
+    <point lng="-90.679436" lat="14.57747"/>
+    <point lng="-90.688019" lat="14.573316"/>
+    <point lng="-90.69231" lat="14.567003"/>
+    <point lng="-90.697803" lat="14.566172"/>
+    <point lng="-90.700722" lat="14.565342"/>
+    <point lng="-90.703468" lat="14.561686"/>
+    <point lng="-90.710163" lat="14.559526"/>
+    <point lng="-90.719261" lat="14.559194"/>
+    <point lng="-90.727329" lat="14.557865"/>
+    <point lng="-90.734196" lat="14.557865"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Guatemala City</b></div> Distance: 45 km<br>Driving time: 45 mins]]></infowindow>
+  </line>
+  <line name="Quetzaltenango" colour="#FF0000" width="5" opacity="0.6" category="Antigua">
+    <point lng="-91.52298" lat="14.845382"/>
+    <point lng="-91.523666" lat="14.859983"/>
+    <point lng="-91.509247" lat="14.858656"/>
+    <point lng="-91.499634" lat="14.867284"/>
+    <point lng="-91.468735" lat="14.863965"/>
+    <point lng="-91.456375" lat="14.887856"/>
+    <point lng="-91.448822" lat="14.905109"/>
+    <point lng="-91.424103" lat="14.895819"/>
+    <point lng="-91.424789" lat="14.887192"/>
+    <point lng="-91.41037" lat="14.886529"/>
+    <point lng="-91.40419" lat="14.875247"/>
+    <point lng="-91.409683" lat="14.867947"/>
+    <point lng="-91.40419" lat="14.842727"/>
+    <point lng="-91.392517" lat="14.838744"/>
+    <point lng="-91.381531" lat="14.844718"/>
+    <point lng="-91.363678" lat="14.844718"/>
+    <point lng="-91.361618" lat="14.828788"/>
+    <point lng="-91.343079" lat="14.82746"/>
+    <point lng="-91.336212" lat="14.820159"/>
+    <point lng="-91.31424" lat="14.838744"/>
+    <point lng="-91.310806" lat="14.838081"/>
+    <point lng="-91.309433" lat="14.81352"/>
+    <point lng="-91.2957" lat="14.788958"/>
+    <point lng="-91.288147" lat="14.800907"/>
+    <point lng="-91.266861" lat="14.795596"/>
+    <point lng="-91.254501" lat="14.791613"/>
+    <point lng="-91.236649" lat="14.806218"/>
+    <point lng="-91.190643" lat="14.830779"/>
+    <point lng="-91.172104" lat="14.842727"/>
+    <point lng="-91.148071" lat="14.855337"/>
+    <point lng="-91.141205" lat="14.8487"/>
+    <point lng="-91.132278" lat="14.849364"/>
+    <point lng="-91.130219" lat="14.848037"/>
+    <point lng="-91.137772" lat="14.840736"/>
+    <point lng="-91.117859" lat="14.838081"/>
+    <point lng="-91.113739" lat="14.833434"/>
+    <point lng="-91.108246" lat="14.836089"/>
+    <point lng="-91.096573" lat="14.835426"/>
+    <point lng="-91.093826" lat="14.828788"/>
+    <point lng="-91.08696" lat="14.826133"/>
+    <point lng="-91.058807" lat="14.858656"/>
+    <point lng="-91.051254" lat="14.852683"/>
+    <point lng="-91.049881" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.846045"/>
+    <point lng="-91.044388" lat="14.838744"/>
+    <point lng="-91.028595" lat="14.822814"/>
+    <point lng="-91.014175" lat="14.82746"/>
+    <point lng="-91.005936" lat="14.823478"/>
+    <point lng="-90.985336" lat="14.79958"/>
+    <point lng="-90.97435" lat="14.797588"/>
+    <point lng="-90.988083" lat="14.768376"/>
+    <point lng="-90.977097" lat="14.756424"/>
+    <point lng="-90.97641" lat="14.746464"/>
+    <point lng="-90.968857" lat="14.747792"/>
+    <point lng="-90.962677" lat="14.720565"/>
+    <point lng="-90.955811" lat="14.713924"/>
+    <point lng="-90.951004" lat="14.705954"/>
+    <point lng="-90.951004" lat="14.665437"/>
+    <point lng="-90.918045" lat="14.632221"/>
+    <point lng="-90.900192" lat="14.63355"/>
+    <point lng="-90.891953" lat="14.640858"/>
+    <point lng="-90.887833" lat="14.637536"/>
+    <point lng="-90.862427" lat="14.650159"/>
+    <point lng="-90.852127" lat="14.669423"/>
+    <point lng="-90.832214" lat="14.659459"/>
+    <point lng="-90.816422" lat="14.658795"/>
+    <point lng="-90.798569" lat="14.64883"/>
+    <point lng="-90.774536" lat="14.641389"/>
+    <point lng="-90.766983" lat="14.606176"/>
+    <point lng="-90.755997" lat="14.601259"/>
+    <point lng="-90.748444" lat="14.593285"/>
+    <point lng="-90.750504" lat="14.59096"/>
+    <point lng="-90.741577" lat="14.577669"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Quetzaltenango</b></div> Distance: 170 km<br>Driving time: 3 hrs]]></infowindow>
+  </line>
+  <line name="Escuintla" colour="#00FF00" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.738144" lat="14.559792"/>
+    <point lng="-90.747757" lat="14.544506"/>
+    <point lng="-90.751877" lat="14.527225"/>
+    <point lng="-90.775223" lat="14.521242"/>
+    <point lng="-90.799942" lat="14.496647"/>
+    <point lng="-90.808868" lat="14.494652"/>
+    <point lng="-90.814362" lat="14.46141"/>
+    <point lng="-90.812302" lat="14.452767"/>
+    <point lng="-90.816422" lat="14.437473"/>
+    <point lng="-90.821228" lat="14.424838"/>
+    <point lng="-90.828094" lat="14.408878"/>
+    <point lng="-90.827408" lat="14.390921"/>
+    <point lng="-90.799255" lat="14.336376"/>
+    <point lng="-90.793076" lat="14.302445"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Escuintla</b></div> Distance: 102 km<br>Driving time: 1 hr 30 mins]]></infowindow>
+  </line>
+  <line name="Monterrico" colour="#0000FF" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.738144" lat="14.559792"/>
+    <point lng="-90.747757" lat="14.544506"/>
+    <point lng="-90.751877" lat="14.527225"/>
+    <point lng="-90.775223" lat="14.521242"/>
+    <point lng="-90.799942" lat="14.496647"/>
+    <point lng="-90.808868" lat="14.494652"/>
+    <point lng="-90.814362" lat="14.46141"/>
+    <point lng="-90.812302" lat="14.452767"/>
+    <point lng="-90.816422" lat="14.437473"/>
+    <point lng="-90.821228" lat="14.424838"/>
+    <point lng="-90.828094" lat="14.408878"/>
+    <point lng="-90.827408" lat="14.390921"/>
+    <point lng="-90.799255" lat="14.336376"/>
+    <point lng="-90.793076" lat="14.302445"/>
+    <point lng="-90.797882" lat="14.290468"/>
+    <point lng="-90.775909" lat="14.273833"/>
+    <point lng="-90.77179" lat="14.209941"/>
+    <point lng="-90.782776" lat="14.183979"/>
+    <point lng="-90.776596" lat="14.056793"/>
+    <point lng="-90.787582" lat="13.997504"/>
+    <point lng="-90.788269" lat="13.940198"/>
+    <point lng="-90.748444" lat="13.936866"/>
+    <point lng="-90.74295" lat="13.938199"/>
+    <point lng="-90.720978" lat="13.939532"/>
+    <point lng="-90.714111" lat="13.933534"/>
+    <point lng="-90.689392" lat="13.934867"/>
+    <point lng="-90.649052" lat="13.930435"/>
+    <point lng="-90.603561" lat="13.925103"/>
+    <point lng="-90.585709" lat="13.92477"/>
+    <point lng="-90.531292" lat="13.91194"/>
+    <point lng="-90.512924" lat="13.907275"/>
+    <point lng="-90.502453" lat="13.902109"/>
+    <point lng="-90.498161" lat="13.89811"/>
+    <point lng="-90.481853" lat="13.894611"/>
+    <point lng="-90.48151" lat="13.891944"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Monterrico</b></div> Distance: 180 km<br>Driving time: 2 hrs 30 mins]]></infowindow>
+  </line>
+  <line name="San Pedro la Laguna" colour="#0000FF" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.738144" lat="14.559061"/>
+    <point lng="-90.741577" lat="14.570027"/>
+    <point lng="-90.742607" lat="14.579663"/>
+    <point lng="-90.750504" lat="14.591624"/>
+    <point lng="-90.748787" lat="14.592621"/>
+    <point lng="-90.752907" lat="14.597937"/>
+    <point lng="-90.7584" lat="14.603252"/>
+    <point lng="-90.762177" lat="14.603252"/>
+    <point lng="-90.764236" lat="14.607239"/>
+    <point lng="-90.768013" lat="14.611226"/>
+    <point lng="-90.771103" lat="14.621192"/>
+    <point lng="-90.77282" lat="14.625511"/>
+    <point lng="-90.772133" lat="14.632487"/>
+    <point lng="-90.775566" lat="14.642452"/>
+    <point lng="-90.793419" lat="14.64677"/>
+    <point lng="-90.813675" lat="14.658396"/>
+    <point lng="-90.829811" lat="14.65906"/>
+    <point lng="-90.851784" lat="14.669689"/>
+    <point lng="-90.856934" lat="14.66205"/>
+    <point lng="-90.858994" lat="14.658728"/>
+    <point lng="-90.86174" lat="14.64976"/>
+    <point lng="-90.887146" lat="14.637137"/>
+    <point lng="-90.891266" lat="14.640459"/>
+    <point lng="-90.894356" lat="14.639463"/>
+    <point lng="-90.896072" lat="14.635144"/>
+    <point lng="-90.899162" lat="14.638466"/>
+    <point lng="-90.900879" lat="14.638134"/>
+    <point lng="-90.899849" lat="14.633816"/>
+    <point lng="-90.902939" lat="14.632155"/>
+    <point lng="-90.907059" lat="14.632155"/>
+    <point lng="-90.911522" lat="14.631158"/>
+    <point lng="-90.913925" lat="14.631823"/>
+    <point lng="-90.916328" lat="14.629165"/>
+    <point lng="-90.951691" lat="14.665371"/>
+    <point lng="-90.949974" lat="14.70622"/>
+    <point lng="-90.955124" lat="14.709873"/>
+    <point lng="-90.956154" lat="14.712197"/>
+    <point lng="-90.955124" lat="14.713858"/>
+    <point lng="-90.960617" lat="14.718507"/>
+    <point lng="-90.967484" lat="14.745734"/>
+    <point lng="-90.97023" lat="14.747394"/>
+    <point lng="-90.975037" lat="14.744737"/>
+    <point lng="-90.97744" lat="14.74839"/>
+    <point lng="-90.976067" lat="14.754366"/>
+    <point lng="-90.97847" lat="14.759346"/>
+    <point lng="-90.981903" lat="14.761006"/>
+    <point lng="-90.984993" lat="14.76333"/>
+    <point lng="-90.986366" lat="14.763994"/>
+    <point lng="-90.98877" lat="14.769969"/>
+    <point lng="-90.986023" lat="14.78358"/>
+    <point lng="-90.988083" lat="14.784576"/>
+    <point lng="-90.986366" lat="14.787563"/>
+    <point lng="-90.984993" lat="14.786568"/>
+    <point lng="-90.977097" lat="14.792543"/>
+    <point lng="-90.974693" lat="14.797854"/>
+    <point lng="-90.977097" lat="14.799181"/>
+    <point lng="-90.98774" lat="14.799513"/>
+    <point lng="-90.990486" lat="14.800509"/>
+    <point lng="-90.989799" lat="14.803497"/>
+    <point lng="-90.991173" lat="14.805156"/>
+    <point lng="-90.992203" lat="14.804824"/>
+    <point lng="-90.993919" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.811131"/>
+    <point lng="-90.994606" lat="14.812126"/>
+    <point lng="-90.994949" lat="14.814782"/>
+    <point lng="-90.996323" lat="14.81445"/>
+    <point lng="-91.001816" lat="14.820092"/>
+    <point lng="-91.003532" lat="14.819097"/>
+    <point lng="-91.005936" lat="14.821088"/>
+    <point lng="-91.004219" lat="14.823411"/>
+    <point lng="-91.007309" lat="14.825734"/>
+    <point lng="-91.008682" lat="14.824739"/>
+    <point lng="-91.016579" lat="14.827062"/>
+    <point lng="-91.020699" lat="14.824739"/>
+    <point lng="-91.025162" lat="14.825071"/>
+    <point lng="-91.027565" lat="14.822084"/>
+    <point lng="-91.034088" lat="14.824407"/>
+    <point lng="-91.041985" lat="14.8337"/>
+    <point lng="-91.041641" lat="14.836023"/>
+    <point lng="-91.044044" lat="14.838678"/>
+    <point lng="-91.042328" lat="14.841665"/>
+    <point lng="-91.042671" lat="14.846975"/>
+    <point lng="-91.048851" lat="14.845315"/>
+    <point lng="-91.046791" lat="14.850293"/>
+    <point lng="-91.051941" lat="14.851952"/>
+    <point lng="-91.050911" lat="14.855603"/>
+    <point lng="-91.053658" lat="14.855271"/>
+    <point lng="-91.058464" lat="14.859917"/>
+    <point lng="-91.062241" lat="14.855271"/>
+    <point lng="-91.06739" lat="14.853944"/>
+    <point lng="-91.068764" lat="14.847638"/>
+    <point lng="-91.067734" lat="14.845315"/>
+    <point lng="-91.07048" lat="14.84432"/>
+    <point lng="-91.0746" lat="14.83735"/>
+    <point lng="-91.074257" lat="14.835691"/>
+    <point lng="-91.080093" lat="14.831708"/>
+    <point lng="-91.08078" lat="14.82839"/>
+    <point lng="-91.08593" lat="14.825071"/>
+    <point lng="-91.09108" lat="14.829385"/>
+    <point lng="-91.093483" lat="14.82839"/>
+    <point lng="-91.095543" lat="14.8337"/>
+    <point lng="-91.104813" lat="14.834695"/>
+    <point lng="-91.107559" lat="14.837019"/>
+    <point lng="-91.110306" lat="14.836355"/>
+    <point lng="-91.110306" lat="14.834364"/>
+    <point lng="-91.114769" lat="14.8337"/>
+    <point lng="-91.116486" lat="14.837682"/>
+    <point lng="-91.125412" lat="14.836687"/>
+    <point lng="-91.131935" lat="14.83901"/>
+    <point lng="-91.138115" lat="14.840669"/>
+    <point lng="-91.129875" lat="14.846643"/>
+    <point lng="-91.129875" lat="14.849629"/>
+    <point lng="-91.133308" lat="14.849629"/>
+    <point lng="-91.134338" lat="14.848634"/>
+    <point lng="-91.135712" lat="14.850957"/>
+    <point lng="-91.139488" lat="14.848634"/>
+    <point lng="-91.140518" lat="14.845979"/>
+    <point lng="-91.142921" lat="14.848966"/>
+    <point lng="-91.145325" lat="14.848966"/>
+    <point lng="-91.150818" lat="14.857594"/>
+    <point lng="-91.160088" lat="14.85328"/>
+    <point lng="-91.172447" lat="14.843324"/>
+    <point lng="-91.175194" lat="14.843324"/>
+    <point lng="-91.178284" lat="14.837682"/>
+    <point lng="-91.180687" lat="14.838346"/>
+    <point lng="-91.184464" lat="14.835027"/>
+    <point lng="-91.183777" lat="14.827726"/>
+    <point lng="-91.189613" lat="14.830381"/>
+    <point lng="-91.19854" lat="14.824407"/>
+    <point lng="-91.198883" lat="14.822416"/>
+    <point lng="-91.20163" lat="14.81976"/>
+    <point lng="-91.20163" lat="14.814782"/>
+    <point lng="-91.209183" lat="14.814782"/>
+    <point lng="-91.214333" lat="14.808143"/>
+    <point lng="-91.220169" lat="14.811795"/>
+    <point lng="-91.222572" lat="14.809139"/>
+    <point lng="-91.221886" lat="14.805156"/>
+    <point lng="-91.228752" lat="14.807812"/>
+    <point lng="-91.239052" lat="14.803165"/>
+    <point lng="-91.252441" lat="14.800177"/>
+    <point lng="-91.255188" lat="14.792211"/>
+    <point lng="-91.259308" lat="14.791879"/>
+    <point lng="-91.266174" lat="14.796526"/>
+    <point lng="-91.273041" lat="14.79553"/>
+    <point lng="-91.284714" lat="14.802169"/>
+    <point lng="-91.290894" lat="14.799845"/>
+    <point lng="-91.295357" lat="14.790551"/>
+    <point lng="-91.292267" lat="14.785572"/>
+    <point lng="-91.29261" lat="14.773953"/>
+    <point lng="-91.291237" lat="14.770301"/>
+    <point lng="-91.29261" lat="14.765986"/>
+    <point lng="-91.293983" lat="14.764326"/>
+    <point lng="-91.294327" lat="14.742745"/>
+    <point lng="-91.304283" lat="14.726808"/>
+    <point lng="-91.299477" lat="14.719503"/>
+    <point lng="-91.29364" lat="14.713194"/>
+    <point lng="-91.290207" lat="14.707548"/>
+    <point lng="-91.28952" lat="14.696922"/>
+    <point lng="-91.284714" lat="14.691276"/>
+    <point lng="-91.279221" lat="14.69028"/>
+    <point lng="-91.270981" lat="14.693269"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to San Pedro</b></div> Distance: 122 km<br>Driving time: 3 hrs 30 mins]]></infowindow>
+  </line>
+  <line name="Panajachel" colour="#0000FF" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.738144" lat="14.559061"/>
+    <point lng="-90.741577" lat="14.570027"/>
+    <point lng="-90.742607" lat="14.579663"/>
+    <point lng="-90.750504" lat="14.591624"/>
+    <point lng="-90.748787" lat="14.592621"/>
+    <point lng="-90.752907" lat="14.597937"/>
+    <point lng="-90.7584" lat="14.603252"/>
+    <point lng="-90.762177" lat="14.603252"/>
+    <point lng="-90.764236" lat="14.607239"/>
+    <point lng="-90.768013" lat="14.611226"/>
+    <point lng="-90.771103" lat="14.621192"/>
+    <point lng="-90.77282" lat="14.625511"/>
+    <point lng="-90.772133" lat="14.632487"/>
+    <point lng="-90.775566" lat="14.642452"/>
+    <point lng="-90.793419" lat="14.64677"/>
+    <point lng="-90.813675" lat="14.658396"/>
+    <point lng="-90.829811" lat="14.65906"/>
+    <point lng="-90.851784" lat="14.669689"/>
+    <point lng="-90.856934" lat="14.66205"/>
+    <point lng="-90.858994" lat="14.658728"/>
+    <point lng="-90.86174" lat="14.64976"/>
+    <point lng="-90.887146" lat="14.637137"/>
+    <point lng="-90.891266" lat="14.640459"/>
+    <point lng="-90.894356" lat="14.639463"/>
+    <point lng="-90.896072" lat="14.635144"/>
+    <point lng="-90.899162" lat="14.638466"/>
+    <point lng="-90.900879" lat="14.638134"/>
+    <point lng="-90.899849" lat="14.633816"/>
+    <point lng="-90.902939" lat="14.632155"/>
+    <point lng="-90.907059" lat="14.632155"/>
+    <point lng="-90.911522" lat="14.631158"/>
+    <point lng="-90.913925" lat="14.631823"/>
+    <point lng="-90.916328" lat="14.629165"/>
+    <point lng="-90.951691" lat="14.665371"/>
+    <point lng="-90.949974" lat="14.70622"/>
+    <point lng="-90.955124" lat="14.709873"/>
+    <point lng="-90.956154" lat="14.712197"/>
+    <point lng="-90.955124" lat="14.713858"/>
+    <point lng="-90.960617" lat="14.718507"/>
+    <point lng="-90.967484" lat="14.745734"/>
+    <point lng="-90.97023" lat="14.747394"/>
+    <point lng="-90.975037" lat="14.744737"/>
+    <point lng="-90.97744" lat="14.74839"/>
+    <point lng="-90.976067" lat="14.754366"/>
+    <point lng="-90.97847" lat="14.759346"/>
+    <point lng="-90.981903" lat="14.761006"/>
+    <point lng="-90.984993" lat="14.76333"/>
+    <point lng="-90.986366" lat="14.763994"/>
+    <point lng="-90.98877" lat="14.769969"/>
+    <point lng="-90.986023" lat="14.78358"/>
+    <point lng="-90.988083" lat="14.784576"/>
+    <point lng="-90.986366" lat="14.787563"/>
+    <point lng="-90.984993" lat="14.786568"/>
+    <point lng="-90.977097" lat="14.792543"/>
+    <point lng="-90.974693" lat="14.797854"/>
+    <point lng="-90.977097" lat="14.799181"/>
+    <point lng="-90.98774" lat="14.799513"/>
+    <point lng="-90.990486" lat="14.800509"/>
+    <point lng="-90.989799" lat="14.803497"/>
+    <point lng="-90.991173" lat="14.805156"/>
+    <point lng="-90.992203" lat="14.804824"/>
+    <point lng="-90.993919" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.811131"/>
+    <point lng="-90.994606" lat="14.812126"/>
+    <point lng="-90.994949" lat="14.814782"/>
+    <point lng="-90.996323" lat="14.81445"/>
+    <point lng="-91.001816" lat="14.820092"/>
+    <point lng="-91.003532" lat="14.819097"/>
+    <point lng="-91.005936" lat="14.821088"/>
+    <point lng="-91.004219" lat="14.823411"/>
+    <point lng="-91.007309" lat="14.825734"/>
+    <point lng="-91.008682" lat="14.824739"/>
+    <point lng="-91.016579" lat="14.827062"/>
+    <point lng="-91.020699" lat="14.824739"/>
+    <point lng="-91.025162" lat="14.825071"/>
+    <point lng="-91.027565" lat="14.822084"/>
+    <point lng="-91.034088" lat="14.824407"/>
+    <point lng="-91.041985" lat="14.8337"/>
+    <point lng="-91.041641" lat="14.836023"/>
+    <point lng="-91.044044" lat="14.838678"/>
+    <point lng="-91.042328" lat="14.841665"/>
+    <point lng="-91.042671" lat="14.846975"/>
+    <point lng="-91.048851" lat="14.845315"/>
+    <point lng="-91.046791" lat="14.850293"/>
+    <point lng="-91.051941" lat="14.851952"/>
+    <point lng="-91.050911" lat="14.855603"/>
+    <point lng="-91.053658" lat="14.855271"/>
+    <point lng="-91.058464" lat="14.859917"/>
+    <point lng="-91.062241" lat="14.855271"/>
+    <point lng="-91.06739" lat="14.853944"/>
+    <point lng="-91.068764" lat="14.847638"/>
+    <point lng="-91.067734" lat="14.845315"/>
+    <point lng="-91.07048" lat="14.84432"/>
+    <point lng="-91.0746" lat="14.83735"/>
+    <point lng="-91.074257" lat="14.835691"/>
+    <point lng="-91.080093" lat="14.831708"/>
+    <point lng="-91.08078" lat="14.82839"/>
+    <point lng="-91.08593" lat="14.825071"/>
+    <point lng="-91.09108" lat="14.829385"/>
+    <point lng="-91.093483" lat="14.82839"/>
+    <point lng="-91.095543" lat="14.8337"/>
+    <point lng="-91.104813" lat="14.834695"/>
+    <point lng="-91.107559" lat="14.837019"/>
+    <point lng="-91.110306" lat="14.836355"/>
+    <point lng="-91.110306" lat="14.834364"/>
+    <point lng="-91.114769" lat="14.8337"/>
+    <point lng="-91.116486" lat="14.837682"/>
+    <point lng="-91.125412" lat="14.836687"/>
+    <point lng="-91.131935" lat="14.83901"/>
+    <point lng="-91.138115" lat="14.840669"/>
+    <point lng="-91.129875" lat="14.846643"/>
+    <point lng="-91.129875" lat="14.849629"/>
+    <point lng="-91.133308" lat="14.849629"/>
+    <point lng="-91.134338" lat="14.848634"/>
+    <point lng="-91.135712" lat="14.850957"/>
+    <point lng="-91.139488" lat="14.848634"/>
+    <point lng="-91.140518" lat="14.845979"/>
+    <point lng="-91.142921" lat="14.848966"/>
+    <point lng="-91.145325" lat="14.848966"/>
+    <point lng="-91.150818" lat="14.857594"/>
+    <point lng="-91.160431" lat="14.853612"/>
+    <point lng="-91.172447" lat="14.843324"/>
+    <point lng="-91.175537" lat="14.831045"/>
+    <point lng="-91.17691" lat="14.825734"/>
+    <point lng="-91.18206" lat="14.81445"/>
+    <point lng="-91.179314" lat="14.810799"/>
+    <point lng="-91.181717" lat="14.794866"/>
+    <point lng="-91.18309" lat="14.786568"/>
+    <point lng="-91.182404" lat="14.783912"/>
+    <point lng="-91.18206" lat="14.782252"/>
+    <point lng="-91.180687" lat="14.78192"/>
+    <point lng="-91.181374" lat="14.777937"/>
+    <point lng="-91.184464" lat="14.776941"/>
+    <point lng="-91.183777" lat="14.771629"/>
+    <point lng="-91.17897" lat="14.768641"/>
+    <point lng="-91.17794" lat="14.764326"/>
+    <point lng="-91.175537" lat="14.759014"/>
+    <point lng="-91.17691" lat="14.75503"/>
+    <point lng="-91.174164" lat="14.754698"/>
+    <point lng="-91.169357" lat="14.752706"/>
+    <point lng="-91.169014" lat="14.757022"/>
+    <point lng="-91.164551" lat="14.75503"/>
+    <point lng="-91.161461" lat="14.757022"/>
+    <point lng="-91.162148" lat="14.745069"/>
+    <point lng="-91.158714" lat="14.743409"/>
+    <point lng="-91.158028" lat="14.739425"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Panajachel</b></div> Distance: 80 km<br>Driving time: 1 hr 20 mins]]></infowindow>
+  </line>
+  <line name="Chichicastenango" colour="#0000FF" width="5" opacity="0.6" category="Antigua">
+    <point lng="-90.738144" lat="14.559061"/>
+    <point lng="-90.741577" lat="14.570027"/>
+    <point lng="-90.742607" lat="14.579663"/>
+    <point lng="-90.750504" lat="14.591624"/>
+    <point lng="-90.748787" lat="14.592621"/>
+    <point lng="-90.752907" lat="14.597937"/>
+    <point lng="-90.7584" lat="14.603252"/>
+    <point lng="-90.762177" lat="14.603252"/>
+    <point lng="-90.764236" lat="14.607239"/>
+    <point lng="-90.768013" lat="14.611226"/>
+    <point lng="-90.771103" lat="14.621192"/>
+    <point lng="-90.77282" lat="14.625511"/>
+    <point lng="-90.772133" lat="14.632487"/>
+    <point lng="-90.775566" lat="14.642452"/>
+    <point lng="-90.793419" lat="14.64677"/>
+    <point lng="-90.813675" lat="14.658396"/>
+    <point lng="-90.829811" lat="14.65906"/>
+    <point lng="-90.851784" lat="14.669689"/>
+    <point lng="-90.856934" lat="14.66205"/>
+    <point lng="-90.858994" lat="14.658728"/>
+    <point lng="-90.86174" lat="14.64976"/>
+    <point lng="-90.887146" lat="14.637137"/>
+    <point lng="-90.891266" lat="14.640459"/>
+    <point lng="-90.894356" lat="14.639463"/>
+    <point lng="-90.896072" lat="14.635144"/>
+    <point lng="-90.899162" lat="14.638466"/>
+    <point lng="-90.900879" lat="14.638134"/>
+    <point lng="-90.899849" lat="14.633816"/>
+    <point lng="-90.902939" lat="14.632155"/>
+    <point lng="-90.907059" lat="14.632155"/>
+    <point lng="-90.911522" lat="14.631158"/>
+    <point lng="-90.913925" lat="14.631823"/>
+    <point lng="-90.916328" lat="14.629165"/>
+    <point lng="-90.951691" lat="14.665371"/>
+    <point lng="-90.949974" lat="14.70622"/>
+    <point lng="-90.955124" lat="14.709873"/>
+    <point lng="-90.956154" lat="14.712197"/>
+    <point lng="-90.955124" lat="14.713858"/>
+    <point lng="-90.960617" lat="14.718507"/>
+    <point lng="-90.967484" lat="14.745734"/>
+    <point lng="-90.97023" lat="14.747394"/>
+    <point lng="-90.975037" lat="14.744737"/>
+    <point lng="-90.97744" lat="14.74839"/>
+    <point lng="-90.976067" lat="14.754366"/>
+    <point lng="-90.97847" lat="14.759346"/>
+    <point lng="-90.981903" lat="14.761006"/>
+    <point lng="-90.984993" lat="14.76333"/>
+    <point lng="-90.986366" lat="14.763994"/>
+    <point lng="-90.98877" lat="14.769969"/>
+    <point lng="-90.986023" lat="14.78358"/>
+    <point lng="-90.988083" lat="14.784576"/>
+    <point lng="-90.986366" lat="14.787563"/>
+    <point lng="-90.984993" lat="14.786568"/>
+    <point lng="-90.977097" lat="14.792543"/>
+    <point lng="-90.974693" lat="14.797854"/>
+    <point lng="-90.977097" lat="14.799181"/>
+    <point lng="-90.98774" lat="14.799513"/>
+    <point lng="-90.990486" lat="14.800509"/>
+    <point lng="-90.989799" lat="14.803497"/>
+    <point lng="-90.991173" lat="14.805156"/>
+    <point lng="-90.992203" lat="14.804824"/>
+    <point lng="-90.993919" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.809471"/>
+    <point lng="-90.996323" lat="14.811131"/>
+    <point lng="-90.994606" lat="14.812126"/>
+    <point lng="-90.994949" lat="14.814782"/>
+    <point lng="-90.996323" lat="14.81445"/>
+    <point lng="-91.001816" lat="14.820092"/>
+    <point lng="-91.003532" lat="14.819097"/>
+    <point lng="-91.005936" lat="14.821088"/>
+    <point lng="-91.004219" lat="14.823411"/>
+    <point lng="-91.007309" lat="14.825734"/>
+    <point lng="-91.008682" lat="14.824739"/>
+    <point lng="-91.016579" lat="14.827062"/>
+    <point lng="-91.020699" lat="14.824739"/>
+    <point lng="-91.025162" lat="14.825071"/>
+    <point lng="-91.027565" lat="14.822084"/>
+    <point lng="-91.034088" lat="14.824407"/>
+    <point lng="-91.041985" lat="14.8337"/>
+    <point lng="-91.041641" lat="14.836023"/>
+    <point lng="-91.044044" lat="14.838678"/>
+    <point lng="-91.042328" lat="14.841665"/>
+    <point lng="-91.042671" lat="14.846975"/>
+    <point lng="-91.048851" lat="14.845315"/>
+    <point lng="-91.046791" lat="14.850293"/>
+    <point lng="-91.051941" lat="14.851952"/>
+    <point lng="-91.050911" lat="14.855603"/>
+    <point lng="-91.053658" lat="14.855271"/>
+    <point lng="-91.058464" lat="14.859917"/>
+    <point lng="-91.062241" lat="14.855271"/>
+    <point lng="-91.06739" lat="14.853944"/>
+    <point lng="-91.068764" lat="14.847638"/>
+    <point lng="-91.067734" lat="14.845315"/>
+    <point lng="-91.07048" lat="14.84432"/>
+    <point lng="-91.0746" lat="14.83735"/>
+    <point lng="-91.074257" lat="14.835691"/>
+    <point lng="-91.080093" lat="14.831708"/>
+    <point lng="-91.08078" lat="14.82839"/>
+    <point lng="-91.08593" lat="14.825071"/>
+    <point lng="-91.09108" lat="14.829385"/>
+    <point lng="-91.093483" lat="14.82839"/>
+    <point lng="-91.095543" lat="14.8337"/>
+    <point lng="-91.104813" lat="14.834695"/>
+    <point lng="-91.107559" lat="14.837019"/>
+    <point lng="-91.110306" lat="14.836355"/>
+    <point lng="-91.110306" lat="14.834364"/>
+    <point lng="-91.114769" lat="14.8337"/>
+    <point lng="-91.116486" lat="14.837682"/>
+    <point lng="-91.125412" lat="14.836687"/>
+    <point lng="-91.131935" lat="14.83901"/>
+    <point lng="-91.138115" lat="14.840669"/>
+    <point lng="-91.129875" lat="14.846643"/>
+    <point lng="-91.129875" lat="14.849629"/>
+    <point lng="-91.133308" lat="14.849629"/>
+    <point lng="-91.134338" lat="14.848634"/>
+    <point lng="-91.135712" lat="14.850957"/>
+    <point lng="-91.139488" lat="14.848634"/>
+    <point lng="-91.140518" lat="14.845979"/>
+    <point lng="-91.142921" lat="14.848966"/>
+    <point lng="-91.145325" lat="14.848966"/>
+    <point lng="-91.150818" lat="14.857594"/>
+    <point lng="-91.150131" lat="14.863235"/>
+    <point lng="-91.125069" lat="14.884472"/>
+    <point lng="-91.121292" lat="14.887126"/>
+    <point lng="-91.120262" lat="14.896084"/>
+    <point lng="-91.112709" lat="14.901393"/>
+    <point lng="-91.109619" lat="14.902388"/>
+    <point lng="-91.105843" lat="14.914332"/>
+    <point lng="-91.102753" lat="14.914"/>
+    <point lng="-91.102066" lat="14.912341"/>
+    <point lng="-91.098289" lat="14.914332"/>
+    <point lng="-91.095886" lat="14.918313"/>
+    <point lng="-91.102753" lat="14.917981"/>
+    <point lng="-91.105843" lat="14.918976"/>
+    <point lng="-91.103096" lat="14.92163"/>
+    <point lng="-91.106873" lat="14.92163"/>
+    <point lng="-91.103439" lat="14.924284"/>
+    <point lng="-91.107559" lat="14.923952"/>
+    <point lng="-91.110649" lat="14.933573"/>
+    <point lng="-91.108932" lat="14.935895"/>
+    <point lng="-91.113052" lat="14.940539"/>
+    <point lng="-91.110992" lat="14.94452"/>
+    <infowindow><![CDATA[<div align="center"><b>Antigua to Chichicastenango</b></div> Distance: 108 km<br>Driving time: 2 hrs]]></infowindow>
+  </line>
+  <line name="Guatemala City" colour="#888888" width="5" opacity="0.6" category="Rio Dulce">
+    <point lng="-90.532837" lat="14.61096"/>
+    <point lng="-90.521164" lat="14.650159"/>
+    <point lng="-90.515671" lat="14.652816"/>
+    <point lng="-90.482712" lat="14.650823"/>
+    <point lng="-90.467606" lat="14.655473"/>
+    <point lng="-90.437393" lat="14.649494"/>
+    <point lng="-90.411987" lat="14.684701"/>
+    <point lng="-90.394821" lat="14.695328"/>
+    <point lng="-90.396194" lat="14.705954"/>
+    <point lng="-90.390701" lat="14.701305"/>
+    <point lng="-90.381775" lat="14.70529"/>
+    <point lng="-90.377655" lat="14.711932"/>
+    <point lng="-90.369415" lat="14.713924"/>
+    <point lng="-90.361176" lat="14.731191"/>
+    <point lng="-90.355682" lat="14.730527"/>
+    <point lng="-90.354996" lat="14.733847"/>
+    <point lng="-90.342636" lat="14.741152"/>
+    <point lng="-90.336456" lat="14.745136"/>
+    <point lng="-90.330963" lat="14.739824"/>
+    <point lng="-90.328217" lat="14.74248"/>
+    <point lng="-90.32135" lat="14.7458"/>
+    <point lng="-90.32341" lat="14.757752"/>
+    <point lng="-90.31723" lat="14.767712"/>
+    <point lng="-90.30899" lat="14.770368"/>
+    <point lng="-90.31105" lat="14.773687"/>
+    <point lng="-90.298004" lat="14.785638"/>
+    <point lng="-90.291824" lat="14.78431"/>
+    <point lng="-90.292511" lat="14.788958"/>
+    <point lng="-90.284271" lat="14.789622"/>
+    <point lng="-90.289078" lat="14.797588"/>
+    <point lng="-90.287704" lat="14.804227"/>
+    <point lng="-90.228653" lat="14.78431"/>
+    <point lng="-90.223846" lat="14.794269"/>
+    <point lng="-90.21492" lat="14.795596"/>
+    <point lng="-90.208054" lat="14.807546"/>
+    <point lng="-90.164108" lat="14.805554"/>
+    <point lng="-90.147629" lat="14.820159"/>
+    <point lng="-90.146255" lat="14.826797"/>
+    <point lng="-90.141449" lat="14.828788"/>
+    <point lng="-90.133209" lat="14.846709"/>
+    <point lng="-90.11879" lat="14.850691"/>
+    <point lng="-90.111237" lat="14.8487"/>
+    <point lng="-90.100937" lat="14.85401"/>
+    <point lng="-90.066605" lat="14.850691"/>
+    <point lng="-90.061111" lat="14.86131"/>
+    <point lng="-90.049438" lat="14.865293"/>
+    <point lng="-90.032959" lat="14.879229"/>
+    <point lng="-90.015793" lat="14.927004"/>
+    <point lng="-89.945068" lat="14.918379"/>
+    <point lng="-89.931335" lat="14.923687"/>
+    <point lng="-89.912796" lat="14.919043"/>
+    <point lng="-89.88739" lat="14.929658"/>
+    <point lng="-89.857864" lat="14.927668"/>
+    <point lng="-89.843445" lat="14.938283"/>
+    <point lng="-89.834518" lat="14.942927"/>
+    <point lng="-89.831085" lat="14.953542"/>
+    <point lng="-89.809113" lat="14.954205"/>
+    <point lng="-89.804993" lat="14.962166"/>
+    <point lng="-89.731522" lat="14.986046"/>
+    <point lng="-89.723969" lat="14.994005"/>
+    <point lng="-89.654617" lat="15.010586"/>
+    <point lng="-89.655991" lat="15.017218"/>
+    <point lng="-89.592133" lat="15.041092"/>
+    <point lng="-89.473343" lat="15.086842"/>
+    <point lng="-89.458237" lat="15.085516"/>
+    <point lng="-89.429398" lat="15.096787"/>
+    <point lng="-89.416351" lat="15.116674"/>
+    <point lng="-89.401245" lat="15.119326"/>
+    <point lng="-89.390945" lat="15.123303"/>
+    <point lng="-89.386139" lat="15.121314"/>
+    <point lng="-89.368973" lat="15.132583"/>
+    <point lng="-89.349747" lat="15.131257"/>
+    <point lng="-89.328461" lat="15.147165"/>
+    <point lng="-89.322968" lat="15.162408"/>
+    <point lng="-89.311981" lat="15.163734"/>
+    <point lng="-89.297562" lat="15.184278"/>
+    <point lng="-89.285202" lat="15.18494"/>
+    <point lng="-89.274216" lat="15.199519"/>
+    <point lng="-89.244003" lat="15.209458"/>
+    <point lng="-89.211044" lat="15.234635"/>
+    <point lng="-89.198685" lat="15.234635"/>
+    <point lng="-89.189072" lat="15.23331"/>
+    <point lng="-89.178772" lat="15.240597"/>
+    <point lng="-89.172592" lat="15.240597"/>
+    <point lng="-89.156113" lat="15.247885"/>
+    <point lng="-89.141006" lat="15.24391"/>
+    <point lng="-89.117661" lat="15.255172"/>
+    <point lng="-89.091568" lat="15.255172"/>
+    <point lng="-89.079208" lat="15.270408"/>
+    <point lng="-89.069595" lat="15.274382"/>
+    <point lng="-89.069595" lat="15.28233"/>
+    <point lng="-89.063416" lat="15.286967"/>
+    <point lng="-89.066162" lat="15.297564"/>
+    <point lng="-89.039383" lat="15.336637"/>
+    <point lng="-89.04213" lat="15.343921"/>
+    <point lng="-89.035263" lat="15.363123"/>
+    <point lng="-88.986511" lat="15.425352"/>
+    <point lng="-88.939133" lat="15.449842"/>
+    <point lng="-88.930206" lat="15.46374"/>
+    <point lng="-88.910294" lat="15.465725"/>
+    <point lng="-88.905487" lat="15.470357"/>
+    <point lng="-88.879395" lat="15.484254"/>
+    <point lng="-88.889008" lat="15.506884"/>
+    <point lng="-88.91922" lat="15.570392"/>
+    <point lng="-88.941193" lat="15.606107"/>
+    <point lng="-88.976898" lat="15.637849"/>
+    <point lng="-89.013977" lat="15.665619"/>
+    <infowindow><![CDATA[<div align="center"><b>Rio Dulce to Guatemala City</b></div> Distance: 325 km<br>Driving time: 4 hrs 30 mins]]></infowindow>
+  </line>
+  <line name="Flores" colour="#0000FF" width="5" opacity="0.6" category="Rio Dulce">
+    <point lng="-89.013977" lat="15.665619"/>
+    <point lng="-89.03595" lat="15.67223"/>
+    <point lng="-89.059296" lat="15.747583"/>
+    <point lng="-89.103241" lat="15.775338"/>
+    <point lng="-89.112854" lat="15.774017"/>
+    <point lng="-89.130707" lat="15.791196"/>
+    <point lng="-89.199371" lat="15.849332"/>
+    <point lng="-89.23645" lat="15.877073"/>
+    <point lng="-89.237823" lat="15.931223"/>
+    <point lng="-89.272156" lat="15.958952"/>
+    <point lng="-89.280396" lat="15.973476"/>
+    <point lng="-89.277649" lat="15.989318"/>
+    <point lng="-89.302368" lat="15.998559"/>
+    <point lng="-89.307861" lat="16.0144"/>
+    <point lng="-89.332581" lat="16.028919"/>
+    <point lng="-89.354553" lat="16.085667"/>
+    <point lng="-89.364166" lat="16.10282"/>
+    <point lng="-89.421844" lat="16.181969"/>
+    <point lng="-89.434204" lat="16.21362"/>
+    <point lng="-89.421844" lat="16.24131"/>
+    <point lng="-89.412231" lat="16.316449"/>
+    <point lng="-89.388885" lat="16.328311"/>
+    <point lng="-89.412231" lat="16.333582"/>
+    <point lng="-89.44519" lat="16.388925"/>
+    <point lng="-89.446564" lat="16.420542"/>
+    <point lng="-89.425964" lat="16.467958"/>
+    <point lng="-89.439697" lat="16.554858"/>
+    <point lng="-89.508362" lat="16.593029"/>
+    <point lng="-89.538574" lat="16.604873"/>
+    <point lng="-89.552307" lat="16.624612"/>
+    <point lng="-89.588013" lat="16.623297"/>
+    <point lng="-89.625092" lat="16.641718"/>
+    <point lng="-89.658051" lat="16.643034"/>
+    <point lng="-89.680023" lat="16.668032"/>
+    <point lng="-89.725342" lat="16.679872"/>
+    <point lng="-89.804993" lat="16.771935"/>
+    <point lng="-89.822845" lat="16.821894"/>
+    <point lng="-89.810486" lat="16.863954"/>
+    <point lng="-89.810486" lat="16.899435"/>
+    <point lng="-89.89563" lat="16.921771"/>
+    <infowindow><![CDATA[<div align="center"><b>Rio Dulce to Flores</b></div> Distance: 195 km<br>Driving time: 3 hrs 30 mins]]></infowindow>
+  </line>
+  <line name="Lanquin" colour="#0000FF" width="5" opacity="0.6" category="Rio Dulce">
+    <point lng="-89.000931" lat="15.660197"/>
+    <point lng="-89.01123" lat="15.653586"/>
+    <point lng="-89.013977" lat="15.648296"/>
+    <point lng="-89.028397" lat="15.645651"/>
+    <point lng="-89.032516" lat="15.641684"/>
+    <point lng="-89.043503" lat="15.6397"/>
+    <point lng="-89.070282" lat="15.619201"/>
+    <point lng="-89.080582" lat="15.614572"/>
+    <point lng="-89.094315" lat="15.609282"/>
+    <point lng="-89.099808" lat="15.600684"/>
+    <point lng="-89.118347" lat="15.594732"/>
+    <point lng="-89.136887" lat="15.60333"/>
+    <point lng="-89.151993" lat="15.599362"/>
+    <point lng="-89.156113" lat="15.602668"/>
+    <point lng="-89.182205" lat="15.598039"/>
+    <point lng="-89.180145" lat="15.58878"/>
+    <point lng="-89.189072" lat="15.586134"/>
+    <point lng="-89.195938" lat="15.589441"/>
+    <point lng="-89.217911" lat="15.586134"/>
+    <point lng="-89.227524" lat="15.57489"/>
+    <point lng="-89.233017" lat="15.571583"/>
+    <point lng="-89.25293" lat="15.568937"/>
+    <point lng="-89.262543" lat="15.572244"/>
+    <point lng="-89.283829" lat="15.561"/>
+    <point lng="-89.281082" lat="15.555708"/>
+    <point lng="-89.293442" lat="15.553723"/>
+    <point lng="-89.299622" lat="15.548431"/>
+    <point lng="-89.309921" lat="15.54777"/>
+    <point lng="-89.339447" lat="15.530569"/>
+    <point lng="-89.342194" lat="15.524615"/>
+    <point lng="-89.385452" lat="15.519322"/>
+    <point lng="-89.390259" lat="15.512706"/>
+    <point lng="-89.409485" lat="15.498811"/>
+    <point lng="-89.414978" lat="15.500796"/>
+    <point lng="-89.419785" lat="15.495503"/>
+    <point lng="-89.430084" lat="15.495503"/>
+    <point lng="-89.431458" lat="15.492195"/>
+    <point lng="-89.441071" lat="15.491533"/>
+    <point lng="-89.44931" lat="15.480284"/>
+    <point lng="-89.469223" lat="15.476975"/>
+    <point lng="-89.473343" lat="15.471681"/>
+    <point lng="-89.496002" lat="15.469034"/>
+    <point lng="-89.535828" lat="15.451165"/>
+    <point lng="-89.5578" lat="15.459107"/>
+    <point lng="-89.57222" lat="15.453813"/>
+    <point lng="-89.58046" lat="15.449842"/>
+    <point lng="-89.614792" lat="15.441899"/>
+    <point lng="-89.631271" lat="15.444547"/>
+    <point lng="-89.640884" lat="15.453813"/>
+    <point lng="-89.639511" lat="15.457783"/>
+    <point lng="-89.659424" lat="15.480945"/>
+    <point lng="-89.655991" lat="15.486239"/>
+    <point lng="-89.662857" lat="15.496826"/>
+    <point lng="-89.667664" lat="15.496165"/>
+    <point lng="-89.68277" lat="15.519984"/>
+    <point lng="-89.68895" lat="15.52263"/>
+    <point lng="-89.696503" lat="15.516014"/>
+    <point lng="-89.705429" lat="15.516676"/>
+    <point lng="-89.707489" lat="15.512045"/>
+    <point lng="-89.716415" lat="15.516014"/>
+    <point lng="-89.732208" lat="15.510721"/>
+    <point lng="-89.745941" lat="15.529246"/>
+    <point lng="-89.776154" lat="15.528585"/>
+    <point lng="-89.778214" lat="15.533877"/>
+    <point lng="-89.773407" lat="15.57026"/>
+    <point lng="-89.77478" lat="15.586134"/>
+    <point lng="-89.766541" lat="15.590103"/>
+    <point lng="-89.763794" lat="15.600023"/>
+    <point lng="-89.778214" lat="15.605975"/>
+    <point lng="-89.798126" lat="15.5987"/>
+    <point lng="-89.822159" lat="15.61325"/>
+    <point lng="-89.856491" lat="15.609943"/>
+    <point lng="-89.859924" lat="15.603991"/>
+    <point lng="-89.857864" lat="15.597378"/>
+    <point lng="-89.867477" lat="15.590764"/>
+    <point lng="-89.877777" lat="15.592087"/>
+    <point lng="-89.898376" lat="15.592087"/>
+    <point lng="-89.902496" lat="15.589441"/>
+    <point lng="-89.912796" lat="15.590103"/>
+    <point lng="-89.924469" lat="15.586796"/>
+    <point lng="-89.934082" lat="15.590103"/>
+    <point lng="-89.962234" lat="15.590764"/>
+    <infowindow><![CDATA[<div align="center"><b>Rio Dulce to Lanquin</b></div> Distance: 150 km<br>Driving time: 3 hrs (4WD required)]]></infowindow>
+  </line>
+  <line name="Coban" colour="#0000FF" width="5" opacity="0.6" category="Rio Dulce">
+    <point lng="-90.385895" lat="15.473799"/>
+    <point lng="-90.357056" lat="15.479093"/>
+    <point lng="-90.314484" lat="15.484386"/>
+    <point lng="-90.304871" lat="15.49762"/>
+    <point lng="-90.287018" lat="15.49762"/>
+    <point lng="-90.247192" lat="15.518793"/>
+    <point lng="-90.22934" lat="15.547902"/>
+    <point lng="-90.199127" lat="15.547902"/>
+    <point lng="-90.189514" lat="15.558486"/>
+    <point lng="-90.163422" lat="15.567747"/>
+    <point lng="-90.135956" lat="15.566424"/>
+    <point lng="-90.113983" lat="15.558486"/>
+    <point lng="-90.102997" lat="15.566424"/>
+    <point lng="-90.086517" lat="15.565101"/>
+    <point lng="-90.086517" lat="15.59288"/>
+    <point lng="-90.032959" lat="15.582298"/>
+    <point lng="-90.006866" lat="15.584944"/>
+    <point lng="-89.986267" lat="15.582298"/>
+    <point lng="-89.957428" lat="15.591558"/>
+    <point lng="-89.946442" lat="15.588912"/>
+    <point lng="-89.918976" lat="15.584944"/>
+    <point lng="-89.89975" lat="15.59288"/>
+    <point lng="-89.870911" lat="15.590235"/>
+    <point lng="-89.858551" lat="15.596849"/>
+    <point lng="-89.858551" lat="15.610075"/>
+    <point lng="-89.821472" lat="15.614043"/>
+    <point lng="-89.7995" lat="15.600817"/>
+    <point lng="-89.78302" lat="15.606107"/>
+    <point lng="-89.761047" lat="15.600817"/>
+    <point lng="-89.763794" lat="15.590235"/>
+    <point lng="-89.776154" lat="15.586267"/>
+    <point lng="-89.772034" lat="15.570392"/>
+    <point lng="-89.781647" lat="15.535994"/>
+    <point lng="-89.772034" lat="15.528055"/>
+    <point lng="-89.754181" lat="15.528055"/>
+    <point lng="-89.730835" lat="15.510854"/>
+    <point lng="-89.717102" lat="15.516147"/>
+    <point lng="-89.711609" lat="15.512177"/>
+    <point lng="-89.689636" lat="15.522763"/>
+    <point lng="-89.669037" lat="15.494974"/>
+    <point lng="-89.659424" lat="15.494974"/>
+    <point lng="-89.658051" lat="15.48174"/>
+    <point lng="-89.633331" lat="15.447327"/>
+    <point lng="-89.612732" lat="15.442032"/>
+    <point lng="-89.56604" lat="15.46321"/>
+    <point lng="-89.537201" lat="15.451298"/>
+    <point lng="-89.46991" lat="15.475122"/>
+    <point lng="-89.446564" lat="15.480416"/>
+    <point lng="-89.441071" lat="15.49365"/>
+    <point lng="-89.423218" lat="15.494974"/>
+    <point lng="-89.384766" lat="15.51747"/>
+    <point lng="-89.343567" lat="15.524086"/>
+    <point lng="-89.307861" lat="15.545256"/>
+    <point lng="-89.281769" lat="15.55584"/>
+    <point lng="-89.280396" lat="15.562455"/>
+    <point lng="-89.259796" lat="15.56907"/>
+    <point lng="-89.25293" lat="15.567747"/>
+    <point lng="-89.229584" lat="15.573038"/>
+    <point lng="-89.218597" lat="15.586267"/>
+    <point lng="-89.196625" lat="15.588912"/>
+    <point lng="-89.188385" lat="15.588912"/>
+    <point lng="-89.180145" lat="15.598171"/>
+    <point lng="-89.138947" lat="15.603462"/>
+    <point lng="-89.121094" lat="15.594203"/>
+    <point lng="-89.026337" lat="15.644461"/>
+    <point lng="-89.004364" lat="15.657685"/>
+    <infowindow><![CDATA[<div align="center"><b>Rio Dulce to Coban</b></div> Distance: 190 km<br>Driving time: 4 hrs (4WD required)]]></infowindow>
+  </line>
+  <line name="Puerto Barrios" colour="#0000FF" width="5" opacity="0.6" category="Rio Dulce">
+    <point lng="-89.003677" lat="15.657553"/>
+    <point lng="-88.9254" lat="15.590764"/>
+    <point lng="-88.90892" lat="15.534539"/>
+    <point lng="-88.9048" lat="15.529908"/>
+    <point lng="-88.9048" lat="15.524615"/>
+    <point lng="-88.883514" lat="15.499473"/>
+    <point lng="-88.878708" lat="15.482269"/>
+    <point lng="-88.846436" lat="15.503443"/>
+    <point lng="-88.82515" lat="15.500135"/>
+    <point lng="-88.811417" lat="15.506751"/>
+    <point lng="-88.80043" lat="15.515353"/>
+    <point lng="-88.79631" lat="15.524615"/>
+    <point lng="-88.764725" lat="15.527923"/>
+    <point lng="-88.759232" lat="15.537185"/>
+    <point lng="-88.695374" lat="15.549093"/>
+    <point lng="-88.675461" lat="15.561"/>
+    <point lng="-88.656235" lat="15.559015"/>
+    <point lng="-88.645248" lat="15.578197"/>
+    <point lng="-88.617096" lat="15.57489"/>
+    <point lng="-88.604736" lat="15.583489"/>
+    <point lng="-88.58551" lat="15.585473"/>
+    <point lng="-88.575211" lat="15.592748"/>
+    <point lng="-88.577271" lat="15.611266"/>
+    <point lng="-88.569717" lat="15.620524"/>
+    <point lng="-88.558044" lat="15.623169"/>
+    <point lng="-88.551865" lat="15.655569"/>
+    <point lng="-88.571091" lat="15.680031"/>
+    <point lng="-88.577271" lat="15.682675"/>
+    <point lng="-88.577271" lat="15.695236"/>
+    <point lng="-88.586197" lat="15.695897"/>
+    <point lng="-88.59787" lat="15.726963"/>
+    <infowindow><![CDATA[<div align="center"><b>Rio Dulce to Puerto Barrios</b></div> Distance: 80 km<br>Driving time: 1 hr]]></infowindow>
+  </line>
+  <line name="Lanquin" colour="#0000FF" width="5" opacity="0.6" category="Coban">
+    <point lng="-90.385895" lat="15.473799"/>
+    <point lng="-90.357056" lat="15.479093"/>
+    <point lng="-90.314484" lat="15.484386"/>
+    <point lng="-90.304871" lat="15.49762"/>
+    <point lng="-90.287018" lat="15.49762"/>
+    <point lng="-90.247192" lat="15.518793"/>
+    <point lng="-90.22934" lat="15.547902"/>
+    <point lng="-90.199127" lat="15.547902"/>
+    <point lng="-90.189514" lat="15.558486"/>
+    <point lng="-90.163422" lat="15.567747"/>
+    <point lng="-90.135956" lat="15.566424"/>
+    <point lng="-90.113983" lat="15.558486"/>
+    <point lng="-90.102997" lat="15.566424"/>
+    <point lng="-90.086517" lat="15.565101"/>
+    <point lng="-90.086517" lat="15.59288"/>
+    <point lng="-90.032959" lat="15.582298"/>
+    <point lng="-90.006866" lat="15.584944"/>
+    <point lng="-89.986267" lat="15.582298"/>
+    <point lng="-89.957428" lat="15.591558"/>
+    <point lng="-89.946442" lat="15.588912"/>
+    <infowindow><![CDATA[<div align="center"><b>Coban to Lanquin</b></div> Distance: 40 km<br>Driving time: 1 hr 20 mins]]></infowindow>
+  </line>
+  <line name="Rio Dulce" colour="#0000FF" width="5" opacity="0.6" category="Coban">
+    <point lng="-90.385895" lat="15.473799"/>
+    <point lng="-90.357056" lat="15.479093"/>
+    <point lng="-90.314484" lat="15.484386"/>
+    <point lng="-90.304871" lat="15.49762"/>
+    <point lng="-90.287018" lat="15.49762"/>
+    <point lng="-90.247192" lat="15.518793"/>
+    <point lng="-90.22934" lat="15.547902"/>
+    <point lng="-90.199127" lat="15.547902"/>
+    <point lng="-90.189514" lat="15.558486"/>
+    <point lng="-90.163422" lat="15.567747"/>
+    <point lng="-90.135956" lat="15.566424"/>
+    <point lng="-90.113983" lat="15.558486"/>
+    <point lng="-90.102997" lat="15.566424"/>
+    <point lng="-90.086517" lat="15.565101"/>
+    <point lng="-90.086517" lat="15.59288"/>
+    <point lng="-90.032959" lat="15.582298"/>
+    <point lng="-90.006866" lat="15.584944"/>
+    <point lng="-89.986267" lat="15.582298"/>
+    <point lng="-89.957428" lat="15.591558"/>
+    <point lng="-89.946442" lat="15.588912"/>
+    <point lng="-89.918976" lat="15.584944"/>
+    <point lng="-89.89975" lat="15.59288"/>
+    <point lng="-89.870911" lat="15.590235"/>
+    <point lng="-89.858551" lat="15.596849"/>
+    <point lng="-89.858551" lat="15.610075"/>
+    <point lng="-89.821472" lat="15.614043"/>
+    <point lng="-89.7995" lat="15.600817"/>
+    <point lng="-89.78302" lat="15.606107"/>
+    <point lng="-89.761047" lat="15.600817"/>
+    <point lng="-89.763794" lat="15.590235"/>
+    <point lng="-89.776154" lat="15.586267"/>
+    <point lng="-89.772034" lat="15.570392"/>
+    <point lng="-89.781647" lat="15.535994"/>
+    <point lng="-89.772034" lat="15.528055"/>
+    <point lng="-89.754181" lat="15.528055"/>
+    <point lng="-89.730835" lat="15.510854"/>
+    <point lng="-89.717102" lat="15.516147"/>
+    <point lng="-89.711609" lat="15.512177"/>
+    <point lng="-89.689636" lat="15.522763"/>
+    <point lng="-89.669037" lat="15.494974"/>
+    <point lng="-89.659424" lat="15.494974"/>
+    <point lng="-89.658051" lat="15.48174"/>
+    <point lng="-89.633331" lat="15.447327"/>
+    <point lng="-89.612732" lat="15.442032"/>
+    <point lng="-89.56604" lat="15.46321"/>
+    <point lng="-89.537201" lat="15.451298"/>
+    <point lng="-89.46991" lat="15.475122"/>
+    <point lng="-89.446564" lat="15.480416"/>
+    <point lng="-89.441071" lat="15.49365"/>
+    <point lng="-89.423218" lat="15.494974"/>
+    <point lng="-89.384766" lat="15.51747"/>
+    <point lng="-89.343567" lat="15.524086"/>
+    <point lng="-89.307861" lat="15.545256"/>
+    <point lng="-89.281769" lat="15.55584"/>
+    <point lng="-89.280396" lat="15.562455"/>
+    <point lng="-89.259796" lat="15.56907"/>
+    <point lng="-89.25293" lat="15.567747"/>
+    <point lng="-89.229584" lat="15.573038"/>
+    <point lng="-89.218597" lat="15.586267"/>
+    <point lng="-89.196625" lat="15.588912"/>
+    <point lng="-89.188385" lat="15.588912"/>
+    <point lng="-89.180145" lat="15.598171"/>
+    <point lng="-89.138947" lat="15.603462"/>
+    <point lng="-89.121094" lat="15.594203"/>
+    <point lng="-89.026337" lat="15.644461"/>
+    <point lng="-89.004364" lat="15.657685"/>
+    <infowindow><![CDATA[<div align="center"><b>Coban to Rio Dulce</b></div> Distance: 190 km<br>Driving time: 4 hrs (4WD required)]]></infowindow>
+  </line>
+  <line name="Laguna Lachua NP" colour="#0000FF" width="5" opacity="0.6" category="Coban">
+    <point lng="-90.387955" lat="15.471019"/>
+    <point lng="-90.370789" lat="15.488886"/>
+    <point lng="-90.365982" lat="15.491533"/>
+    <point lng="-90.365982" lat="15.500135"/>
+    <point lng="-90.356369" lat="15.50609"/>
+    <point lng="-90.351562" lat="15.508736"/>
+    <point lng="-90.354309" lat="15.514691"/>
+    <point lng="-90.357742" lat="15.514691"/>
+    <point lng="-90.357742" lat="15.525938"/>
+    <point lng="-90.341263" lat="15.529246"/>
+    <point lng="-90.330276" lat="15.536524"/>
+    <point lng="-90.32959" lat="15.547108"/>
+    <point lng="-90.343323" lat="15.54777"/>
+    <point lng="-90.346756" lat="15.553062"/>
+    <point lng="-90.352249" lat="15.553062"/>
+    <point lng="-90.352249" lat="15.556369"/>
+    <point lng="-90.349503" lat="15.557692"/>
+    <point lng="-90.348816" lat="15.56563"/>
+    <point lng="-90.379028" lat="15.585473"/>
+    <point lng="-90.380402" lat="15.593409"/>
+    <point lng="-90.385208" lat="15.5987"/>
+    <point lng="-90.410614" lat="15.604653"/>
+    <point lng="-90.418854" lat="15.605975"/>
+    <point lng="-90.42366" lat="15.613911"/>
+    <point lng="-90.440826" lat="15.621185"/>
+    <point lng="-90.4422" lat="15.63441"/>
+    <point lng="-90.4319" lat="15.636394"/>
+    <point lng="-90.42778" lat="15.651602"/>
+    <point lng="-90.430527" lat="15.660197"/>
+    <point lng="-90.424347" lat="15.664825"/>
+    <point lng="-90.431213" lat="15.67342"/>
+    <point lng="-90.410614" lat="15.686642"/>
+    <point lng="-90.414734" lat="15.697219"/>
+    <point lng="-90.416107" lat="15.708456"/>
+    <point lng="-90.426407" lat="15.713744"/>
+    <point lng="-90.42366" lat="15.718371"/>
+    <point lng="-90.429153" lat="15.732912"/>
+    <point lng="-90.42778" lat="15.759347"/>
+    <point lng="-90.413361" lat="15.767937"/>
+    <point lng="-90.402374" lat="15.765294"/>
+    <point lng="-90.405121" lat="15.77851"/>
+    <point lng="-90.396194" lat="15.783135"/>
+    <point lng="-90.396194" lat="15.789082"/>
+    <point lng="-90.347443" lat="15.785118"/>
+    <point lng="-90.293884" lat="15.807582"/>
+    <point lng="-90.289764" lat="15.829383"/>
+    <point lng="-90.291138" lat="15.845898"/>
+    <point lng="-90.285645" lat="15.873639"/>
+    <point lng="-90.276031" lat="15.87562"/>
+    <point lng="-90.271912" lat="15.887508"/>
+    <point lng="-90.262299" lat="15.89081"/>
+    <point lng="-90.264359" lat="15.902037"/>
+    <point lng="-90.273972" lat="15.917225"/>
+    <point lng="-90.289764" lat="15.927129"/>
+    <point lng="-90.307617" lat="15.927789"/>
+    <point lng="-90.316544" lat="15.942975"/>
+    <point lng="-90.328903" lat="15.948257"/>
+    <point lng="-90.33989" lat="15.977305"/>
+    <point lng="-90.365295" lat="15.980605"/>
+    <point lng="-90.387955" lat="15.980605"/>
+    <point lng="-90.391388" lat="15.984566"/>
+    <point lng="-90.397568" lat="15.983246"/>
+    <point lng="-90.396881" lat="15.979285"/>
+    <point lng="-90.415421" lat="15.976645"/>
+    <point lng="-90.415421" lat="15.980605"/>
+    <point lng="-90.442886" lat="15.987206"/>
+    <point lng="-90.442886" lat="15.982586"/>
+    <point lng="-90.462799" lat="15.979945"/>
+    <point lng="-90.473099" lat="15.991827"/>
+    <point lng="-90.487518" lat="15.970703"/>
+    <point lng="-90.488205" lat="15.95882"/>
+    <point lng="-90.499191" lat="15.946277"/>
+    <point lng="-90.513611" lat="15.932411"/>
+    <point lng="-90.532837" lat="15.935052"/>
+    <point lng="-90.549316" lat="15.941655"/>
+    <point lng="-90.673599" lat="15.954859"/>
+    <infowindow><![CDATA[<div align="center"><b>Coban to Laguna Lachua NP</b></div> Distance: 150 km<br>Driving time: 4 hrs]]></infowindow>
+  </line>
+  <line name="Flores" colour="#0000FF" width="5" opacity="0.6" category="Coban">
+    <point lng="-90.384178" lat="15.477571"/>
+    <point lng="-90.374565" lat="15.486835"/>
+    <point lng="-90.371132" lat="15.487496"/>
+    <point lng="-90.371132" lat="15.489812"/>
+    <point lng="-90.367012" lat="15.492128"/>
+    <point lng="-90.367355" lat="15.498414"/>
+    <point lng="-90.363922" lat="15.498414"/>
+    <point lng="-90.356369" lat="15.503708"/>
+    <point lng="-90.352936" lat="15.50867"/>
+    <point lng="-90.353966" lat="15.513302"/>
+    <point lng="-90.357399" lat="15.513963"/>
+    <point lng="-90.357399" lat="15.522564"/>
+    <point lng="-90.347443" lat="15.528849"/>
+    <point lng="-90.339546" lat="15.52918"/>
+    <point lng="-90.330448" lat="15.536094"/>
+    <point lng="-90.331135" lat="15.547174"/>
+    <point lng="-90.337143" lat="15.547373"/>
+    <point lng="-90.341949" lat="15.546381"/>
+    <point lng="-90.347443" lat="15.552996"/>
+    <point lng="-90.350533" lat="15.552334"/>
+    <point lng="-90.353279" lat="15.556965"/>
+    <point lng="-90.349159" lat="15.556965"/>
+    <point lng="-90.351219" lat="15.560934"/>
+    <point lng="-90.348129" lat="15.564572"/>
+    <point lng="-90.378685" lat="15.583423"/>
+    <point lng="-90.379715" lat="15.592682"/>
+    <point lng="-90.388298" lat="15.597973"/>
+    <point lng="-90.420227" lat="15.607893"/>
+    <point lng="-90.421944" lat="15.610538"/>
+    <point lng="-90.439796" lat="15.621119"/>
+    <point lng="-90.442543" lat="15.630046"/>
+    <point lng="-90.43293" lat="15.636328"/>
+    <point lng="-90.429153" lat="15.641948"/>
+    <point lng="-90.428123" lat="15.652528"/>
+    <point lng="-90.431557" lat="15.65947"/>
+    <point lng="-90.42366" lat="15.663437"/>
+    <point lng="-90.408554" lat="15.687303"/>
+    <point lng="-90.415421" lat="15.707795"/>
+    <point lng="-90.42778" lat="15.713744"/>
+    <point lng="-90.422974" lat="15.72498"/>
+    <point lng="-90.430527" lat="15.734167"/>
+    <point lng="-90.425377" lat="15.759611"/>
+    <point lng="-90.415077" lat="15.768202"/>
+    <point lng="-90.402031" lat="15.764567"/>
+    <point lng="-90.405121" lat="15.777453"/>
+    <point lng="-90.395164" lat="15.781748"/>
+    <point lng="-90.394135" lat="15.788686"/>
+    <point lng="-90.367355" lat="15.788025"/>
+    <point lng="-90.344696" lat="15.7834"/>
+    <point lng="-90.293884" lat="15.809696"/>
+    <point lng="-90.288391" lat="15.869148"/>
+    <point lng="-90.262299" lat="15.888961"/>
+    <point lng="-90.230026" lat="15.896093"/>
+    <point lng="-90.2108" lat="15.886187"/>
+    <point lng="-90.143509" lat="15.884866"/>
+    <point lng="-90.099564" lat="15.87496"/>
+    <point lng="-90.09613" lat="15.900716"/>
+    <point lng="-90.109177" lat="15.925148"/>
+    <point lng="-90.126343" lat="15.938354"/>
+    <point lng="-90.149689" lat="15.997107"/>
+    <point lng="-90.165482" lat="16.010968"/>
+    <point lng="-90.181961" lat="16.011628"/>
+    <point lng="-90.181961" lat="16.080917"/>
+    <point lng="-90.177841" lat="16.331474"/>
+    <point lng="-90.127716" lat="16.331474"/>
+    <point lng="-90.109177" lat="16.40065"/>
+    <point lng="-90.128403" lat="16.484946"/>
+    <point lng="-90.127029" lat="16.500748"/>
+    <point lng="-90.165482" lat="16.524447"/>
+    <point lng="-90.186424" lat="16.519773"/>
+    <point lng="-90.191231" lat="16.527015"/>
+    <point lng="-90.184021" lat="16.54018"/>
+    <point lng="-90.166855" lat="16.54742"/>
+    <point lng="-90.173721" lat="16.571772"/>
+    <point lng="-90.173721" lat="16.577366"/>
+    <point lng="-90.170803" lat="16.590166"/>
+    <point lng="-90.178871" lat="16.606123"/>
+    <point lng="-90.17767" lat="16.61221"/>
+    <point lng="-90.183334" lat="16.638955"/>
+    <point lng="-90.163422" lat="16.665269"/>
+    <point lng="-90.165482" lat="16.681056"/>
+    <point lng="-90.152435" lat="16.703418"/>
+    <point lng="-90.154495" lat="16.721174"/>
+    <point lng="-90.119476" lat="16.781007"/>
+    <point lng="-90.076218" lat="16.815847"/>
+    <point lng="-90.041885" lat="16.81979"/>
+    <point lng="-90.037766" lat="16.827677"/>
+    <point lng="-90.029526" lat="16.831621"/>
+    <point lng="-90.022659" lat="16.831621"/>
+    <point lng="-89.99588" lat="16.855937"/>
+    <point lng="-89.9897" lat="16.873022"/>
+    <point lng="-89.967728" lat="16.88025"/>
+    <point lng="-89.955368" lat="16.878278"/>
+    <point lng="-89.946442" lat="16.886163"/>
+    <point lng="-89.940948" lat="16.884849"/>
+    <point lng="-89.936142" lat="16.88682"/>
+    <point lng="-89.929962" lat="16.901176"/>
+    <point lng="-89.913998" lat="16.912837"/>
+    <point lng="-89.9049" lat="16.920227"/>
+    <point lng="-89.89666" lat="16.918914"/>
+    <point lng="-89.89563" lat="16.921213"/>
+    <point lng="-89.891853" lat="16.92072"/>
+    <point lng="-89.890823" lat="16.929588"/>
+    <infowindow><![CDATA[<div align="center"><b>Coban to Flores</b></div> Distance: 190 km<br>Driving time: 3 hrs]]></infowindow>
+  </line>
+</markers>
+
+

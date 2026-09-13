@@ -1,0 +1,102 @@
+.query-builder .rule-container {
+	background: rgba(255, 255, 255, 0.9); margin: 4px 0px; padding: 5px; border-radius: 5px; border: 1px solid rgb(238, 238, 238); position: relative;
+}
+.query-builder .rule-placeholder {
+	background: rgba(255, 255, 255, 0.9); margin: 4px 0px; padding: 5px; border-radius: 5px; border: 1px solid rgb(238, 238, 238); position: relative;
+}
+.query-builder .rules-group-container {
+	background: rgba(255, 255, 255, 0.9); margin: 4px 0px; padding: 5px; border-radius: 5px; border: 1px solid rgb(238, 238, 238); position: relative;
+}
+.query-builder .drag-handle {
+	margin: 0px 5px 0px 0px; vertical-align: middle; display: inline-block;
+}
+.query-builder .error-container {
+	margin: 0px 5px 0px 0px; vertical-align: middle; display: inline-block;
+}
+.query-builder .rule-container .rule-filter-container {
+	margin: 0px 5px 0px 0px; vertical-align: middle; display: inline-block;
+}
+.query-builder .rule-container .rule-operator-container {
+	margin: 0px 5px 0px 0px; vertical-align: middle; display: inline-block;
+}
+.query-builder .rule-container .rule-value-container {
+	margin: 0px 5px 0px 0px; vertical-align: middle; display: inline-block;
+}
+.query-builder .rules-group-container {
+	background: rgba(250, 240, 210, 0.5); padding: 10px 10px 6px; border: 1px solid rgb(220, 200, 150);
+}
+.query-builder .rules-group-container .rules-group-header {
+	margin-bottom: 10px;
+}
+.query-builder .rules-group-container .rules-group-header input[name$=_cond] {
+	display: none;
+}
+.query-builder .rules-group-container .rules-list {
+	list-style: none; margin: 0px; padding: 0px 0px 0px 15px;
+}
+.query-builder .rule-container .rule-value-container {
+	padding-left: 5px; border-left-color: rgb(221, 221, 221); border-left-width: 1px; border-left-style: solid;
+}
+.query-builder .rule-container .rule-value-container label {
+	font-weight: 400; margin-bottom: 0px;
+}
+.query-builder .rule-container .rule-value-container label.block {
+	display: block;
+}
+.query-builder .rule-container input[type=number] {
+	padding: 1px;
+}
+.query-builder .rule-container input[type=text] {
+	padding: 1px;
+}
+.query-builder .rule-container select {
+	padding: 1px;
+}
+.query-builder .error-container {
+	color: red; display: none; cursor: help;
+}
+.query-builder .has-error {
+	border-color: rgb(255, 153, 153); background-color: rgb(255, 221, 221);
+}
+.query-builder .has-error .error-container {
+	display: inline-block !important;
+}
+.query-builder .rules-list > ::after {
+	border-style: solid; border-color: rgb(204, 204, 204); left: -10px; width: 10px; height: calc(50% + 4px); position: absolute; content: "";
+}
+.query-builder .rules-list > ::before {
+	border-style: solid; border-color: rgb(204, 204, 204); left: -10px; width: 10px; height: calc(50% + 4px); position: absolute; content: "";
+}
+.query-builder .rules-list > ::before {
+	border-width: 0px 0px 2px 2px; top: -4px;
+}
+.query-builder .rules-list > ::after {
+	border-width: 0px 0px 0px 2px; top: 50%;
+}
+.query-builder .rules-list > :first-child::before {
+	top: -12px; height: calc(50% + 14px);
+}
+.query-builder .rules-list > :last-child::before {
+	border-radius: 0px 0px 0px 4px;
+}
+.query-builder .rules-list > :last-child::after {
+	display: none;
+}
+.query-builder .error-container + .tooltip .tooltip-inner {
+	color: rgb(255, 153, 153) !important;
+}
+.query-builder p.filter-description {
+	background: rgb(217, 237, 247); margin: 5px 0px 0px; padding: 2.5px 5px; border-radius: 5px; border: 1px solid rgb(188, 232, 241); color: rgb(49, 112, 143); font-size: 0.8em;
+}
+.query-builder .rules-group-header [data-invert] {
+	margin-left: 5px;
+}
+.query-builder .drag-handle {
+	margin-left: 5px; vertical-align: middle; cursor: move;
+}
+.query-builder .dragged {
+	opacity: 0.5;
+}
+.query-builder .rule-placeholder {
+	border: 1px dashed rgb(187, 187, 187); opacity: 0.7;
+}
