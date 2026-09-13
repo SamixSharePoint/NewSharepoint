@@ -127,13 +127,6 @@
     <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx.designer.cs">
       <DependentUpon>ShowAllKoridorInfoUserControl_NewTajamoee.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_Tajamoee.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_Tajamoee.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
       <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx</DependentUpon>
@@ -422,7 +415,6 @@
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx" />
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx" />
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Tajamoee.ascx" />
     <Content Include="ShowAllPolyganInfo\Elements.xml" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />

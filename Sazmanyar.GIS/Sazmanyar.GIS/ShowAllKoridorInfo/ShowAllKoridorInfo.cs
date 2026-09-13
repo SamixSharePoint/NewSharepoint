@@ -209,13 +209,7 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
 
             try
             {
-                if (FormMode == ClsHelpper.FormModeRouteOfStation.InAdminMode)
-                {
-                    ShowAllKoridorInfoUserControl_admin objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_admin)Page.LoadControl(ascxPathForAdmin);
-                    objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
-                    Controls.Add(objShowInNewsLetterFormatUserControl);
-                }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface)
+                if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface)
                 {
                     ShowAllKoridorInfoUserControl objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl)Page.LoadControl(ascxPath);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;

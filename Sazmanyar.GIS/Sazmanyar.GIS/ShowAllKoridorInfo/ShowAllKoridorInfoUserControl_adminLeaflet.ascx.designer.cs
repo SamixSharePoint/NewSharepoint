@@ -22,15 +22,6 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo {
         protected global::System.Web.UI.WebControls.Literal InitializBounds;
 
         /// <summary>
-        /// pnlShow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable pnlShow;
-
-        /// <summary>
         /// cmbNameProjeh control.
         /// </summary>
         /// <remarks>
@@ -38,14 +29,5 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cmbNameProjeh;
-
-        /// <summary>
-        /// pnlConfig control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTable pnlConfig;
     }
 }

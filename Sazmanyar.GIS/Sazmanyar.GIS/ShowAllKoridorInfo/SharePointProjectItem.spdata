@@ -8,7 +8,6 @@
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_New.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_endUser.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_NewTajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_Tajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_Bonyad.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_AbOBargh.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_adminLeaflet.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />

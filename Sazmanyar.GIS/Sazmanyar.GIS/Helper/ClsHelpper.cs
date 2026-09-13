@@ -245,7 +245,6 @@ namespace Sazmanyar.GIS
 
         public enum FormModeRouteOfStation
         {
-            InAdminMode,
             InEndUserModeWithInterface,
             InEndUserModeWithInterface_New,
             InEndUserModeWithInterface_Bonyad,
