@@ -6,7 +6,9 @@
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShowAllPolyganInfoUserControl_EndUser.ascx.cs" Inherits="Sazmanyar.GIS.ShowAllPolyganInfo.ShowAllPolyganInfoUserControl_EndUser" %>
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 
 <script type="text/javascript">
@@ -178,34 +180,24 @@
 
 
 <style type="text/css">
-    .MainPanle {
-        direction: rtl;
-        text-align: right;
-        width: 250px;
-        position: absolute;
-        top: 100px;
-        right: 10px;
-        background-color: #CCFFCC;
-        z-index: 1;
-    }
-
-        .gm-style-mtc {
+    .gm-style-mtc {
         display: none;
     }
-
 </style>
-<div class="MainPanle">
-    <fieldset>
-        <legend>ثبت سطح</legend>
-        <table cellpadding="5" cellspacing="5" id="pnlConfig" runat="server" width="100%">
-            <tr>
-                <td>
-                    <select id="cmbFromPolygan" style="width: 200px" onchange="ShowPolyganInMap(this);">
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+<div class="gis-reg-panel">
+    <div class="gis-reg-section">
+        <div class="gis-reg-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l7-4 9 5-3 10-10-1z" /></svg>
+            <span>نمایش سطح</span>
+        </div>
+        <div class="gis-reg-body" id="pnlConfig">
+            <div class="gis-reg-field">
+                <label for="cmbFromPolygan">انتخاب سطح</label>
+                <select id="cmbFromPolygan" onchange="ShowPolyganInMap(this);">
+                </select>
+            </div>
+        </div>
+    </div>
 </div>
 <div id='map_canvas' style="border: medium solid #FFFFFF; width: 100%; height: 620px;">
 </div>

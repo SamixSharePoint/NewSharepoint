@@ -6,7 +6,9 @@
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShowAllPolyganInfoUserControl_admin.ascx.cs" Inherits="Sazmanyar.GIS.ShowAllPolyganInfo.ShowAllPolyganInfoUserControl_admin" %>
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 
 <script type="text/javascript">
@@ -252,60 +254,39 @@
 
 
 <style type="text/css">
-    .MainPanle {
-        direction: rtl;
-        text-align: right;
-        width: 250px;
-        position: absolute;
-        top: 180px;
-       background-color: #CCFFCC;
-        z-index: 1;
-    }
-
-        .gm-style-mtc {
+    .gm-style-mtc {
         display: none;
     }
 </style>
-<div>
-    <div class="MainPanle">
-        <fieldset>
-            <legend>ثبت سطح</legend>
-            <table cellpadding="5" cellspacing="5" id="pnlConfig" runat="server" width="100%">
-                <tr>
-                    <td>
-                        <input id="txtNamePolygan" type="text" style="width: 90%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="txtFillColor" type="text" value="Blue" style="width: 90%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="txtBorderColor" type="text" value="Black" style="width: 90%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="txtOpacity" type="text" value="0.2" style="width: 90%" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input id="btnSubmit" style="width: 100px" type="button" onclick="SubmitPolyganInMap()"
-                            value="ثبت سطح" />
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
+<div class="gis-reg-panel">
+    <div class="gis-reg-section">
+        <div class="gis-reg-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l7-4 9 5-3 10-10-1z" /></svg>
+            <span>ثبت سطح</span>
+        </div>
+        <div class="gis-reg-body" id="pnlConfig">
+            <div class="gis-reg-field">
+                <label for="txtNamePolygan">نام سطح</label>
+                <input id="txtNamePolygan" type="text" placeholder="نام سطح..." />
+            </div>
+            <div class="gis-reg-field">
+                <label for="txtFillColor">رنگ داخل سطح</label>
+                <input id="txtFillColor" type="text" value="Blue" />
+            </div>
+            <div class="gis-reg-field">
+                <label for="txtBorderColor">رنگ دور سطح</label>
+                <input id="txtBorderColor" type="text" value="Black" />
+            </div>
+            <div class="gis-reg-field">
+                <label for="txtOpacity">شفافیت (بین 0 تا 1)</label>
+                <input id="txtOpacity" type="text" value="0.2" />
+            </div>
+            <div class="gis-reg-hint">
+                برای درج نقاط سطح از <b>Shift + کلیک چپ</b> و برای حذف نقاط از <b>Ctrl + کلیک چپ</b> روی نقشه استفاده کنید.
+            </div>
+            <button type="button" id="btnSubmit" class="gis-reg-btn gis-reg-btn-primary" onclick="SubmitPolyganInMap()">ثبت سطح</button>
+        </div>
     </div>
-
-    <div>
-        <p style="color: blue">برای درج نقاط Polygan از Shift + Left Click استفاده کنید </p>
-        <p style="color: red">برای حذف نقاط Polygan از Ctrl + Left Click استفاده کنید </p>
-    </div>
-    <div id='map_canvas' style="border: medium solid #FFFFFF; width: 100%; height: 620px;">
-    </div>
-
+</div>
+<div id='map_canvas' style="border: medium solid #FFFFFF; width: 100%; height: 620px;">
 </div>
