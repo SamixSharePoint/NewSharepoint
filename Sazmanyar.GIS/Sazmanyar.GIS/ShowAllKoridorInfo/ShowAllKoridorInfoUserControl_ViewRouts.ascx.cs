@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
@@ -34,17 +34,6 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
                 InitializBounds.Text = "<script type='text/javascript'>var bounds = new GLatLngBounds(@);</script>".Replace("@", strPointBase);
             }
             catch (Exception)
-            {
-            }
-
-            try
-            {
-                if (IsPostBack == true)
-                {
-                    return;
-                }
-            }
-            catch (Exception ex)
             {
             }
         }

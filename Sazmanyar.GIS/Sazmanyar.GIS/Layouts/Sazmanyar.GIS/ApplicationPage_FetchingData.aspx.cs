@@ -337,6 +337,56 @@ namespace Sazmanyar.GIS.Layouts.Sazmanyar.GIS
 
         }
 
+        #region لیست مسیرها (ViewRouts)
+
+        [WebMethod]
+        public static string FillSugestion_ProjectName_FromRoutsList()
+        {
+            return string.Join("*", ClsHelpper.GetProjectNameDistinctFromRoutsList().ToArray());
+        }
+
+        [WebMethod]
+        public static List<Dictionary<string, string>> FetchRoutsListSchema()
+        {
+            return DataTableToDictionaryList(ClsHelpper.FetchRoutsListSchema());
+        }
+
+        [WebMethod]
+        public static List<Dictionary<string, string>> FetchRoutsListItems_ByPaging(string NameProjeh, int PageSize, int PageIndex)
+        {
+            DataTable objDataTable = ClsHelpper.FetchRoutsListItems(NameProjeh ?? "");
+
+            if (PageSize > 0)
+            {
+                DataTable objPage = objDataTable.Clone();
+                int nStart = PageSize * (PageIndex - 1);
+                for (int nCounter = nStart; nCounter < objDataTable.Rows.Count && nCounter < nStart + PageSize; nCounter++)
+                {
+                    objPage.ImportRow(objDataTable.Rows[nCounter]);
+                }
+                objDataTable = objPage;
+            }
+
+            return DataTableToDictionaryList(objDataTable);
+        }
+
+        private static List<Dictionary<string, string>> DataTableToDictionaryList(DataTable objDataTable)
+        {
+            List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
+            foreach (DataRow item in objDataTable.Rows)
+            {
+                Dictionary<string, string> objItem = new Dictionary<string, string>();
+                foreach (DataColumn ColItem in objDataTable.Columns)
+                {
+                    objItem.Add(ColItem.ColumnName, item[ColItem.ColumnName].ToString());
+                }
+                lstResult.Add(objItem);
+            }
+            return lstResult;
+        }
+
+        #endregion
+
         [WebMethod]
         public static string FillSugestion_ProjectNameDistinctInfoDataBase()
         {

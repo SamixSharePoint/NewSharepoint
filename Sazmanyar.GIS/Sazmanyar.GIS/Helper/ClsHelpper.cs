@@ -15,7 +15,9 @@ using Sazmanyar.GIS.Helper;
 using System.Xml.Serialization;
 using System.Web.Script.Serialization;
 using System.Threading;
+using System.Security;
 using System.Security.Principal;
+using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
 namespace Sazmanyar.GIS
@@ -245,14 +247,14 @@ namespace Sazmanyar.GIS
 
         public enum FormModeRouteOfStation
         {
-            InEndUserModeWithInterface_ViewTemplate1,
-            InEndUserModeWithInterface_ViewTemplate2,
-            InEndUserModeWithInterface_ViewTemplate3,
-            InEndUserModeWithInterface_ViewRouts,
-            InEndUserModeWithInterface_ViewReport,
-            InEndUserModeWithInterface_ViewTajamoee,
-            InEndUserModeWithInterface_AdminGoogle,
-            InEndUserModeWithInterface_AdminLeaflet
+            InEndUserMode_ViewTemplate1,
+            InEndUserMode_ViewTemplate2,
+            InEndUserMode_ViewTemplate3,
+            InEndUserMode_ViewRouts,
+            InEndUserMode_ViewReport,
+            InEndUserMode_ViewTajamoee,
+            InAdminMode_AdminGoogle,
+            InAdminMode_AdminLeaflet
         }
 
         public enum FormModePolyganOfStation
@@ -2318,6 +2320,380 @@ namespace Sazmanyar.GIS
 
             return objResult;
 
+        }
+
+        #endregion
+
+        #region لیست مسیرها (ViewRouts)
+
+        // ستون‌هایی که داده‌ی فنی نقشه هستند و در فیلترها/پنجرهٔ اطلاعات نمایش داده نمی‌شوند
+        private static readonly string[] RoutsListTechnicalFields = { "Points", "LatNortheast", "LongNortheast", "LatSouthwest", "LongSouthwest" };
+        private static readonly string[] RoutsListReadOnlyDisplayFields = { "ID", "Created", "Modified" };
+
+        private static bool IsRoutsListDisplayField(SPField field)
+        {
+            if (field == null || field.Hidden)
+            {
+                return false;
+            }
+
+            if (Array.IndexOf(RoutsListReadOnlyDisplayFields, field.InternalName) >= 0)
+            {
+                return true;
+            }
+
+            if (field.ReadOnlyField)
+            {
+                return false;
+            }
+
+            switch (field.Type)
+            {
+                case SPFieldType.Attachments:
+                case SPFieldType.Computed:
+                case SPFieldType.File:
+                case SPFieldType.ContentTypeId:
+                case SPFieldType.Guid:
+                case SPFieldType.WorkflowStatus:
+                case SPFieldType.ModStat:
+                case SPFieldType.Counter:
+                    return field.InternalName == "ID";
+            }
+
+            return field.InternalName != "ContentType";
+        }
+
+        private static List<SPField> GetRoutsListDisplayFields(SPList objSPList)
+        {
+            List<SPField> lstFields = new List<SPField>();
+            List<SPField> lstTail = new List<SPField>();
+
+            lstFields.Add(objSPList.Fields.GetFieldByInternalName("ID"));
+            lstFields.Add(objSPList.Fields.GetFieldByInternalName("Title"));
+
+            foreach (SPField field in objSPList.Fields)
+            {
+                if (!IsRoutsListDisplayField(field) || field.InternalName == "ID" || field.InternalName == "Title")
+                {
+                    continue;
+                }
+
+                if (field.InternalName == "Created" || field.InternalName == "Modified")
+                {
+                    lstTail.Add(field);
+                }
+                else
+                {
+                    lstFields.Add(field);
+                }
+            }
+
+            lstFields.AddRange(lstTail);
+            return lstFields;
+        }
+
+        private static string GetRoutsListFieldDisplayText(SPListItem item, SPField field)
+        {
+            object value = null;
+            try
+            {
+                value = item[field.Id];
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+
+            if (value == null)
+            {
+                return "";
+            }
+
+            try
+            {
+                switch (field.Type)
+                {
+                    case SPFieldType.Lookup:
+                        {
+                            List<string> parts = new List<string>();
+                            foreach (SPFieldLookupValue lookupValue in new SPFieldLookupValueCollection(value.ToString()))
+                            {
+                                parts.Add(lookupValue.LookupValue);
+                            }
+                            return string.Join("، ", parts.ToArray());
+                        }
+                    case SPFieldType.User:
+                        {
+                            List<string> parts = new List<string>();
+                            foreach (SPFieldUserValue userValue in new SPFieldUserValueCollection(item.Web, value.ToString()))
+                            {
+                                parts.Add(userValue.LookupValue);
+                            }
+                            return string.Join("، ", parts.ToArray());
+                        }
+                    case SPFieldType.DateTime:
+                        {
+                            DateTime dt = Convert.ToDateTime(value);
+                            SPFieldDateTime dateField = field as SPFieldDateTime;
+                            string strPersian = PersianDate(dt);
+                            if (dateField != null && dateField.DisplayFormat == SPDateTimeFieldFormatType.DateOnly)
+                            {
+                                strPersian = strPersian.Split(' ')[0];
+                            }
+                            return strPersian;
+                        }
+                    case SPFieldType.Boolean:
+                        return Convert.ToBoolean(value) ? "بله" : "خیر";
+                    case SPFieldType.URL:
+                        return new SPFieldUrlValue(value.ToString()).Url;
+                    case SPFieldType.Number:
+                    case SPFieldType.Currency:
+                        return ToInvariantNumber(value);
+                    case SPFieldType.Note:
+                        return Regex.Replace(value.ToString(), "<[^>]+>", " ").Replace("&nbsp;", " ").Trim();
+                    default:
+                        return field.GetFieldValueAsText(value);
+                }
+            }
+            catch (Exception)
+            {
+                return value.ToString();
+            }
+        }
+
+        /// <summary>
+        /// ستون‌های قابل نمایش «لیست مسیرها»: نام داخلی، عنوان، نوع، گزینه‌ها (برای Choice) و اینکه فنی است یا نه.
+        /// </summary>
+        public static DataTable FetchRoutsListSchema()
+        {
+            SPWeb objCurrentWeb = SPContext.Current.Web;
+            DataTable objResult = new DataTable();
+            objResult.Columns.Add("InternalName");
+            objResult.Columns.Add("Title");
+            objResult.Columns.Add("Type");
+            objResult.Columns.Add("Choices");
+            objResult.Columns.Add("Technical");
+
+            try
+            {
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    Thread.CurrentPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                    using (SPSite objSiteColl = new SPSite(objCurrentWeb.Site.ID))
+                    {
+                        using (SPWeb objWeb = objSiteColl.OpenWeb(objCurrentWeb.ID))
+                        {
+                            try
+                            {
+                                SPList objSPList = objWeb.Lists[Const_ListRouts_Title];
+                                foreach (SPField field in GetRoutsListDisplayFields(objSPList))
+                                {
+                                    DataRow objDataRow = objResult.NewRow();
+                                    objDataRow["InternalName"] = field.InternalName;
+                                    objDataRow["Title"] = field.Title;
+                                    objDataRow["Type"] = field.Type.ToString();
+
+                                    string strChoices = "";
+                                    SPFieldMultiChoice choiceField = field as SPFieldMultiChoice;
+                                    if (choiceField != null)
+                                    {
+                                        List<string> lstChoices = new List<string>();
+                                        foreach (string strChoice in choiceField.Choices)
+                                        {
+                                            lstChoices.Add(strChoice);
+                                        }
+                                        strChoices = string.Join("|", lstChoices.ToArray());
+                                    }
+                                    objDataRow["Choices"] = strChoices;
+                                    objDataRow["Technical"] = Array.IndexOf(RoutsListTechnicalFields, field.InternalName) >= 0 ? "1" : "0";
+                                    objResult.Rows.Add(objDataRow);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                ClsHelpper.WriteToLogFile(e.Message);
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile(e.Message);
+            }
+
+            return objResult;
+        }
+
+        /// <summary>
+        /// نام پروژه‌هایی که واقعاً در «لیست مسیرها» مسیر دارند (مقادیر متمایز ستون ProgramName).
+        /// </summary>
+        public static List<string> GetProjectNameDistinctFromRoutsList()
+        {
+            SPWeb objCurrentWeb = SPContext.Current.Web;
+            List<string> lstResult = new List<string>();
+
+            try
+            {
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    Thread.CurrentPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                    using (SPSite objSiteColl = new SPSite(objCurrentWeb.Site.ID))
+                    {
+                        using (SPWeb objWeb = objSiteColl.OpenWeb(objCurrentWeb.ID))
+                        {
+                            try
+                            {
+                                SPList objSPList = objWeb.Lists[Const_ListRouts_Title];
+                                SPField programField = objSPList.Fields.GetFieldByInternalName("ProgramName");
+                                SPQuery objSPQuery = new SPQuery();
+                                objSPQuery.ViewFields = "<FieldRef Name='ProgramName' />";
+                                foreach (SPListItem objSPListItem in objSPList.GetItems(objSPQuery))
+                                {
+                                    string strName = GetRoutsListFieldDisplayText(objSPListItem, programField).Trim();
+                                    if (strName.Length != 0 && !lstResult.Contains(strName))
+                                    {
+                                        lstResult.Add(strName);
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                ClsHelpper.WriteToLogFile(e.Message);
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile(e.Message);
+            }
+
+            lstResult.Sort();
+            return lstResult;
+        }
+
+        /// <summary>
+        /// آیتم‌های «لیست مسیرها» با متن نمایشی همهٔ ستون‌ها، به‌علاوهٔ مختصات ایستگاه‌های مبدا/مقصد
+        /// که از «لیست ایستگاه ها» برداشته می‌شود. اگر نام پروژه خالی باشد همهٔ مسیرها برمی‌گردند.
+        /// </summary>
+        public static DataTable FetchRoutsListItems(string strProgramName)
+        {
+            SPWeb objCurrentWeb = SPContext.Current.Web;
+            DataTable objResult = new DataTable();
+            string[] strComputedColumns = { "StationFrom_ID", "StationFrom_Title", "LatFrom", "LongFrom", "StationTo_ID", "StationTo_Title", "LatTo", "LongTo" };
+
+            try
+            {
+                SPSecurity.RunWithElevatedPrivileges(delegate()
+                {
+                    Thread.CurrentPrincipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+                    using (SPSite objSiteColl = new SPSite(objCurrentWeb.Site.ID))
+                    {
+                        using (SPWeb objWeb = objSiteColl.OpenWeb(objCurrentWeb.ID))
+                        {
+                            try
+                            {
+                                SPList objSPList = objWeb.Lists[Const_ListRouts_Title];
+                                List<SPField> lstFields = GetRoutsListDisplayFields(objSPList);
+
+                                foreach (SPField field in lstFields)
+                                {
+                                    objResult.Columns.Add(field.InternalName);
+                                }
+                                foreach (string strColumn in strComputedColumns)
+                                {
+                                    if (!objResult.Columns.Contains(strColumn))
+                                    {
+                                        objResult.Columns.Add(strColumn);
+                                    }
+                                }
+
+                                // مختصات ایستگاه‌ها یک بار خوانده می‌شود تا برای هر مسیر پرس‌وجوی جداگانه نزنیم
+                                Dictionary<int, string[]> dicStations = new Dictionary<int, string[]>();
+                                try
+                                {
+                                    SPList objStationsList = objWeb.Lists[Const_ListStations_Title];
+                                    Guid latFieldId = objStationsList.Fields.GetFieldByInternalName("Latitude").Id;
+                                    Guid longFieldId = objStationsList.Fields.GetFieldByInternalName("Longitude").Id;
+                                    SPQuery objStationsQuery = new SPQuery();
+                                    objStationsQuery.ViewFields = "<FieldRef Name='ID' /><FieldRef Name='Latitude' /><FieldRef Name='Longitude' />";
+                                    foreach (SPListItem objStation in objStationsList.GetItems(objStationsQuery))
+                                    {
+                                        dicStations[objStation.ID] = new[] { ToInvariantNumber(objStation[latFieldId]), ToInvariantNumber(objStation[longFieldId]) };
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    ClsHelpper.WriteToLogFile(e.Message);
+                                }
+
+                                SPQuery objSPQuery = new SPQuery();
+                                if (strProgramName.Trim().Length != 0)
+                                {
+                                    objSPQuery.Query = "<Where><Eq><FieldRef Name='ProgramName' /><Value Type='Text'>" + SecurityElement.Escape(strProgramName.Trim()) + "</Value></Eq></Where>";
+                                }
+
+                                foreach (SPListItem objSPListItem in objSPList.GetItems(objSPQuery))
+                                {
+                                    try
+                                    {
+                                        DataRow objDataRow = objResult.NewRow();
+                                        foreach (SPField field in lstFields)
+                                        {
+                                            objDataRow[field.InternalName] = GetRoutsListFieldDisplayText(objSPListItem, field);
+                                        }
+                                        objDataRow["ID"] = objSPListItem.ID.ToString();
+
+                                        string strStartStation = Convert.ToString(objSPListItem[objSPList.Fields.GetFieldByInternalName("StartStation").Id]);
+                                        if (strStartStation.Length != 0)
+                                        {
+                                            SPFieldLookupValue objStartStation = new SPFieldLookupValue(strStartStation);
+                                            objDataRow["StationFrom_ID"] = objStartStation.LookupId.ToString();
+                                            objDataRow["StationFrom_Title"] = objStartStation.LookupValue;
+                                            if (dicStations.ContainsKey(objStartStation.LookupId))
+                                            {
+                                                objDataRow["LatFrom"] = dicStations[objStartStation.LookupId][0];
+                                                objDataRow["LongFrom"] = dicStations[objStartStation.LookupId][1];
+                                            }
+                                        }
+
+                                        string strEndStation = Convert.ToString(objSPListItem[objSPList.Fields.GetFieldByInternalName("EndStation").Id]);
+                                        if (strEndStation.Length != 0)
+                                        {
+                                            SPFieldLookupValue objEndStation = new SPFieldLookupValue(strEndStation);
+                                            objDataRow["StationTo_ID"] = objEndStation.LookupId.ToString();
+                                            objDataRow["StationTo_Title"] = objEndStation.LookupValue;
+                                            if (dicStations.ContainsKey(objEndStation.LookupId))
+                                            {
+                                                objDataRow["LatTo"] = dicStations[objEndStation.LookupId][0];
+                                                objDataRow["LongTo"] = dicStations[objEndStation.LookupId][1];
+                                            }
+                                        }
+
+                                        objResult.Rows.Add(objDataRow);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        ClsHelpper.WriteToLogFile(e.Message);
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                ClsHelpper.WriteToLogFile(e.Message);
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile(e.Message);
+            }
+
+            return objResult;
         }
 
         #endregion

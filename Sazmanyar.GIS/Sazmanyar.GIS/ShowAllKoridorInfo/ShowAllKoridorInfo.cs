@@ -185,7 +185,7 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
 
         #region "تنظیمات ویژه"
 
-        private ClsHelpper.FormModeRouteOfStation _FormMode = ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate1;
+        private ClsHelpper.FormModeRouteOfStation _FormMode = ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewTemplate1;
         [WebBrowsable(true)]
         [WebDisplayName("نحوهء نمایش اطلاعات بر روی صفحه؟")]
         [WebDescription("نحوهء نمایش اطلاعات بر روی صفحه؟")]
@@ -233,50 +233,50 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
 
             try
             {
-                if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate1)
+                if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewTemplate1)
                 {
                     ShowAllKoridorInfoUserControl_ViewTemplate1 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate1)Page.LoadControl(ascxPathForViewTemplate1);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate2)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewTemplate2)
                 {
                     ShowAllKoridorInfoUserControl_ViewTemplate2 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate2)Page.LoadControl(ascxPathForViewTemplate2);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate3)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewTemplate3)
                 {
                     ShowAllKoridorInfoUserControl_ViewTemplate3 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate3)Page.LoadControl(ascxPathForViewTemplate3);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewRouts)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewRouts)
                 {
                     ShowAllKoridorInfoUserControl_ViewRouts objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewRouts)Page.LoadControl(ascxPathForViewRouts);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewReport)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewReport)
                 {
                     ShowAllKoridorInfoUserControl_ViewReport objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewReport)Page.LoadControl(ascxPathForViewReport);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTajamoee)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserMode_ViewTajamoee)
                 {
                     ShowAllKoridorInfoUserControl_ViewTajamoee objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTajamoee)Page.LoadControl(ascxPathForViewTajamoee);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AdminGoogle)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InAdminMode_AdminGoogle)
                 {
                     ShowAllKoridorInfoUserControl_adminGoogle objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_adminGoogle)Page.LoadControl(ascxPathForAdminGoogle);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     objShowInNewsLetterFormatUserControl.GoogleMapsApiKey = GoogleMapsApiKey;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AdminLeaflet)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InAdminMode_AdminLeaflet)
                 {
                     ShowAllKoridorInfoUserControl_adminLeaflet objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_adminLeaflet)Page.LoadControl(ascxPathForAdminLeaflet);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
