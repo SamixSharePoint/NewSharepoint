@@ -88,11 +88,6 @@ namespace Sazmanyar.GIS.ShowAllPolyganInfo
                     ShowAllPolyganInfoUserControl_EndUser objShowInNewsLetterFormatUserControl = (ShowAllPolyganInfoUserControl_EndUser)Page.LoadControl(ascxPathForEndUser);
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModePolyganOfStation.InEndUserModeWithOutInterface)
-                {
-                    ShowAllPolyganInfoUserControl_EndUser objShowInNewsLetterFormatUserControl = (ShowAllPolyganInfoUserControl_EndUser)Page.LoadControl(ascxPathForEndUser);
-                    Controls.Add(objShowInNewsLetterFormatUserControl);
-                }
             }
             catch (Exception)
             {

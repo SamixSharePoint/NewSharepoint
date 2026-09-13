@@ -10,7 +10,7 @@
 namespace Sazmanyar.GIS.ShowAllKoridorInfo {
     
     
-    public partial class ShowAllKoridorInfoUserControl_NewTajamoee {
+    public partial class ShowAllKoridorInfoUserControl_ViewTajamoee {
         
         /// <summary>
         /// InitializBounds control.

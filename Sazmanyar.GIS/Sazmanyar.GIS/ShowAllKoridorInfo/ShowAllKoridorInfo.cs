@@ -13,115 +13,153 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
     public class ShowAllKoridorInfo : WebPart
     {
 
-        #region "تنظیمات ویژه"
+        #region "تنظیمات نمایش (View)"
 
-        private string _ascxPath = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl.ascx";
+        private string _ascxPathForViewTemplate1 = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewTemplate1.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت )")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت )")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewTemplate1)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewTemplate1)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPath
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewTemplate1
         {
             get
             {
-                return _ascxPath;
+                return _ascxPathForViewTemplate1;
             }
             set
             {
-                _ascxPath = value;
+                _ascxPathForViewTemplate1 = value;
             }
         }
 
-        private string _ascxPathForNew = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_New.ascx";
+        private string _ascxPathForViewTemplate2 = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewTemplate2.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - New)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - New)")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewTemplate2)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewTemplate2)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForNew
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewTemplate2
         {
             get
             {
-                return _ascxPathForNew;
+                return _ascxPathForViewTemplate2;
             }
             set
             {
-                _ascxPathForNew = value;
+                _ascxPathForViewTemplate2 = value;
             }
         }
 
-        private string _ascxPathForBonyad = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_Bonyad.ascx";
+        private string _ascxPathForViewTemplate3 = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewTemplate3.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - Bonyad)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - Bonyad)")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewTemplate3)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewTemplate3)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForBonyad
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewTemplate3
         {
             get
             {
-                return _ascxPathForBonyad;
+                return _ascxPathForViewTemplate3;
             }
             set
             {
-                _ascxPathForBonyad = value;
+                _ascxPathForViewTemplate3 = value;
             }
         }
 
-        private string _ascxPathForAbOBargh = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_AbOBargh.ascx";
+        private string _ascxPathForViewRouts = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewRouts.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - کاربر نهایی جدید)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - کاربر نهایی جدید)")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewRouts)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewRouts)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForAbOBargh
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewRouts
         {
             get
             {
-                return _ascxPathForAbOBargh;
+                return _ascxPathForViewRouts;
             }
             set
             {
-                _ascxPathForAbOBargh = value;
+                _ascxPathForViewRouts = value;
             }
         }
 
-
-        private string _ascxPathForEndUser = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_endUser.ascx";
+        private string _ascxPathForViewReport = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewReport.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - endUser)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - endUser)")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewReport (نمایش گزارشات)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewReport (نمایش گزارشات)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForEndUser
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewReport
         {
             get
             {
-                return _ascxPathForEndUser;
+                return _ascxPathForViewReport;
             }
             set
             {
-                _ascxPathForEndUser = value;
+                _ascxPathForViewReport = value;
             }
         }
 
-
-        private string _ascxPathForAdmin = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_admin.ascx";
+        private string _ascxPathForViewTajamoee = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_ViewTajamoee.ascx";
         [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - admin)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - admin)")]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - ViewTajamoee)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - ViewTajamoee)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForAdmin
+        [Category("تنظیمات نمایش (View)")]
+        public string ascxPathForViewTajamoee
         {
             get
             {
-                return _ascxPathForAdmin;
+                return _ascxPathForViewTajamoee;
             }
             set
             {
-                _ascxPathForAdmin = value;
+                _ascxPathForViewTajamoee = value;
+            }
+        }
+
+        #endregion
+
+        #region "تنظیمات مدیریت (Admin)"
+
+        private string _ascxPathForAdminGoogle = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_adminGoogle.ascx";
+        [WebBrowsable(true)]
+        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - admin (نقشهء Google، نیازمند کلید/Billing گوگل)")]
+        [WebDescription("مسیر کنترل اصلی کل وب پارت - admin (نقشهء Google، نیازمند کلید/Billing گوگل)")]
+        [Personalizable(PersonalizationScope.User)]
+        [Category("تنظیمات مدیریت (Admin)")]
+        public string ascxPathForAdminGoogle
+        {
+            get
+            {
+                return _ascxPathForAdminGoogle;
+            }
+            set
+            {
+                _ascxPathForAdminGoogle = value;
+            }
+        }
+
+        private string _GoogleMapsApiKey = "AIzaSyBk2zY1PsSNsYBAFC7Gi-qCbTm4rvvAo_g";
+        [WebBrowsable(true)]
+        [WebDisplayName("کلید Google Maps API (فقط برای admin - نقشهء Google)")]
+        [WebDescription("کلید Google Maps JavaScript API که در کنترل admin (نقشهء Google) استفاده می‌شود؛ باید در پنل Google Cloud با Billing فعال ساخته شود. اگر کلید معتبری ندارید، از کنترل «admin (نقشهء رایگان Leaflet)» استفاده کنید که نیازی به کلید ندارد.")]
+        [Personalizable(PersonalizationScope.Shared)]
+        [Category("تنظیمات مدیریت (Admin)")]
+        public string GoogleMapsApiKey
+        {
+            get
+            {
+                return _GoogleMapsApiKey;
+            }
+            set
+            {
+                _GoogleMapsApiKey = value;
             }
         }
 
@@ -130,7 +168,7 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
         [WebDisplayName("مسیر کنترل اصلی کل وب پارت - admin (نقشهء رایگان Leaflet)")]
         [WebDescription("مسیر کنترل اصلی کل وب پارت - admin (نقشهء رایگان Leaflet، بدون نیاز به کلید/Billing گوگل)")]
         [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
+        [Category("تنظیمات مدیریت (Admin)")]
         public string ascxPathForAdminLeaflet
         {
             get
@@ -143,25 +181,11 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
             }
         }
 
-        private string _ascxPathForTajamoee = @"~/_CONTROLTEMPLATES/15/Sazmanyar.GIS/ShowAllKoridorInfo/ShowAllKoridorInfoUserControl_NewTajamoee.ascx";
-        [WebBrowsable(true)]
-        [WebDisplayName("مسیر کنترل اصلی کل وب پارت - NewTajamoee)")]
-        [WebDescription("مسیر کنترل اصلی کل وب پارت - NewTajamoee)")]
-        [Personalizable(PersonalizationScope.User)]
-        [Category("تنظیمات ویژه")]
-        public string ascxPathForTajamoee
-        {
-            get
-            {
-                return _ascxPathForTajamoee;
-            }
-            set
-            {
-                _ascxPathForTajamoee = value;
-            }
-        }
+        #endregion
 
-        private ClsHelpper.FormModeRouteOfStation _FormMode = ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AbOBargh;
+        #region "تنظیمات ویژه"
+
+        private ClsHelpper.FormModeRouteOfStation _FormMode = ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate1;
         [WebBrowsable(true)]
         [WebDisplayName("نحوهء نمایش اطلاعات بر روی صفحه؟")]
         [WebDescription("نحوهء نمایش اطلاعات بر روی صفحه؟")]
@@ -209,46 +233,47 @@ namespace Sazmanyar.GIS.ShowAllKoridorInfo
 
             try
             {
-                if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface)
+                if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate1)
                 {
-                    ShowAllKoridorInfoUserControl objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl)Page.LoadControl(ascxPath);
+                    ShowAllKoridorInfoUserControl_ViewTemplate1 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate1)Page.LoadControl(ascxPathForViewTemplate1);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_New)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate2)
                 {
-                    ShowAllKoridorInfoUserControl_New objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_New)Page.LoadControl(ascxPathForNew);
+                    ShowAllKoridorInfoUserControl_ViewTemplate2 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate2)Page.LoadControl(ascxPathForViewTemplate2);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_Bonyad)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTemplate3)
                 {
-                    ShowAllKoridorInfoUserControl_Bonyad objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_Bonyad)Page.LoadControl(ascxPathForBonyad);
+                    ShowAllKoridorInfoUserControl_ViewTemplate3 objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTemplate3)Page.LoadControl(ascxPathForViewTemplate3);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AbOBargh)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewRouts)
                 {
-                    ShowAllKoridorInfoUserControl_AbOBargh objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_AbOBargh)Page.LoadControl(ascxPathForAbOBargh);
+                    ShowAllKoridorInfoUserControl_ViewRouts objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewRouts)Page.LoadControl(ascxPathForViewRouts);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_EndUser)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewReport)
                 {
-                    ShowAllKoridorInfoUserControl_endUser objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_endUser)Page.LoadControl(ascxPathForEndUser);
+                    ShowAllKoridorInfoUserControl_ViewReport objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewReport)Page.LoadControl(ascxPathForViewReport);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_Admin)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_ViewTajamoee)
                 {
-                    ShowAllKoridorInfoUserControl_admin objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_admin)Page.LoadControl(ascxPathForAdmin);
+                    ShowAllKoridorInfoUserControl_ViewTajamoee objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_ViewTajamoee)Page.LoadControl(ascxPathForViewTajamoee);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
-                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModePathForTajamoee)
+                else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AdminGoogle)
                 {
-                    ShowAllKoridorInfoUserControl_NewTajamoee objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_NewTajamoee)Page.LoadControl(_ascxPathForTajamoee);
+                    ShowAllKoridorInfoUserControl_adminGoogle objShowInNewsLetterFormatUserControl = (ShowAllKoridorInfoUserControl_adminGoogle)Page.LoadControl(ascxPathForAdminGoogle);
                     objShowInNewsLetterFormatUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
+                    objShowInNewsLetterFormatUserControl.GoogleMapsApiKey = GoogleMapsApiKey;
                     Controls.Add(objShowInNewsLetterFormatUserControl);
                 }
                 else if (FormMode == ClsHelpper.FormModeRouteOfStation.InEndUserModeWithInterface_AdminLeaflet)

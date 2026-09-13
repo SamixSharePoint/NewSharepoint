@@ -10,7 +10,7 @@
 namespace Sazmanyar.GIS.ShowAllKoridorInfo {
     
     
-    public partial class ShowAllKoridorInfoUserControl {
+    public partial class ShowAllKoridorInfoUserControl_ViewReport {
         
         /// <summary>
         /// MyLocationMarkerHidden control.

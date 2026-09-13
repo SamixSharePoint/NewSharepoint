@@ -71,26 +71,26 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfo.cs" />
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewReport.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewReport.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewReport.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewReport.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_AbOBargh.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate1.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_AbOBargh.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate1.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate1.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_admin.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminGoogle.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_adminGoogle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_admin.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminGoogle.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_adminGoogle.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx.cs">
       <DependentUpon>ShowAllKoridorInfoUserControl_adminLeaflet.ascx</DependentUpon>
@@ -99,33 +99,33 @@
     <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx.designer.cs">
       <DependentUpon>ShowAllKoridorInfoUserControl_adminLeaflet.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_Bonyad.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate2.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate2.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_Bonyad.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate2.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate2.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_endUser.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewRouts.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewRouts.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_endUser.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewRouts.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewRouts.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_New.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate3.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate3.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_New.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate3.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTemplate3.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_NewTajamoee.ascx</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTajamoee.ascx.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTajamoee.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx.designer.cs">
-      <DependentUpon>ShowAllKoridorInfoUserControl_NewTajamoee.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTajamoee.ascx.designer.cs">
+      <DependentUpon>ShowAllKoridorInfoUserControl_ViewTajamoee.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
@@ -407,14 +407,14 @@
     <Content Include="Layouts\Sazmanyar.GIS\Script\js\tlabel.2.05.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\js\verticaltabs.pack.js" />
     <Content Include="ShowAllKoridorInfo\Elements.xml" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_AbOBargh.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_admin.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewReport.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate1.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminGoogle.ascx" />
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_adminLeaflet.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_Bonyad.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_endUser.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_New.ascx" />
-    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_NewTajamoee.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate2.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewRouts.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate3.ascx" />
+    <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTajamoee.ascx" />
     <Content Include="ShowAllPolyganInfo\Elements.xml" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />

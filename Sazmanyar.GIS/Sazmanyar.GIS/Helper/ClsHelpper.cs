@@ -245,21 +245,20 @@ namespace Sazmanyar.GIS
 
         public enum FormModeRouteOfStation
         {
-            InEndUserModeWithInterface,
-            InEndUserModeWithInterface_New,
-            InEndUserModeWithInterface_Bonyad,
-            InEndUserModeWithInterface_AbOBargh,
-            InEndUserModeWithInterface_EndUser,
-            InEndUserModeWithInterface_Admin,
-            InEndUserModePathForTajamoee,
+            InEndUserModeWithInterface_ViewTemplate1,
+            InEndUserModeWithInterface_ViewTemplate2,
+            InEndUserModeWithInterface_ViewTemplate3,
+            InEndUserModeWithInterface_ViewRouts,
+            InEndUserModeWithInterface_ViewReport,
+            InEndUserModeWithInterface_ViewTajamoee,
+            InEndUserModeWithInterface_AdminGoogle,
             InEndUserModeWithInterface_AdminLeaflet
         }
 
         public enum FormModePolyganOfStation
         {
             InAdminMode,
-            InEndUserModeWithInterface,
-            InEndUserModeWithOutInterface
+            InEndUserModeWithInterface
         }
 
 

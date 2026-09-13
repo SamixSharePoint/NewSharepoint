@@ -10,7 +10,7 @@
 namespace Sazmanyar.GIS.ShowAllKoridorInfo {
 
 
-    public partial class ShowAllKoridorInfoUserControl_Bonyad
+    public partial class ShowAllKoridorInfoUserControl_ViewTemplate2
     {
         
         /// <summary>

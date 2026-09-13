@@ -10,7 +10,7 @@
 namespace Sazmanyar.GIS.ShowAllKoridorInfo {
     
     
-    public partial class ShowAllKoridorInfoUserControl_endUser {
+    public partial class ShowAllKoridorInfoUserControl_ViewRouts {
         
         /// <summary>
         /// InitializBounds control.

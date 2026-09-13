@@ -5,7 +5,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace Sazmanyar.GIS.ShowAllKoridorInfo
 {
-    public partial class ShowAllKoridorInfoUserControl_endUser : UserControl
+    public partial class ShowAllKoridorInfoUserControl_ViewRouts : UserControl
     {
         #region Variables
         public string InitializeLatLngCamaSemicalonSeperated = "";

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="ShowAllKoridorInfoUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="ShowAllKoridorInfoUserControl_ViewReport.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="ShowAllKoridorInfo\" Type="ElementManifest" />
     <ProjectItemFile Source="ShowAllKoridorInfo.webpart" Target="ShowAllKoridorInfo\" Type="ElementFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_admin.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_New.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_endUser.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_NewTajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_Bonyad.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
-    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_AbOBargh.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewReport.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_adminGoogle.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewTemplate3.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewRouts.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewTajamoee.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewTemplate2.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
+    <ProjectItemFile Source="ShowAllKoridorInfoUserControl_ViewTemplate1.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
     <ProjectItemFile Source="ShowAllKoridorInfoUserControl_adminLeaflet.ascx" Target="CONTROLTEMPLATES\Sazmanyar.GIS\ShowAllKoridorInfo\" Type="TemplateFile" />
   </Files>
   <SafeControls>
