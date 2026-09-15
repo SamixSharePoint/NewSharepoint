@@ -294,21 +294,38 @@
     overflow: hidden;
 }
 
-/* ==== پنجرهٔ اطلاعات (InfoWindow) روی نقشه ==== */
-.gm-style .gm-style-iw-c {
+/* ==== پنجرهٔ اطلاعات (InfoWindow) روی نقشه ====
+   دو ساختار وجود دارد: Google v3 زنده (.gm-style-iw-c، کنترل adminGoogle) و موتور آفلاین
+   (.gm-style-iw، کنترل‌های نمایشی). فونت داخل پنجره را gis-ui.js از body صفحه کپی می‌کند،
+   چون استایل داخلی موتور نقشه روی .gm-style فونت Roboto/Arial را تحمیل می‌کند. */
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw {
     border-radius: 12px;
     box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
-    padding: 12px 14px;
+    background: #fff;
 }
 
+.gm-style .gm-style-iw-d {
+    overflow: auto !important;
+}
+
+/* padding روی خود محتواست تا موتور نقشه آن را در اندازه‌گیری پنجره حساب کند و چیزی بیرون نزند */
 .gis-iw {
     direction: rtl;
     text-align: right;
     color: #374151;
+    font-size: 12px;
+    line-height: 1.7;
+    unicode-bidi: embed;
+    box-sizing: border-box;
+    padding: 6px 8px 4px;
+    display: inline-block;
 }
 
     .gis-iw table {
         border-collapse: collapse;
+        direction: rtl;
+        text-align: right;
     }
 
     .gis-iw td {
@@ -317,6 +334,8 @@
         line-height: 1.7;
         white-space: nowrap;
         vertical-align: middle;
+        text-align: right;
+        direction: rtl;
     }
 
     /* ستون‌های جدول اصلی و جدول فیلدهای تخصصی از بالا هم‌تراز باشند */
@@ -587,7 +606,16 @@
         color: #dc2626;
     }
 
-/* اسلایدر شفافیت داخل سطح‌ها (کنار راهنمای رنگ در نوار بالا) */
+/* ستون سمت چپ نوار بالا: اسلایدر شفافیت و زیر آن راهنمای رنگ تحقق، هر دو چپ‌چین.
+   نوار RTL است، پس flex-end یعنی لبهٔ چپ. */
+.gis-topbar-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+/* اسلایدر شفافیت داخل سطح‌ها (بالای راهنمای رنگ در نوار بالا) */
 .gis-opacity {
     display: flex;
     align-items: center;

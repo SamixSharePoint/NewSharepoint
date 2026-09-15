@@ -8,7 +8,9 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FilteredGoogleMapOfflineWebpartUserControl.ascx.cs" Inherits="Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart.FilteredGoogleMapOfflineWebpartUserControl" %>
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css" />
 <script type="text/javascript" language="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js" charset="utf-8"></script>
 <script type="text/javascript" language="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/json2.js"></script>
+<div class="gmo-root">
 <div id="pnlShowDetails" style="visibility: hidden">
     <div class="msg-modal" onclick="closeDetailInfo()">
     </div>
@@ -36,6 +38,10 @@
     <button type="button" id="ctl00_panelArrow" class="gmo-toggle" onclick="togglePanel();" title="بستن فرم جستجو">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M15 4v16" /><path d="M6 9h5M6 13h5" /></svg>
         <span>پنل جستجو</span>
+    </button>
+    <button type="button" class="gmo-toggle gmo-fs-btn" onclick="gmoToggleFullscreen(this);" title="نمایش تمام‌صفحه">
+        <svg class="gmo-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg><svg class="gmo-fs-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+        <span class="gmo-fs-enter">تمام‌صفحه</span><span class="gmo-fs-exit">خروج از تمام‌صفحه</span>
     </button>
 </div>
 <div class="gmo-row">
@@ -171,4 +177,5 @@
     </div>
     <div id="map_canvas" class="gmo-map">
     </div>
+</div>
 </div>

@@ -492,10 +492,86 @@
             text-decoration: none;
         }
 
-.gm-style .gm-style-iw-c {
+/* فونت داخل پنجره را gmo-ui.js از body صفحه کپی می‌کند (موتور نقشه فونت خودش را تحمیل می‌کند).
+   padding روی خود محتواست تا در اندازه‌گیری پنجره حساب شود و چیزی بیرون نزند. */
+.gmo-iw {
+    box-sizing: border-box;
+    padding: 4px 6px 2px;
+    unicode-bidi: embed;
+}
+
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw {
     border-radius: 12px;
     box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
-    padding: 12px 14px;
+    background: #fff;
+}
+
+/* ---- حالت تمام‌صفحه ----
+   div.gmo-root ریشهٔ کنترل است؛ با کلاس gmo-fullscreen روی کل پنجره ثابت می‌شود و
+   نوار بالا + ردیف نقشه (ستونی) تمام ارتفاع پنجره را پر می‌کنند. */
+.gmo-fullscreen {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px;
+    background: #fff;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+body.gmo-fullscreen-active,
+body.gmo-fullscreen-active #s4-workspace {
+    overflow: hidden !important;
+}
+
+.gmo-fullscreen .gmo-topbar {
+    flex: none;
+}
+
+.gmo-fullscreen .gmo-row {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.gmo-fullscreen .gmo-side {
+    display: flex;
+}
+
+.gmo-fullscreen .gmo-map,
+.gmo-fullscreen .gmo-panel {
+    height: auto;
+}
+
+/* نسخهٔ JS وب‌پارت نقشه را بدون ردیف، مستقیم زیر نوار بالا دارد */
+.gmo-fullscreen > .gmo-map {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+/* دکمهٔ تمام‌صفحه: آیکون/برچسب ورود و خروج با CSS جابه‌جا می‌شوند */
+.gmo-fs-btn .gmo-fs-exit {
+    display: none;
+}
+
+.gmo-fullscreen .gmo-fs-btn .gmo-fs-enter {
+    display: none;
+}
+
+.gmo-fullscreen .gmo-fs-btn .gmo-fs-exit {
+    display: inline-block;
+}
+
+.gmo-fullscreen .gmo-toggle.gmo-fs-btn {
+    background: #2f6fdd;
+    border-color: #2f6fdd;
+    color: #fff;
 }
 
 /* ---- منوی راست‌کلیک روی نقشه ---- */

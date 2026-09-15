@@ -116,6 +116,7 @@
   <ItemGroup>
     <Content Include="CONTROLTEMPLATES\Sazmanyar.GoogleMapOffline\JSFilteredGoogleMapOnfflineWebpartUserControl.ascx" />
     <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\css\gmo-ui.css" />
+    <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\gmo-ui.js" />
     <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\css\SlideToggle.css" />
     <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\Base.js" />
     <Content Include="Layouts\Sazmanyar.GoogleMapOffline\Script\js\DrowDetailInfo.js" />

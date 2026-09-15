@@ -805,7 +805,7 @@
             HTMlGan = HTMlGan + "<td>";
             try {
 
-                HTMlGan = HTMlGan + " مبدا: <b>" + StationFrom_Title + "</b>";
+                HTMlGan = HTMlGan + " سطح: <b>" + gisEscapeHtml(String(label || "").replace(/\s*\[[^\]]*\]\s*$/, "")) + "</b>";
             } catch (e) {
 
             }
@@ -813,7 +813,7 @@
             HTMlGan = HTMlGan + "<td>";
             try {
 
-                HTMlGan = HTMlGan + " مقصد: <b>" + StationTo_Title + "</b>";
+                HTMlGan = HTMlGan + " پروژه: <b>" + gisEscapeHtml(ObjAllRoutInfo.ProgramName || "-") + "</b>";
             } catch (e) {
 
             }
@@ -1962,17 +1962,19 @@
                                     </asp:RadioButtonList>
                                 </div>
                             </div>
-                            <div class="gis-opacity" title="شفافیت داخل سطح‌ها (چندضلعی‌ها) روی نقشه">
-                                <span class="gis-field-label">شفافیت سطح‌ها:</span>
-                                <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
-                                <span id="gisAreaOpacityValue" class="gis-opacity-value" title="تا وقتی اسلایدر را حرکت نداده‌اید، شفافیت هر سطح از دادهٔ خودش می‌آید">خودکار</span>
-                            </div>
-                            <div class="gis-legend" title="درصد تحقق مسیر">
-                                <span class="gis-legend-title">تحقق:</span>
-                                <span class="gis-legend-item"><i style="background: #22c55e"></i>بیش از ۹۰٪</span>
-                                <span class="gis-legend-item"><i style="background: #facc15"></i>۷۰ تا ۹۰٪</span>
-                                <span class="gis-legend-item"><i style="background: #f472b6"></i>۵۰ تا ۷۰٪</span>
-                                <span class="gis-legend-item"><i style="background: #ef4444"></i>کمتر از ۵۰٪</span>
+                            <div class="gis-topbar-aside">
+                                <div class="gis-opacity" title="شفافیت داخل سطح‌ها (چندضلعی‌ها) روی نقشه">
+                                    <span class="gis-field-label">شفافیت سطح‌ها:</span>
+                                    <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
+                                    <span id="gisAreaOpacityValue" class="gis-opacity-value" title="تا وقتی اسلایدر را حرکت نداده‌اید، شفافیت هر سطح از دادهٔ خودش می‌آید">خودکار</span>
+                                </div>
+                                <div class="gis-legend" title="درصد تحقق مسیر">
+                                    <span class="gis-legend-title">تحقق:</span>
+                                    <span class="gis-legend-item"><i style="background: #22c55e"></i>بیش از ۹۰٪</span>
+                                    <span class="gis-legend-item"><i style="background: #facc15"></i>۷۰ تا ۹۰٪</span>
+                                    <span class="gis-legend-item"><i style="background: #f472b6"></i>۵۰ تا ۷۰٪</span>
+                                    <span class="gis-legend-item"><i style="background: #ef4444"></i>کمتر از ۵۰٪</span>
+                                </div>
                             </div>
                         </div>
                     </td>

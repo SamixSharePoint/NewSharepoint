@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css" />
 <script type="text/javascript" lang="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js" charset="utf-8"></script>
 <script type="text/javascript" lang="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/json2.js"></script>
 <script type="text/javascript">
 
@@ -206,6 +207,7 @@
     }
 
 </script>
+<div class="gmo-root">
 <div id="pnlShouldHideCtrl" style="display: none; visibility: hidden">
     <div id="pnlShowDetails" style="visibility: hidden">
         <div class="msg-modal">
@@ -292,6 +294,10 @@
     </table>
 </div>
 <div class="gmo-topbar gmo-form gmo-form-inline">
+    <button type="button" class="gmo-toggle gmo-fs-btn" onclick="gmoToggleFullscreen(this);" title="نمایش تمام‌صفحه">
+        <svg class="gmo-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg><svg class="gmo-fs-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+        <span class="gmo-fs-enter">تمام‌صفحه</span><span class="gmo-fs-exit">خروج از تمام‌صفحه</span>
+    </button>
     <table>
         <tr>
             <td colspan="2">
@@ -385,4 +391,5 @@
     </table>
 </div>
 <div id="map_canvas" class="gmo-map">
+</div>
 </div>

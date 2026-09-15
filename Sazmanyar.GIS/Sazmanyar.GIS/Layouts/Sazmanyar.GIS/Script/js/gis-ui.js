@@ -78,6 +78,40 @@ function gisResizeMap() {
     }
 }
 
+// ==== فونت پنجرهٔ اطلاعات (InfoWindow) و برچسب‌های روی نقشه ====
+// استایل داخلی موتور نقشه روی .gm-style فونت Roboto/Arial را تحمیل می‌کند، پس فونت تم سایت به داخل
+// پنجره ارث نمی‌رسد. فونت واقعی صفحه (body) را می‌خوانیم و با !important روی محتوای پنجره می‌گذاریم.
+function gisApplyPageFontToMap() {
+    var font = '';
+    try {
+        font = window.getComputedStyle ? window.getComputedStyle(document.body).fontFamily : document.body.currentStyle.fontFamily;
+    } catch (e) {
+    }
+    if (!font || /^\s*$/.test(font)) {
+        font = 'Tahoma, Arial, sans-serif';
+    }
+    // بدون پیشوند .gm-style: موتور نقشه محتوای پنجره را قبل از نمایش، بیرون از نقشه اندازه می‌گیرد؛
+    // اگر آن‌جا فونت دیگری اعمال شود اندازهٔ پنجره کوچک‌تر از متن واقعی می‌شود و متن بیرون می‌زند.
+    var css = '.gis-iw, .gis-iw td, .gis-iw b, .gis-iw a, ' +
+        '.gis-map-label, .estyle1, .estyle2, .estyle3, .estyle4, .estyle5, .estyle6, .estyle7 ' +
+        '{ font-family: ' + font + ' !important; }';
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.id = 'gisMapFontStyle';
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+    (document.head || document.getElementsByTagName('head')[0]).appendChild(style);
+}
+
+jQuery(function () {
+    if (!document.getElementById('gisMapFontStyle')) {
+        gisApplyPageFontToMap();
+    }
+});
+
 // ==== شفافیت سطح‌ها (چندضلعی‌ها) ====
 // هر ردیف سطح می‌تواند ستون Opacity (0 تا 1) داشته باشد؛ اسلایدر «شفافیت سطح‌ها» وقتی حرکت کند
 // روی همهٔ سطح‌های رسم‌شده و سطح‌هایی که بعداً رسم می‌شوند اولویت پیدا می‌کند.
