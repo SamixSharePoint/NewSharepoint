@@ -78,6 +78,48 @@ function gisResizeMap() {
     }
 }
 
+// ==== شفافیت سطح‌ها (چندضلعی‌ها) ====
+// هر ردیف سطح می‌تواند ستون Opacity (0 تا 1) داشته باشد؛ اسلایدر «شفافیت سطح‌ها» وقتی حرکت کند
+// روی همهٔ سطح‌های رسم‌شده و سطح‌هایی که بعداً رسم می‌شوند اولویت پیدا می‌کند.
+var GIS_AREA_DEFAULT_OPACITY = 0.35;
+var gisAreaOpacityOverride = null;
+
+function gisAreaOpacity(value) {
+    if (gisAreaOpacityOverride != null) {
+        return gisAreaOpacityOverride;
+    }
+    var v = parseFloat(String(value == null ? '' : value)
+        .replace(/[۰-۹]/g, function (d) { return String.fromCharCode(d.charCodeAt(0) - 1776 + 48); })
+        .replace(/[,٫]/g, '.'));
+    if (isNaN(v) || v < 0 || v > 1) {
+        return GIS_AREA_DEFAULT_OPACITY;
+    }
+    return v;
+}
+
+function gisApplyAreaOpacity(percent) {
+    var p = parseInt(percent, 10);
+    if (isNaN(p)) {
+        return;
+    }
+    gisAreaOpacityOverride = p / 100;
+    var lbl = document.getElementById('gisAreaOpacityValue');
+    if (lbl) {
+        lbl.innerHTML = p + '%';
+    }
+    if (typeof ggans == 'undefined' || !ggans) {
+        return;
+    }
+    for (var i = 0; i < ggans.length; i++) {
+        try {
+            if (ggans[i] && ggans[i].setFillStyle) {
+                ggans[i].setFillStyle({ opacity: gisAreaOpacityOverride });
+            }
+        } catch (e) {
+        }
+    }
+}
+
 // ==== حالت تمام‌صفحه ====
 // ریشهٔ هر کنترل (div.gis-root) با کلاس gis-fullscreen روی کل پنجرهٔ مرورگر ثابت می‌شود؛ خود API تمام‌صفحهٔ
 // مرورگر به کار نمی‌رود چون لیست پیشنهاد و پنجره‌های fancybox خارج از ریشه (روی body) ساخته می‌شوند و

@@ -1161,10 +1161,13 @@
             }
 
             //Add first marker in the end to close the Polygon
-            PolygonPoints.push(new GLatLng(points[0].G, points[0].K));
+            PolygonPoints.push(points[0]);
 
-
-            var Polygon = new GPolygon(PolygonPoints, BaseColor, 2, 1, BaseColor, 1, { clickable: false }); //New GPolygon object
+            // رنگ دور/داخل و شفافیت سطح از ستون‌های BorderColor / FillColor / Opacity؛ اگر خالی بودند رنگ ردیف و شفافیت پیش‌فرض
+            var FillColor = ObjAllRoutInfo.FillColor ? ObjAllRoutInfo.FillColor : BaseColor;
+            var BorderColor = ObjAllRoutInfo.BorderColor ? ObjAllRoutInfo.BorderColor : BaseColor;
+            var Polygon = new GPolygon(PolygonPoints, BorderColor, 2, 1, FillColor, gisAreaOpacity(ObjAllRoutInfo.Opacity), { clickable: false }); //New GPolygon object
+            Polygon.gisOpacity = gisAreaOpacity(ObjAllRoutInfo.Opacity);
 
             ggans.push(Polygon);
 
@@ -1194,7 +1197,7 @@
             if (!label) {
                 label = "polyGan #" + gan_num;
             }
-            divSearchResult_html += gisResultItem('area', 'Gan', gan_num, 'toggleGan', BaseColor, 'ggans', label);
+            divSearchResult_html += gisResultItem('area', 'Gan', gan_num, 'toggleGan', FillColor, 'ggans', label);
 
             if (Polygon && Polygon.getBounds && Polygon.getBounds()) {
                 if (debug) { GLog.write(Polygon.getBounds() + ":" + Polygon.getBounds().getNorthEast() + ":" + Polygon.getBounds().getSouthWest()) }
@@ -2055,6 +2058,11 @@
                                     </span>
                                     <span id="gisProjectHint" class="gis-hint"></span>
                                 </div>
+                            </div>
+                            <div class="gis-opacity" title="شفافیت داخل سطح‌ها (چندضلعی‌ها) روی نقشه">
+                                <span class="gis-field-label">شفافیت سطح‌ها:</span>
+                                <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
+                                <span id="gisAreaOpacityValue" class="gis-opacity-value" title="تا وقتی اسلایدر را حرکت نداده‌اید، شفافیت هر سطح از دادهٔ خودش می‌آید">خودکار</span>
                             </div>
                             <div class="gis-legend" title="درصد تحقق مسیر">
                                 <span class="gis-legend-title">تحقق:</span>
