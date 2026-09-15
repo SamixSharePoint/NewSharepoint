@@ -728,6 +728,7 @@
 
 
 </script>
+<div class="gis-root">
 <table width="100%">
     <tr>
         <td valign="top">
@@ -740,6 +741,9 @@
                                     <tr>
                                         <td align="left">
                                             <div class="gis-toolbar">
+                                                <button type="button" class="gis-tool gis-fs-btn" onclick="gisToggleFullscreen(this);" title="نمایش تمام‌صفحه">
+                                                    <svg class="gis-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg><svg class="gis-fs-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+                                                </button>
                                                 <button type="button" class="gis-tool" id="btnShowSearchOptionIstgah" onclick="ShowSearchOptionIstgah();" title="تنظیمات جستجوی ایستگاه">
                                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></svg>
                                                 </button>
@@ -1054,3 +1058,4 @@
    
     //]]>
 </script>
+</div>

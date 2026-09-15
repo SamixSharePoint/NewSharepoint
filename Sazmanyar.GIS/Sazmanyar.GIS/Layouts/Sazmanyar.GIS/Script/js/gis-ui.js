@@ -61,12 +61,77 @@ jQuery(function () {
     gisSetProjectStatus('none');
 });
 
-// پهنای نقشه را CSS (flex) تعیین می‌کند؛ بعد از باز/بسته شدن پنل فقط باید به موتور نقشه خبر داد.
+// پهنای نقشه را CSS (flex) تعیین می‌کند؛ بعد از باز/بسته شدن پنل یا تمام‌صفحه فقط باید به موتور نقشه خبر داد.
+// سه موتور در کنترل‌ها استفاده می‌شود: نقشهٔ آفلاین (API نسخهٔ ۲: checkResize)، Leaflet (invalidateSize) و Google v3 (رویداد resize).
 function gisResizeMap() {
-    if ((typeof map != 'undefined') && (map != null) && map.checkResize) {
+    if ((typeof map == 'undefined') || map == null) {
+        return;
+    }
+    if (map.checkResize) {
         map.checkResize();
     }
+    else if (map.invalidateSize) {
+        map.invalidateSize();
+    }
+    else if (window.google && google.maps && google.maps.event) {
+        google.maps.event.trigger(map, 'resize');
+    }
 }
+
+// ==== حالت تمام‌صفحه ====
+// ریشهٔ هر کنترل (div.gis-root) با کلاس gis-fullscreen روی کل پنجرهٔ مرورگر ثابت می‌شود؛ خود API تمام‌صفحهٔ
+// مرورگر به کار نمی‌رود چون لیست پیشنهاد و پنجره‌های fancybox خارج از ریشه (روی body) ساخته می‌شوند و
+// در آن حالت دیده نمی‌شدند. Esc از حالت تمام‌صفحه خارج می‌کند.
+var gisFullscreenRoot = null;
+
+function gisFindRoot(el) {
+    while (el && el !== document.body) {
+        if (el.className && (' ' + el.className + ' ').indexOf(' gis-root ') >= 0) {
+            return el;
+        }
+        el = el.parentNode;
+    }
+    return null;
+}
+
+function gisToggleFullscreen(btn) {
+    var root = gisFindRoot(btn);
+    if (!root) {
+        return;
+    }
+    if (gisFullscreenRoot === root) {
+        gisExitFullscreen();
+        return;
+    }
+    if (gisFullscreenRoot) {
+        gisExitFullscreen();
+    }
+    gisFullscreenRoot = root;
+    jQuery(root).addClass('gis-fullscreen').find('.gis-fs-btn').attr('title', 'خروج از تمام‌صفحه (Esc)');
+    jQuery(document.body).addClass('gis-fullscreen-active');
+    gisAfterFullscreenChange();
+}
+
+function gisExitFullscreen() {
+    if (!gisFullscreenRoot) {
+        return;
+    }
+    jQuery(gisFullscreenRoot).removeClass('gis-fullscreen').find('.gis-fs-btn').attr('title', 'نمایش تمام‌صفحه');
+    jQuery(document.body).removeClass('gis-fullscreen-active');
+    gisFullscreenRoot = null;
+    gisAfterFullscreenChange();
+}
+
+function gisAfterFullscreenChange() {
+    // اندازهٔ جدید بعد از اعمال CSS محاسبه می‌شود؛ یک تیک صبر می‌کنیم
+    setTimeout(gisResizeMap, 60);
+}
+
+jQuery(document).on('keydown', function (e) {
+    if (e.keyCode == 27 && gisFullscreenRoot) {
+        gisExitFullscreen();
+    }
+});
 
 function gisCountChips(stations, routes, areas) {
     return '<span class="gis-chip" title="ایستگاه">' + GIS_ICON_STATION + ' ایستگاه <b>' + stations + '</b></span>' +

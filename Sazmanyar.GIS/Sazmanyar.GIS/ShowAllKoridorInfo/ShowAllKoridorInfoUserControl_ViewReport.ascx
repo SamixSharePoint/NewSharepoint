@@ -2034,6 +2034,7 @@
     }
 
 </script>
+<div class="gis-root">
 <input id="MyLocationMarkerHidden" type="hidden" runat="server" />
 <table style="width: 100%">
     <tr>
@@ -2046,6 +2047,10 @@
                                 <%-- اسکریپت‌های قدیمی روی این دو دکمه .src و .title می‌نویسند؛ src روی button بی‌اثر است و
                                      حالت باز/بسته از روی title (که با «بستن» شروع می‌شود) در CSS تشخیص داده می‌شود. --%>
                                 <div class="gis-toggles">
+                                    <button type="button" class="gis-toggle gis-fs-btn" onclick="gisToggleFullscreen(this);" title="نمایش تمام‌صفحه">
+                                        <svg class="gis-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg><svg class="gis-fs-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+                                        <span class="gis-fs-enter">تمام‌صفحه</span><span class="gis-fs-exit">خروج از تمام‌صفحه</span>
+                                    </button>
                                     <button type="button" id="map_SearchArrow" class="gis-toggle" onclick="togglePanelSearch();" title="نمایش فرم جستجو">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M15 4v16" /><path d="M6 9h5M6 13h5" /></svg>
                                         <span>پنل جستجو</span>
@@ -2357,3 +2362,4 @@
 
     //]]>
 </script>
+</div>

@@ -879,3 +879,121 @@
     white-space: normal;
     max-width: 230px;
 }
+
+/* ==== حالت تمام‌صفحه ====
+   div.gis-root ریشهٔ هر کنترل است؛ با کلاس gis-fullscreen روی کل پنجره ثابت می‌شود و
+   بقیهٔ صفحهٔ شیرپوینت (روبان، منو، سایر وب‌پارت‌ها) زیر آن پنهان می‌ماند. */
+.gis-fullscreen {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100000;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px;
+    background: #fff;
+    overflow: auto;
+}
+
+body.gis-fullscreen-active,
+body.gis-fullscreen-active #s4-workspace {
+    overflow: hidden !important;
+}
+
+/* عناصری که روی body ساخته می‌شوند باید بالاتر از ریشهٔ تمام‌صفحه بیایند */
+body.gis-fullscreen-active .ui-autocomplete {
+    z-index: 100010 !important;
+}
+
+body.gis-fullscreen-active #fancybox-overlay,
+body.gis-fullscreen-active #fancybox-wrap,
+body.gis-fullscreen-active #fancybox-tmp,
+body.gis-fullscreen-active #fancybox-loading {
+    z-index: 100020 !important;
+}
+
+/* ارتفاع نقشه و پنل‌ها به‌اندازهٔ پنجره: کنترل‌های نمایشی (نوار بالا + ردیف نقشه) */
+.gis-fullscreen .gis-map,
+.gis-fullscreen .gis-panel {
+    height: calc(100vh - 110px);
+}
+
+/* کنترل‌های ثبت (پنل شناور + map_canvas) */
+.gis-fullscreen #map_canvas {
+    height: calc(100vh - 16px) !important;
+    box-sizing: border-box;
+    border: 0 !important;
+}
+
+/* کنترل تجمیعی: نقشه و فهرست نتایج با ارتفاع ثابت درون‌خطی */
+.gis-fullscreen #map[style*="height"] {
+    height: calc(100vh - 30px) !important;
+}
+
+.gis-fullscreen #divSearchResult[style*="height"] {
+    height: calc(100vh - 170px) !important;
+}
+
+/* دکمهٔ تمام‌صفحه: آیکون/برچسب ورود و خروج با CSS جابه‌جا می‌شوند */
+.gis-fs-btn .gis-fs-exit {
+    display: none;
+}
+
+.gis-fullscreen .gis-fs-btn .gis-fs-enter {
+    display: none;
+}
+
+.gis-fullscreen .gis-fs-btn .gis-fs-exit {
+    display: inline-block;
+}
+
+.gis-fullscreen .gis-toggle.gis-fs-btn,
+.gis-fullscreen .gis-reg-tool.gis-fs-btn {
+    background: #2f6fdd;
+    border-color: #2f6fdd;
+    color: #fff;
+}
+
+.gis-fullscreen .gis-tool.gis-fs-btn {
+    background: #eff4ff;
+    border-color: #c7d7f7;
+    color: #2f6fdd;
+}
+
+/* نوار ابزار باریک بالای پنل شناور ثبت/نمایش (جای دکمهٔ تمام‌صفحه در کنترل‌های admin و سطح) */
+.gis-reg-tools {
+    display: flex;
+    padding: 6px 8px;
+    background: #f8fafc;
+    border-bottom: 1px solid #eef0f3;
+}
+
+.gis-reg-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    min-width: 0;
+    margin: 0;
+    padding: 0 9px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #fff;
+    color: #374151;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+    .gis-reg-tool svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .gis-reg-tool:hover {
+        background: #eff4ff;
+        border-color: #c7d7f7;
+        color: #2f6fdd;
+    }

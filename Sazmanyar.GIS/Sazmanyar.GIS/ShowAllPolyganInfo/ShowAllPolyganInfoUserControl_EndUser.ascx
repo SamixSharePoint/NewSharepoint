@@ -184,7 +184,14 @@
         display: none;
     }
 </style>
+<div class="gis-root gis-root-map">
 <div class="gis-reg-panel">
+    <div class="gis-reg-tools">
+        <button type="button" class="gis-reg-tool gis-fs-btn" onclick="gisToggleFullscreen(this);" title="نمایش تمام‌صفحه">
+            <svg class="gis-fs-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg><svg class="gis-fs-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+            <span class="gis-fs-enter">تمام‌صفحه</span><span class="gis-fs-exit">خروج از تمام‌صفحه</span>
+        </button>
+    </div>
     <div class="gis-reg-section">
         <div class="gis-reg-section-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l7-4 9 5-3 10-10-1z" /></svg>
@@ -200,4 +207,5 @@
     </div>
 </div>
 <div id='map_canvas' style="border: medium solid #FFFFFF; width: 100%; height: 620px;">
+</div>
 </div>
