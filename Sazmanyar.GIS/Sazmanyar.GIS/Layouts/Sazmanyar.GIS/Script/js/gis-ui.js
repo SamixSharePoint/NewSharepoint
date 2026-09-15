@@ -170,6 +170,30 @@ function gisFindRoot(el) {
     return null;
 }
 
+// حالت تمام‌صفحه در localStorage (به‌ازای آدرس صفحه و شمارهٔ کنترل در صفحه) نگه داشته می‌شود
+// تا با رفرش صفحه دوباره برقرار شود؛ با خروج (دکمه یا Esc) پاک می‌شود.
+function gisFullscreenKey(root) {
+    var roots = jQuery('.gis-root').get();
+    var idx = 0;
+    for (var i = 0; i < roots.length; i++) {
+        if (roots[i] === root) {
+            idx = i;
+        }
+    }
+    return 'gisFullscreen:' + window.location.pathname + '#' + idx;
+}
+
+function gisSaveFullscreen(root, on) {
+    try {
+        if (on) {
+            window.localStorage.setItem(gisFullscreenKey(root), '1');
+        } else {
+            window.localStorage.removeItem(gisFullscreenKey(root));
+        }
+    } catch (e) {
+    }
+}
+
 function gisToggleFullscreen(btn) {
     var root = gisFindRoot(btn);
     if (!root) {
@@ -185,6 +209,7 @@ function gisToggleFullscreen(btn) {
     gisFullscreenRoot = root;
     jQuery(root).addClass('gis-fullscreen').find('.gis-fs-btn').attr('title', 'خروج از تمام‌صفحه (Esc)');
     jQuery(document.body).addClass('gis-fullscreen-active');
+    gisSaveFullscreen(root, true);
     gisAfterFullscreenChange();
 }
 
@@ -194,9 +219,25 @@ function gisExitFullscreen() {
     }
     jQuery(gisFullscreenRoot).removeClass('gis-fullscreen').find('.gis-fs-btn').attr('title', 'نمایش تمام‌صفحه');
     jQuery(document.body).removeClass('gis-fullscreen-active');
+    gisSaveFullscreen(gisFullscreenRoot, false);
     gisFullscreenRoot = null;
     gisAfterFullscreenChange();
 }
+
+jQuery(function () {
+    jQuery('.gis-root').each(function () {
+        var root = this;
+        try {
+            if (window.localStorage.getItem(gisFullscreenKey(root)) == '1') {
+                var btn = jQuery(root).find('.gis-fs-btn').get(0);
+                if (btn) {
+                    gisToggleFullscreen(btn);
+                }
+            }
+        } catch (e) {
+        }
+    });
+});
 
 function gisAfterFullscreenChange() {
     // اندازهٔ جدید بعد از اعمال CSS محاسبه می‌شود؛ یک تیک صبر می‌کنیم

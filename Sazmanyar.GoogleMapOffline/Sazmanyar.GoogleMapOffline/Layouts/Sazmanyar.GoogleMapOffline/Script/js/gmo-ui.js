@@ -56,6 +56,30 @@ function gmoFindRoot(el) {
     return null;
 }
 
+// حالت تمام‌صفحه در localStorage (به‌ازای آدرس صفحه و شمارهٔ کنترل در صفحه) نگه داشته می‌شود
+// تا با رفرش صفحه دوباره برقرار شود؛ با خروج (دکمه یا Esc) پاک می‌شود.
+function gmoFullscreenKey(root) {
+    var roots = jQuery('.gmo-root').get();
+    var idx = 0;
+    for (var i = 0; i < roots.length; i++) {
+        if (roots[i] === root) {
+            idx = i;
+        }
+    }
+    return 'gmoFullscreen:' + window.location.pathname + '#' + idx;
+}
+
+function gmoSaveFullscreen(root, on) {
+    try {
+        if (on) {
+            window.localStorage.setItem(gmoFullscreenKey(root), '1');
+        } else {
+            window.localStorage.removeItem(gmoFullscreenKey(root));
+        }
+    } catch (e) {
+    }
+}
+
 function gmoToggleFullscreen(btn) {
     var root = gmoFindRoot(btn);
     if (!root) {
@@ -71,6 +95,7 @@ function gmoToggleFullscreen(btn) {
     gmoFullscreenRoot = root;
     jQuery(root).addClass('gmo-fullscreen').find('.gmo-fs-btn').attr('title', 'خروج از تمام‌صفحه (Esc)');
     jQuery(document.body).addClass('gmo-fullscreen-active');
+    gmoSaveFullscreen(root, true);
     setTimeout(gmoResizeMap, 60);
 }
 
@@ -80,9 +105,25 @@ function gmoExitFullscreen() {
     }
     jQuery(gmoFullscreenRoot).removeClass('gmo-fullscreen').find('.gmo-fs-btn').attr('title', 'نمایش تمام‌صفحه');
     jQuery(document.body).removeClass('gmo-fullscreen-active');
+    gmoSaveFullscreen(gmoFullscreenRoot, false);
     gmoFullscreenRoot = null;
     setTimeout(gmoResizeMap, 60);
 }
+
+jQuery(function () {
+    jQuery('.gmo-root').each(function () {
+        var root = this;
+        try {
+            if (window.localStorage.getItem(gmoFullscreenKey(root)) == '1') {
+                var btn = jQuery(root).find('.gmo-fs-btn').get(0);
+                if (btn) {
+                    gmoToggleFullscreen(btn);
+                }
+            }
+        } catch (e) {
+        }
+    });
+});
 
 jQuery(document).keydown(function (e) {
     if (e.keyCode == 27 && gmoFullscreenRoot) {
