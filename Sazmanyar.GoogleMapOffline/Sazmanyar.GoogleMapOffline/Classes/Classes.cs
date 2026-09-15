@@ -261,6 +261,68 @@ namespace Sazmanyar.GoogleMapOffline.Classes
             return "";
         }
 
+        /// <summary>
+        /// عنوان نمایشی (Title) یک ستون لیست را از روی نام داخلی یا نام نمایشی آن برمی‌گرداند؛
+        /// اگر لیست یا ستون پیدا نشد همان مقدار ورودی برگردانده می‌شود تا برچسب خالی نماند.
+        /// </summary>
+        public static string GetFieldTitle(string BaseWebUrlInfo, string strListName, string strName)
+        {
+            if (strListName.Trim().Length == 0 || strName.Trim().Length == 0)
+            {
+                return strName;
+            }
+
+            string strTitle = strName;
+            try
+            {
+                SPWeb CurrentWeb = SPContext.Current.Web;
+                if ((BaseWebUrlInfo != "/") && (BaseWebUrlInfo != ""))
+                {
+                    try
+                    {
+                        SPSecurity.RunWithElevatedPrivileges(
+                        delegate ()
+                        {
+                            using (SPSite TempCurrentSite = new SPSite(BaseWebUrlInfo))
+                            {
+                                CurrentWeb = TempCurrentSite.OpenWeb(BaseWebUrlInfo.Replace(TempCurrentSite.Url.ToString(), ""));
+                            }
+                        });
+                    }
+                    catch (Exception)
+                    { }
+                }
+
+                SPSecurity.RunWithElevatedPrivileges(
+                delegate ()
+                {
+                    using (SPSite CurrentSite = new SPSite(CurrentWeb.Site.ID))
+                    {
+                        using (SPWeb web = CurrentSite.OpenWeb(CurrentWeb.ID))
+                        {
+                            foreach (SPList list in web.Lists)
+                            {
+                                if (list.Title.Trim().ToLowerInvariant() == strListName.Trim().ToLowerInvariant())
+                                {
+                                    SPField field = list.Fields.GetField(strName.Trim());
+                                    if (field != null && field.Title.Trim().Length > 0)
+                                    {
+                                        strTitle = field.Title;
+                                    }
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            catch (Exception)
+            {
+            }
+
+            return strTitle;
+        }
+
         public static string GetInternalName(string SubSiteUrl, string strListName, string strName)
         {
             if (strListName.Trim().Length == 0)

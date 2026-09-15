@@ -84,7 +84,7 @@ namespace Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart
             get
             {
                 // استایل پنجرهٔ جزئیات (msg-modal/msg-content) به فایل مشترک gmo-ui.css منتقل شده است.
-                return "<link rel='stylesheet' type='text/css' href='/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css' />";
+                return "<link rel='stylesheet' type='text/css' href='/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css?v=20260915' />";
             }
 
         }
@@ -1247,7 +1247,8 @@ namespace Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart
                                                 GEvent.trigger(Arrayesmarkers[selectedIdx],'click'); ;                                               
                                                 map.setCenter(new GLatLng(Latitude, Longitude));
                                             }
-                                        } togglePanel();  ";
+                                        }  ";
+                    // پنل جستجو در بار اول بسته می‌ماند و فقط دکمهٔ آن دیده می‌شود؛ کاربر خودش بازش می‌کند.
                 }
                 else
                 {
@@ -1290,7 +1291,7 @@ namespace Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart
                 lblOnvanSearch1.Text = "";
                 txtMarekerSearch1.Text = "";
 
-                string strTitle = this.Searched_by_column1.ToString();
+                string strTitle = HelperClass.GetFieldTitle(BaseWebUrlInfo, ListName, this.Searched_by_column1.ToString());
 
                 pnlSearch1.Visible = true;
                 lblOnvanSearch1.Visible = true;
@@ -1308,7 +1309,7 @@ namespace Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart
                 lblOnvanSearch2.Text = "";
                 txtMarekerSearch2.Text = "";
 
-                string strTitle = this.Searched_by_column2.ToString();
+                string strTitle = HelperClass.GetFieldTitle(BaseWebUrlInfo, ListName, this.Searched_by_column2.ToString());
 
                 pnlSearch2.Visible = true;
                 lblOnvanSearch2.Visible = true;
@@ -1325,7 +1326,7 @@ namespace Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart
                 lblOnvanSearch3.Text = "";
                 txtMarekerSearch3.Text = "";
 
-                string strTitle = this.Searched_by_column3.ToString();
+                string strTitle = HelperClass.GetFieldTitle(BaseWebUrlInfo, ListName, this.Searched_by_column3.ToString());
 
                 pnlSearch3.Visible = true;
                 lblOnvanSearch3.Visible = true;

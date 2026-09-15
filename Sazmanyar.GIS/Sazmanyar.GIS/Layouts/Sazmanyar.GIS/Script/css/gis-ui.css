@@ -307,13 +307,16 @@
 
 .gm-style .gm-style-iw-d {
     overflow: auto !important;
+    background: #fff;
 }
 
-/* padding روی خود محتواست تا موتور نقشه آن را در اندازه‌گیری پنجره حساب کند و چیزی بیرون نزند */
+/* padding روی خود محتواست تا موتور نقشه آن را در اندازه‌گیری پنجره حساب کند و چیزی بیرون نزند؛
+   پس‌زمینه همیشه سفید، مستقل از قاب موتور نقشه */
 .gis-iw {
     direction: rtl;
     text-align: right;
     color: #374151;
+    background: #fff;
     font-size: 12px;
     line-height: 1.7;
     unicode-bidi: embed;

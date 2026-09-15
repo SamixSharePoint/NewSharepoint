@@ -329,6 +329,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\respond.min.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\selectize.min.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\sql-parser.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\gis-filter.js" />
     <Content Include="Layouts\Sazmanyar.GIS\ForShowIframInfo.htm" />
     <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\GISBase.js" />
     <Content Include="Layouts\Sazmanyar.GIS\GoogleMap\adsense.js" />

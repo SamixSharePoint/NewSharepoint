@@ -6,9 +6,9 @@
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="FilteredGoogleMapOfflineWebpartUserControl.ascx.cs" Inherits="Sazmanyar.GoogleMapOffline.FilteredGoogleMapOfflineWebpart.FilteredGoogleMapOfflineWebpartUserControl" %>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css?v=20260915" />
 <script type="text/javascript" language="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js?v=20260915" charset="utf-8"></script>
 <script type="text/javascript" language="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/json2.js"></script>
 <div class="gmo-root">
 <div id="pnlShowDetails" style="visibility: hidden">
@@ -35,7 +35,7 @@
      حالت باز/بسته از روی title (که با «بستن» شروع می‌شود) در CSS تشخیص داده می‌شود. --%>
 <div id="map_Search" runat="server" class="gmo-topbar">
     <input id="MyLocationMarkerHidden" type="hidden" runat="server" />
-    <button type="button" id="ctl00_panelArrow" class="gmo-toggle" onclick="togglePanel();" title="بستن فرم جستجو">
+    <button type="button" id="ctl00_panelArrow" class="gmo-toggle" onclick="togglePanel();" title="نمایش فرم جستجو">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M15 4v16" /><path d="M6 9h5M6 13h5" /></svg>
         <span>پنل جستجو</span>
     </button>

@@ -6,9 +6,9 @@
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ShowAllPolyganInfoUserControl_EndUser.ascx.cs" Inherits="Sazmanyar.GIS.ShowAllPolyganInfo.ShowAllPolyganInfoUserControl_EndUser" %>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260915" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260915" charset="utf-8"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 
 <script type="text/javascript">

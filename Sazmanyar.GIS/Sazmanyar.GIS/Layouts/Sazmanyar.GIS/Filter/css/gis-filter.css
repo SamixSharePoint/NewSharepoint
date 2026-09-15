@@ -251,3 +251,92 @@ body {
 .query-builder .error-container {
     color: #d33;
 }
+
+/* ---- راست‌به‌چپ کردن QueryBuilder ----
+   استایل اصلی QueryBuilder چپ‌به‌چپ است: دکمهٔ حذف شرط را با float:right به راست می‌برد، خطوط درختی
+   گروه‌ها را از سمت چپ می‌کشد و جداکنندهٔ مقدار را با border-left می‌گذارد. این‌جا همه آینه می‌شوند تا
+   ترتیب خواندن شود: ستون ← عملگر ← مقدار ← حذف. */
+html,
+body,
+.query-builder {
+    direction: rtl;
+    text-align: right;
+}
+
+    /* دکمه‌های «افزودن شرط / مجموعه» به چپ، سوییچ «و / یا» به راست */
+    .query-builder .rules-group-header .pull-right,
+    .query-builder .rule-header .pull-right {
+        float: left !important;
+    }
+
+    .query-builder .rules-group-header .group-conditions {
+        float: right;
+    }
+
+    .query-builder .rules-group-header::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    /* هر شرط: ستون، عملگر، مقدار از راست پشت هم؛ حذف در انتهای چپ */
+    .query-builder .rule-container .drag-handle,
+    .query-builder .rule-container .error-container,
+    .query-builder .rule-container .rule-filter-container,
+    .query-builder .rule-container .rule-operator-container,
+    .query-builder .rule-container .rule-value-container {
+        margin: 0 0 0 5px;
+    }
+
+    .query-builder .rule-container .rule-value-container {
+        padding-left: 0;
+        padding-right: 8px;
+        border-left: 0;
+        border-right: 1px solid #e5e7eb;
+    }
+
+    /* خطوط درختی گروه‌ها از سمت راست */
+    .query-builder .rules-group-container .rules-list {
+        padding: 0 15px 0 0;
+    }
+
+    .query-builder .rules-list > ::before,
+    .query-builder .rules-list > ::after {
+        left: auto;
+        right: -10px;
+    }
+
+    .query-builder .rules-list > ::before {
+        border-width: 0 2px 2px 0;
+    }
+
+    .query-builder .rules-list > ::after {
+        border-width: 0 2px 0 0;
+    }
+
+    .query-builder .rules-list > :last-child::before {
+        border-radius: 0 0 4px 0;
+    }
+
+    /* ورودی‌ها و منوهای بازشو هم راست‌چین */
+    .query-builder .form-control,
+    .query-builder select,
+    .query-builder .selectize-input,
+    .query-builder .selectize-dropdown,
+    .query-builder .bootstrap-select > .btn,
+    .query-builder .dropdown-menu {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .query-builder .bootstrap-select > .btn .caret {
+        right: auto;
+        left: 12px;
+    }
+
+    .query-builder .selectize-control.plugin-remove_button [data-value] .remove {
+        right: auto;
+        left: 0;
+        border-left: 0;
+        border-right: 1px solid #d0d0d0;
+    }

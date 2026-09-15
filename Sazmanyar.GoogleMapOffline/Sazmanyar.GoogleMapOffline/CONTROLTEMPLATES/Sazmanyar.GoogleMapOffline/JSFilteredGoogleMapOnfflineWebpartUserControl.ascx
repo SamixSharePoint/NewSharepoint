@@ -7,9 +7,9 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="JSFilteredGoogleMapOnfflineWebpartUserControl.ascx.cs" Inherits="Sazmanyar.GoogleMapOffline.CONTROLTEMPLATES.Sazmanyar.GoogleMapOffline.JSFilteredGoogleMapOnfflineWebpartUserControl" %>
 
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/css/gmo-ui.css?v=20260915" />
 <script type="text/javascript" lang="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/gmo-ui.js?v=20260915" charset="utf-8"></script>
 <script type="text/javascript" lang="javascript" src="/_layouts/15/Sazmanyar.GoogleMapOffline/Script/js/json2.js"></script>
 <script type="text/javascript">
 
@@ -234,7 +234,7 @@
         <input id="MyLocationMarkerHidden" type="hidden" runat="server" />
         <img alt="" src="/_layouts/15/images/Sazmanyar.GoogleMapOffline/Search/left-arrow.png"
             id="ctl00_panelArrow" style="cursor: pointer;" onclick="javascript:togglePanel();"
-            title="بستن فرم جستجو" />
+            title="نمایش فرم جستجو" />
     </div>
     <table width="100%">
         <tr>

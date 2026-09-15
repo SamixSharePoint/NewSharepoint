@@ -28,12 +28,12 @@
         display: none;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260915" />
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/GoogleMap/EWindow.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260915" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/EWindow.js"></script>
 <script type="text/javascript" language="javascript">
