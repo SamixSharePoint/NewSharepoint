@@ -527,11 +527,13 @@
             success: function (strHtmlOutput) {
                 var result = strHtmlOutput.d;
                 if (result == null || result.length == 0) {
+                    pwaLastRows = null;
                     document.getElementById('divSearchResult').innerHTML = '<div class="gis-msg">هیچ موردی جهت نمایش در لیست یافت نشد</div>';
                     map.centerAndZoomOnBounds(new GLatLngBounds(new GLatLng(39.027719, 44.736328), new GLatLng(26.745610, 62.050781)));
                     return;
                 }
-                DrawPWAProjects(result);
+                pwaLastRows = result;
+                DrawPWAProjects(result, false);
             },
             error: function (MSG) {
                 alert('error' + MSG.responseText);
@@ -539,7 +541,7 @@
         });
     }
 
-    function DrawPWAProjects(rows) {
+    function DrawPWAProjects(rows, bKeepView) {
         // 1) گروه‌بندی بر اساس منطقه و بر اساس نقطه
         var byRegion = {}, regionOrder = [];
         var byPoint = {}, pointOrder = [];
@@ -560,8 +562,10 @@
             byPoint[pointKey].rows.push(r);
         }
 
-        // 2) ناحیهء هر منطقه (پوستهء محدب پین‌های آن منطقه)
+        // 2) ناحیه‌های هر منطقه: نقاط منطقه خوشه‌بندی می‌شوند (فاصلهء آستانه از اسلایدر) و هر خوشه یک لکهء نرم می‌شود؛
+        //    نقاط تک یا دوتایی دایره می‌گیرند. همهء لکه‌های یک منطقه در یک گروه (PwaRegionGroup) با یک ردیف در فهرست.
         var areaHtml = "";
+        var clusterKm = pwaGetClusterKm();
         for (var a = 0; a < regionOrder.length; a++) {
             var regionName = regionOrder[a];
             var regionRows = byRegion[regionName];
@@ -573,44 +577,54 @@
                 seen[k] = true;
                 pts.push({ lat: pwaNum(regionRows[j].Lat), lng: pwaNum(regionRows[j].Long) });
             }
-            var hull = pwaRegionShape(pts);
-            if (hull.length < 3) { continue; }
+            var shapes = pwaClusterShapes(pts, clusterKm);
+            if (shapes.length == 0) { continue; }
 
             var cat = pwaCategory(regionRows);
             var color = PWA_CAT[cat].hex;
-            var PolygonPoints = [];
-            for (var h = 0; h < hull.length; h++) {
-                PolygonPoints.push(new GLatLng(hull[h].lat, hull[h].lng));
+            var polys = [];
+            for (var s = 0; s < shapes.length; s++) {
+                var shape = shapes[s];
+                var PolygonPoints = [];
+                for (var h = 0; h < shape.length; h++) {
+                    PolygonPoints.push(new GLatLng(shape[h].lat, shape[h].lng));
+                }
+                PolygonPoints.push(new GLatLng(shape[0].lat, shape[0].lng));
+                var Polygon = new GPolygon(PolygonPoints, color, 1.5, 0.8, color, gisAreaOpacity(null), { clickable: true });
+                polys.push(Polygon);
             }
-            PolygonPoints.push(new GLatLng(hull[0].lat, hull[0].lng));
 
-            var Polygon = new GPolygon(PolygonPoints, color, 2, 0.9, color, gisAreaOpacity(null), { clickable: true });
-            Polygon.gisOpacity = gisAreaOpacity(null);
-            Polygon.pwaRegion = regionName;
-            Polygon.pwaColor = color;
-            ggans.push(Polygon);
+            var group = new PwaRegionGroup(polys, regionName, color);
+            ggans.push(group);
             var gan_num = ggans.length - 1;
 
-            (function (poly, html, num) {
-                GEvent.addListener(poly, 'click', function (point) {
+            (function (grp, html, num) {
+                GEvent.addListener(grp, 'click', function (point) {
                     if (!point) {
                         // کلیک از فهرست کناری: مرکز ناحیه
-                        var b = poly.getBounds();
-                        point = b ? b.getCenter() : poly.getVertex(0);
+                        var b = grp.getBounds();
+                        point = b ? b.getCenter() : grp.getVertex(0);
                         map.panTo(point);
                     }
-                    pwaSelectPolygon(poly, num);
+                    pwaSelectPolygon(grp, num);
                     map.openInfoWindowHtml(point, html);
                 });
-            })(Polygon, BuildRegionInfoHtml(regionName, regionRows, cat), gan_num);
+                for (var q = 0; q < grp.polys.length; q++) {
+                    GEvent.addListener(grp.polys[q], 'click', function (point) {
+                        GEvent.trigger(grp, 'click', point);
+                    });
+                }
+            })(group, BuildRegionInfoHtml(regionName, regionRows, cat), gan_num);
 
-            areaHtml += gisResultItem('area', 'Gan', gan_num, 'toggleGan', color, 'ggans', regionName + ' [' + regionRows.length + ' پروژه]');
+            var lbl = regionName + ' [' + regionRows.length + ' پروژه' + (shapes.length > 1 ? ' - ' + shapes.length + ' ناحیه' : '') + ']';
+            areaHtml += gisResultItem('area', 'Gan', gan_num, 'toggleGan', color, 'ggans', lbl);
 
-            if (Polygon.getBounds && Polygon.getBounds()) {
-                bounds.extend(Polygon.getBounds().getNorthEast());
-                bounds.extend(Polygon.getBounds().getSouthWest());
+            var gb = group.getBounds();
+            if (gb) {
+                bounds.extend(gb.getNorthEast());
+                bounds.extend(gb.getSouthWest());
             }
-            map.addOverlay(Polygon);
+            for (var o = 0; o < polys.length; o++) { map.addOverlay(polys[o]); }
         }
 
         // 3) پین‌ها (یک پین برای هر نقطه؛ InfoWindow همهء پروژه‌های آن نقطه را فهرست می‌کند)
@@ -646,7 +660,7 @@
         document.getElementById("divSearchCount").innerHTML = pwaCountChips(regionOrder.length, pointOrder.length, nProjects);
         document.getElementById("divSearchResult").innerHTML = divSearchResult_html;
 
-        if (regionOrder.length > 0 || pointOrder.length > 0) {
+        if (!bKeepView && (regionOrder.length > 0 || pointOrder.length > 0)) {
             map.centerAndZoomOnBounds(bounds);
         }
     }
@@ -904,36 +918,140 @@
         return lower.concat(upper);
     }
 
-    // اگر کمتر از 3 نقطهء متمایز (یا همه روی یک خط) باشند، دایره‌ای دور مرکز نقاط با شعاع حداقل 12 کیلومتر
+    // شکل یک خوشه: پوستهء محدبِ «دایره‌های دور هر نقطه» (شعاع حاشیه). نتیجه همیشه گوشه‌های گرد دارد، هر نقطه با
+    // حاشیهء کامل داخل شکل است، و برای نقاط هم‌خط یا تکی هم درست کار می‌کند (کپسول / دایره).
+    var PWA_SHAPE_MARGIN_KM = 9;     // حاشیهء دور هر پین
+    var PWA_SINGLE_RADIUS_KM = 12;   // شعاع دایرهء پین تنها
+
     function pwaRegionShape(points) {
         if (points.length == 0) { return []; }
-        var hull = pwaConvexHull(points);
-        if (hull.length >= 3) {
-            // حاشیهء کوچک (حدود 3 کیلومتر) تا پین‌های روی مرز داخل ناحیه بیفتند
-            return pwaBuffer(hull, 0.03);
+        var r = (points.length == 1) ? PWA_SINGLE_RADIUS_KM : PWA_SHAPE_MARGIN_KM;
+        var cloud = [];
+        for (var i = 0; i < points.length; i++) {
+            var circ = pwaCircle(points[i].lat, points[i].lng, r, 24);
+            for (var c = 0; c < circ.length; c++) { cloud.push(circ[c]); }
         }
-        var cLat = 0, cLng = 0;
-        for (var i = 0; i < points.length; i++) { cLat += points[i].lat; cLng += points[i].lng; }
-        cLat /= points.length; cLng /= points.length;
-        var radiusKm = 12;
-        for (var j = 0; j < points.length; j++) {
-            var d = pwaDistKm(cLat, cLng, points[j].lat, points[j].lng) + 8;
-            if (d > radiusKm) { radiusKm = d; }
-        }
-        return pwaCircle(cLat, cLng, radiusKm, 24);
+        var hull = pwaConvexHull(cloud);
+        if (hull.length < 3) { return pwaCircle(points[0].lat, points[0].lng, PWA_SINGLE_RADIUS_KM, 32); }
+        // یک بار گردکردن اضافه تا اتصال کمان‌ها به خط‌های راست نرم‌تر شود
+        return pwaChaikin(hull, 1);
     }
 
-    function pwaBuffer(hull, deg) {
-        var cLat = 0, cLng = 0;
-        for (var i = 0; i < hull.length; i++) { cLat += hull[i].lat; cLng += hull[i].lng; }
-        cLat /= hull.length; cLng /= hull.length;
-        var out = [];
-        for (var j = 0; j < hull.length; j++) {
-            var dLat = hull[j].lat - cLat, dLng = hull[j].lng - cLng;
-            var len = Math.sqrt(dLat * dLat + dLng * dLng) || 1;
-            out.push({ lat: hull[j].lat + dLat / len * deg, lng: hull[j].lng + dLng / len * deg });
+    // خوشه‌بندی تک‌پیوندی: دو نقطه که فاصله‌شان کمتر از آستانه است در یک خوشه‌اند (اتحاد مجموعه‌ها)
+    function pwaClusterPoints(points, thresholdKm) {
+        var n = points.length;
+        var parent = [];
+        for (var i = 0; i < n; i++) { parent[i] = i; }
+        function find(x) { while (parent[x] != x) { parent[x] = parent[parent[x]]; x = parent[x]; } return x; }
+        for (var a = 0; a < n; a++) {
+            for (var b = a + 1; b < n; b++) {
+                if (pwaDistKm(points[a].lat, points[a].lng, points[b].lat, points[b].lng) <= thresholdKm) {
+                    var ra = find(a), rb = find(b);
+                    if (ra != rb) { parent[ra] = rb; }
+                }
+            }
         }
+        var groups = {}, order = [];
+        for (var c = 0; c < n; c++) {
+            var r = find(c);
+            if (!groups[r]) { groups[r] = []; order.push(r); }
+            groups[r].push(points[c]);
+        }
+        var out = [];
+        for (var g = 0; g < order.length; g++) { out.push(groups[order[g]]); }
         return out;
+    }
+
+    // شکل‌های یک منطقه: هر خوشه یک شکل (آرایه‌ای از {lat,lng})
+    function pwaClusterShapes(points, thresholdKm) {
+        var shapes = [];
+        var clusters = pwaClusterPoints(points, thresholdKm);
+        for (var i = 0; i < clusters.length; i++) {
+            var shape = pwaRegionShape(clusters[i]);
+            if (shape.length >= 3) { shapes.push(shape); }
+        }
+        return shapes;
+    }
+
+    // آیا نقطه داخل چندضلعی است؟ (ray casting)
+    function pwaPointInPoly(pt, poly) {
+        var inside = false;
+        for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+            var a = poly[i], b = poly[j];
+            if (((a.lat > pt.lat) != (b.lat > pt.lat)) &&
+                (pt.lng < (b.lng - a.lng) * (pt.lat - a.lat) / (b.lat - a.lat) + a.lng)) {
+                inside = !inside;
+            }
+        }
+        return inside;
+    }
+
+    // گردکردن گوشه‌ها (الگوریتم Chaikin) روی چندضلعی بسته؛ هر تکرار تعداد رئوس را دو برابر می‌کند
+    function pwaChaikin(poly, iterations) {
+        var pts = poly;
+        for (var it = 0; it < iterations; it++) {
+            var out = [];
+            var n = pts.length;
+            for (var i = 0; i < n; i++) {
+                var p = pts[i], q = pts[(i + 1) % n];
+                out.push({ lat: 0.75 * p.lat + 0.25 * q.lat, lng: 0.75 * p.lng + 0.25 * q.lng });
+                out.push({ lat: 0.25 * p.lat + 0.75 * q.lat, lng: 0.25 * p.lng + 0.75 * q.lng });
+            }
+            pts = out;
+        }
+        return pts;
+    }
+
+    // گروه لکه‌های یک منطقه: همان رابط GPolygon که بقیهء کد (فهرست، شفافیت، انتخاب) انتظار دارد، روی همهء لکه‌ها اعمال می‌شود
+    function PwaRegionGroup(polys, regionName, color) {
+        this.polys = polys;
+        this.pwaRegion = regionName;
+        this.pwaColor = color;
+        this.gisOpacity = gisAreaOpacity(null);
+        this.hidden = false;
+    }
+    PwaRegionGroup.prototype.show = function () { this.hidden = false; for (var i = 0; i < this.polys.length; i++) { this.polys[i].show(); } };
+    PwaRegionGroup.prototype.hide = function () { this.hidden = true; for (var i = 0; i < this.polys.length; i++) { this.polys[i].hide(); } };
+    PwaRegionGroup.prototype.isHidden = function () { return this.hidden; };
+    PwaRegionGroup.prototype.setFillStyle = function (o) { for (var i = 0; i < this.polys.length; i++) { try { this.polys[i].setFillStyle(o); } catch (e) { } } };
+    PwaRegionGroup.prototype.setStrokeStyle = function (o) { for (var i = 0; i < this.polys.length; i++) { try { this.polys[i].setStrokeStyle(o); } catch (e) { } } };
+    PwaRegionGroup.prototype.getVertex = function (i) { return this.polys[0].getVertex(i); };
+    PwaRegionGroup.prototype.getBounds = function () {
+        var b = null;
+        for (var i = 0; i < this.polys.length; i++) {
+            var pb = this.polys[i].getBounds ? this.polys[i].getBounds() : null;
+            if (!pb) { continue; }
+            if (!b) { b = new GLatLngBounds(pb.getSouthWest(), pb.getNorthEast()); }
+            else { b.extend(pb.getNorthEast()); b.extend(pb.getSouthWest()); }
+        }
+        return b;
+    };
+
+    // ---- اسلایدر فاصلهء خوشه‌بندی ----
+    var pwaLastRows = null;   // آخرین نتیجهء سرور برای بازترسیم بدون درخواست مجدد
+
+    function pwaGetClusterKm() {
+        var el = document.getElementById('gisClusterKm');
+        var v = el ? parseInt(el.value, 10) : 70;
+        return isNaN(v) ? 70 : v;
+    }
+
+    function pwaApplyClusterKm(value) {
+        var lbl = document.getElementById('gisClusterKmValue');
+        if (lbl) { lbl.innerHTML = value + ' km'; }
+    }
+
+    // بازترسیم با داده‌ی فعلی (بدون درخواست به سرور و بدون تغییر زوم)
+    function pwaRedraw() {
+        if (!pwaLastRows || typeof map == 'undefined' || map == null) { return; }
+        pwaClearSelection();
+        try { map.closeInfoWindow(); } catch (e) { }
+        gmarkers = [];
+        ggans = [];
+        map.clearOverlays();
+        divSearchResult_html = "";
+        bounds = new GLatLngBounds();
+        DrawPWAProjects(pwaLastRows, true);
     }
 
     function pwaCircle(lat, lng, radiusKm, n) {
@@ -1057,6 +1175,11 @@
                                     <span class="gis-field-label">شفافیت ناحیه‌ها:</span>
                                     <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
                                     <span id="gisAreaOpacityValue" class="gis-opacity-value">خودکار</span>
+                                </div>
+                                <div class="gis-opacity" title="پین‌هایی که فاصله‌شان از این مقدار کمتر است در یک ناحیه می‌افتند؛ مقدار کمتر = لکه‌های کوچک‌تر و بیشتر">
+                                    <span class="gis-field-label">فاصله خوشه‌بندی:</span>
+                                    <input type="range" id="gisClusterKm" min="20" max="200" step="10" value="70" oninput="pwaApplyClusterKm(this.value);" onchange="pwaApplyClusterKm(this.value); pwaRedraw();" />
+                                    <span id="gisClusterKmValue" class="gis-opacity-value">70 km</span>
                                 </div>
                                 <div class="gis-legend" title="درصد تحقق پروژه (میانگین در پین و ناحیه)">
                                     <span class="gis-legend-title">تحقق:</span>
