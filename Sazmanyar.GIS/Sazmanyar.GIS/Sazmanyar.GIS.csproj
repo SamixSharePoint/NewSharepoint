@@ -127,6 +127,14 @@
     <Compile Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTajamoee.ascx.designer.cs">
       <DependentUpon>ShowAllKoridorInfoUserControl_ViewTajamoee.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowAllProjectInfo\ShowAllProjectInfo.cs" />
+    <Compile Include="ShowAllProjectInfo\ShowAllProjectInfoUserControl.ascx.cs">
+      <DependentUpon>ShowAllProjectInfoUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllProjectInfo\ShowAllProjectInfoUserControl.ascx.designer.cs">
+      <DependentUpon>ShowAllProjectInfoUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
       <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx</DependentUpon>
@@ -167,6 +175,10 @@
       <SharePointProjectItemId>{b9d02bac-3705-4926-837b-399e33f4551c}</SharePointProjectItemId>
     </None>
     <None Include="ShowAllKoridorInfo\ShowAllKoridorInfo.webpart" />
+    <None Include="ShowAllProjectInfo\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c7e1f2a4-5b3d-4e8a-9f61-2d7a8b4c0e15}</SharePointProjectItemId>
+    </None>
+    <None Include="ShowAllProjectInfo\ShowAllProjectInfo.webpart" />
     <None Include="ShowAllPolyganInfo\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8a0b0f5a-edc0-4241-917f-36bfbf174803}</SharePointProjectItemId>
     </None>
@@ -416,6 +428,8 @@
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewRouts.ascx" />
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTemplate3.ascx" />
     <Content Include="ShowAllKoridorInfo\ShowAllKoridorInfoUserControl_ViewTajamoee.ascx" />
+    <Content Include="ShowAllProjectInfo\Elements.xml" />
+    <Content Include="ShowAllProjectInfo\ShowAllProjectInfoUserControl.ascx" />
     <Content Include="ShowAllPolyganInfo\Elements.xml" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />

@@ -1616,6 +1616,44 @@ namespace Sazmanyar.GIS.Layouts.Sazmanyar.GIS
             return lstResult;
         }
 
+
+        #region PWAInfo (وب‌پارت ShowAllProjectInfo)
+
+        /// <summary>انواع پروژهء PWAInfo</summary>
+        [WebMethod]
+        public static List<string> FetchPWAProjectTypes()
+        {
+            return ClsHelpper.GetPWAProjectTypes();
+        }
+
+        /// <summary>منطقه‌های پروژهء PWAInfo؛ ProjectType خالی = همهء انواع</summary>
+        [WebMethod]
+        public static List<string> FetchPWARegions(string ProjectType)
+        {
+            return ClsHelpper.GetPWARegions(ProjectType);
+        }
+
+        /// <summary>پروژه‌های PWAInfo با مختصات؛ ProjectType / Region خالی = بدون فیلتر</summary>
+        [WebMethod]
+        public static List<Dictionary<string, string>> FetchPWAProjects(string ProjectType, string Region)
+        {
+            List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
+            DataTable objDataTable = ClsHelpper.FetchPWAProjects(ProjectType, Region);
+
+            foreach (DataRow item in objDataTable.Rows)
+            {
+                Dictionary<string, string> objItem = new Dictionary<string, string>();
+                foreach (DataColumn ColItem in objDataTable.Columns)
+                {
+                    objItem.Add(ColItem.ColumnName.ToString(), item[ColItem.ColumnName].ToString());
+                }
+                lstResult.Add(objItem);
+            }
+            return lstResult;
+        }
+
+        #endregion
+
         #endregion
 
         #endregion

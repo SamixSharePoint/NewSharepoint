@@ -2752,5 +2752,108 @@ namespace Sazmanyar.GIS
 
 
 
+            #region PWAInfo (نقشهء پروژه‌های Project Web App - وب‌پارت ShowAllProjectInfo)
+
+        // ستون‌هایی که به کلاینت فرستاده می‌شود (فقط سطرهایی که مختصات دارند)
+        private const string PWAINFO_SELECT_COLUMNS =
+            " ID, ProjectName, ProjectCode, Status, PlannedProgress, ActualProgress, AchievementPct, " +
+            " StartDateJ, FinishDateJ, PlannedStartJ, PlannedFinishJ, TotalCost, ProjectType, Region, ExecutionMethod, " +
+            " ProjectManager, ProjectSupervisor, OrgLevel1, OrgLevel2, Lat, [Long], TahaghoghCategory ";
+
+        /// <summary>انواع پروژهء موجود در PWAInfo (برای کمبوی «نوع پروژه»)</summary>
+        public static List<string> GetPWAProjectTypes()
+        {
+            List<string> fieldList = new List<string>();
+            try
+            {
+                DataTable objDatatable = new DataTable();
+                using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
+                {
+                    objSqlConnection.Open();
+                    string Strsql = " SELECT DISTINCT ProjectType FROM dbo.PWAInfo WHERE ProjectType IS NOT NULL AND LTRIM(RTRIM(ProjectType)) <> N'' ORDER BY ProjectType ";
+                    SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(Strsql, objSqlConnection);
+                    objSqlDataAdapter.Fill(objDatatable);
+                    objSqlConnection.Close();
+                }
+                foreach (DataRow objDataRow in objDatatable.Rows)
+                {
+                    fieldList.Add(objDataRow["ProjectType"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile("GetPWAProjectTypes: " + e.Message);
+            }
+            return fieldList;
+        }
+
+        /// <summary>منطقه‌های پروژه (برای پیشنهاد خودکار فیلد «منطقه پروژه»)؛ خالی بودن نوع = همهء انواع</summary>
+        public static List<string> GetPWARegions(string strProjectType)
+        {
+            List<string> fieldList = new List<string>();
+            try
+            {
+                DataTable objDatatable = new DataTable();
+                using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
+                {
+                    objSqlConnection.Open();
+                    string Strsql = " SELECT DISTINCT Region FROM dbo.PWAInfo " +
+                                    " WHERE Region IS NOT NULL AND LTRIM(RTRIM(Region)) <> N'' " +
+                                    "   AND (@ProjectType = N'' OR ProjectType = @ProjectType) " +
+                                    " ORDER BY Region ";
+                    SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
+                    objCmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar, 50).Value = (strProjectType ?? "").Trim();
+                    SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
+                    objSqlDataAdapter.Fill(objDatatable);
+                    objSqlConnection.Close();
+                }
+                foreach (DataRow objDataRow in objDatatable.Rows)
+                {
+                    fieldList.Add(objDataRow["Region"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile("GetPWARegions: " + e.Message);
+            }
+            return fieldList;
+        }
+
+        /// <summary>
+        /// پروژه‌های PWAInfo برای نمایش روی نقشه. فقط سطرهایی که Lat/Long دارند.
+        /// نوع یا منطقهء خالی = بدون فیلتر. پروژهء چندنوعی چند سطر دارد و هر سطر جدا برمی‌گردد.
+        /// </summary>
+        public static DataTable FetchPWAProjects(string strProjectType, string strRegion)
+        {
+            DataTable objDatatable = new DataTable();
+            try
+            {
+                using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
+                {
+                    objSqlConnection.Open();
+                    string Strsql = " SELECT " + PWAINFO_SELECT_COLUMNS +
+                                    " FROM dbo.PWAInfo " +
+                                    " WHERE Lat IS NOT NULL AND [Long] IS NOT NULL " +
+                                    "   AND (@ProjectType = N'' OR ProjectType = @ProjectType) " +
+                                    "   AND (@Region = N'' OR Region = @Region) " +
+                                    " ORDER BY Region, ProjectName ";
+                    SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
+                    objCmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar, 50).Value = (strProjectType ?? "").Trim();
+                    objCmd.Parameters.Add("@Region", SqlDbType.NVarChar, 50).Value = (strRegion ?? "").Trim();
+                    SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
+                    objSqlDataAdapter.Fill(objDatatable);
+                    objSqlConnection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile("FetchPWAProjects: " + e.Message);
+            }
+            return objDatatable;
+        }
+
+        #endregion
+
+
     }
 }

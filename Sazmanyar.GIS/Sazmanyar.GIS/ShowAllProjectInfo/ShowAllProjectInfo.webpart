@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Sazmanyar.GIS.ShowAllProjectInfo.ShowAllProjectInfo, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">نقشه پروژه‌های PWA</property>
+        <property name="Description" type="string">نمایش پروژه‌های Project Web App (جدول PWAInfo) روی نقشه: ناحیه هر منطقه، پین پروژه‌ها و اطلاعات هر پروژه با فیلتر نوع و منطقه</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>
