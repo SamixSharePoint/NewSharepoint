@@ -640,15 +640,18 @@
             var marker = new GMarker(point, { icon: pIcon, title: title });
             marker.pwaRows = pt.rows;
             marker.pwaImage = pIcon.image;
+            marker.pwaHtml = BuildPinInfoHtml(pt.rows);
+            marker.pwaUserHidden = false;   // با چک‌باکس فهرست مخفی شده؟
+            marker.pwaClustered = false;    // داخل یک خوشه پنهان شده؟
             gmarkers.push(marker);
             var marker_num = gmarkers.length - 1;
 
-            (function (mk, html, num) {
+            (function (mk, num) {
                 GEvent.addListener(mk, "click", function () {
                     pwaSelectMarker(mk, num);
-                    mk.openInfoWindowHtml(html);
+                    mk.openInfoWindowHtml(mk.pwaHtml);
                 });
-            })(marker, BuildPinInfoHtml(pt.rows), marker_num);
+            })(marker, marker_num);
 
             pinHtml += gisResultItem('station', 'marker', marker_num, 'togglemarker', pcolor, 'gmarkers', title + ' [' + pt.rows.length + ' پروژه]');
 
@@ -663,6 +666,8 @@
         if (!bKeepView && (regionOrder.length > 0 || pointOrder.length > 0)) {
             map.centerAndZoomOnBounds(bounds);
         }
+        // خوشه‌بندی پین‌ها برای زوم فعلی (با تغییر زوم، رویداد zoomend دوباره محاسبه می‌کند)
+        pwaRebuildMarkerClusters();
     }
 
     function pwaCountChips(regions, points, projects) {
@@ -1072,6 +1077,139 @@
         return 2 * R * Math.asin(Math.sqrt(h));
     }
 
+    // ---- خوشه‌بندی پین‌ها (MarkerClusterer سبک، وابسته به زوم) ----
+    // پین‌هایی که در زوم فعلی روی هم می‌افتند (فاصله‌شان کمتر از حدود 40 پیکسل است) یک نشانگر شمارنده می‌شوند.
+    // کلیک روی خوشه: زوم به داخل؛ در بیشترین زوم: فهرست پروژه‌های خوشه. با هر تغییر زوم دوباره محاسبه می‌شود.
+    var pwaClusterEnabled = true;
+    var pwaClusterMarkers = [];          // نشانگرهای خوشه که الان روی نقشه‌اند
+    var PWA_CLUSTER_PX = 40;             // فاصلهء پیکسلی ادغام
+    var PWA_MAX_CLUSTER_ZOOM = 13;       // از این زوم به بعد کلیک روی خوشه فهرست را نشان می‌دهد (کاشی‌های آفلاین تا 14)
+
+    // فاصلهء کیلومتری معادل PWA_CLUSTER_PX پیکسل در زوم فعلی (مقیاس وب‌مرکاتور در عرض ~33 درجه)
+    function pwaClusterThresholdKm() {
+        var z = 6;
+        try { z = map.getZoom(); } catch (e) { }
+        return PWA_CLUSTER_PX * 156.543 * 0.84 / Math.pow(2, z);
+    }
+
+    function pwaApplyMarkerVisibility(m) {
+        if (m.pwaUserHidden || m.pwaClustered) { m.hide(); } else { m.show(); }
+    }
+
+    // آیکون خوشه (SVG درون‌خطی، بدون فایل تصویری): هالهء کم‌رنگ + حلقهء رنگی (دستهء تحقق میانگین) + دایرهء سفید + عدد.
+    // اندازه با تعداد بزرگ می‌شود. آیکون هر (تعداد، رنگ) یک بار ساخته و کش می‌شود.
+    var pwaClusterIconCache = {};
+    function pwaClusterIconWithCount(count, hex) {
+        var key = count + '|' + hex;
+        if (pwaClusterIconCache[key]) { return pwaClusterIconCache[key]; }
+        var size = count < 10 ? 34 : (count < 50 ? 40 : 46);
+        var half = size / 2;
+        var fontSize = count < 100 ? 13 : 11;
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
+            '<circle cx="' + half + '" cy="' + half + '" r="' + (half - 1) + '" fill="' + hex + '" fill-opacity="0.35"/>' +
+            '<circle cx="' + half + '" cy="' + half + '" r="' + (half - 5) + '" fill="' + hex + '"/>' +
+            '<circle cx="' + half + '" cy="' + half + '" r="' + (half - 9) + '" fill="#ffffff"/>' +
+            '<text x="' + half + '" y="' + half + '" dy="0.36em" text-anchor="middle" font-family="Arial, Tahoma" font-size="' + fontSize + '" font-weight="bold" fill="#111827">' + count + '</text>' +
+            '</svg>';
+        var icon = new GIcon();
+        icon.image = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        icon.iconSize = new GSize(size, size);
+        icon.iconAnchor = new GPoint(half, half);
+        icon.infoWindowAnchor = new GPoint(half, 2);
+        pwaClusterIconCache[key] = icon;
+        return icon;
+    }
+
+    function pwaRebuildMarkerClusters() {
+        if (typeof map == 'undefined' || map == null) { return; }
+        for (var c = 0; c < pwaClusterMarkers.length; c++) {
+            try { map.removeOverlay(pwaClusterMarkers[c]); } catch (e) { }
+        }
+        pwaClusterMarkers = [];
+
+        if (!pwaClusterEnabled) {
+            for (var i = 0; i < gmarkers.length; i++) { gmarkers[i].pwaClustered = false; pwaApplyMarkerVisibility(gmarkers[i]); }
+            return;
+        }
+
+        // فقط پین‌هایی که کاربر مخفی نکرده
+        var pts = [];
+        for (var k = 0; k < gmarkers.length; k++) {
+            var m = gmarkers[k];
+            if (m.pwaUserHidden) { m.pwaClustered = false; m.hide(); continue; }
+            var ll = m.getLatLng();
+            pts.push({ lat: ll.lat(), lng: ll.lng(), idx: k });
+        }
+
+        var clusters = pwaClusterPoints(pts, pwaClusterThresholdKm());
+        for (var q = 0; q < clusters.length; q++) {
+            var cl = clusters[q];
+            if (cl.length == 1) {
+                var single = gmarkers[cl[0].idx];
+                single.pwaClustered = false;
+                pwaApplyMarkerVisibility(single);
+                continue;
+            }
+            var sumLat = 0, sumLng = 0, rows = [], members = [];
+            for (var j = 0; j < cl.length; j++) {
+                var gm = gmarkers[cl[j].idx];
+                gm.pwaClustered = true;
+                gm.hide();
+                sumLat += cl[j].lat; sumLng += cl[j].lng;
+                rows = rows.concat(gm.pwaRows);
+                members.push(cl[j].idx);
+            }
+            var center = new GLatLng(sumLat / cl.length, sumLng / cl.length);
+            var cat = pwaCategory(rows);
+            var cm = new GMarker(center, { icon: pwaClusterIconWithCount(rows.length, PWA_CAT[cat].hex), title: rows.length + ' پروژه در ' + cl.length + ' نقطه' });
+            cm.pwaMembers = members;
+            cm.pwaRows = rows;
+            (function (clusterMarker, pos) {
+                GEvent.addListener(clusterMarker, 'click', function () {
+                    var z = map.getZoom();
+                    if (z < PWA_MAX_CLUSTER_ZOOM) {
+                        map.setCenter(pos, Math.min(PWA_MAX_CLUSTER_ZOOM, z + 2));
+                    }
+                    else {
+                        map.openInfoWindowHtml(pos, BuildClusterInfoHtml(clusterMarker));
+                    }
+                });
+            })(cm, center);
+            pwaClusterMarkers.push(cm);
+            map.addOverlay(cm);
+        }
+
+        // اگر مارکر انتخاب‌شده داخل خوشه رفت، انتخاب و پنجره بسته شود
+        if (pwaSel.marker && pwaSel.marker.pwaClustered) {
+            try { map.closeInfoWindow(); } catch (e) { }
+            pwaClearSelection();
+        }
+    }
+
+    // فهرست پروژه‌های یک خوشه (در بیشترین زوم): هر ردیف یک پین؛ کلیک = پنجرهء همان پین
+    function BuildClusterInfoHtml(clusterMarker) {
+        var html = "<div class='gis-iw gis-iw-pwa'>";
+        html += "<h4>" + clusterMarker.pwaRows.length + " پروژه در " + clusterMarker.pwaMembers.length + " نقطهء نزدیک به هم</h4>";
+        html += "<table>";
+        for (var i = 0; i < clusterMarker.pwaMembers.length; i++) {
+            var idx = clusterMarker.pwaMembers[i];
+            var m = gmarkers[idx];
+            var cat = pwaCategory(m.pwaRows);
+            html += "<tr><td><span class='pwa-badge' style='background:" + PWA_CAT[cat].hex + "'></span>" +
+                "<a href='javascript:void(0);' onclick='pwaOpenPinFromCluster(" + idx + ");'>" + gisEscapeHtml(pwaPinTitle(m.pwaRows)) + "</a></td>" +
+                "<td class='lbl'>" + m.pwaRows.length + " پروژه</td></tr>";
+        }
+        html += "</table></div>";
+        return html;
+    }
+
+    function pwaOpenPinFromCluster(idx) {
+        var m = gmarkers[idx];
+        if (!m) { return; }
+        pwaHighlightListItem('marker' + idx);
+        map.openInfoWindowHtml(m.getLatLng(), m.pwaHtml);
+    }
+
     // ---- پنل کناری ----
     // انتخاب همه / انتخاب معکوس / پاک کردن همه: روی چک‌باکس‌های فهرست (مناطق و پین‌ها) اعمال و روی نقشه هم نمایش/مخفی می‌کند
     function pwaSetAllVisible(mode) {
@@ -1087,7 +1225,7 @@
             try {
                 if (id.indexOf('marker') == 0) {
                     var m = gmarkers[parseInt(id.substring(6), 10)];
-                    if (m) { if (checked) { m.show(); } else { m.hide(); } }
+                    if (m) { m.pwaUserHidden = !checked; pwaApplyMarkerVisibility(m); }
                 }
                 else if (id.indexOf('Gan') == 0) {
                     var g = ggans[parseInt(id.substring(3), 10)];
@@ -1095,6 +1233,7 @@
                 }
             } catch (e) { }
         }
+        pwaRebuildMarkerClusters();
         // اگر مورد انتخاب‌شده مخفی شد، پنجرهء اطلاعات و حالت انتخاب هم بسته شود
         var sel = pwaSel.marker || pwaSel.poly;
         if (sel) {
@@ -1180,6 +1319,9 @@
                                     <span class="gis-field-label">فاصله خوشه‌بندی:</span>
                                     <input type="range" id="gisClusterKm" min="20" max="200" step="10" value="70" oninput="pwaApplyClusterKm(this.value);" onchange="pwaApplyClusterKm(this.value); pwaRedraw();" />
                                     <span id="gisClusterKmValue" class="gis-opacity-value">70 km</span>
+                                    <label class="gis-field-label" style="cursor: pointer;" title="پین‌های نزدیک به هم در هر زوم یک نشانگر شمارنده می‌شوند؛ کلیک روی آن زوم می‌کند">
+                                        <input type="checkbox" id="chkClusterPins" checked="checked" onchange="pwaClusterEnabled = this.checked; pwaRebuildMarkerClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی پین‌ها
+                                    </label>
                                 </div>
                                 <div class="gis-legend" title="درصد تحقق پروژه (میانگین در پین و ناحیه)">
                                     <span class="gis-legend-title">تحقق:</span>
@@ -1244,12 +1386,12 @@
     if (GBrowserIsCompatible()) {
 
         function togglemarker(marker_num) {
-            if (document.getElementById('marker' + marker_num)) {
-                if (document.getElementById('marker' + marker_num).checked) {
-                    gmarkers[marker_num].show();
-                } else {
-                    gmarkers[marker_num].hide();
-                }
+            var cb = document.getElementById('marker' + marker_num);
+            if (cb && gmarkers[marker_num]) {
+                gmarkers[marker_num].pwaUserHidden = !cb.checked;
+                pwaApplyMarkerVisibility(gmarkers[marker_num]);
+                // عضویت خوشه‌ها با مخفی/نمایش شدن یک پین عوض می‌شود
+                pwaRebuildMarkerClusters();
             }
         }
 
@@ -1306,6 +1448,10 @@
         // با بسته شدن پنجرهء اطلاعات، حالت انتخاب مارکر/ناحیه/ردیف فهرست هم پاک می‌شود
         GEvent.addListener(map, "infowindowclose", function () {
             pwaClearSelection();
+        });
+        // با هر تغییر زوم، خوشه‌بندی پین‌ها دوباره محاسبه می‌شود
+        GEvent.addListener(map, "zoomend", function () {
+            pwaRebuildMarkerClusters();
         });
     }
     else {
