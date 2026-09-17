@@ -2822,12 +2822,16 @@ namespace Sazmanyar.GIS
         /// <summary>
         /// پروژه‌های PWAInfo برای نمایش روی نقشه. فقط سطرهایی که Lat/Long دارند.
         /// نوع یا منطقهء خالی = بدون فیلتر. پروژهء چندنوعی چند سطر دارد و هر سطر جدا برمی‌گردد.
+        /// strCondition: شرط WHERE ساخته‌شده توسط query-builder صفحهء FilterProject.html (همان قرارداد قالب 1:
+        /// کوتیشن‌ها به‌صورت #@# و تاریخ‌های شمسی با پیشوند DDDDDDDDDDD می‌آیند). خالی = بدون شرط.
         /// </summary>
-        public static DataTable FetchPWAProjects(string strProjectType, string strRegion)
+        public static DataTable FetchPWAProjects(string strProjectType, string strRegion, string strCondition)
         {
             DataTable objDatatable = new DataTable();
             try
             {
+                string strExtra = PWABuildConditionSql(strCondition);
+
                 using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
                 {
                     objSqlConnection.Open();
@@ -2836,6 +2840,7 @@ namespace Sazmanyar.GIS
                                     " WHERE Lat IS NOT NULL AND [Long] IS NOT NULL " +
                                     "   AND (@ProjectType = N'' OR ProjectType = @ProjectType) " +
                                     "   AND (@Region = N'' OR Region = @Region) " +
+                                    (strExtra.Length > 0 ? "   AND ( " + strExtra + " ) " : "") +
                                     " ORDER BY Region, ProjectName ";
                     SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
                     objCmd.Parameters.Add("@ProjectType", SqlDbType.NVarChar, 50).Value = (strProjectType ?? "").Trim();
@@ -2850,6 +2855,69 @@ namespace Sazmanyar.GIS
                 ClsHelpper.WriteToLogFile("FetchPWAProjects: " + e.Message);
             }
             return objDatatable;
+        }
+
+        // ستون‌هایی که در شرط جستجو مجازند (شناسهء فیلترهای demo_widgetsProject.js)
+        private static readonly string[] PWA_FILTER_COLUMNS = new string[] {
+            "ProjectName", "ProjectCode", "ProjectType", "Region", "Status", "ExecutionMethod", "TahaghoghCategory",
+            "PlannedProgress", "ActualProgress", "AchievementPct", "StartDate", "FinishDate", "PlannedStart", "PlannedFinish",
+            "ProjectManager", "ProjectSupervisor", "OrgLevel1", "OrgLevel2", "TotalCost" };
+
+        /// <summary>
+        /// شرط query-builder را به SQL قابل استفاده تبدیل می‌کند:
+        ///   #@# -> '   ،   DDDDDDDDDDD'yyyy/mm/dd' (شمسی) -> 'yyyy-MM-dd' (میلادی)
+        /// و یک کنترل ایمنی ساده انجام می‌دهد: فقط ستون‌های مجاز، بدون ; -- /* و دستورات غیر از مقایسه.
+        /// در صورت تشخیص محتوای نامعتبر، شرط نادیده گرفته می‌شود و در لاگ نوشته می‌شود.
+        /// </summary>
+        private static string PWABuildConditionSql(string strCondition)
+        {
+            if (strCondition == null) { return ""; }
+            string cond = strCondition.Trim();
+            if (cond.Length == 0) { return ""; }
+
+            cond = cond.Replace("#@#", "'");
+
+            // تاریخ‌های شمسی
+            cond = Regex.Replace(cond, @"DDDDDDDDDDD'%?(\d{4})/(\d{1,2})/(\d{1,2})%?'", delegate (Match m)
+            {
+                try
+                {
+                    PersianCalendar cal = new PersianCalendar();
+                    DateTime dt = new DateTime(Convert.ToInt32(m.Groups[1].Value), Convert.ToInt32(m.Groups[2].Value), Convert.ToInt32(m.Groups[3].Value), cal);
+                    return "'" + dt.ToString("yyyy-MM-dd") + "'";
+                }
+                catch (Exception)
+                {
+                    return "'" + m.Groups[1].Value + "-" + m.Groups[2].Value.PadLeft(2, '0') + "-" + m.Groups[3].Value.PadLeft(2, '0') + "'";
+                }
+            });
+            cond = cond.Replace("DDDDDDDDDDD", "");
+
+            // کنترل ایمنی
+            string lowered = cond.ToLowerInvariant();
+            if (lowered.Contains(";") || lowered.Contains("--") || lowered.Contains("/*") || lowered.Contains("*/") ||
+                Regex.IsMatch(lowered, @"\b(select|insert|update|delete|drop|alter|exec|execute|union|truncate|merge|create|grant|xp_|sp_)\b"))
+            {
+                ClsHelpper.WriteToLogFile("FetchPWAProjects: شرط جستجو رد شد (محتوای غیرمجاز): " + strCondition);
+                return "";
+            }
+
+            // شناسه‌های بیرون از رشته‌ها باید یا ستون مجاز باشند یا کلیدواژهء مقایسه
+            string noStrings = Regex.Replace(cond, @"N?'([^']|'')*'", " ");
+            string[] allowedWords = new string[] { "and", "or", "not", "like", "in", "between", "is", "null", "n" };
+            foreach (Match m in Regex.Matches(noStrings, @"[A-Za-z_][A-Za-z0-9_]*"))
+            {
+                string w = m.Value;
+                if (Array.IndexOf(allowedWords, w.ToLowerInvariant()) >= 0) { continue; }
+                bool ok = false;
+                foreach (string c in PWA_FILTER_COLUMNS) { if (string.Equals(c, w, StringComparison.OrdinalIgnoreCase)) { ok = true; break; } }
+                if (!ok)
+                {
+                    ClsHelpper.WriteToLogFile("FetchPWAProjects: شرط جستجو رد شد (ستون نامعتبر " + w + "): " + strCondition);
+                    return "";
+                }
+            }
+            return cond;
         }
 
         #endregion

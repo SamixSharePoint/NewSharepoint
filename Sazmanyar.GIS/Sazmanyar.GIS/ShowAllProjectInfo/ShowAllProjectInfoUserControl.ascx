@@ -112,12 +112,155 @@
         height: 50%;
         top: 25%;
     }
+
+    /* تب‌های پین چندپروژه‌ای */
+    .gis-iw-pwa .pwa-tab-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        border-bottom: 1px solid #d1d5db;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+    }
+
+    .gis-iw-pwa .pwa-tab {
+        display: inline-block;
+        padding: 3px 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px 6px 0 0;
+        background: #f3f4f6;
+        color: #374151;
+        font-size: 12px;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .gis-iw-pwa .pwa-tab:hover {
+        background: #e5e7eb;
+        text-decoration: none;
+    }
+
+    .gis-iw-pwa .pwa-tab.is-active {
+        background: #ffffff;
+        border-bottom-color: #ffffff;
+        color: #111827;
+        font-weight: bold;
+        margin-bottom: -5px;
+        padding-bottom: 7px;
+    }
+
+    .gis-iw-pwa .pwa-tab-panel {
+        display: none;
+        padding: 2px;
+    }
+
+    .gis-iw-pwa .pwa-tab-panel.is-active {
+        display: block;
+    }
+
+    /* ---- انتخاب و انیمیشن مارکر / ناحیه / ردیف فهرست ---- */
+    @keyframes pwaMarkerBounce {
+        0%   { transform: translateY(0) scale(1.45); }
+        25%  { transform: translateY(-16px) scale(1.45); }
+        50%  { transform: translateY(0) scale(1.45); }
+        70%  { transform: translateY(-7px) scale(1.45); }
+        100% { transform: translateY(0) scale(1.45); }
+    }
+
+    @keyframes pwaMarkerPulse {
+        0%   { filter: drop-shadow(0 0 2px rgba(29, 78, 216, 0.95)); }
+        50%  { filter: drop-shadow(0 0 9px rgba(29, 78, 216, 0.95)); }
+        100% { filter: drop-shadow(0 0 2px rgba(29, 78, 216, 0.95)); }
+    }
+
+    /* کلاس روی عنصر نگهدارندهء تصویر مارکر (div با overflow:hidden) می‌نشیند تا بزرگ‌نمایی و سایه بریده نشود */
+    .gis-root .pwa-marker-selected {
+        transform: scale(1.45);
+        transform-origin: 50% 100%;
+        overflow: visible !important;
+        z-index: 100000 !important;
+        animation: pwaMarkerBounce 0.9s ease-out 1, pwaMarkerPulse 1.6s ease-in-out 0.9s infinite;
+    }
+
+    .gis-root .gis-item.is-selected {
+        background: #dbeafe;
+        box-shadow: inset 3px 0 0 #2563eb;
+        border-radius: 6px;
+    }
+
+    .gis-root .gis-item.is-selected .gis-item-title {
+        font-weight: bold;
+        color: #1e3a8a;
+    }
+
+    /* نوار بالا: بخش «شفافیت ناحیه‌ها + راهنمای تحقق» همیشه در گوشهء چپ می‌ماند و به ردیف پایین نمی‌افتد؛
+       اگر جا کم باشد فیلدهای سمت راست (دکمه‌ها، نوع، منطقه) داخل خودشان می‌شکنند، نه بخش چپ */
+    .gis-root .gis-topbar {
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+
+    .gis-root .gis-topbar .gis-fields {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .gis-root .gis-topbar-aside {
+        flex: 0 0 auto;
+        margin-right: auto;   /* در RTL یعنی چسبیده به چپ */
+        align-items: flex-end; /* داخل ستون هم اسلایدر و راهنما به لبهء چپ بچسبند */
+    }
+
+    .gis-root .gis-legend {
+        flex-wrap: wrap;
+        max-width: 460px;
+        row-gap: 4px;
+    }
+
+    /* دکمهء جستجوی پیشرفته وقتی شرط فعال دارد، و دکمهء حذف شرایط */
+    .gis-root .gis-toggle.is-active {
+        background: #eff4ff;
+        border-color: #2f6fdd;
+        color: #2f6fdd;
+        box-shadow: 0 0 0 2px rgba(47, 111, 221, 0.18);
+    }
+
+    .gis-root .gis-toggle.pwa-toggle-danger:hover {
+        background: #fff1f1;
+        color: #d33;
+        border-color: #f3c2c2;
+    }
+
+    /* نوار «همه / معکوس / هیچ» بالای فهرست: فشرده، تک‌خطی، هم‌عرض */
+    .gis-root .pwa-selbar {
+        gap: 4px;
+        margin-top: 6px;
+    }
+
+    .gis-root .pwa-selbar .gis-tool {
+        height: 26px;
+        padding: 0 6px;
+        gap: 4px;
+        font-size: 11px;
+        line-height: 1;
+        white-space: nowrap;
+        border-radius: 6px;
+    }
+
+    .gis-root .pwa-selbar .gis-tool svg {
+        width: 13px;
+        height: 13px;
+        flex: none;
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260917" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260917" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Fansy/css/jquery.fancybox-1.3.4.css" />
+<script src="/_layouts/15/Sazmanyar.GIS/Fansy/JS/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 <script type="text/javascript" language="javascript">
 
@@ -134,6 +277,80 @@
     var currentRegion = "";
     var strCurrentWebUrl = window.location.protocol + "//" + window.location.host + _spPageContextInfo.webServerRelativeUrl;
     var strFetchUrl = strCurrentWebUrl + "/_layouts/15/Sazmanyar.GIS/ApplicationPage_FetchingData.aspx/";
+
+    // ---- جستجوی پیشرفته (همان سازوکار قالب 1: صفحهء FilterProject.html داخل fancybox، خروجی query-builder به‌صورت SQL) ----
+    var SearchOption_Project = null;   // { sql: "SELECT * FROM table WHERE ..." } که صفحهء فیلتر برمی‌گرداند
+
+    function ShowSearchOptionProject() {
+        X.fancybox({
+            'width': 960,
+            'height': 600,
+            'padding': 0,
+            'autoScale': false,
+            'transitionIn': 'none',
+            'transitionOut': 'none',
+            'type': 'iframe',
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterProject.html?v=20260917'
+        });
+    }
+
+    // صفحهء فیلتر با این تابع شرط‌های قبلی را برای «پیش فرض شرایط» می‌گیرد
+    function GetRulesWidgets_Project() {
+        if (SearchOption_Project != null) {
+            var Sql = SearchOption_Project.sql.replace("SELECT * FROM table WHERE ", "").replace(/NNNNNNNNNNN/g, "").replace(/DDDDDDDDDDD/g, ""); // For Unicode Support
+            if (Sql.trim().length == 0) {
+                return null;
+            }
+            SearchOption_Project.sql = Sql;
+        }
+        return SearchOption_Project;
+    }
+
+    function setInformation_Project(data) {
+        SearchOption_Project = data;
+        return SearchOption_Project;
+    }
+
+    // صفحهء فیلتر بعد از «جستجوی اطلاعات» این را صدا می‌زند
+    function ShowAllRoutInMap() {
+        RefereshAllInMap();
+    }
+
+    function DeLSearchOption() {
+        SearchOption_Project = null;
+        RefereshAllInMap();
+    }
+
+    // فهرست نوع‌ها و منطقه‌ها برای فیلترهای انتخابی صفحهء جستجو
+    function pwaFilterLists() {
+        var types = [];
+        try {
+            var control = document.getElementById('<%= cmbProjectType.ClientID %>');
+            for (var i = 0; i < control.options.length; i++) {
+                if (control.options[i].value != 'همه موارد') { types.push(control.options[i].value); }
+            }
+        } catch (e) { }
+        return { types: types, regions: availableTags.slice() };
+    }
+
+    // شرطی که به سرور می‌رود (کوتیشن -> #@# تا در JSON/URL مشکلی نسازد؛ سرور برمی‌گرداند)
+    function pwaGetSearchCondition() {
+        if (SearchOption_Project == null || SearchOption_Project.sql == null) { return ""; }
+        var Condition = SearchOption_Project.sql.replace("SELECT * FROM table WHERE ", "").replace(/'/g, "#@#").replace(/NNNNNNNNNNN/g, "N");
+        return Condition.trim();
+    }
+
+    // نمایش/مخفی‌کردن دکمهء «حذف شرایط» و نشانهء فیلتر فعال
+    function pwaUpdateSearchState() {
+        var active = pwaGetSearchCondition().length > 0;
+        var btnDel = document.getElementById('btnDelSearchOption');
+        var btnSearch = document.getElementById('btnShowSearchOption');
+        if (btnDel) { btnDel.style.display = active ? '' : 'none'; }
+        if (btnSearch) {
+            btnSearch.className = 'gis-toggle' + (active ? ' is-active' : '');
+            btnSearch.title = active ? 'جستجوی پیشرفته (شرط فعال است) - برای ویرایش کلیک کنید' : 'جستجوی پیشرفته روی فیلدهای پروژه';
+        }
+    }
 
     // ---- دسته‌های تحقق (همان کدهای GISInfo.TahaghoghRoute) ----
     var PWA_CAT = {
@@ -287,10 +504,14 @@
 
         var strProjectType = GetSelectedProjectType();
         var strRegion = bVaziyatSelect ? currentRegion : "";
+        var strCondition = pwaGetSearchCondition();
+        pwaUpdateSearchState();
+        try { X.fancybox.close(); } catch (e) { }
 
         document.getElementById("divSearchCount").innerHTML = '';
         document.getElementById('divSearchResult').innerHTML = '<div class="gis-msg gis-msg-wait">لطفاً کمی صبر نمایید ...<br />سیستم در حال جستجوی اطلاعات مورد نیاز شما می باشد</div>';
 
+        pwaClearSelection();
         gmarkers = [];
         ggans = [];
         map.clearOverlays();
@@ -300,7 +521,7 @@
         X.ajax({
             type: "POST",
             url: strFetchUrl + "FetchPWAProjects",
-            data: JSON.stringify({ 'ProjectType': strProjectType, 'Region': strRegion }),
+            data: JSON.stringify({ 'ProjectType': strProjectType, 'Region': strRegion, 'Condition': strCondition }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (strHtmlOutput) {
@@ -366,15 +587,22 @@
             var Polygon = new GPolygon(PolygonPoints, color, 2, 0.9, color, gisAreaOpacity(null), { clickable: true });
             Polygon.gisOpacity = gisAreaOpacity(null);
             Polygon.pwaRegion = regionName;
+            Polygon.pwaColor = color;
             ggans.push(Polygon);
             var gan_num = ggans.length - 1;
 
-            (function (poly, html) {
+            (function (poly, html, num) {
                 GEvent.addListener(poly, 'click', function (point) {
-                    if (!point) { point = poly.getVertex(0); }
+                    if (!point) {
+                        // کلیک از فهرست کناری: مرکز ناحیه
+                        var b = poly.getBounds();
+                        point = b ? b.getCenter() : poly.getVertex(0);
+                        map.panTo(point);
+                    }
+                    pwaSelectPolygon(poly, num);
                     map.openInfoWindowHtml(point, html);
                 });
-            })(Polygon, BuildRegionInfoHtml(regionName, regionRows, cat));
+            })(Polygon, BuildRegionInfoHtml(regionName, regionRows, cat), gan_num);
 
             areaHtml += gisResultItem('area', 'Gan', gan_num, 'toggleGan', color, 'ggans', regionName + ' [' + regionRows.length + ' پروژه]');
 
@@ -394,16 +622,19 @@
             var point = new GLatLng(pt.lat, pt.lng);
             var title = pwaPinTitle(pt.rows);
 
-            var marker = new GMarker(point, { icon: get_icon(PWA_CAT[pcat].marker), title: title });
+            var pIcon = get_icon(PWA_CAT[pcat].marker);
+            var marker = new GMarker(point, { icon: pIcon, title: title });
             marker.pwaRows = pt.rows;
+            marker.pwaImage = pIcon.image;
             gmarkers.push(marker);
             var marker_num = gmarkers.length - 1;
 
-            (function (mk, html) {
+            (function (mk, html, num) {
                 GEvent.addListener(mk, "click", function () {
+                    pwaSelectMarker(mk, num);
                     mk.openInfoWindowHtml(html);
                 });
-            })(marker, BuildPinInfoHtml(pt.rows));
+            })(marker, BuildPinInfoHtml(pt.rows), marker_num);
 
             pinHtml += gisResultItem('station', 'marker', marker_num, 'togglemarker', pcolor, 'gmarkers', title + ' [' + pt.rows.length + ' پروژه]');
 
@@ -437,34 +668,182 @@
         return t;
     }
 
+    // ---- انتخاب (Highlight) مارکر یا ناحیه + انیمیشن ----
+    // فقط یک مورد در هر لحظه انتخاب است؛ با بسته شدن InfoWindow یا انتخاب مورد دیگر، حالت قبلی برمی‌گردد.
+    var pwaSel = { marker: null, markerImg: '', poly: null, polyTimer: null, listEl: null };
+    var PWA_SEL_STROKE = '#1d4ed8';
+
+    function pwaHighlightListItem(checkboxId) {
+        if (pwaSel.listEl) {
+            pwaSel.listEl.className = pwaSel.listEl.className.replace(/\s*is-selected/g, '');
+            pwaSel.listEl = null;
+        }
+        var cb = document.getElementById(checkboxId);
+        if (!cb || !cb.parentNode) { return; }
+        var el = cb.parentNode;
+        el.className += ' is-selected';
+        pwaSel.listEl = el;
+        try {
+            var panel = document.getElementById('divSearchOptions');
+            if (panel && panel.style.display != 'none' && el.scrollIntoView) {
+                el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+        } catch (e) { }
+    }
+
+    function pwaClearSelection() {
+        // مارکر: تصویر اصلی برمی‌گردد
+        if (pwaSel.marker) {
+            try { pwaSel.marker.setImage(pwaSel.markerImg); } catch (e) { }
+            pwaSel.marker = null; pwaSel.markerImg = '';
+        }
+        var els = document.querySelectorAll('.gis-root .pwa-marker-selected');
+        for (var i = 0; i < els.length; i++) { els[i].className = els[i].className.replace(/\s*pwa-marker-selected/g, ''); }
+
+        // ناحیه: استایل اصلی برمی‌گردد
+        if (pwaSel.polyTimer) { clearInterval(pwaSel.polyTimer); pwaSel.polyTimer = null; }
+        if (pwaSel.poly) {
+            try {
+                pwaSel.poly.setStrokeStyle({ color: pwaSel.poly.pwaColor, weight: 2, opacity: 0.9 });
+                pwaSel.poly.setFillStyle({ color: pwaSel.poly.pwaColor, opacity: gisAreaOpacity(null) });
+            } catch (e) { }
+            pwaSel.poly = null;
+        }
+
+        if (pwaSel.listEl) {
+            pwaSel.listEl.className = pwaSel.listEl.className.replace(/\s*is-selected/g, '');
+            pwaSel.listEl = null;
+        }
+    }
+
+    // مارکر انتخاب‌شده: تصویر همان رنگ با یک نشانهء یکتا در آدرس، تا بتوان عنصر <img> آن را در DOM پیدا و انیمیت کرد
+    function pwaSelectMarker(mk, marker_num) {
+        pwaClearSelection();
+        pwaSel.marker = mk;
+        pwaSel.markerImg = mk.pwaImage;
+        try { mk.setImage(mk.pwaImage + '?pwasel=' + marker_num); } catch (e) { }
+        setTimeout(function () {
+            var imgs = document.querySelectorAll('.gis-root img[src*="pwasel=' + marker_num + '"]');
+            for (var i = 0; i < imgs.length; i++) {
+                // موتور نقشه تصویر مارکر را داخل یک div با overflow:hidden می‌گذارد؛ کلاس روی همان div می‌نشیند
+                var el = (imgs[i].parentNode && imgs[i].parentNode.tagName == 'DIV') ? imgs[i].parentNode : imgs[i];
+                if (el.className.indexOf('pwa-marker-selected') < 0) { el.className += ' pwa-marker-selected'; }
+            }
+        }, 30);
+        pwaHighlightListItem('marker' + marker_num);
+    }
+
+    // ناحیهء انتخاب‌شده: خط دور ضخیم آبی + چند ضربان شفافیت داخل، سپس ثابت روی حالت پررنگ‌تر
+    function pwaSelectPolygon(poly, gan_num) {
+        pwaClearSelection();
+        pwaSel.poly = poly;
+        var base = gisAreaOpacity(null);
+        var hi = Math.min(0.85, base + 0.3);
+        try { poly.setStrokeStyle({ color: PWA_SEL_STROKE, weight: 4, opacity: 1 }); } catch (e) { }
+        var step = 0;
+        pwaSel.polyTimer = setInterval(function () {
+            step++;
+            var on = (step % 2 == 1);
+            try { poly.setFillStyle({ color: poly.pwaColor, opacity: on ? hi : base }); } catch (e) { }
+            if (step >= 6) {
+                clearInterval(pwaSel.polyTimer); pwaSel.polyTimer = null;
+                try { poly.setFillStyle({ color: poly.pwaColor, opacity: Math.min(0.85, base + 0.15) }); } catch (e) { }
+            }
+        }, 180);
+        pwaHighlightListItem('Gan' + gan_num);
+    }
+
     // ---- HTML پنجرهء اطلاعات ----
+    var pwaInfoSeq = 0; // شمارندهء یکتا برای شناسهء تب‌های هر پنجره
+
+    // نوار مقایسهء پیشرفت: آبی روشن = برنامه‌ای، آبی تیره = واقعی (هر دو 0 تا 100)
+    function pwaBarHtml(plan, act) {
+        var p = Math.max(0, Math.min(100, pwaNum(plan)));
+        var a = Math.max(0, Math.min(100, pwaNum(act)));
+        return "<div class='pwa-bar' title='برنامه‌ای: " + pwaPct(p) + " / واقعی: " + pwaPct(a) + "'>" +
+            "<i class='plan' style='width:" + p + "%'></i><i class='act' style='width:" + a + "%'></i></div>";
+    }
+
+    // جزئیات یک پروژه (بدنهء هر تب)
+    function BuildProjectDetailHtml(r, bShowName) {
+        var rcat = pwaCategory([r]);
+        var html = "";
+        if (bShowName) {
+            html += "<div class='pwa-name'><span class='pwa-badge' style='background:" + PWA_CAT[rcat].hex + "' title='" + PWA_CAT[rcat].title + "'></span>" + pwaVal(r.ProjectName) + "</div>";
+        }
+        html += "<table>";
+        html += "<tr><td class='lbl'>نوع پروژه:</td><td><b>" + pwaVal(r.ProjectType) + "</b></td><td class='lbl'>کد:</td><td>" + pwaVal(r.ProjectCode) + "</td></tr>";
+        html += "<tr><td class='lbl'>وضعیت:</td><td>" + pwaVal(r.Status) + "</td><td class='lbl'>نحوه اجرا:</td><td>" + pwaVal(r.ExecutionMethod) + "</td></tr>";
+        html += "<tr><td class='lbl'>پیشرفت برنامه‌ای:</td><td>" + pwaPct(r.PlannedProgress) + "</td><td class='lbl'>پیشرفت واقعی:</td><td>" + pwaPct(r.ActualProgress) + "</td></tr>";
+        html += "<tr><td class='lbl'>درصد تحقق:</td><td><b>" + pwaPct(r.AchievementPct) + "</b></td><td colspan='2'>" + pwaBarHtml(r.PlannedProgress, r.ActualProgress) + "</td></tr>";
+        html += "<tr><td class='lbl'>شروع:</td><td>" + pwaVal(r.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + pwaVal(r.FinishDateJ) + "</td></tr>";
+        html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + pwaVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + pwaVal(r.PlannedFinishJ) + "</td></tr>";
+        html += "<tr><td class='lbl'>مدیر پروژه:</td><td>" + pwaVal(r.ProjectManager) + "</td><td class='lbl'>ناظر پروژه:</td><td>" + pwaVal(r.ProjectSupervisor) + "</td></tr>";
+        html += "</table>";
+        return html;
+    }
+
+    // پنجرهء پین: یک پروژه = بدون تب؛ چند پروژه = یک تب برای هر پروژه (برچسب تب: نوع پروژه)
     function BuildPinInfoHtml(rows) {
         var cat = pwaCategory(rows);
         var html = "<div class='gis-iw gis-iw-pwa'>";
         html += "<h4><span class='pwa-badge' style='background:" + PWA_CAT[cat].hex + "'></span>" +
             gisEscapeHtml(pwaPinTitle(rows)) + " <small>(" + rows.length + " پروژه" + (rows[0].Region ? " - " + gisEscapeHtml(rows[0].Region) : "") + ")</small></h4>";
 
+        if (rows.length == 1) {
+            html += "<div class='pwa-item'>" + BuildProjectDetailHtml(rows[0], true) + "</div>";
+            html += "</div>";
+            return html;
+        }
+
+        pwaInfoSeq++;
+        var tabId = 'pwaTabs' + pwaInfoSeq;
+
+        // اگر چند پروژه نوع یکسان داشته باشند، شماره به برچسب تب اضافه می‌شود
+        var typeCount = {}, typeSeen = {};
+        for (var c = 0; c < rows.length; c++) {
+            var tc = (rows[c].ProjectType == null || rows[c].ProjectType == '') ? 'بدون نوع' : rows[c].ProjectType;
+            typeCount[tc] = (typeCount[tc] || 0) + 1;
+        }
+
+        html += "<div class='pwa-tabs' id='" + tabId + "'>";
+        html += "<div class='pwa-tab-strip'>";
         for (var i = 0; i < rows.length; i++) {
             var r = rows[i];
             var rcat = pwaCategory([r]);
-            var plan = Math.max(0, Math.min(100, pwaNum(r.PlannedProgress)));
-            var act = Math.max(0, Math.min(100, pwaNum(r.ActualProgress)));
-
-            html += "<div class='pwa-item'>";
-            html += "<div class='pwa-name'><span class='pwa-badge' style='background:" + PWA_CAT[rcat].hex + "' title='" + PWA_CAT[rcat].title + "'></span>" + pwaVal(r.ProjectName) + "</div>";
-            html += "<table>";
-            html += "<tr><td class='lbl'>نوع پروژه:</td><td><b>" + pwaVal(r.ProjectType) + "</b></td><td class='lbl'>کد:</td><td>" + pwaVal(r.ProjectCode) + "</td></tr>";
-            html += "<tr><td class='lbl'>وضعیت:</td><td>" + pwaVal(r.Status) + "</td><td class='lbl'>نحوه اجرا:</td><td>" + pwaVal(r.ExecutionMethod) + "</td></tr>";
-            html += "<tr><td class='lbl'>پیشرفت برنامه‌ای:</td><td>" + pwaPct(r.PlannedProgress) + "</td><td class='lbl'>پیشرفت واقعی:</td><td>" + pwaPct(r.ActualProgress) + "</td></tr>";
-            html += "<tr><td class='lbl'>درصد تحقق:</td><td><b>" + pwaPct(r.AchievementPct) + "</b></td><td colspan='2'><div class='pwa-bar' title='آبی روشن: برنامه‌ای / آبی تیره: واقعی'><i class='plan' style='width:" + plan + "%'></i><i class='act' style='width:" + act + "%'></i></div></td></tr>";
-            html += "<tr><td class='lbl'>شروع:</td><td>" + pwaVal(r.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + pwaVal(r.FinishDateJ) + "</td></tr>";
-            html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + pwaVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + pwaVal(r.PlannedFinishJ) + "</td></tr>";
-            html += "<tr><td class='lbl'>مدیر پروژه:</td><td>" + pwaVal(r.ProjectManager) + "</td><td class='lbl'>ناظر پروژه:</td><td>" + pwaVal(r.ProjectSupervisor) + "</td></tr>";
-            html += "</table>";
-            html += "</div>";
+            var label = (r.ProjectType == null || r.ProjectType == '') ? 'بدون نوع' : r.ProjectType;
+            if (typeCount[label] > 1) {
+                typeSeen[label] = (typeSeen[label] || 0) + 1;
+                label = label + ' (' + typeSeen[label] + ')';
+            }
+            html += "<a href='javascript:void(0);' class='pwa-tab" + (i == 0 ? " is-active" : "") + "' data-idx='" + i + "'" +
+                " onclick=\"pwaShowTab('" + tabId + "', " + i + ");\" title='" + gisEscapeHtml(r.ProjectName) + "'>" +
+                "<span class='pwa-badge' style='background:" + PWA_CAT[rcat].hex + "'></span>" + gisEscapeHtml(label) + "</a>";
         }
         html += "</div>";
+        for (var j = 0; j < rows.length; j++) {
+            html += "<div class='pwa-tab-panel" + (j == 0 ? " is-active" : "") + "' data-idx='" + j + "'>" +
+                BuildProjectDetailHtml(rows[j], true) + "</div>";
+        }
+        html += "</div>";
+        html += "</div>";
         return html;
+    }
+
+    // تغییر تب فعال داخل پنجرهء اطلاعات پین
+    function pwaShowTab(tabId, idx) {
+        var root = document.getElementById(tabId);
+        if (!root) { return; }
+        var tabs = root.getElementsByTagName('a');
+        for (var i = 0; i < tabs.length; i++) {
+            if (tabs[i].className.indexOf('pwa-tab') < 0) { continue; }
+            tabs[i].className = 'pwa-tab' + (tabs[i].getAttribute('data-idx') == String(idx) ? ' is-active' : '');
+        }
+        var panels = root.getElementsByTagName('div');
+        for (var j = 0; j < panels.length; j++) {
+            if (panels[j].className.indexOf('pwa-tab-panel') < 0) { continue; }
+            panels[j].className = 'pwa-tab-panel' + (panels[j].getAttribute('data-idx') == String(idx) ? ' is-active' : '');
+        }
     }
 
     function BuildRegionInfoHtml(regionName, rows, cat) {
@@ -472,26 +851,33 @@
         var types = {}, typeOrder = [];
         for (var i = 0; i < rows.length; i++) {
             var r = rows[i];
-            sumPlan += pwaNum(r.PlannedProgress);
-            sumAct += pwaNum(r.ActualProgress);
+            var rp = pwaNum(r.PlannedProgress), ra = pwaNum(r.ActualProgress);
+            sumPlan += rp;
+            sumAct += ra;
             sumAch += pwaNum(r.AchievementPct);
-            if (pwaNum(r.ActualProgress) >= 100) { done++; }
-            if (pwaNum(r.ActualProgress) == 0) { notStarted++; }
+            if (ra >= 100) { done++; }
+            if (ra == 0) { notStarted++; }
             var t = (r.ProjectType == null || r.ProjectType == '') ? '(بدون نوع)' : r.ProjectType;
-            if (!types[t]) { types[t] = 0; typeOrder.push(t); }
-            types[t]++;
+            if (!types[t]) { types[t] = { n: 0, plan: 0, act: 0, rows: [] }; typeOrder.push(t); }
+            types[t].n++; types[t].plan += rp; types[t].act += ra; types[t].rows.push(r);
         }
+        var avgPlan = sumPlan / n, avgAct = sumAct / n;
         var html = "<div class='gis-iw gis-iw-pwa'>";
         html += "<h4><span class='pwa-badge' style='background:" + PWA_CAT[cat].hex + "'></span>منطقه: " + gisEscapeHtml(regionName) + "</h4>";
         html += "<table>";
         html += "<tr><td class='lbl'>تعداد پروژه:</td><td><b>" + n + "</b></td><td class='lbl'>تکمیل‌شده:</td><td>" + done + "</td></tr>";
         html += "<tr><td class='lbl'>آغاز نشده:</td><td>" + notStarted + "</td><td class='lbl'>دستهء تحقق:</td><td>" + PWA_CAT[cat].title + "</td></tr>";
-        html += "<tr><td class='lbl'>میانگین پیشرفت برنامه‌ای:</td><td>" + pwaPct(sumPlan / n) + "</td><td class='lbl'>میانگین پیشرفت واقعی:</td><td>" + pwaPct(sumAct / n) + "</td></tr>";
-        html += "<tr><td class='lbl'>میانگین درصد تحقق:</td><td><b>" + pwaPct(sumAch / n) + "</b></td><td></td><td></td></tr>";
+        html += "<tr><td class='lbl'>میانگین پیشرفت برنامه‌ای:</td><td>" + pwaPct(avgPlan) + "</td><td class='lbl'>میانگین پیشرفت واقعی:</td><td>" + pwaPct(avgAct) + "</td></tr>";
+        html += "<tr><td class='lbl'>میانگین درصد تحقق:</td><td><b>" + pwaPct(sumAch / n) + "</b></td><td colspan='2'>" + pwaBarHtml(avgPlan, avgAct) + "</td></tr>";
         html += "</table>";
         html += "<div class='pwa-item'><div class='pwa-name'>به تفکیک نوع پروژه</div><table>";
         for (var k = 0; k < typeOrder.length; k++) {
-            html += "<tr><td class='lbl'>" + gisEscapeHtml(typeOrder[k]) + "</td><td><b>" + types[typeOrder[k]] + "</b></td></tr>";
+            var ty = types[typeOrder[k]];
+            var tcat = pwaCategory(ty.rows);
+            html += "<tr><td class='lbl'><span class='pwa-badge' style='background:" + PWA_CAT[tcat].hex + "'></span>" + gisEscapeHtml(typeOrder[k]) + "</td>" +
+                "<td><b>" + ty.n + "</b></td>" +
+                "<td class='lbl'>" + pwaPct(ty.act / ty.n) + " از " + pwaPct(ty.plan / ty.n) + "</td>" +
+                "<td>" + pwaBarHtml(ty.plan / ty.n, ty.act / ty.n) + "</td></tr>";
         }
         html += "</table></div>";
         html += "<div class='gis-hint'>مرز ناحیه به‌صورت تقریبی از موقعیت پین‌های همین منطقه ساخته شده است.</div>";
@@ -569,6 +955,40 @@
     }
 
     // ---- پنل کناری ----
+    // انتخاب همه / انتخاب معکوس / پاک کردن همه: روی چک‌باکس‌های فهرست (مناطق و پین‌ها) اعمال و روی نقشه هم نمایش/مخفی می‌کند
+    function pwaSetAllVisible(mode) {
+        var list = document.getElementById('divSearchResult');
+        if (!list) { return; }
+        var boxes = list.getElementsByTagName('input');
+        for (var i = 0; i < boxes.length; i++) {
+            var cb = boxes[i];
+            if (cb.type != 'checkbox') { continue; }
+            var checked = (mode == 'all') ? true : (mode == 'none') ? false : !cb.checked;
+            cb.checked = checked;
+            var id = cb.id || '';
+            try {
+                if (id.indexOf('marker') == 0) {
+                    var m = gmarkers[parseInt(id.substring(6), 10)];
+                    if (m) { if (checked) { m.show(); } else { m.hide(); } }
+                }
+                else if (id.indexOf('Gan') == 0) {
+                    var g = ggans[parseInt(id.substring(3), 10)];
+                    if (g) { if (checked) { g.show(); } else { g.hide(); } }
+                }
+            } catch (e) { }
+        }
+        // اگر مورد انتخاب‌شده مخفی شد، پنجرهء اطلاعات و حالت انتخاب هم بسته شود
+        var sel = pwaSel.marker || pwaSel.poly;
+        if (sel) {
+            var hidden = false;
+            try { hidden = sel.isHidden(); } catch (e) { }
+            if (hidden) {
+                map.closeInfoWindow();
+                pwaClearSelection();
+            }
+        }
+    }
+
     function togglePanelSearch() {
         if (document.getElementById('divSearchOptions') == null) { return; }
         if (document.getElementById('divSearchOptions').style.display == 'none') {
@@ -603,6 +1023,14 @@
                                     <button type="button" id="map_SearchArrow" class="gis-toggle" onclick="togglePanelSearch();" title="نمایش فهرست">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M15 4v16" /><path d="M6 9h5M6 13h5" /></svg>
                                         <span>فهرست مناطق و پین‌ها</span>
+                                    </button>
+                                    <button type="button" id="btnShowSearchOption" class="gis-toggle" onclick="ShowSearchOptionProject();" title="جستجوی پیشرفته روی فیلدهای پروژه">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4-2v-4z" /></svg>
+                                        <span>جستجو</span>
+                                    </button>
+                                    <button type="button" id="btnDelSearchOption" class="gis-toggle pwa-toggle-danger" style="display: none;" onclick="DeLSearchOption();" title="حذف شرط‌های جستجوی پیشرفته">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14" /><path d="M10 10v7M14 10v7" /></svg>
+                                        <span>حذف شرایط</span>
                                     </button>
                                 </div>
                                 <div class="gis-field">
@@ -650,6 +1078,20 @@
                                 <div id="PanelSearchResult" class="gis-panel-inner">
                                     <div class="gis-panel-head">
                                         <div id="divSearchCount" class="gis-counts"></div>
+                                        <div class="gis-toolbar pwa-selbar">
+                                            <button type="button" class="gis-tool gis-tool-text" onclick="pwaSetAllVisible('all');" title="انتخاب همه: نمایش همهء مناطق و پین‌ها">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M7 12.5l3.5 3.5L17 9" /></svg>
+                                                <span>همه</span>
+                                            </button>
+                                            <button type="button" class="gis-tool gis-tool-text" onclick="pwaSetAllVisible('invert');" title="انتخاب معکوس: برعکس کردن وضعیت نمایش هر مورد">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11l-3-3M20 17H9l3 3" /></svg>
+                                                <span>معکوس</span>
+                                            </button>
+                                            <button type="button" class="gis-tool gis-tool-text gis-tool-danger" onclick="pwaSetAllVisible('none');" title="پاک کردن همه: مخفی کردن همهء مناطق و پین‌ها">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 8l8 8M16 8l-8 8" /></svg>
+                                                <span>هیچ</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div id="divSearchResult" class="gis-list"></div>
                                 </div>
@@ -737,6 +1179,10 @@
             if (!overlay) {
                 map.closeInfoWindow();
             }
+        });
+        // با بسته شدن پنجرهء اطلاعات، حالت انتخاب مارکر/ناحیه/ردیف فهرست هم پاک می‌شود
+        GEvent.addListener(map, "infowindowclose", function () {
+            pwaClearSelection();
         });
     }
     else {

@@ -307,6 +307,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\FilterInstgah.html" />
     <Content Include="Layouts\Sazmanyar.GIS\FilterMaseer.html" />
     <Content Include="Layouts\Sazmanyar.GIS\FilterSath.html" />
+    <Content Include="Layouts\Sazmanyar.GIS\FilterProject.html" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\awesome-bootstrap-checkbox.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker.fa.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker3.min.css" />
@@ -331,6 +332,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsIstgah.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsMaseer.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsSath.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsProject.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\docs.min.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\html5shiv.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\jquery-1.11.2.min.js" />

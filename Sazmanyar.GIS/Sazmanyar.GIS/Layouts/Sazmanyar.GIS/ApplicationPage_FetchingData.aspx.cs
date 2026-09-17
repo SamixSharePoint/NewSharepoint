@@ -1633,12 +1633,12 @@ namespace Sazmanyar.GIS.Layouts.Sazmanyar.GIS
             return ClsHelpper.GetPWARegions(ProjectType);
         }
 
-        /// <summary>پروژه‌های PWAInfo با مختصات؛ ProjectType / Region خالی = بدون فیلتر</summary>
+        /// <summary>پروژه‌های PWAInfo با مختصات؛ ProjectType / Region خالی = بدون فیلتر؛ Condition = شرط جستجوی پیشرفته (خالی = بدون شرط)</summary>
         [WebMethod]
-        public static List<Dictionary<string, string>> FetchPWAProjects(string ProjectType, string Region)
+        public static List<Dictionary<string, string>> FetchPWAProjects(string ProjectType, string Region, string Condition)
         {
             List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
-            DataTable objDataTable = ClsHelpper.FetchPWAProjects(ProjectType, Region);
+            DataTable objDataTable = ClsHelpper.FetchPWAProjects(ProjectType, Region, Condition);
 
             foreach (DataRow item in objDataTable.Rows)
             {
