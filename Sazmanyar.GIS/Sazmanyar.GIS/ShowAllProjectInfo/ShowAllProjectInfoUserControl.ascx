@@ -19,6 +19,10 @@
       * پروژه‌هایی که مختصات یکسان دارند یک پین می‌شوند و در InfoWindow جدا از هم فهرست می‌شوند
         (پروژهء چندنوعی در PWAInfo چند سطر است؛ هر سطر با نوع خودش نمایش داده می‌شود).
       * رنگ پین و ناحیه با همان دسته‌های تحقق GISInfo: 1 سبز (>90٪) 2 زرد (70-90) 3 صورتی (50-70) 4 قرمز (<50) 5 خاکستری (آغاز نشده)
+      * برگه‌های واقعی (dbo.MapSheets، ستون JSON «Sheets» در خروجی FetchPWAProjects): پروژه‌ای که برگه دارد
+        - پین آن روی مرکز برگه (میانگین مرکز برگه‌ها) می‌نشیند، نه Lat/Long تقریبی PWAInfo
+        - مرز واقعی برگه‌هایش به‌صورت یک گروه سطح (یک ردیف در فهرست) با رنگ تحقق کشیده می‌شود
+        - در ساخت ناحیهء تقریبی منطقه شرکت نمی‌کند (اگر همهء پروژه‌های منطقه برگه داشته باشند، ناحیهء تقریبی کشیده نمی‌شود)
 --%>
 
 <style type="text/css">
@@ -387,6 +391,43 @@
         return gisEscapeHtml(v);
     }
 
+    // برگه‌های واقعی یک سطر (ستون Sheets: JSON آرایهء برگه‌های MapSheets)؛ یک بار پارس و روی خود شیء کش می‌شود
+    function pwaSheets(r) {
+        if (!r) { return []; }
+        if (r._sheets) { return r._sheets; }
+        var arr = [];
+        try { arr = JSON.parse(r.Sheets || '[]'); } catch (e) { arr = []; }
+        if (!arr || !arr.length) { arr = []; }
+        r._sheets = arr;
+        return arr;
+    }
+
+    // موقعیت مؤثر پین یک سطر: اگر برگه دارد میانگین مرکز برگه‌ها، وگرنه Lat/Long تقریبی PWAInfo
+    function pwaEffectivePos(r) {
+        if (r._pos) { return r._pos; }
+        var sheets = pwaSheets(r);
+        var pos = { lat: pwaNum(r.Lat), lng: pwaNum(r.Long), fromSheet: false };
+        if (sheets.length > 0) {
+            var sLat = 0, sLng = 0, n = 0;
+            for (var i = 0; i < sheets.length; i++) {
+                var la = pwaNum(sheets[i].CentroidLat), ln = pwaNum(sheets[i].CentroidLong);
+                if (la == 0 && ln == 0) { continue; }
+                sLat += la; sLng += ln; n++;
+            }
+            if (n > 0) { pos = { lat: sLat / n, lng: sLng / n, fromSheet: true }; }
+        }
+        r._pos = pos;
+        return pos;
+    }
+
+    function pwaSheetLabel(sheets) {
+        var parts = [];
+        for (var i = 0; i < sheets.length; i++) {
+            parts.push(String(sheets[i].SheetNo || '') + (sheets[i].SheetNameFa ? ' ' + sheets[i].SheetNameFa : ''));
+        }
+        return parts.join('، ');
+    }
+
     function pwaPct(v) {
         if (v == null || v == '' || v == 'NULL') { return '-'; }
         return gisEscapeHtml(String(Math.round(pwaNum(v) * 100) / 100)) + '٪';
@@ -549,7 +590,8 @@
 
         for (var i = 0; i < rows.length; i++) {
             var r = rows[i];
-            var lat = pwaNum(r.Lat), lng = pwaNum(r.Long);
+            var pos = pwaEffectivePos(r);
+            var lat = pos.lat, lng = pos.lng;
             if (lat == 0 || lng == 0) { continue; }
             nProjects++;
 
@@ -584,6 +626,8 @@
             var pts = [];
             var seen = {};
             for (var j = 0; j < regionRows.length; j++) {
+                // پروژه‌ای که برگهء واقعی دارد در ناحیهء تقریبی منطقه شرکت نمی‌کند (مرز واقعی‌اش جدا کشیده می‌شود)
+                if (pwaSheets(regionRows[j]).length > 0) { continue; }
                 var k = pwaNum(regionRows[j].Lat).toFixed(5) + ',' + pwaNum(regionRows[j].Long).toFixed(5);
                 if (seen[k]) { continue; }
                 seen[k] = true;
@@ -637,6 +681,72 @@
                 bounds.extend(gb.getSouthWest());
             }
             for (var o = 0; o < polys.length; o++) { map.addOverlay(polys[o]); }
+        }
+
+        // 2b) مرز واقعی برگه‌ها: هر پروژهء برگه‌دار (کد پروژه) یک گروه سطح با همان رابط PwaRegionGroup و یک ردیف در فهرست؛
+        //     رنگ = دستهء تحقق همهء سطرهای آن کد؛ کلیک = همان پنجرهء پین (با تب برای پروژهء چندنوعی)
+        var byCode = {}, codeOrder = [];
+        for (var sc = 0; sc < rows.length; sc++) {
+            var sr = rows[sc];
+            if (pwaSheets(sr).length == 0) { continue; }
+            var ck = (sr.ProjectCode == null || sr.ProjectCode == '') ? ('#' + sc) : sr.ProjectCode;
+            if (!byCode[ck]) { byCode[ck] = []; codeOrder.push(ck); }
+            byCode[ck].push(sr);
+        }
+        for (var cc = 0; cc < codeOrder.length; cc++) {
+            var codeRows = byCode[codeOrder[cc]];
+            var sheets = pwaSheets(codeRows[0]);
+            var scat = pwaCategory(codeRows);
+            var scolor = PWA_CAT[scat].hex;
+            var spolys = [];
+            for (var sh = 0; sh < sheets.length; sh++) {
+                var ring = [];
+                try {
+                    var arr = JSON.parse(sheets[sh].Boundary || '[]');
+                    for (var v = 0; v < arr.length; v++) {
+                        var la = pwaNum(arr[v].lat), ln = pwaNum(arr[v].lng);
+                        if (la == 0 && ln == 0) { continue; }
+                        ring.push(new GLatLng(la, ln));
+                    }
+                } catch (e) { ring = []; }
+                if (ring.length < 3) { continue; }
+                ring.push(ring[0]);
+                var spoly = new GPolygon(ring, scolor, 2, 0.9, scolor, gisAreaOpacity(null), { clickable: true });
+                spoly.pwaColor = scolor;
+                spolys.push(spoly);
+            }
+            if (spolys.length == 0) { continue; }
+
+            var sgroup = new PwaRegionGroup(spolys, codeRows[0].Region || '', scolor);
+            ggans.push(sgroup);
+            var sgan_num = ggans.length - 1;
+
+            (function (grp, html, num) {
+                GEvent.addListener(grp, 'click', function (point) {
+                    if (!point) {
+                        var b = grp.getBounds();
+                        point = b ? b.getCenter() : grp.getVertex(0);
+                        map.panTo(point);
+                    }
+                    pwaSelectPolygon(grp, num);
+                    map.openInfoWindowHtml(point, html);
+                });
+                for (var q = 0; q < grp.polys.length; q++) {
+                    GEvent.addListener(grp.polys[q], 'click', function (point) {
+                        GEvent.trigger(grp, 'click', point);
+                    });
+                }
+            })(sgroup, BuildPinInfoHtml(codeRows), sgan_num);
+
+            var slbl = 'برگه ' + pwaSheetLabel(sheets) + ' [' + pwaPinTitle(codeRows) + (sheets.length > 1 ? ' - ' + sheets.length + ' برگه' : '') + ']';
+            areaHtml += gisResultItem('area', 'Gan', sgan_num, 'toggleGan', scolor, 'ggans', slbl);
+
+            var sgb = sgroup.getBounds();
+            if (sgb) {
+                bounds.extend(sgb.getNorthEast());
+                bounds.extend(sgb.getSouthWest());
+            }
+            for (var so = 0; so < spolys.length; so++) { map.addOverlay(spolys[so]); }
         }
 
         // 3) پین‌ها (یک پین برای هر نقطه؛ InfoWindow همهء پروژه‌های آن نقطه را فهرست می‌کند)
@@ -811,6 +921,10 @@
         html += "<tr><td class='lbl'>شروع:</td><td>" + pwaVal(r.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + pwaVal(r.FinishDateJ) + "</td></tr>";
         html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + pwaVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + pwaVal(r.PlannedFinishJ) + "</td></tr>";
         html += "<tr><td class='lbl'>مدیر پروژه:</td><td>" + pwaVal(r.ProjectManager) + "</td><td class='lbl'>ناظر پروژه:</td><td>" + pwaVal(r.ProjectSupervisor) + "</td></tr>";
+        var sheets = pwaSheets(r);
+        if (sheets.length > 0) {
+            html += "<tr><td class='lbl'>برگه" + (sheets.length > 1 ? " (" + sheets.length + ")" : "") + ":</td><td colspan='3' style='white-space:normal'>" + gisEscapeHtml(pwaSheetLabel(sheets)) + "</td></tr>";
+        }
         html += "</table>";
         return html;
     }
@@ -912,7 +1026,7 @@
                 "<td>" + pwaBarHtml(ty.plan / ty.n, ty.act / ty.n) + "</td></tr>";
         }
         html += "</table></div>";
-        html += "<div class='gis-hint'>مرز ناحیه به‌صورت تقریبی از موقعیت پین‌های همین منطقه ساخته شده است.</div>";
+        html += "<div class='gis-hint'>مرز ناحیه به‌صورت تقریبی از موقعیت پین‌های همین منطقه ساخته شده است؛ پروژه‌های دارای برگهء واقعی جداگانه با مرز خودشان نمایش داده می‌شوند.</div>";
         html += "</div>";
         return html;
     }

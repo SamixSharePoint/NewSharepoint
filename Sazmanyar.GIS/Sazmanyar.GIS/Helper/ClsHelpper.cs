@@ -2848,6 +2848,11 @@ namespace Sazmanyar.GIS
                     objCmd.Parameters.Add("@Region", SqlDbType.NVarChar, 50).Value = (strRegion ?? "").Trim();
                     SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
                     objSqlDataAdapter.Fill(objDatatable);
+
+                    // برگه‌های واقعی (dbo.MapSheets) هر پروژه به‌صورت JSON در ستون Sheets؛ وب‌پارت پین را روی مرکز برگه می‌گذارد،
+                    // مرز واقعی برگه را می‌کشد و این پروژه‌ها را از ساخت ناحیهء تقریبی منطقه کنار می‌گذارد.
+                    // اگر جدول MapSheets روی این پایگاه نباشد، فقط لاگ می‌شود و ستون خالی می‌ماند.
+                    AttachMapSheetsToProjects(objDatatable, objSqlConnection);
                     objSqlConnection.Close();
                 }
             }
@@ -2856,6 +2861,68 @@ namespace Sazmanyar.GIS
                 ClsHelpper.WriteToLogFile("FetchPWAProjects: " + e.Message);
             }
             return objDatatable;
+        }
+
+        /// <summary>ستون Sheets (JSON آرایهء برگه‌های MapSheets با همان ProjectCode) را به جدول پروژه‌ها اضافه می‌کند؛ بدون برگه: []</summary>
+        private static void AttachMapSheetsToProjects(DataTable objProjects, SqlConnection objSqlConnection)
+        {
+            if (!objProjects.Columns.Contains("Sheets")) { objProjects.Columns.Add("Sheets", typeof(string)); }
+            foreach (DataRow r in objProjects.Rows) { r["Sheets"] = "[]"; }
+
+            List<string> codes = new List<string>();
+            foreach (DataRow r in objProjects.Rows)
+            {
+                string c = r["ProjectCode"] == DBNull.Value ? "" : Convert.ToString(r["ProjectCode"]).Trim();
+                if (c.Length > 0 && !codes.Contains(c)) { codes.Add(c); }
+            }
+            if (codes.Count == 0) { return; }
+
+            Dictionary<string, List<Dictionary<string, string>>> byCode = new Dictionary<string, List<Dictionary<string, string>>>();
+            try
+            {
+                for (int start = 0; start < codes.Count; start += 200)
+                {
+                    List<string> names = new List<string>();
+                    SqlCommand objCmd = new SqlCommand();
+                    objCmd.Connection = objSqlConnection;
+                    for (int i = start; i < Math.Min(codes.Count, start + 200); i++)
+                    {
+                        string prm = "@c" + i;
+                        names.Add(prm);
+                        objCmd.Parameters.Add(prm, SqlDbType.VarChar, 20).Value = codes[i];
+                    }
+                    objCmd.CommandText = " SELECT ProjectCode, SheetNo, SheetScale, SheetNameFa, SheetNameEn, CentroidLat, CentroidLong, AreaKm2, Boundary " +
+                                         " FROM dbo.MapSheets WHERE ProjectCode IN (" + string.Join(",", names.ToArray()) + ") ORDER BY ProjectCode, SheetNo ";
+                    DataTable objSheets = new DataTable();
+                    new SqlDataAdapter(objCmd).Fill(objSheets);
+                    foreach (DataRow sr in objSheets.Rows)
+                    {
+                        string code = Convert.ToString(sr["ProjectCode"]).Trim();
+                        Dictionary<string, string> item = new Dictionary<string, string>();
+                        foreach (DataColumn col in objSheets.Columns)
+                        {
+                            if (col.ColumnName == "ProjectCode") { continue; }
+                            object v = sr[col.ColumnName];
+                            item[col.ColumnName] = (v is decimal || v is double || v is float) ? ToInvariantNumber(v) : (v == null || v == DBNull.Value ? "" : v.ToString());
+                        }
+                        if (!byCode.ContainsKey(code)) { byCode[code] = new List<Dictionary<string, string>>(); }
+                        byCode[code].Add(item);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile("FetchPWAProjects.AttachMapSheetsToProjects: " + e.Message);
+                return;
+            }
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            ser.MaxJsonLength = int.MaxValue;
+            foreach (DataRow r in objProjects.Rows)
+            {
+                string c = r["ProjectCode"] == DBNull.Value ? "" : Convert.ToString(r["ProjectCode"]).Trim();
+                if (c.Length > 0 && byCode.ContainsKey(c)) { r["Sheets"] = ser.Serialize(byCode[c]); }
+            }
         }
 
         // ستون‌هایی که در شرط جستجو مجازند (شناسهء فیلترهای demo_widgetsProject.js)
