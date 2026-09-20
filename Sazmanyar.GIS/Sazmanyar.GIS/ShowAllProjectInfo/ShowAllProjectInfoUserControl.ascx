@@ -23,6 +23,7 @@
         - پین آن روی مرکز برگه (میانگین مرکز برگه‌ها) می‌نشیند، نه Lat/Long تقریبی PWAInfo
         - مرز واقعی برگه‌هایش به‌صورت یک گروه سطح (یک ردیف در فهرست) با رنگ تحقق کشیده می‌شود
         - در ساخت ناحیهء تقریبی منطقه شرکت نمی‌کند (اگر همهء پروژه‌های منطقه برگه داشته باشند، ناحیهء تقریبی کشیده نمی‌شود)
+        - پین آن آیکون «برگهء نقشه» (SVG درون‌خطی، همان ShowAllMapSheetInfo) است؛ چند پروژه در یک پین = دستهء برگه + نشان تعداد
 --%>
 
 <style type="text/css">
@@ -428,6 +429,50 @@
         return parts.join('، ');
     }
 
+    // ---- آیکون پین پروژه‌های برگه‌دار: SVG درون‌خطی به شکل برگهء نقشه (همان msSheetIcon در ShowAllMapSheetInfo) ----
+    // count > 1 (چند پروژه در یک پین): چند برگهء روی هم (تا 3 لایه) + نشان گرد تعداد. هر (رنگ، تعداد، شناسهء انتخاب) یک بار
+    // ساخته و کش می‌شود. selIdx فقط برای پین انتخاب‌شده: id داخل SVG تا عنصر <img> آن در DOM پیدا و انیمیت شود
+    // (افزودن ?pwasel= به data: URI، که برای پین‌های تصویری استفاده می‌شود، SVG را خراب می‌کند).
+    var pwaSheetIconCache = {};
+    function pwaSheetIcon(hex, selIdx, count) {
+        count = count || 1;
+        var key = hex + '|' + count + '|' + (selIdx == null ? '' : selIdx);
+        if (pwaSheetIconCache[key]) { return pwaSheetIconCache[key]; }
+        var w = 30, h = 38;
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 30 38">' +
+            (selIdx == null ? '<g>' : '<g id="pwasel-' + selIdx + '">') +
+            '<path d="M13 37 L8 29 H18 Z" fill="#1f2937"/>';
+        var layers = Math.min(3, count);
+        for (var L = layers - 1; L >= 1; L--) {
+            svg += '<g transform="translate(' + (3 * L) + ',' + (-3 * L) + ')">' +
+                '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="' + hex + '" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/>' +
+                '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="#ffffff" fill-opacity="' + (0.25 * L) + '"/>' +
+                '</g>';
+        }
+        svg += '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="' + hex + '" stroke="#1f2937" stroke-width="1.4" stroke-linejoin="round"/>' +
+            '<path d="M17 6.5 V12 H22.5" fill="#ffffff" fill-opacity="0.85" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/>' +
+            '<path d="M9.5 12.5 V29.5 M16 15 V29.5 M3.5 18 H22.5 M3.5 23.5 H22.5" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.1"/>';
+        if (count > 1) {
+            var txt = count > 9 ? '9+' : String(count);
+            svg += '<circle cx="23.5" cy="7" r="6.2" fill="#1f2937" stroke="#ffffff" stroke-width="1.3"/>' +
+                '<text x="23.5" y="7" dy="0.36em" text-anchor="middle" font-family="Arial, Tahoma" font-size="' + (count > 9 ? 7.5 : 8.5) + '" font-weight="bold" fill="#ffffff">' + txt + '</text>';
+        }
+        svg += '</g></svg>';
+        var icon = new GIcon();
+        icon.image = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        icon.iconSize = new GSize(w, h);
+        icon.iconAnchor = new GPoint(13, 37);
+        icon.infoWindowAnchor = new GPoint(13, 4);
+        pwaSheetIconCache[key] = icon;
+        return icon;
+    }
+
+    // آیا دست‌کم یکی از سطرهای یک پین برگهء واقعی دارد؟
+    function pwaRowsHaveSheets(rows) {
+        for (var i = 0; i < rows.length; i++) { if (pwaSheets(rows[i]).length > 0) { return true; } }
+        return false;
+    }
+
     function pwaPct(v) {
         if (v == null || v == '' || v == 'NULL') { return '-'; }
         return gisEscapeHtml(String(Math.round(pwaNum(v) * 100) / 100)) + '٪';
@@ -758,10 +803,15 @@
             var point = new GLatLng(pt.lat, pt.lng);
             var title = pwaPinTitle(pt.rows);
 
-            var pIcon = get_icon(PWA_CAT[pcat].marker);
-            var marker = new GMarker(point, { icon: pIcon, title: title });
+            // پین برگه‌دار: آیکون برگهء نقشه (چند پروژه = دستهء برگه + نشان تعداد)؛ بقیه: پین گرد رنگی
+            var bSheetPin = pwaRowsHaveSheets(pt.rows);
+            var pIcon = bSheetPin ? pwaSheetIcon(pcolor, null, pt.rows.length) : get_icon(PWA_CAT[pcat].marker);
+            var marker = new GMarker(point, { icon: pIcon, title: title + (pt.rows.length > 1 ? ' (' + pt.rows.length + ' پروژه)' : '') });
             marker.pwaRows = pt.rows;
             marker.pwaImage = pIcon.image;
+            marker.pwaIsSheet = bSheetPin;
+            marker.pwaColor = pcolor;
+            marker.pwaCount = pt.rows.length;
             marker.pwaHtml = BuildPinInfoHtml(pt.rows);
             marker.pwaRegion = pt.region;   // برای خوشه‌بندی پین‌ها در محدودهء همان منطقه (بخش «خوشه‌بندی پین‌ها»)
             marker.pwaUserHidden = false;   // با چک‌باکس فهرست مخفی شده؟
@@ -863,9 +913,18 @@
         pwaClearSelection();
         pwaSel.marker = mk;
         pwaSel.markerImg = mk.pwaImage;
-        try { mk.setImage(mk.pwaImage + '?pwasel=' + marker_num); } catch (e) { }
+        // پین تصویری: نشانهء یکتا در query string؛ پین SVG برگه: id داخل خود SVG
+        var selector;
+        if (mk.pwaIsSheet) {
+            try { mk.setImage(pwaSheetIcon(mk.pwaColor, marker_num, mk.pwaCount).image); } catch (e) { }
+            selector = '.gis-root img[src*="pwasel-' + marker_num + '%22"]';
+        }
+        else {
+            try { mk.setImage(mk.pwaImage + '?pwasel=' + marker_num); } catch (e) { }
+            selector = '.gis-root img[src*="pwasel=' + marker_num + '"]';
+        }
         setTimeout(function () {
-            var imgs = document.querySelectorAll('.gis-root img[src*="pwasel=' + marker_num + '"]');
+            var imgs = document.querySelectorAll(selector);
             for (var i = 0; i < imgs.length; i++) {
                 // موتور نقشه تصویر مارکر را داخل یک div با overflow:hidden می‌گذارد؛ کلاس روی همان div می‌نشیند
                 var el = (imgs[i].parentNode && imgs[i].parentNode.tagName == 'DIV') ? imgs[i].parentNode : imgs[i];
