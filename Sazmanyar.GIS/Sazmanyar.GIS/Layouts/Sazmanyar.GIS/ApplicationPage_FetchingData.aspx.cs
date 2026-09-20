@@ -1654,6 +1654,60 @@ namespace Sazmanyar.GIS.Layouts.Sazmanyar.GIS
 
         #endregion
 
+        #region MapSheets (وب‌پارت ShowAllMapSheets)
+
+        /// <summary>
+        /// برگه‌های نقشه (dbo.MapSheets) به همراه اطلاعات پروژهء متصل از PWAInfo.
+        /// SheetNo: بخشی از شمارهء یا نام برگه؛ ProjectCode: کد پروژه؛ ImportBatch: GUID یک Import. هر کدام خالی = بدون فیلتر.
+        /// Boundary به‌صورت JSON [{"lat":..,"lng":..},...] است (همان قالب PolygonPoints لیست سطح‌ها).
+        /// </summary>
+        [WebMethod]
+        public static List<Dictionary<string, string>> FetchMapSheets(string SheetNo, string ProjectCode, string ImportBatch)
+        {
+            List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
+            DataTable objDataTable = ClsHelpper.FetchMapSheets(SheetNo, ProjectCode, ImportBatch);
+
+            foreach (DataRow item in objDataTable.Rows)
+            {
+                Dictionary<string, string> objItem = new Dictionary<string, string>();
+                foreach (DataColumn ColItem in objDataTable.Columns)
+                {
+                    object v = item[ColItem.ColumnName];
+                    if (v is decimal || v is double || v is float)
+                    {
+                        objItem.Add(ColItem.ColumnName, ClsHelpper.ToInvariantNumber(v));
+                    }
+                    else
+                    {
+                        objItem.Add(ColItem.ColumnName, v == null || v == DBNull.Value ? "" : v.ToString());
+                    }
+                }
+                lstResult.Add(objItem);
+            }
+            return lstResult;
+        }
+
+        /// <summary>خلاصهء Importهای برگه‌ها (جدیدترین اول)</summary>
+        [WebMethod]
+        public static List<Dictionary<string, string>> FetchMapSheetsImportBatches()
+        {
+            List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
+            DataTable objDataTable = ClsHelpper.FetchMapSheetsImportBatches();
+
+            foreach (DataRow item in objDataTable.Rows)
+            {
+                Dictionary<string, string> objItem = new Dictionary<string, string>();
+                foreach (DataColumn ColItem in objDataTable.Columns)
+                {
+                    objItem.Add(ColItem.ColumnName, item[ColItem.ColumnName].ToString());
+                }
+                lstResult.Add(objItem);
+            }
+            return lstResult;
+        }
+
+        #endregion
+
         #endregion
 
         #endregion

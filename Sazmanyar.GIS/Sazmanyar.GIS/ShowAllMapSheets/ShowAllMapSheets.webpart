@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Sazmanyar.GIS.ShowAllMapSheets.ShowAllMapSheets, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">برگه‌های نقشه (MapSheets)</property>
+        <property name="Description" type="string">بارگذاری Shapefile برگه‌های نقشه از کارفرما (ZIP) و نمایش سطح واقعی پروژه‌های PWA روی نقشه</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

@@ -558,8 +558,20 @@
             byRegion[regionKey].push(r);
 
             var pointKey = lat.toFixed(5) + ',' + lng.toFixed(5);
-            if (!byPoint[pointKey]) { byPoint[pointKey] = { lat: lat, lng: lng, rows: [] }; pointOrder.push(pointKey); }
+            if (!byPoint[pointKey]) { byPoint[pointKey] = { lat: lat, lng: lng, rows: [], regionCounts: {} }; pointOrder.push(pointKey); }
             byPoint[pointKey].rows.push(r);
+            // معمولاً همهء ردیف‌های یک نقطه از یک منطقه‌اند؛ اگر (به‌ندرت) نبودند، منطقهء غالب انتخاب می‌شود
+            byPoint[pointKey].regionCounts[regionKey] = (byPoint[pointKey].regionCounts[regionKey] || 0) + 1;
+        }
+
+        // منطقهء غالب هر نقطه (برای خوشه‌بندی پین‌ها در همان منطقه، نه سراسر نقشه)
+        for (var pk = 0; pk < pointOrder.length; pk++) {
+            var ptRec = byPoint[pointOrder[pk]];
+            var bestRegion = null, bestCount = -1;
+            for (var rk in ptRec.regionCounts) {
+                if (ptRec.regionCounts[rk] > bestCount) { bestCount = ptRec.regionCounts[rk]; bestRegion = rk; }
+            }
+            ptRec.region = bestRegion;
         }
 
         // 2) ناحیه‌های هر منطقه: نقاط منطقه خوشه‌بندی می‌شوند (فاصلهء آستانه از اسلایدر) و هر خوشه یک لکهء نرم می‌شود؛
@@ -641,6 +653,7 @@
             marker.pwaRows = pt.rows;
             marker.pwaImage = pIcon.image;
             marker.pwaHtml = BuildPinInfoHtml(pt.rows);
+            marker.pwaRegion = pt.region;   // برای خوشه‌بندی پین‌ها در محدودهء همان منطقه (بخش «خوشه‌بندی پین‌ها»)
             marker.pwaUserHidden = false;   // با چک‌باکس فهرست مخفی شده؟
             marker.pwaClustered = false;    // داخل یک خوشه پنهان شده؟
             gmarkers.push(marker);
@@ -1079,6 +1092,9 @@
 
     // ---- خوشه‌بندی پین‌ها (MarkerClusterer سبک، وابسته به زوم) ----
     // پین‌هایی که در زوم فعلی روی هم می‌افتند (فاصله‌شان کمتر از حدود 40 پیکسل است) یک نشانگر شمارنده می‌شوند.
+    // خوشه‌بندی همیشه داخل یک منطقه انجام می‌شود، نه بین دو منطقهء مجاور؛ در نتیجه هیچ ناحیه‌ای که پین دارد
+    // بدون خوشه/پین نمی‌ماند، و موقعیت نشانگر خوشه همیشه روی یکی از پین‌های واقعی (Medoid) است، نه میانگین
+    // ریاضی، تا همیشه داخل شکل ناحیهء خودش بیفتد.
     // کلیک روی خوشه: زوم به داخل؛ در بیشترین زوم: فهرست پروژه‌های خوشه. با هر تغییر زوم دوباره محاسبه می‌شود.
     var pwaClusterEnabled = true;
     var pwaClusterMarkers = [];          // نشانگرهای خوشه که الان روی نقشه‌اند
@@ -1120,6 +1136,21 @@
         return icon;
     }
 
+    // نزدیک‌ترین عضو خوشه به میانگین مختصات (Medoid)؛ چون هر پین از قبل داخل شکل ناحیهء خودش تضمین‌شده
+    // است (به همان روش پوستهء محدب+حاشیهء pwaRegionShape)، قرار دادن نشانگر خوشه دقیقاً روی یکی از پین‌های
+    // واقعی، به‌جای میانگین ریاضی، تضمین می‌کند خوشه همیشه داخل محدودهء ناحیه بماند، نه در فاصلهء بین دو ناحیه.
+    function pwaClusterMedoid(cl) {
+        var sumLat = 0, sumLng = 0;
+        for (var i = 0; i < cl.length; i++) { sumLat += cl[i].lat; sumLng += cl[i].lng; }
+        var cLat = sumLat / cl.length, cLng = sumLng / cl.length;
+        var best = cl[0], bestD = Infinity;
+        for (var j = 0; j < cl.length; j++) {
+            var d = pwaDistKm(cl[j].lat, cl[j].lng, cLat, cLng);
+            if (d < bestD) { bestD = d; best = cl[j]; }
+        }
+        return best;
+    }
+
     function pwaRebuildMarkerClusters() {
         if (typeof map == 'undefined' || map == null) { return; }
         for (var c = 0; c < pwaClusterMarkers.length; c++) {
@@ -1132,51 +1163,57 @@
             return;
         }
 
-        // فقط پین‌هایی که کاربر مخفی نکرده
-        var pts = [];
+        // پین‌هایی که کاربر مخفی نکرده، به تفکیک منطقه (تا خوشه هرگز از مرز یک ناحیه به ناحیهء دیگر پل نزند
+        // و در نتیجه هیچ ناحیه‌ای بدون خوشه/پین داخلش نماند)
+        var byRegion = {};
         for (var k = 0; k < gmarkers.length; k++) {
             var m = gmarkers[k];
             if (m.pwaUserHidden) { m.pwaClustered = false; m.hide(); continue; }
             var ll = m.getLatLng();
-            pts.push({ lat: ll.lat(), lng: ll.lng(), idx: k });
+            var rk = m.pwaRegion || '(بدون منطقه)';
+            if (!byRegion[rk]) { byRegion[rk] = []; }
+            byRegion[rk].push({ lat: ll.lat(), lng: ll.lng(), idx: k });
         }
 
-        var clusters = pwaClusterPoints(pts, pwaClusterThresholdKm());
-        for (var q = 0; q < clusters.length; q++) {
-            var cl = clusters[q];
-            if (cl.length == 1) {
-                var single = gmarkers[cl[0].idx];
-                single.pwaClustered = false;
-                pwaApplyMarkerVisibility(single);
-                continue;
+        var thresholdKm = pwaClusterThresholdKm();
+        for (var regionKey in byRegion) {
+            var clusters = pwaClusterPoints(byRegion[regionKey], thresholdKm);
+            for (var q = 0; q < clusters.length; q++) {
+                var cl = clusters[q];
+                if (cl.length == 1) {
+                    var single = gmarkers[cl[0].idx];
+                    single.pwaClustered = false;
+                    pwaApplyMarkerVisibility(single);
+                    continue;
+                }
+                var rows = [], members = [];
+                for (var j = 0; j < cl.length; j++) {
+                    var gm = gmarkers[cl[j].idx];
+                    gm.pwaClustered = true;
+                    gm.hide();
+                    rows = rows.concat(gm.pwaRows);
+                    members.push(cl[j].idx);
+                }
+                var medoid = pwaClusterMedoid(cl);
+                var center = new GLatLng(medoid.lat, medoid.lng);
+                var cat = pwaCategory(rows);
+                var cm = new GMarker(center, { icon: pwaClusterIconWithCount(rows.length, PWA_CAT[cat].hex), title: rows.length + ' پروژه در ' + cl.length + ' نقطه' });
+                cm.pwaMembers = members;
+                cm.pwaRows = rows;
+                (function (clusterMarker, pos) {
+                    GEvent.addListener(clusterMarker, 'click', function () {
+                        var z = map.getZoom();
+                        if (z < PWA_MAX_CLUSTER_ZOOM) {
+                            map.setCenter(pos, Math.min(PWA_MAX_CLUSTER_ZOOM, z + 2));
+                        }
+                        else {
+                            map.openInfoWindowHtml(pos, BuildClusterInfoHtml(clusterMarker));
+                        }
+                    });
+                })(cm, center);
+                pwaClusterMarkers.push(cm);
+                map.addOverlay(cm);
             }
-            var sumLat = 0, sumLng = 0, rows = [], members = [];
-            for (var j = 0; j < cl.length; j++) {
-                var gm = gmarkers[cl[j].idx];
-                gm.pwaClustered = true;
-                gm.hide();
-                sumLat += cl[j].lat; sumLng += cl[j].lng;
-                rows = rows.concat(gm.pwaRows);
-                members.push(cl[j].idx);
-            }
-            var center = new GLatLng(sumLat / cl.length, sumLng / cl.length);
-            var cat = pwaCategory(rows);
-            var cm = new GMarker(center, { icon: pwaClusterIconWithCount(rows.length, PWA_CAT[cat].hex), title: rows.length + ' پروژه در ' + cl.length + ' نقطه' });
-            cm.pwaMembers = members;
-            cm.pwaRows = rows;
-            (function (clusterMarker, pos) {
-                GEvent.addListener(clusterMarker, 'click', function () {
-                    var z = map.getZoom();
-                    if (z < PWA_MAX_CLUSTER_ZOOM) {
-                        map.setCenter(pos, Math.min(PWA_MAX_CLUSTER_ZOOM, z + 2));
-                    }
-                    else {
-                        map.openInfoWindowHtml(pos, BuildClusterInfoHtml(clusterMarker));
-                    }
-                });
-            })(cm, center);
-            pwaClusterMarkers.push(cm);
-            map.addOverlay(cm);
         }
 
         // اگر مارکر انتخاب‌شده داخل خوشه رفت، انتخاب و پنجره بسته شود

@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
@@ -61,6 +62,7 @@
       <DependentUpon>Feature_Sazmanyar_GIS_Web.feature</DependentUpon>
     </Compile>
     <Compile Include="Helper\ClsHelpper.cs" />
+    <Compile Include="Helper\ClsShapefile.cs" />
     <Compile Include="Helper\clsRouteForJson.cs" />
     <Compile Include="Layouts\Sazmanyar.GIS\ApplicationPage_FetchingData.aspx.cs">
       <DependentUpon>ApplicationPage_FetchingData.aspx</DependentUpon>
@@ -136,6 +138,21 @@
       <DependentUpon>ShowAllProjectInfoUserControl.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
+    <Compile Include="ShowAllMapSheets\ShowAllMapSheets.cs" />
+    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx.cs">
+      <DependentUpon>ShowAllMapSheetsUserControl_admin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx.designer.cs">
+      <DependentUpon>ShowAllMapSheetsUserControl_admin.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx.cs">
+      <DependentUpon>ShowAllMapSheetsUserControl_EndUser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx.designer.cs">
+      <DependentUpon>ShowAllMapSheetsUserControl_EndUser.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
       <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -183,6 +200,10 @@
       <SharePointProjectItemId>{8a0b0f5a-edc0-4241-917f-36bfbf174803}</SharePointProjectItemId>
     </None>
     <None Include="ShowAllPolyganInfo\ShowAllPolyganInfo.webpart" />
+    <None Include="ShowAllMapSheets\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5d2c8a7e-4f1b-4c6a-9e3d-7b8a2f5c1d90}</SharePointProjectItemId>
+    </None>
+    <None Include="ShowAllMapSheets\ShowAllMapSheets.webpart" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Sazmanyar.GIS\" />
@@ -318,6 +339,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\gis-filter.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\css\gis-ui.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\js\gis-ui.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Script\js\mapsheets.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\query-builder.default.min.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\selectize.default.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\style.css" />
@@ -435,6 +457,9 @@
     <Content Include="ShowAllPolyganInfo\Elements.xml" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />
+    <Content Include="ShowAllMapSheets\Elements.xml" />
+    <Content Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx" />
+    <Content Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
