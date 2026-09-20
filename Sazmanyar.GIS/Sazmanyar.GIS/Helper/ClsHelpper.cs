@@ -3182,6 +3182,10 @@ namespace Sazmanyar.GIS
                     if (bHasBatch) { objCmd.Parameters.Add("@Batch", SqlDbType.UniqueIdentifier).Value = gBatch; }
                     SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
                     objSqlDataAdapter.Fill(objDatatable);
+
+                    // همهء سطرهای PWAInfo هر کد (پروژهء چندنوعی = چند سطر) به‌صورت JSON در ستون PwaRows؛
+                    // وب‌پارت با آن تب‌های پنجرهء اطلاعات و رنگ میانگین برگه را می‌سازد (همان رفتار پین‌های ShowAllProjectInfo)
+                    AttachPwaRows(objDatatable, objSqlConnection);
                     objSqlConnection.Close();
                 }
             }
@@ -3190,6 +3194,67 @@ namespace Sazmanyar.GIS
                 ClsHelpper.WriteToLogFile("FetchMapSheets: " + e.Message);
             }
             return objDatatable;
+        }
+
+        /// <summary>ستون PwaRows (JSON آرایهء سطرهای PWAInfo با همان کد) را به جدول برگه‌ها اضافه می‌کند؛ برگهء بدون کد یا بدون سطر: []</summary>
+        private static void AttachPwaRows(DataTable objSheets, SqlConnection objSqlConnection)
+        {
+            if (!objSheets.Columns.Contains("PwaRows")) { objSheets.Columns.Add("PwaRows", typeof(string)); }
+            foreach (DataRow r in objSheets.Rows) { r["PwaRows"] = "[]"; }
+
+            List<string> codes = new List<string>();
+            foreach (DataRow r in objSheets.Rows)
+            {
+                string c = r["ProjectCode"] == DBNull.Value ? "" : Convert.ToString(r["ProjectCode"]).Trim();
+                if (c.Length > 0 && !codes.Contains(c)) { codes.Add(c); }
+            }
+            if (codes.Count == 0) { return; }
+
+            Dictionary<string, List<Dictionary<string, string>>> byCode = new Dictionary<string, List<Dictionary<string, string>>>();
+            try
+            {
+                // کدها دسته‌ای (حداکثر 200 پارامتر در هر پرس‌وجو)
+                for (int start = 0; start < codes.Count; start += 200)
+                {
+                    List<string> names = new List<string>();
+                    SqlCommand objCmd = new SqlCommand();
+                    objCmd.Connection = objSqlConnection;
+                    for (int i = start; i < Math.Min(codes.Count, start + 200); i++)
+                    {
+                        string prm = "@c" + i;
+                        names.Add(prm);
+                        objCmd.Parameters.Add(prm, SqlDbType.VarChar, 20).Value = codes[i];
+                    }
+                    objCmd.CommandText = " SELECT " + PWAINFO_SELECT_COLUMNS + " FROM dbo.PWAInfo WHERE ProjectCode IN (" + string.Join(",", names.ToArray()) + ") ORDER BY ProjectCode, ID ";
+                    DataTable objPwa = new DataTable();
+                    new SqlDataAdapter(objCmd).Fill(objPwa);
+                    foreach (DataRow pr in objPwa.Rows)
+                    {
+                        string code = Convert.ToString(pr["ProjectCode"]).Trim();
+                        Dictionary<string, string> item = new Dictionary<string, string>();
+                        foreach (DataColumn col in objPwa.Columns)
+                        {
+                            object v = pr[col.ColumnName];
+                            item[col.ColumnName] = (v is decimal || v is double || v is float) ? ToInvariantNumber(v) : (v == null || v == DBNull.Value ? "" : v.ToString());
+                        }
+                        if (!byCode.ContainsKey(code)) { byCode[code] = new List<Dictionary<string, string>>(); }
+                        byCode[code].Add(item);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ClsHelpper.WriteToLogFile("FetchMapSheets.AttachPwaRows: " + e.Message);
+                return;
+            }
+
+            JavaScriptSerializer ser = new JavaScriptSerializer();
+            ser.MaxJsonLength = int.MaxValue;
+            foreach (DataRow r in objSheets.Rows)
+            {
+                string c = r["ProjectCode"] == DBNull.Value ? "" : Convert.ToString(r["ProjectCode"]).Trim();
+                if (c.Length > 0 && byCode.ContainsKey(c)) { r["PwaRows"] = ser.Serialize(byCode[c]); }
+            }
         }
 
         /// <summary>خلاصهء هر Import (برای فهرست ادمین)؛ جدیدترین اول</summary>

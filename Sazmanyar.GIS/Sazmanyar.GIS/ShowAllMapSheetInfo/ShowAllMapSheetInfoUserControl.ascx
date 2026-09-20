@@ -18,9 +18,17 @@
       * جستجوی پیشرفته: FilterMapSheet.html داخل fancybox؛ شرط SQL به وب‌متد FetchMapSheets می‌رود
     رفتار نقشه:
       * هر برگه یک چندضلعی واقعی (از Boundary ذخیره‌شده) + یک پین روی مرکز برگه
-      * رنگ = دستهء تحقق پروژهء متصل (همان کدهای PWAInfo.TahaghoghCategory)؛ دستهء ششم «بدون پروژه»: خاکستری‌آبی
-      * پین هر برگه آیکون «برگهء نقشه» (SVG درون‌خطی) با همان رنگ دسته است تا از پین پروژه‌های PWA متمایز باشد
+      * رنگ = دستهء تحقق میانگین همهء سطرهای PWAInfo با کد آن برگه (ستون PwaRows؛ پروژهء چندنوعی = چند سطر، همان فرمول
+        pwaCategory در ShowAllProjectInfo)؛ دستهء ششم «بدون پروژه»: خاکستری‌آبی
+      * پنجرهء اطلاعات: یک سطر = بدون تب؛ چند سطر = یک تب برای هر سطر (برچسب تب: نوع پروژه) مثل پین‌های ShowAllProjectInfo
+      * پین هر برگه آیکون «برگهء نقشه» (SVG درون‌خطی) با همان رنگ دسته است تا از پین پروژه‌های PWA متمایز باشد؛
+        برگهء چندپروژه‌ای (چند سطر PWA) آیکون «دستهء برگه» (چند برگهء روی هم) با نشان تعداد می‌گیرد
       * کلیک روی سطح یا پین: انتخاب (هایلایت) + پنجرهء اطلاعات برگه و پروژه
+      * خوشه‌بندی سه‌سطحی وابسته به زوم (چک‌باکس «خوشه‌بندی» و اسلایدر «زوم تک‌برگه» در ریبون):
+          - زوم نزدیک (>= زوم تک‌برگه): هر برگه با سطح و پین خودش
+          - زوم میانی (دو پله پایین‌تر): برگه‌های یک «برگهء مادر 1:100000» (SheetSeries) یک نشانگر شمارنده می‌گیرند؛ سطح‌ها می‌مانند
+          - زوم دور: برگه‌های نزدیک هم (آستانهء پیکسلی) یک نشانگر شمارنده می‌شوند و سطح‌ها پنهان می‌شوند
+        کلیک روی نشانگر خوشه: زوم به محدودهء اعضا؛ در بیشترین زوم فهرست اعضا
 --%>
 
 <style type="text/css">
@@ -117,6 +125,52 @@
         background: #1d4ed8;
         height: 50%;
         top: 25%;
+    }
+
+    /* تب‌های برگهء چندپروژه‌ای (همان ShowAllProjectInfo) */
+    .gis-iw-pwa .pwa-tab-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        border-bottom: 1px solid #d1d5db;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+    }
+
+    .gis-iw-pwa .pwa-tab {
+        display: inline-block;
+        padding: 3px 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px 6px 0 0;
+        background: #f3f4f6;
+        color: #374151;
+        font-size: 12px;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .gis-iw-pwa .pwa-tab:hover {
+        background: #e5e7eb;
+        text-decoration: none;
+    }
+
+    .gis-iw-pwa .pwa-tab.is-active {
+        background: #ffffff;
+        border-bottom-color: #ffffff;
+        color: #111827;
+        font-weight: bold;
+        margin-bottom: -5px;
+        padding-bottom: 7px;
+    }
+
+    .gis-iw-pwa .pwa-tab-panel {
+        display: none;
+        padding: 2px;
+    }
+
+    .gis-iw-pwa .pwa-tab-panel.is-active {
+        display: block;
     }
 
     /* ---- انتخاب و انیمیشن مارکر / سطح / ردیف فهرست (همان ShowAllProjectInfo) ---- */
@@ -493,10 +547,47 @@
         return '1:' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
+    // سطرهای PWAInfo یک برگه (ستون PwaRows: JSON)؛ یک بار پارس و روی خود شیء کش می‌شود
+    function msPwaRows(s) {
+        if (!s) { return []; }
+        if (s._pwaRows) { return s._pwaRows; }
+        var rows = [];
+        try { rows = JSON.parse(s.PwaRows || '[]'); } catch (e) { rows = []; }
+        if (!rows || !rows.length) {
+            // سازگاری: اگر ستون PwaRows نبود، همان سطر اول نما
+            if (s.PwaID != null && s.PwaID !== '') { rows = [s]; } else { rows = []; }
+        }
+        s._pwaRows = rows;
+        return rows;
+    }
+
+    // دستهء تحقق یک مجموعه سطر PWA: میانگین درصد تحقق و پیشرفت واقعی (همان pwaCategory در ShowAllProjectInfo)؛ بدون سطر = 0
+    function msCategoryOfRows(rows) {
+        var sumAch = 0, sumAct = 0, n = 0;
+        for (var i = 0; i < rows.length; i++) {
+            sumAch += msNum(rows[i].AchievementPct);
+            sumAct += msNum(rows[i].ActualProgress);
+            n++;
+        }
+        if (n == 0) { return 0; }
+        if (sumAct == 0) { return 5; }
+        var ach = sumAch / n;
+        if (ach > 90) { return 1; }
+        if (ach > 70) { return 2; }
+        if (ach > 50) { return 3; }
+        return 4;
+    }
+
     function msCategory(s) {
-        if (!s || s.PwaID == null || s.PwaID === '') { return 0; }
-        var c = parseInt(s.TahaghoghCategory, 10);
-        return (c >= 1 && c <= 5) ? c : 5;
+        return msCategoryOfRows(msPwaRows(s));
+    }
+
+    // میانگین یک ستون عددی روی سطرهای PWA یک برگه
+    function msAvg(rows, col) {
+        if (!rows.length) { return 0; }
+        var sum = 0;
+        for (var i = 0; i < rows.length; i++) { sum += msNum(rows[i][col]); }
+        return sum / rows.length;
     }
 
     function msSheetTitle(s) {
@@ -679,6 +770,7 @@
         gpolys = [];
         ggans = gpolys;
         gsheets = [];
+        msClusterMarkers = [];
         map.clearOverlays();
         divSearchResult_html = "";
         bounds = new GLatLngBounds();
@@ -741,13 +833,16 @@
             gpolys.push(poly);
             map.addOverlay(poly);
 
-            // پین مرکز برگه: آیکون «برگهء نقشه» با رنگ دسته
+            // پین مرکز برگه: آیکون «برگهء نقشه» با رنگ دسته؛ چند سطر PWA = دستهء برگه با نشان تعداد
+            var prows = msPwaRows(s);
             var center = new GLatLng(msNum(s.CentroidLat), msNum(s.CentroidLong));
-            var pIcon = msSheetIcon(color, null);
-            var marker = new GMarker(center, { icon: pIcon, title: msSheetTitle(s) });
+            var pIcon = msSheetIcon(color, null, prows.length);
+            var marker = new GMarker(center, { icon: pIcon, title: msSheetTitle(s) + (prows.length > 1 ? ' (' + prows.length + ' پروژه)' : '') });
             marker.pwaImage = pIcon.image;
             marker.pwaColor = color;
-            marker.pwaUserHidden = false;
+            marker.pwaCount = prows.length;
+            marker.pwaUserHidden = false;   // با چک‌باکس فهرست مخفی شده؟
+            marker.pwaClustered = false;    // داخل یک خوشه پنهان شده؟
             gmarkers.push(marker);
             map.addOverlay(marker);
 
@@ -764,7 +859,7 @@
 
             var sub = (cat == 0)
                 ? (s.ProjectCode ? 'کد ' + s.ProjectCode + ' در PWA نیست' : 'بدون کد پروژه')
-                : String(s.ProjectName || '');
+                : String(prows[0].ProjectName || '') + (prows.length > 1 ? ' - ' + prows.length + ' نوع' : '');
             listHtml += gisResultItem('area', 'Sheet', idx, 'toggleSheet', color, 'gpolys', msSheetTitle(s) + ' [' + sub + ']');
 
             var b = poly.getBounds();
@@ -779,6 +874,8 @@
         if (gsheets.length > 0) {
             map.centerAndZoomOnBounds(bounds);
         }
+        // خوشه‌بندی برای زوم فعلی (با تغییر زوم، رویداد zoomend دوباره محاسبه می‌کند)
+        msRebuildClusters();
     }
 
     function msCountChips(sheets, projects, unlinked) {
@@ -791,25 +888,43 @@
     }
 
     // ---- آیکون پین برگه: SVG درون‌خطی به شکل یک برگهء نقشه (چهارگوش با گوشهء تاشده و خطوط شبکه) + نوک پایین ----
-    // هر (رنگ، شناسهء انتخاب) یک بار ساخته و کش می‌شود. selIdx فقط برای پین انتخاب‌شده: یک id داخل SVG می‌گذارد تا
+    // count > 1 (برگهء چندپروژه‌ای): چند برگهء روی هم (تا 3 لایه) + نشان گرد تعداد در گوشهء بالا-چپ.
+    // هر (رنگ، تعداد، شناسهء انتخاب) یک بار ساخته و کش می‌شود. selIdx فقط برای پین انتخاب‌شده: یک id داخل SVG می‌گذارد تا
     // بتوان عنصر <img> آن را در DOM پیدا و انیمیت کرد (روش ShowAllProjectInfo با ?pwasel= روی data: URI کار نمی‌کند).
     var msIconCache = {};
-    function msSheetIcon(hex, selIdx) {
-        var key = hex + '|' + (selIdx == null ? '' : selIdx);
+    function msSheetIcon(hex, selIdx, count) {
+        count = count || 1;
+        var key = hex + '|' + count + '|' + (selIdx == null ? '' : selIdx);
         if (msIconCache[key]) { return msIconCache[key]; }
-        var w = 26, h = 34;
-        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 26 34">' +
+        var w = 30, h = 38;
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 30 38">' +
             (selIdx == null ? '<g>' : '<g id="pwasel-' + selIdx + '">') +
-            '<path d="M13 33 L8 25 H18 Z" fill="#1f2937"/>' +
-            '<path d="M3.5 2.5 H17 L22.5 8 V25.5 H3.5 Z" fill="' + hex + '" stroke="#1f2937" stroke-width="1.4" stroke-linejoin="round"/>' +
-            '<path d="M17 2.5 V8 H22.5" fill="#ffffff" fill-opacity="0.85" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/>' +
-            '<path d="M9.5 8.5 V25.5 M16 11 V25.5 M3.5 14 H22.5 M3.5 19.5 H22.5" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.1"/>' +
-            '</g></svg>';
+            '<path d="M13 37 L8 29 H18 Z" fill="#1f2937"/>';
+        // برگه‌های پشتی (دستهء برگه): هر لایه 3 پیکسل بالا-چپ‌تر (در RTL یعنی پشت سر)
+        var layers = Math.min(3, count);
+        for (var L = layers - 1; L >= 1; L--) {
+            var dx = 3 * L, dy = -3 * L;
+            svg += '<g transform="translate(' + dx + ',' + dy + ')">' +
+                '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="' + hex + '" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/>' +
+                '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="#ffffff" fill-opacity="' + (0.25 * L) + '"/>' +
+                '</g>';
+        }
+        // برگهء جلو
+        svg += '<path d="M3.5 6.5 H17 L22.5 12 V29.5 H3.5 Z" fill="' + hex + '" stroke="#1f2937" stroke-width="1.4" stroke-linejoin="round"/>' +
+            '<path d="M17 6.5 V12 H22.5" fill="#ffffff" fill-opacity="0.85" stroke="#1f2937" stroke-width="1.2" stroke-linejoin="round"/>' +
+            '<path d="M9.5 12.5 V29.5 M16 15 V29.5 M3.5 18 H22.5 M3.5 23.5 H22.5" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.1"/>';
+        // نشان تعداد
+        if (count > 1) {
+            var txt = count > 9 ? '9+' : String(count);
+            svg += '<circle cx="23.5" cy="7" r="6.2" fill="#1f2937" stroke="#ffffff" stroke-width="1.3"/>' +
+                '<text x="23.5" y="7" dy="0.36em" text-anchor="middle" font-family="Arial, Tahoma" font-size="' + (count > 9 ? 7.5 : 8.5) + '" font-weight="bold" fill="#ffffff">' + txt + '</text>';
+        }
+        svg += '</g></svg>';
         var icon = new GIcon();
         icon.image = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
         icon.iconSize = new GSize(w, h);
-        icon.iconAnchor = new GPoint(13, 33);
-        icon.infoWindowAnchor = new GPoint(13, 2);
+        icon.iconAnchor = new GPoint(13, 37);
+        icon.infoWindowAnchor = new GPoint(13, 4);
         msIconCache[key] = icon;
         return icon;
     }
@@ -863,7 +978,7 @@
         // پین: همان آیکون با یک id یکتا داخل SVG، تا بتوان عنصر <img> آن را در DOM پیدا و انیمیت کرد
         var mk = gmarkers[idx];
         if (mk) {
-            try { mk.setImage(msSheetIcon(mk.pwaColor, idx).image); } catch (e) { }
+            try { mk.setImage(msSheetIcon(mk.pwaColor, idx, mk.pwaCount).image); } catch (e) { }
             setTimeout(function () {
                 var imgs = document.querySelectorAll('.gis-root img[src*="pwasel-' + idx + '%22"]');
                 for (var i = 0; i < imgs.length; i++) {
@@ -896,6 +1011,44 @@
             "<i class='plan' style='width:" + p + "%'></i><i class='act' style='width:" + a + "%'></i></div>";
     }
 
+    var msInfoSeq = 0; // شمارندهء یکتا برای شناسهء تب‌های هر پنجره
+
+    // جزئیات یک سطر PWA (بدنهء هر تب) - همان BuildProjectDetailHtml در ShowAllProjectInfo
+    function BuildProjectDetailHtml(r, bShowName) {
+        var rcat = msCategoryOfRows([r]);
+        var html = "";
+        if (bShowName) {
+            html += "<div class='pwa-name'><span class='pwa-badge' style='background:" + MS_CAT[rcat].hex + "' title='" + MS_CAT[rcat].title + "'></span>" + msVal(r.ProjectName) + "</div>";
+        }
+        html += "<table>";
+        html += "<tr><td class='lbl'>نوع پروژه:</td><td><b>" + msVal(r.ProjectType) + "</b></td><td class='lbl'>کد:</td><td>" + msVal(r.ProjectCode) + "</td></tr>";
+        html += "<tr><td class='lbl'>وضعیت:</td><td>" + msVal(r.Status) + "</td><td class='lbl'>منطقه:</td><td>" + msVal(r.Region) + "</td></tr>";
+        html += "<tr><td class='lbl'>پیشرفت برنامه‌ای:</td><td>" + msPct(r.PlannedProgress) + "</td><td class='lbl'>پیشرفت واقعی:</td><td>" + msPct(r.ActualProgress) + "</td></tr>";
+        html += "<tr><td class='lbl'>درصد تحقق:</td><td><b>" + msPct(r.AchievementPct) + "</b></td><td colspan='2'>" + msBarHtml(r.PlannedProgress, r.ActualProgress) + "</td></tr>";
+        html += "<tr><td class='lbl'>شروع:</td><td>" + msVal(r.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + msVal(r.FinishDateJ) + "</td></tr>";
+        html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + msVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + msVal(r.PlannedFinishJ) + "</td></tr>";
+        html += "<tr><td class='lbl'>نحوه اجرا:</td><td>" + msVal(r.ExecutionMethod) + "</td><td class='lbl'>مدیر پروژه:</td><td>" + msVal(r.ProjectManager) + "</td></tr>";
+        html += "<tr><td class='lbl'>ناظر پروژه:</td><td colspan='3'>" + msVal(r.ProjectSupervisor) + "</td></tr>";
+        html += "</table>";
+        return html;
+    }
+
+    // تغییر تب فعال داخل پنجرهء اطلاعات
+    function msShowTab(tabId, idx) {
+        var root = document.getElementById(tabId);
+        if (!root) { return; }
+        var tabs = root.getElementsByTagName('a');
+        for (var i = 0; i < tabs.length; i++) {
+            if (tabs[i].className.indexOf('pwa-tab') < 0) { continue; }
+            tabs[i].className = 'pwa-tab' + (tabs[i].getAttribute('data-idx') == String(idx) ? ' is-active' : '');
+        }
+        var panels = root.getElementsByTagName('div');
+        for (var j = 0; j < panels.length; j++) {
+            if (panels[j].className.indexOf('pwa-tab-panel') < 0) { continue; }
+            panels[j].className = 'pwa-tab-panel' + (panels[j].getAttribute('data-idx') == String(idx) ? ' is-active' : '');
+        }
+    }
+
     function BuildSheetInfoHtml(s) {
         var cat = msCategory(s);
         var html = "<div class='gis-iw gis-iw-pwa'>";
@@ -913,22 +1066,45 @@
         }
         html += "</table></div>";
 
-        html += "<div class='pwa-item'><div class='pwa-name'><span class='pwa-badge' style='background:" + MS_CAT[cat].hex + "' title='" + MS_CAT[cat].title + "'></span>پروژه در PWA</div>";
-        if (cat != 0) {
-            html += "<table>";
-            html += "<tr><td class='lbl'>نام:</td><td colspan='3' class='wrap'><b>" + msVal(s.ProjectName) + "</b></td></tr>";
-            html += "<tr><td class='lbl'>کد:</td><td>" + msVal(s.ProjectCode) + "</td><td class='lbl'>وضعیت:</td><td>" + msVal(s.Status) + "</td></tr>";
-            html += "<tr><td class='lbl'>نوع:</td><td>" + msVal(s.ProjectType) + (msNum(s.PwaRowCount) > 1 ? " <small>(" + gisEscapeHtml(s.PwaRowCount) + " نوع)</small>" : "") + "</td><td class='lbl'>منطقه:</td><td>" + msVal(s.Region) + "</td></tr>";
-            html += "<tr><td class='lbl'>پیشرفت برنامه‌ای:</td><td>" + msPct(s.PlannedProgress) + "</td><td class='lbl'>پیشرفت واقعی:</td><td>" + msPct(s.ActualProgress) + "</td></tr>";
-            html += "<tr><td class='lbl'>درصد تحقق:</td><td><b>" + msPct(s.AchievementPct) + "</b></td><td colspan='2'>" + msBarHtml(s.PlannedProgress, s.ActualProgress) + "</td></tr>";
-            html += "<tr><td class='lbl'>شروع:</td><td>" + msVal(s.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + msVal(s.FinishDateJ) + "</td></tr>";
-            html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + msVal(s.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + msVal(s.PlannedFinishJ) + "</td></tr>";
-            html += "<tr><td class='lbl'>نحوه اجرا:</td><td>" + msVal(s.ExecutionMethod) + "</td><td class='lbl'>مدیر پروژه:</td><td>" + msVal(s.ProjectManager) + "</td></tr>";
-            html += "<tr><td class='lbl'>ناظر پروژه:</td><td colspan='3'>" + msVal(s.ProjectSupervisor) + "</td></tr>";
-            html += "</table>";
-        } else if (s.ProjectCode) {
+        var rows = msPwaRows(s);
+        html += "<div class='pwa-item'><div class='pwa-name'><span class='pwa-badge' style='background:" + MS_CAT[cat].hex + "' title='" + MS_CAT[cat].title + "'></span>پروژه در PWA" +
+            (rows.length > 1 ? " <small>(" + rows.length + " سطر / نوع - کد " + gisEscapeHtml(s.ProjectCode) + ")</small>" : "") + "</div>";
+        if (rows.length == 1) {
+            html += BuildProjectDetailHtml(rows[0], true);
+        }
+        else if (rows.length > 1) {
+            // چند سطر (پروژهء چندنوعی): یک تب برای هر سطر؛ برچسب تب = نوع پروژه، با شماره برای نوع‌های تکراری
+            msInfoSeq++;
+            var tabId = 'msTabs' + msInfoSeq;
+            var typeCount = {}, typeSeen = {};
+            for (var c = 0; c < rows.length; c++) {
+                var tc = (rows[c].ProjectType == null || rows[c].ProjectType == '') ? 'بدون نوع' : rows[c].ProjectType;
+                typeCount[tc] = (typeCount[tc] || 0) + 1;
+            }
+            html += "<div class='pwa-tabs' id='" + tabId + "'>";
+            html += "<div class='pwa-tab-strip'>";
+            for (var i = 0; i < rows.length; i++) {
+                var r = rows[i];
+                var rcat = msCategoryOfRows([r]);
+                var label = (r.ProjectType == null || r.ProjectType == '') ? 'بدون نوع' : r.ProjectType;
+                if (typeCount[label] > 1) {
+                    typeSeen[label] = (typeSeen[label] || 0) + 1;
+                    label = label + ' (' + typeSeen[label] + ')';
+                }
+                html += "<a href='javascript:void(0);' class='pwa-tab" + (i == 0 ? " is-active" : "") + "' data-idx='" + i + "'" +
+                    " onclick=\"msShowTab('" + tabId + "', " + i + ");\" title='" + gisEscapeHtml(r.ProjectName) + "'>" +
+                    "<span class='pwa-badge' style='background:" + MS_CAT[rcat].hex + "'></span>" + gisEscapeHtml(label) + "</a>";
+            }
+            html += "</div>";
+            for (var j = 0; j < rows.length; j++) {
+                html += "<div class='pwa-tab-panel" + (j == 0 ? " is-active" : "") + "' data-idx='" + j + "'>" + BuildProjectDetailHtml(rows[j], true) + "</div>";
+            }
+            html += "</div>";
+        }
+        else if (s.ProjectCode) {
             html += "<div class='gis-hint'>کد پروژه «" + gisEscapeHtml(s.ProjectCode) + "» در PWAInfo پیدا نشد؛ باید با کارفرما بررسی شود.</div>";
-        } else {
+        }
+        else {
             html += "<div class='gis-hint'>در فایل کارفرما کد پروژه (P_Code) برای این برگه خالی است.</div>";
         }
         html += "</div>";
@@ -936,6 +1112,200 @@
         html += "<div class='gis-hint'>منبع: " + msVal(s.SourceFile) + (s.SourceLayer ? " / " + gisEscapeHtml(s.SourceLayer) : "") + (s.SourceCrs ? " - " + gisEscapeHtml(s.SourceCrs) : "") + "</div>";
         html += "</div>";
         return html;
+    }
+
+    // ==== خوشه‌بندی وابسته به زوم ====
+    var msClusterEnabled = true;
+    var msZoomFull = 10;                 // از این زوم به بعد هر برگه جدا نمایش داده می‌شود
+    var msClusterMarkers = [];           // نشانگرهای خوشه که الان روی نقشه‌اند
+    var MS_CLUSTER_PX = 44;              // فاصلهء پیکسلی ادغام در سطح دور
+    var msClusterIconCache = {};
+
+    function msApplyZoomFull(value) {
+        var v = parseInt(value, 10);
+        if (isNaN(v)) { return; }
+        msZoomFull = v;
+        var lbl = document.getElementById('msZoomFullValue');
+        if (lbl) { lbl.innerHTML = v; }
+    }
+
+    // فاصلهء کیلومتری معادل MS_CLUSTER_PX پیکسل در زوم فعلی (مقیاس وب‌مرکاتور در عرض ~33 درجه)
+    function msClusterThresholdKm() {
+        var z = 6;
+        try { z = map.getZoom(); } catch (e) { }
+        return MS_CLUSTER_PX * 156.543 * 0.84 / Math.pow(2, z);
+    }
+
+    function msDistKm(lat1, lng1, lat2, lng2) {
+        var R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLng = (lng2 - lng1) * Math.PI / 180;
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    // دستهء رنگ یک مجموعه برگه: میانگین روی همهء سطرهای PWA همهء اعضا؛ اگر هیچ‌کدام پروژه ندارند 0
+    function msCategoryOfSheets(idxs) {
+        var all = [];
+        for (var i = 0; i < idxs.length; i++) { all = all.concat(msPwaRows(gsheets[idxs[i]])); }
+        return msCategoryOfRows(all);
+    }
+
+    // آیکون خوشه: چهارگوش گردگوشه به شکل برگه (متمایز از خوشهء دایره‌ای پروژه‌ها) + عدد؛ هر (تعداد، رنگ) یک بار ساخته می‌شود
+    function msClusterIcon(count, hex) {
+        var key = count + '|' + hex;
+        if (msClusterIconCache[key]) { return msClusterIconCache[key]; }
+        var size = count < 10 ? 34 : (count < 50 ? 40 : 46);
+        var half = size / 2;
+        var fontSize = count < 100 ? 13 : 11;
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">' +
+            '<rect x="1" y="1" width="' + (size - 2) + '" height="' + (size - 2) + '" rx="6" fill="' + hex + '" fill-opacity="0.35"/>' +
+            '<rect x="5" y="5" width="' + (size - 10) + '" height="' + (size - 10) + '" rx="4" fill="' + hex + '"/>' +
+            '<rect x="9" y="9" width="' + (size - 18) + '" height="' + (size - 18) + '" rx="3" fill="#ffffff"/>' +
+            '<text x="' + half + '" y="' + half + '" dy="0.36em" text-anchor="middle" font-family="Arial, Tahoma" font-size="' + fontSize + '" font-weight="bold" fill="#111827">' + count + '</text>' +
+            '</svg>';
+        var icon = new GIcon();
+        icon.image = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        icon.iconSize = new GSize(size, size);
+        icon.iconAnchor = new GPoint(half, half);
+        icon.infoWindowAnchor = new GPoint(half, 2);
+        msClusterIconCache[key] = icon;
+        return icon;
+    }
+
+    // نمایش/مخفی یک برگه با توجه به چک‌باکس کاربر و عضویت در خوشه (hidePoly: در سطح دور سطح هم پنهان می‌شود)
+    function msApplyVisibility(idx, hidePoly) {
+        var m = gmarkers[idx], p = gpolys[idx];
+        if (!m || !p) { return; }
+        if (m.pwaUserHidden) { m.hide(); p.hide(); return; }
+        if (m.pwaClustered) { m.hide(); } else { m.show(); }
+        if (m.pwaClustered && hidePoly) { p.hide(); } else { p.show(); }
+    }
+
+    // خوشه‌بندی سادهء فاصله‌ای (greedy): هر نقطه به اولین خوشه‌ای می‌رود که هستهء آن در آستانه است
+    function msClusterByDistance(items, thresholdKm) {
+        var clusters = [];
+        for (var i = 0; i < items.length; i++) {
+            var it = items[i], placed = false;
+            for (var c = 0; c < clusters.length; c++) {
+                var seed = clusters[c][0];
+                if (msDistKm(it.lat, it.lng, seed.lat, seed.lng) <= thresholdKm) { clusters[c].push(it); placed = true; break; }
+            }
+            if (!placed) { clusters.push([it]); }
+        }
+        return clusters;
+    }
+
+    function msRebuildClusters() {
+        if (typeof map == 'undefined' || map == null) { return; }
+        for (var c = 0; c < msClusterMarkers.length; c++) {
+            try { map.removeOverlay(msClusterMarkers[c]); } catch (e) { }
+        }
+        msClusterMarkers = [];
+
+        var z = 6;
+        try { z = map.getZoom(); } catch (e) { }
+
+        // سطح 1: زوم نزدیک یا خوشه‌بندی خاموش -> همه جدا
+        if (!msClusterEnabled || z >= msZoomFull) {
+            for (var i = 0; i < gmarkers.length; i++) { gmarkers[i].pwaClustered = false; msApplyVisibility(i, false); }
+            return;
+        }
+
+        // نقاط قابل خوشه‌بندی (کاربر مخفی نکرده)
+        var items = [];
+        for (var k = 0; k < gmarkers.length; k++) {
+            var m = gmarkers[k];
+            if (m.pwaUserHidden) { m.pwaClustered = false; msApplyVisibility(k, false); continue; }
+            var ll = m.getLatLng();
+            items.push({ lat: ll.lat(), lng: ll.lng(), idx: k, series: gsheets[k].SheetSeries || ('#' + gsheets[k].SheetNo) });
+        }
+
+        var clusters = [];
+        var hidePoly = false;
+        if (z >= msZoomFull - 2) {
+            // سطح 2: زوم میانی -> گروه‌بندی بر اساس برگهء مادر (SheetSeries)؛ سطح‌ها می‌مانند
+            var bySeries = {}, order = [];
+            for (var a = 0; a < items.length; a++) {
+                var key = items[a].series;
+                if (!bySeries[key]) { bySeries[key] = []; order.push(key); }
+                bySeries[key].push(items[a]);
+            }
+            for (var o = 0; o < order.length; o++) { clusters.push(bySeries[order[o]]); }
+        }
+        else {
+            // سطح 3: زوم دور -> خوشه‌بندی فاصله‌ای؛ سطح‌ها هم پنهان می‌شوند
+            clusters = msClusterByDistance(items, msClusterThresholdKm());
+            hidePoly = true;
+        }
+
+        for (var q = 0; q < clusters.length; q++) {
+            var cl = clusters[q];
+            if (cl.length == 1) {
+                gmarkers[cl[0].idx].pwaClustered = false;
+                msApplyVisibility(cl[0].idx, false);
+                continue;
+            }
+            var members = [], sumLat = 0, sumLng = 0;
+            var cb = new GLatLngBounds();
+            for (var j = 0; j < cl.length; j++) {
+                var gm = gmarkers[cl[j].idx];
+                gm.pwaClustered = true;
+                msApplyVisibility(cl[j].idx, hidePoly);
+                members.push(cl[j].idx);
+                sumLat += cl[j].lat; sumLng += cl[j].lng;
+                var pb = gpolys[cl[j].idx].getBounds();
+                cb.extend(pb.getNorthEast()); cb.extend(pb.getSouthWest());
+            }
+            var center = new GLatLng(sumLat / cl.length, sumLng / cl.length);
+            var cat = msCategoryOfSheets(members);
+            var title = (hidePoly ? '' : 'برگه مادر ' + cl[0].series + ': ') + cl.length + ' برگه';
+            var cm = new GMarker(center, { icon: msClusterIcon(cl.length, MS_CAT[cat].hex), title: title });
+            cm.pwaMembers = members;
+            cm.pwaBounds = cb;
+            (function (clusterMarker, pos) {
+                GEvent.addListener(clusterMarker, 'click', function () {
+                    var zz = map.getZoom();
+                    if (zz < msZoomFull) {
+                        // زوم به محدودهء اعضا؛ دست‌کم یک پله نزدیک‌تر
+                        var target = Math.max(zz + 1, Math.min(msZoomFull, map.getBoundsZoomLevel(clusterMarker.pwaBounds)));
+                        map.setCenter(clusterMarker.pwaBounds.getCenter(), target);
+                    }
+                    else {
+                        map.openInfoWindowHtml(pos, BuildClusterInfoHtml(clusterMarker));
+                    }
+                });
+            })(cm, center);
+            msClusterMarkers.push(cm);
+            map.addOverlay(cm);
+        }
+
+        // اگر برگهء انتخاب‌شده داخل خوشه رفت، انتخاب و پنجره بسته شود
+        if (msSel.idx >= 0 && gmarkers[msSel.idx] && gmarkers[msSel.idx].pwaClustered) {
+            try { map.closeInfoWindow(); } catch (e) { }
+            msClearSelection();
+        }
+    }
+
+    // فهرست برگه‌های یک خوشه: هر ردیف یک برگه؛ کلیک = پنجرهء همان برگه
+    function BuildClusterInfoHtml(clusterMarker) {
+        var html = "<div class='gis-iw gis-iw-pwa'>";
+        html += "<h4>" + clusterMarker.pwaMembers.length + " برگهء نزدیک به هم</h4>";
+        html += "<table>";
+        for (var i = 0; i < clusterMarker.pwaMembers.length; i++) {
+            var idx = clusterMarker.pwaMembers[i];
+            var sh = gsheets[idx];
+            var cat = msCategory(sh);
+            html += "<tr><td><span class='pwa-badge' style='background:" + MS_CAT[cat].hex + "'></span>" +
+                "<a href='javascript:void(0);' onclick='msOpenSheetFromCluster(" + idx + ");'>" + gisEscapeHtml(msSheetTitle(sh)) + "</a></td>" +
+                "<td class='lbl'>" + (cat == 0 ? 'بدون پروژه' : msPct(msAvg(msPwaRows(sh), 'AchievementPct')) + ' تحقق' + (msPwaRows(sh).length > 1 ? ' (' + msPwaRows(sh).length + ' نوع)' : '')) + "</td></tr>";
+        }
+        html += "</table></div>";
+        return html;
+    }
+
+    function msOpenSheetFromCluster(idx) {
+        var sh = gsheets[idx];
+        if (!sh) { return; }
+        map.openInfoWindowHtml(new GLatLng(msNum(sh.CentroidLat), msNum(sh.CentroidLong)), BuildSheetInfoHtml(sh));
     }
 
     // ---- پنل کناری ----
@@ -948,8 +1318,9 @@
             if (cb.type != 'checkbox') { continue; }
             cb.checked = (mode == 'all') ? true : (mode == 'none') ? false : !cb.checked;
             var id = cb.id || '';
-            if (id.indexOf('Sheet') == 0) { toggleSheet(parseInt(id.substring(5), 10)); }
+            if (id.indexOf('Sheet') == 0) { toggleSheet(parseInt(id.substring(5), 10), true); }
         }
+        msRebuildClusters();
     }
 
     function togglePanelSearch() {
@@ -1058,6 +1429,14 @@
                                     <span class="gis-field-label">شفافیت سطح‌ها:</span>
                                     <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
                                     <span id="gisAreaOpacityValue" class="gis-opacity-value">خودکار</span>
+                                </div>
+                                <div class="gis-opacity" title="از این زوم به بعد هر برگه جدا نمایش داده می‌شود؛ دو پله پایین‌تر برگه‌های هر برگهء مادر یک نشانگر می‌شوند و دورتر از آن برگه‌های نزدیک هم">
+                                    <span class="gis-field-label">زوم تک‌برگه:</span>
+                                    <input type="range" id="msZoomFull" min="6" max="14" step="1" value="10" oninput="msApplyZoomFull(this.value);" onchange="msApplyZoomFull(this.value); msRebuildClusters();" />
+                                    <span id="msZoomFullValue" class="gis-opacity-value">10</span>
+                                    <label class="gis-field-label" style="cursor: pointer;" title="برگه‌های نزدیک به هم در زوم‌های دور یک نشانگر شمارنده می‌شوند؛ کلیک روی آن زوم می‌کند">
+                                        <input type="checkbox" id="chkCluster" checked="checked" onchange="msClusterEnabled = this.checked; msRebuildClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی
+                                    </label>
                                 </div>
                                 <div class="gis-legend" title="رنگ برگه = درصد تحقق پروژهء متصل در PWA">
                                     <span class="gis-legend-title">تحقق:</span>
@@ -1184,21 +1563,16 @@
 
     if (GBrowserIsCompatible()) {
 
-        // چک‌باکس فهرست: نمایش/مخفی سطح و پین یک برگه
-        function toggleSheet(idx) {
+        // چک‌باکس فهرست: نمایش/مخفی سطح و پین یک برگه (عضویت خوشه‌ها با مخفی/نمایش شدن یک برگه عوض می‌شود)
+        function toggleSheet(idx, skipRebuild) {
             var cb = document.getElementById('Sheet' + idx);
-            if (!cb || !gpolys[idx]) { return; }
-            if (cb.checked) {
-                gpolys[idx].show();
-                if (gmarkers[idx]) { gmarkers[idx].show(); }
-            } else {
-                gpolys[idx].hide();
-                if (gmarkers[idx]) { gmarkers[idx].hide(); }
-                if (msSel.idx == idx) {
-                    map.closeInfoWindow();
-                    msClearSelection();
-                }
+            if (!cb || !gpolys[idx] || !gmarkers[idx]) { return; }
+            gmarkers[idx].pwaUserHidden = !cb.checked;
+            if (!cb.checked && msSel.idx == idx) {
+                map.closeInfoWindow();
+                msClearSelection();
             }
+            if (!skipRebuild) { msRebuildClusters(); }
         }
 
         // آیکون پین‌ها: msSheetIcon (SVG درون‌خطی به شکل برگهء نقشه)؛ پین‌های گرد Marker/<Color>/marker.png این‌جا استفاده نمی‌شوند
@@ -1224,6 +1598,10 @@
         // با بسته شدن پنجرهء اطلاعات، حالت انتخاب سطح/پین/ردیف فهرست هم پاک می‌شود
         GEvent.addListener(map, "infowindowclose", function () {
             msClearSelection();
+        });
+        // با هر تغییر زوم، خوشه‌بندی دوباره محاسبه می‌شود
+        GEvent.addListener(map, "zoomend", function () {
+            msRebuildClusters();
         });
     }
     else {
