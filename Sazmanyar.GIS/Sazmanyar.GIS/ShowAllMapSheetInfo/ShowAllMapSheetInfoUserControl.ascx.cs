@@ -9,22 +9,54 @@ using System.Web.UI.WebControls.WebParts;
 using Microsoft.SharePoint;
 using Sazmanyar.GIS.Helper;
 
-namespace Sazmanyar.GIS.ShowAllMapSheets
+namespace Sazmanyar.GIS.ShowAllMapSheetInfo
 {
     /// <summary>
-    /// حالت ادمین وب‌پارت برگه‌های نقشه: بارگذاری ZIP (Shapefile) و ثبت در dbo.MapSheets + مدیریت Importها.
-    /// خواندن فایل در ClsShapefile (بدون پایگاه داده) و ثبت در ClsHelpper.ImportMapSheets انجام می‌شود.
+    /// کنترل وب‌پارت برگه‌های نقشه. نمایش و جستجو کاملاً سمت کلاینت (وب‌متد FetchMapSheets) است؛
+    /// این کد فقط پنل «ثبت برگه» را اداره می‌کند: بارگذاری ZIP با postback، خواندن با ClsShapefile،
+    /// ثبت با ClsHelpper.ImportMapSheets و فهرست/حذف Importها.
     /// </summary>
-    public partial class ShowAllMapSheetsUserControl_admin : UserControl
+    public partial class ShowAllMapSheetInfoUserControl : UserControl
     {
+        #region Variables
+        public string InitializeLatLngCamaSemicalonSeperated = "";
+        public bool ShowRegistrationPanel = true;
+        #endregion
+
         #region Events
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
+                // محدودهء اولیهء نقشه (پیش‌فرض: کل ایران) - همان الگوی ShowAllProjectInfo
+                string strPointBase = "new GLatLng(39.027719, 44.736328), new GLatLng(26.745610, 62.050781)";
+                if (!string.IsNullOrEmpty(InitializeLatLngCamaSemicalonSeperated) && InitializeLatLngCamaSemicalonSeperated.Split(';').Length > 1)
+                {
+                    strPointBase = "";
+                    foreach (string stritem in InitializeLatLngCamaSemicalonSeperated.Split(';'))
+                    {
+                        if (strPointBase.Length != 0)
+                        {
+                            strPointBase = strPointBase + ",";
+                        }
+                        strPointBase = strPointBase + "new GLatLng(" + stritem + ")";
+                    }
+                }
+                InitializBounds.Text = "<script type='text/javascript'>var bounds = new GLatLngBounds(@);</script>".Replace("@", strPointBase);
+            }
+            catch (Exception)
+            {
+            }
+
+            try
+            {
+                // پنل ثبت فقط برای ادمین
+                phRegToggle.Visible = ShowRegistrationPanel;
+                pnlRegPanel.Visible = ShowRegistrationPanel;
+
                 // آپلود فایل به فرم multipart نیاز دارد (مسترپیج‌های SharePoint این را دارند؛ برای اطمینان)
-                if (Page.Form != null)
+                if (ShowRegistrationPanel && Page.Form != null)
                 {
                     Page.Form.Enctype = "multipart/form-data";
                 }
@@ -38,12 +70,16 @@ namespace Sazmanyar.GIS.ShowAllMapSheets
                 return;
             }
 
-            BindBatches();
+            if (ShowRegistrationPanel)
+            {
+                BindBatches();
+            }
         }
 
         protected void btnImport_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
+            hdnRegOpen.Value = "1";
             try
             {
                 if (fupZip == null || !fupZip.HasFile)
@@ -92,7 +128,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheets
                 }
 
                 ClsHelpper.MapSheetsImportResult objImport = ClsHelpper.ImportMapSheets(objParse.Records, chkOverwrite.Checked, strFileName, strUser);
-                hdnFocusBatch.Value = objImport.Batch.ToString();
+                hdnFocusBatch.Value = (objImport.Inserted + objImport.Updated) > 0 ? objImport.Batch.ToString() : "";
 
                 string strSummary = "<div class='" + (objImport.Failed == 0 ? "ms-ok" : "ms-err") + "'><b>فایل «" + HttpUtility.HtmlEncode(strFileName) + "»: "
                     + objParse.Records.Count + " برگه خوانده شد - "
@@ -112,7 +148,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheets
             }
             catch (Exception ex)
             {
-                ClsHelpper.WriteToLogFile("ShowAllMapSheetsUserControl_admin.btnImport_Click: " + ex.Message);
+                ClsHelpper.WriteToLogFile("ShowAllMapSheetInfoUserControl.btnImport_Click: " + ex.Message);
                 litResult.Text = "<div class='ms-err'>خطا در بارگذاری: " + HttpUtility.HtmlEncode(ex.Message) + "</div>" + sb.ToString();
             }
 
@@ -121,29 +157,22 @@ namespace Sazmanyar.GIS.ShowAllMapSheets
 
         protected void rptBatches_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
+            hdnRegOpen.Value = "1";
             try
             {
                 if (e.CommandName == "DeleteBatch")
                 {
                     string strBatch = Convert.ToString(e.CommandArgument);
                     int nDeleted = ClsHelpper.DeleteMapSheetsImportBatch(strBatch);
-                    if (nDeleted < 0)
-                    {
-                        litResult.Text = "<div class='ms-err'>حذف انجام نشد.</div>";
-                    }
-                    else
-                    {
-                        litResult.Text = "<div class='ms-ok'>" + nDeleted + " برگه حذف شد.</div>";
-                    }
-                    if (string.Equals(hdnFocusBatch.Value, strBatch, StringComparison.OrdinalIgnoreCase))
-                    {
-                        hdnFocusBatch.Value = "";
-                    }
+                    litResult.Text = nDeleted < 0
+                        ? "<div class='ms-err'>حذف انجام نشد.</div>"
+                        : "<div class='ms-ok'>" + nDeleted + " برگه حذف شد.</div>";
+                    hdnFocusBatch.Value = "";
                 }
             }
             catch (Exception ex)
             {
-                ClsHelpper.WriteToLogFile("ShowAllMapSheetsUserControl_admin.rptBatches_ItemCommand: " + ex.Message);
+                ClsHelpper.WriteToLogFile("ShowAllMapSheetInfoUserControl.rptBatches_ItemCommand: " + ex.Message);
                 litResult.Text = "<div class='ms-err'>خطا: " + HttpUtility.HtmlEncode(ex.Message) + "</div>";
             }
 
@@ -165,7 +194,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheets
             }
             catch (Exception ex)
             {
-                ClsHelpper.WriteToLogFile("ShowAllMapSheetsUserControl_admin.BindBatches: " + ex.Message);
+                ClsHelpper.WriteToLogFile("ShowAllMapSheetInfoUserControl.BindBatches: " + ex.Message);
             }
         }
 

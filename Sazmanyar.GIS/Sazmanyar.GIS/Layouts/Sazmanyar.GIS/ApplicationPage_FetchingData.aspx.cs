@@ -1654,18 +1654,19 @@ namespace Sazmanyar.GIS.Layouts.Sazmanyar.GIS
 
         #endregion
 
-        #region MapSheets (وب‌پارت ShowAllMapSheets)
+        #region MapSheets (وب‌پارت ShowAllMapSheetInfo)
 
         /// <summary>
-        /// برگه‌های نقشه (dbo.MapSheets) به همراه اطلاعات پروژهء متصل از PWAInfo.
-        /// SheetNo: بخشی از شمارهء یا نام برگه؛ ProjectCode: کد پروژه؛ ImportBatch: GUID یک Import. هر کدام خالی = بدون فیلتر.
+        /// برگه‌های نقشه (dbo.MapSheets) به همراه اطلاعات پروژهء متصل از PWAInfo (وب‌پارت ShowAllMapSheetInfo).
+        /// Region: منطقهء پروژهء متصل (*NOPWA* = فقط بدون پروژه)؛ Sheet: بخشی از شماره/نام برگه؛ ImportBatch: GUID یک Import؛
+        /// Condition: شرط جستجوی پیشرفته (FilterMapSheet.html). هر کدام خالی = بدون فیلتر.
         /// Boundary به‌صورت JSON [{"lat":..,"lng":..},...] است (همان قالب PolygonPoints لیست سطح‌ها).
         /// </summary>
         [WebMethod]
-        public static List<Dictionary<string, string>> FetchMapSheets(string SheetNo, string ProjectCode, string ImportBatch)
+        public static List<Dictionary<string, string>> FetchMapSheets(string Region, string Sheet, string ImportBatch, string Condition)
         {
             List<Dictionary<string, string>> lstResult = new List<Dictionary<string, string>>();
-            DataTable objDataTable = ClsHelpper.FetchMapSheets(SheetNo, ProjectCode, ImportBatch);
+            DataTable objDataTable = ClsHelpper.FetchMapSheets(Region, Sheet, ImportBatch, Condition);
 
             foreach (DataRow item in objDataTable.Rows)
             {

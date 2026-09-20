@@ -263,12 +263,6 @@ namespace Sazmanyar.GIS
             InEndUserModeWithInterface
         }
 
-        /// <summary>حالت نمایش وب‌پارت برگه‌های نقشه (ShowAllMapSheets)</summary>
-        public enum FormModeMapSheets
-        {
-            InAdminMode,                 // بارگذاری ZIP و مدیریت Importها
-            InEndUserModeWithInterface   // فقط نمایش برگه‌های ثبت‌شده
-        }
 
 
         #region Function
@@ -2878,6 +2872,12 @@ namespace Sazmanyar.GIS
         /// </summary>
         private static string PWABuildConditionSql(string strCondition)
         {
+            return BuildConditionSql(strCondition, PWA_FILTER_COLUMNS, "FetchPWAProjects");
+        }
+
+        /// <summary>نسخهء عمومی سازندهء شرط: فهرست ستون‌های مجاز و برچسب لاگ را می‌گیرد (PWAInfo و MapSheets از همین استفاده می‌کنند)</summary>
+        private static string BuildConditionSql(string strCondition, string[] allowedColumns, string strLogTag)
+        {
             if (strCondition == null) { return ""; }
             string cond = strCondition.Trim();
             if (cond.Length == 0) { return ""; }
@@ -2905,7 +2905,7 @@ namespace Sazmanyar.GIS
             if (lowered.Contains(";") || lowered.Contains("--") || lowered.Contains("/*") || lowered.Contains("*/") ||
                 Regex.IsMatch(lowered, @"\b(select|insert|update|delete|drop|alter|exec|execute|union|truncate|merge|create|grant|xp_|sp_)\b"))
             {
-                ClsHelpper.WriteToLogFile("FetchPWAProjects: شرط جستجو رد شد (محتوای غیرمجاز): " + strCondition);
+                ClsHelpper.WriteToLogFile(strLogTag + ": شرط جستجو رد شد (محتوای غیرمجاز): " + strCondition);
                 return "";
             }
 
@@ -2917,17 +2917,17 @@ namespace Sazmanyar.GIS
                 string w = m.Value;
                 if (Array.IndexOf(allowedWords, w.ToLowerInvariant()) >= 0) { continue; }
                 bool ok = false;
-                foreach (string c in PWA_FILTER_COLUMNS) { if (string.Equals(c, w, StringComparison.OrdinalIgnoreCase)) { ok = true; break; } }
+                foreach (string c in allowedColumns) { if (string.Equals(c, w, StringComparison.OrdinalIgnoreCase)) { ok = true; break; } }
                 if (!ok)
                 {
-                    ClsHelpper.WriteToLogFile("FetchPWAProjects: شرط جستجو رد شد (ستون نامعتبر " + w + "): " + strCondition);
+                    ClsHelpper.WriteToLogFile(strLogTag + ": شرط جستجو رد شد (ستون نامعتبر " + w + "): " + strCondition);
                     return "";
                 }
             }
             return cond;
         }
 
-        #region MapSheets (وب‌پارت ShowAllMapSheets)
+        #region MapSheets (وب‌پارت ShowAllMapSheetInfo)
 
         /// <summary>نتیجهء یک بار Import برگه‌ها</summary>
         public class MapSheetsImportResult
@@ -3141,30 +3141,44 @@ namespace Sazmanyar.GIS
             " StartDateJ, FinishDateJ, PlannedStartJ, PlannedFinishJ, ProjectType, Region, ExecutionMethod, " +
             " ProjectManager, ProjectSupervisor, PwaLat, PwaLong, TahaghoghCategory ";
 
+        // ستون‌هایی که در شرط جستجوی پیشرفتهء برگه‌ها مجازند (شناسهء فیلترهای Filter\js\demo_widgetsMapSheet.js = ستون‌های vw_MapSheetsProjects)
+        private static readonly string[] MAPSHEETS_FILTER_COLUMNS = new string[] {
+            "SheetNo", "SheetNameFa", "SheetNameEn", "SheetSeries", "SheetQuarter", "SheetScale", "SourceSheetID",
+            "Contractor", "Supervisor", "Geologist", "AreaKm2", "ImportedAt", "SourceFile", "SourceLayer", "SheetProjectName",
+            "PwaID", "PwaRowCount", "ProjectCode", "ProjectName", "ProjectType", "Region", "Status", "ExecutionMethod", "TahaghoghCategory",
+            "PlannedProgress", "ActualProgress", "AchievementPct", "StartDate", "FinishDate", "PlannedStart", "PlannedFinish",
+            "ProjectManager", "ProjectSupervisor", "OrgLevel1", "OrgLevel2", "TotalCost" };
+
         /// <summary>
         /// برگه‌ها به همراه اطلاعات پروژهء متصل (نمای vw_MapSheetsProjects). هر فیلتر خالی = بدون فیلتر.
-        /// strSheetNo: بخشی از شمارهء برگه یا نام برگه؛ strProjectCode: کد پروژه؛ strImportBatch: GUID یک Import.
+        /// strRegion: منطقهء پروژهء متصل؛ مقدار ویژهء *NOPWA* = فقط برگه‌های بدون پروژه در PWAInfo.
+        /// strSheet: بخشی از شمارهء برگه یا نام برگه (LIKE)؛ strImportBatch: GUID یک Import.
+        /// strCondition: شرط query-builder صفحهء FilterMapSheet.html (همان قرارداد PWAInfo: کوتیشن #@# و تاریخ شمسی با پیشوند DDDDDDDDDDD).
         /// </summary>
-        public static DataTable FetchMapSheets(string strSheetNo, string strProjectCode, string strImportBatch)
+        public static DataTable FetchMapSheets(string strRegion, string strSheet, string strImportBatch, string strCondition)
         {
             DataTable objDatatable = new DataTable();
             try
             {
                 Guid gBatch = Guid.Empty;
                 bool bHasBatch = !string.IsNullOrEmpty(strImportBatch) && Guid.TryParse(strImportBatch.Trim(), out gBatch);
+                string strRegionValue = (strRegion ?? "").Trim();
+                bool bOnlyUnlinked = strRegionValue == "*NOPWA*";
+                string strExtra = BuildConditionSql(strCondition, MAPSHEETS_FILTER_COLUMNS, "FetchMapSheets");
 
                 using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
                 {
                     objSqlConnection.Open();
                     string Strsql = " SELECT " + MAPSHEETS_SELECT_COLUMNS +
                                     " FROM dbo.vw_MapSheetsProjects " +
-                                    " WHERE (@SheetNo = N'' OR SheetNo LIKE N'%' + @SheetNo + N'%' OR SheetNameFa LIKE N'%' + @SheetNo + N'%' OR SheetNameEn LIKE N'%' + @SheetNo + N'%') " +
-                                    "   AND (@ProjectCode = '' OR ProjectCode = @ProjectCode) " +
+                                    " WHERE (@Sheet = N'' OR SheetNo LIKE N'%' + @Sheet + N'%' OR SheetNameFa LIKE N'%' + @Sheet + N'%' OR SheetNameEn LIKE N'%' + @Sheet + N'%') " +
+                                    (bOnlyUnlinked ? "   AND PwaID IS NULL " : "   AND (@Region = N'' OR Region = @Region) ") +
                                     (bHasBatch ? "   AND ImportBatch = @Batch " : "") +
+                                    (strExtra.Length > 0 ? "   AND ( " + strExtra + " ) " : "") +
                                     " ORDER BY SheetScale, SheetNo ";
                     SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
-                    objCmd.Parameters.Add("@SheetNo", SqlDbType.NVarChar, 100).Value = (strSheetNo ?? "").Trim();
-                    objCmd.Parameters.Add("@ProjectCode", SqlDbType.VarChar, 20).Value = ClsShapefile.NormalizeProjectCode(strProjectCode ?? "");
+                    objCmd.Parameters.Add("@Sheet", SqlDbType.NVarChar, 100).Value = (strSheet ?? "").Trim();
+                    objCmd.Parameters.Add("@Region", SqlDbType.NVarChar, 50).Value = bOnlyUnlinked ? "" : strRegionValue;
                     if (bHasBatch) { objCmd.Parameters.Add("@Batch", SqlDbType.UniqueIdentifier).Value = gBatch; }
                     SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
                     objSqlDataAdapter.Fill(objDatatable);

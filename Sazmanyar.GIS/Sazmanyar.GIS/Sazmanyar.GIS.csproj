@@ -138,20 +138,13 @@
       <DependentUpon>ShowAllProjectInfoUserControl.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfo.cs" />
-    <Compile Include="ShowAllMapSheets\ShowAllMapSheets.cs" />
-    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx.cs">
-      <DependentUpon>ShowAllMapSheetsUserControl_admin.ascx</DependentUpon>
+    <Compile Include="ShowAllMapSheetInfo\ShowAllMapSheetInfo.cs" />
+    <Compile Include="ShowAllMapSheetInfo\ShowAllMapSheetInfoUserControl.ascx.cs">
+      <DependentUpon>ShowAllMapSheetInfoUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx.designer.cs">
-      <DependentUpon>ShowAllMapSheetsUserControl_admin.ascx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx.cs">
-      <DependentUpon>ShowAllMapSheetsUserControl_EndUser.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx.designer.cs">
-      <DependentUpon>ShowAllMapSheetsUserControl_EndUser.ascx.cs</DependentUpon>
+    <Compile Include="ShowAllMapSheetInfo\ShowAllMapSheetInfoUserControl.ascx.designer.cs">
+      <DependentUpon>ShowAllMapSheetInfoUserControl.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx.cs">
       <DependentUpon>ShowAllPolyganInfoUserControl_admin.ascx</DependentUpon>
@@ -200,10 +193,10 @@
       <SharePointProjectItemId>{8a0b0f5a-edc0-4241-917f-36bfbf174803}</SharePointProjectItemId>
     </None>
     <None Include="ShowAllPolyganInfo\ShowAllPolyganInfo.webpart" />
-    <None Include="ShowAllMapSheets\SharePointProjectItem.spdata">
+    <None Include="ShowAllMapSheetInfo\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5d2c8a7e-4f1b-4c6a-9e3d-7b8a2f5c1d90}</SharePointProjectItemId>
     </None>
-    <None Include="ShowAllMapSheets\ShowAllMapSheets.webpart" />
+    <None Include="ShowAllMapSheetInfo\ShowAllMapSheetInfo.webpart" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Sazmanyar.GIS\" />
@@ -329,6 +322,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\FilterMaseer.html" />
     <Content Include="Layouts\Sazmanyar.GIS\FilterSath.html" />
     <Content Include="Layouts\Sazmanyar.GIS\FilterProject.html" />
+    <Content Include="Layouts\Sazmanyar.GIS\FilterMapSheet.html" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\awesome-bootstrap-checkbox.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker.fa.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap-datepicker3.min.css" />
@@ -339,7 +333,7 @@
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\gis-filter.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\css\gis-ui.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\js\gis-ui.js" />
-    <Content Include="Layouts\Sazmanyar.GIS\Script\js\mapsheets.js" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsMapSheet.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\query-builder.default.min.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\selectize.default.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\style.css" />
@@ -457,9 +451,8 @@
     <Content Include="ShowAllPolyganInfo\Elements.xml" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_admin.ascx" />
     <Content Include="ShowAllPolyganInfo\ShowAllPolyganInfoUserControl_EndUser.ascx" />
-    <Content Include="ShowAllMapSheets\Elements.xml" />
-    <Content Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_admin.ascx" />
-    <Content Include="ShowAllMapSheets\ShowAllMapSheetsUserControl_EndUser.ascx" />
+    <Content Include="ShowAllMapSheetInfo\Elements.xml" />
+    <Content Include="ShowAllMapSheetInfo\ShowAllMapSheetInfoUserControl.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

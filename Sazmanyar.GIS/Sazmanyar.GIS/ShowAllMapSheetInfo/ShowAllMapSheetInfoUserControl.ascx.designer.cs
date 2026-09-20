@@ -7,10 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sazmanyar.GIS.ShowAllMapSheets {
+namespace Sazmanyar.GIS.ShowAllMapSheetInfo {
 
 
-    public partial class ShowAllMapSheetsUserControl_admin {
+    public partial class ShowAllMapSheetInfoUserControl {
+
+        /// <summary>
+        /// phRegToggle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phRegToggle;
+
+        /// <summary>
+        /// pnlRegPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlRegPanel;
 
         /// <summary>
         /// fupZip control.
@@ -49,6 +67,15 @@ namespace Sazmanyar.GIS.ShowAllMapSheets {
         protected global::System.Web.UI.WebControls.HiddenField hdnFocusBatch;
 
         /// <summary>
+        /// hdnRegOpen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnRegOpen;
+
+        /// <summary>
         /// litResult control.
         /// </summary>
         /// <remarks>
@@ -74,5 +101,14 @@ namespace Sazmanyar.GIS.ShowAllMapSheets {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptBatches;
+
+        /// <summary>
+        /// InitializBounds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal InitializBounds;
     }
 }
