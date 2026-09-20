@@ -55,6 +55,24 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
             }
         }
 
+        private bool _ShowSheetAreas = false;
+        [WebBrowsable(true)]
+        [WebDisplayName("نمایش سطح برگه‌های واقعی به‌صورت پیش‌فرض؟")]
+        [WebDescription("غیرفعال (پیش‌فرض): فقط پین؛ مرز برگه فقط برای پین انتخاب‌شده کشیده می‌شود. فعال: مرز همهء برگه‌ها با یک ردیف در فهرست. کاربر با چک‌باکس «سطح برگه‌ها» در ریبون می‌تواند عوضش کند.")]
+        [Personalizable(PersonalizationScope.Shared)]
+        [Category("تنظیمات ویژه")]
+        public bool ShowSheetAreas
+        {
+            get
+            {
+                return _ShowSheetAreas;
+            }
+            set
+            {
+                _ShowSheetAreas = value;
+            }
+        }
+
         protected override void CreateChildControls()
         {
             if (this.Page.Header == null)
@@ -66,6 +84,7 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
             {
                 ShowAllProjectInfoUserControl objUserControl = (ShowAllProjectInfoUserControl)Page.LoadControl(ascxPath);
                 objUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
+                objUserControl.ShowSheetAreas = ShowSheetAreas;
                 Controls.Add(objUserControl);
             }
             catch (Exception ex)

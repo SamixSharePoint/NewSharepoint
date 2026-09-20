@@ -10,6 +10,7 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
     {
         #region Variables
         public string InitializeLatLngCamaSemicalonSeperated = "";
+        public bool ShowSheetAreas = false;
         #endregion
 
         #region Events

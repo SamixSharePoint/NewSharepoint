@@ -21,6 +21,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
         #region Variables
         public string InitializeLatLngCamaSemicalonSeperated = "";
         public bool ShowRegistrationPanel = true;
+        public bool ShowSheetAreas = false;
         #endregion
 
         #region Events
@@ -128,12 +129,12 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
                 }
 
                 ClsHelpper.MapSheetsImportResult objImport = ClsHelpper.ImportMapSheets(objParse.Records, chkOverwrite.Checked, strFileName, strUser);
-                hdnFocusBatch.Value = (objImport.Inserted + objImport.Updated) > 0 ? objImport.Batch.ToString() : "";
+                hdnFocusBatch.Value = (objImport.Inserted + objImport.Updated + objImport.SheetsInserted + objImport.SheetsUpdated) > 0 ? objImport.Batch.ToString() : "";
 
                 string strSummary = "<div class='" + (objImport.Failed == 0 ? "ms-ok" : "ms-err") + "'><b>فایل «" + HttpUtility.HtmlEncode(strFileName) + "»: "
-                    + objParse.Records.Count + " برگه خوانده شد - "
-                    + objImport.Inserted + " ثبت جدید، " + objImport.Updated + " بازنویسی، " + objImport.Skipped + " تکراری (رد شد)، " + objImport.Failed + " خطا"
-                    + (objImport.Unlinked > 0 ? " - " + objImport.Unlinked + " برگه بدون پروژه در PWAInfo" : "")
+                    + objParse.Records.Count + " رکورد خوانده شد - برگه: " + objImport.SheetsInserted + " جدید، " + objImport.SheetsUpdated + " بازنویسی - "
+                    + "اتصال پروژه: " + objImport.Inserted + " جدید، " + objImport.Updated + " بازنویسی، " + objImport.Skipped + " تکراری (رد شد) - " + objImport.Failed + " خطا"
+                    + (objImport.Unlinked > 0 ? " - " + objImport.Unlinked + " رکورد بدون پروژه در PWAInfo" : "")
                     + "</b></div>";
 
                 sb.Insert(0, strSummary);
@@ -166,7 +167,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
                     int nDeleted = ClsHelpper.DeleteMapSheetsImportBatch(strBatch);
                     litResult.Text = nDeleted < 0
                         ? "<div class='ms-err'>حذف انجام نشد.</div>"
-                        : "<div class='ms-ok'>" + nDeleted + " برگه حذف شد.</div>";
+                        : "<div class='ms-ok'>" + nDeleted + " سطر (اتصال پروژه و برگهء بدون پروژه) حذف شد.</div>";
                     hdnFocusBatch.Value = "";
                 }
             }

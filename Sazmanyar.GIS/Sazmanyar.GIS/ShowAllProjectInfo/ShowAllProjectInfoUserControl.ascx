@@ -21,7 +21,8 @@
       * رنگ پین و ناحیه با همان دسته‌های تحقق GISInfo: 1 سبز (>90٪) 2 زرد (70-90) 3 صورتی (50-70) 4 قرمز (<50) 5 خاکستری (آغاز نشده)
       * برگه‌های واقعی (dbo.MapSheets، ستون JSON «Sheets» در خروجی FetchPWAProjects): پروژه‌ای که برگه دارد
         - پین آن روی مرکز برگه (میانگین مرکز برگه‌ها) می‌نشیند، نه Lat/Long تقریبی PWAInfo
-        - مرز واقعی برگه‌هایش به‌صورت یک گروه سطح (یک ردیف در فهرست) با رنگ تحقق کشیده می‌شود
+        - مرز واقعی برگه‌هایش پیش‌فرض فقط وقتی پین انتخاب شود کشیده می‌شود؛ با چک‌باکس «سطح برگه‌ها» (خاصیت ShowSheetAreas)
+          مرز همهء برگه‌ها به‌صورت یک گروه سطح برای هر پروژه (یک ردیف در فهرست) با رنگ تحقق کشیده می‌شود
         - در ساخت ناحیهء تقریبی منطقه شرکت نمی‌کند (اگر همهء پروژه‌های منطقه برگه داشته باشند، ناحیهء تقریبی کشیده نمی‌شود)
         - پین آن آیکون «برگهء نقشه» (SVG درون‌خطی، همان ShowAllMapSheetInfo) است؛ چند پروژه در یک پین = دستهء برگه + نشان تعداد
 --%>
@@ -277,6 +278,7 @@
     document.onkeypress = stopRKey;
 
     var X = jQuery;
+    var pwaShowSheetAreas = <%= ShowSheetAreas ? "true" : "false" %>;   // مرز همهء برگه‌های واقعی کشیده شود؟ (وگرنه فقط برای پین انتخاب‌شده)
     var availableTags = [];            // فهرست منطقه‌ها برای پیشنهاد خودکار
     var bVaziyatSelect = false;        // آیا منطقهء معتبری انتخاب شده؟
     var currentRegion = "";
@@ -733,6 +735,7 @@
         var byCode = {}, codeOrder = [];
         for (var sc = 0; sc < rows.length; sc++) {
             var sr = rows[sc];
+            if (!pwaShowSheetAreas) { break; }   // سطح‌ها خاموش: مرز برگه فقط هنگام انتخاب پین کشیده می‌شود (pwaShowSelectedSheets)
             if (pwaSheets(sr).length == 0) { continue; }
             var ck = (sr.ProjectCode == null || sr.ProjectCode == '') ? ('#' + sc) : sr.ProjectCode;
             if (!byCode[ck]) { byCode[ck] = []; codeOrder.push(ck); }
@@ -862,8 +865,52 @@
 
     // ---- انتخاب (Highlight) مارکر یا ناحیه + انیمیشن ----
     // فقط یک مورد در هر لحظه انتخاب است؛ با بسته شدن InfoWindow یا انتخاب مورد دیگر، حالت قبلی برمی‌گردد.
-    var pwaSel = { marker: null, markerImg: '', poly: null, polyTimer: null, listEl: null };
+    var pwaSel = { marker: null, markerImg: '', poly: null, polyTimer: null, listEl: null, sheetOverlays: [] };
     var PWA_SEL_STROKE = '#1d4ed8';
+
+    // مرز برگه‌های واقعی پروژه‌های یک پین انتخاب‌شده (فقط وقتی «سطح برگه‌ها» خاموش است): موقت، با بستن پنجره پاک می‌شود
+    function pwaShowSelectedSheets(rows) {
+        pwaHideSelectedSheets();
+        if (pwaShowSheetAreas) { return; }
+        var seen = {};
+        var cat = pwaCategory(rows);
+        var color = PWA_CAT[cat].hex;
+        for (var i = 0; i < rows.length; i++) {
+            var sheets = pwaSheets(rows[i]);
+            for (var sh = 0; sh < sheets.length; sh++) {
+                var key = String(sheets[sh].SheetNo || sh);
+                if (seen[key]) { continue; }
+                seen[key] = true;
+                var ring = [];
+                try {
+                    var arr = JSON.parse(sheets[sh].Boundary || '[]');
+                    for (var v = 0; v < arr.length; v++) {
+                        var la = pwaNum(arr[v].lat), ln = pwaNum(arr[v].lng);
+                        if (la == 0 && ln == 0) { continue; }
+                        ring.push(new GLatLng(la, ln));
+                    }
+                } catch (e) { ring = []; }
+                if (ring.length < 3) { continue; }
+                ring.push(ring[0]);
+                var poly = new GPolygon(ring, PWA_SEL_STROKE, 3, 1, color, Math.min(0.85, gisAreaOpacity(null) + 0.15), { clickable: false });
+                map.addOverlay(poly);
+                pwaSel.sheetOverlays.push(poly);
+            }
+        }
+    }
+
+    function pwaHideSelectedSheets() {
+        for (var i = 0; i < pwaSel.sheetOverlays.length; i++) {
+            try { map.removeOverlay(pwaSel.sheetOverlays[i]); } catch (e) { }
+        }
+        pwaSel.sheetOverlays = [];
+    }
+
+    // چک‌باکس «سطح برگه‌ها» در ریبون
+    function pwaToggleSheetAreas(checked) {
+        pwaShowSheetAreas = !!checked;
+        pwaRedraw();
+    }
 
     function pwaHighlightListItem(checkboxId) {
         if (pwaSel.listEl) {
@@ -884,6 +931,7 @@
     }
 
     function pwaClearSelection() {
+        pwaHideSelectedSheets();
         // مارکر: تصویر اصلی برمی‌گردد
         if (pwaSel.marker) {
             try { pwaSel.marker.setImage(pwaSel.markerImg); } catch (e) { }
@@ -932,6 +980,8 @@
             }
         }, 30);
         pwaHighlightListItem('marker' + marker_num);
+        // پین برگه‌دار: مرز برگه‌هایش (فقط وقتی سطح‌ها خاموش‌اند)
+        if (mk.pwaIsSheet) { pwaShowSelectedSheets(mk.pwaRows); }
     }
 
     // ناحیهء انتخاب‌شده: خط دور ضخیم آبی + چند ضربان شفافیت داخل، سپس ثابت روی حالت پررنگ‌تر
@@ -1521,6 +1571,9 @@
                             </div>
                             <div class="gis-topbar-aside">
                                 <div class="gis-opacity" title="شفافیت داخل ناحیه‌های مناطق روی نقشه">
+                                    <label class="gis-field-label" style="cursor: pointer;" title="خاموش: مرز برگهء واقعی فقط برای پین انتخاب‌شده کشیده می‌شود. روشن: مرز همهء برگه‌ها با یک ردیف در فهرست">
+                                        <input type="checkbox" id="chkSheetAreas" <%= ShowSheetAreas ? "checked=\"checked\"" : "" %> onchange="pwaToggleSheetAreas(this.checked);" style="vertical-align: middle; margin: 0 0 0 4px;" />سطح برگه‌ها
+                                    </label>
                                     <span class="gis-field-label">شفافیت ناحیه‌ها:</span>
                                     <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
                                     <span id="gisAreaOpacityValue" class="gis-opacity-value">خودکار</span>

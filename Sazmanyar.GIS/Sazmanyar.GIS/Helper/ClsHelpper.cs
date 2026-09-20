@@ -2849,7 +2849,7 @@ namespace Sazmanyar.GIS
                     SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(objCmd);
                     objSqlDataAdapter.Fill(objDatatable);
 
-                    // برگه‌های واقعی (dbo.MapSheets) هر پروژه به‌صورت JSON در ستون Sheets؛ وب‌پارت پین را روی مرکز برگه می‌گذارد،
+                    // برگه‌های واقعی (dbo.MapSheets از طریق dbo.MapSheetProjects) هر پروژه به‌صورت JSON در ستون Sheets؛ وب‌پارت پین را روی مرکز برگه می‌گذارد،
                     // مرز واقعی برگه را می‌کشد و این پروژه‌ها را از ساخت ناحیهء تقریبی منطقه کنار می‌گذارد.
                     // اگر جدول MapSheets روی این پایگاه نباشد، فقط لاگ می‌شود و ستون خالی می‌ماند.
                     AttachMapSheetsToProjects(objDatatable, objSqlConnection);
@@ -2863,7 +2863,7 @@ namespace Sazmanyar.GIS
             return objDatatable;
         }
 
-        /// <summary>ستون Sheets (JSON آرایهء برگه‌های MapSheets با همان ProjectCode) را به جدول پروژه‌ها اضافه می‌کند؛ بدون برگه: []</summary>
+        /// <summary>ستون Sheets (JSON آرایهء برگه‌های متصل به هر ProjectCode از طریق MapSheetProjects) را به جدول پروژه‌ها اضافه می‌کند؛ بدون برگه: []</summary>
         private static void AttachMapSheetsToProjects(DataTable objProjects, SqlConnection objSqlConnection)
         {
             if (!objProjects.Columns.Contains("Sheets")) { objProjects.Columns.Add("Sheets", typeof(string)); }
@@ -2891,8 +2891,9 @@ namespace Sazmanyar.GIS
                         names.Add(prm);
                         objCmd.Parameters.Add(prm, SqlDbType.VarChar, 20).Value = codes[i];
                     }
-                    objCmd.CommandText = " SELECT ProjectCode, SheetNo, SheetScale, SheetNameFa, SheetNameEn, CentroidLat, CentroidLong, AreaKm2, Boundary " +
-                                         " FROM dbo.MapSheets WHERE ProjectCode IN (" + string.Join(",", names.ToArray()) + ") ORDER BY ProjectCode, SheetNo ";
+                    objCmd.CommandText = " SELECT l.ProjectCode, ms.SheetNo, ms.SheetScale, ms.SheetNameFa, ms.SheetNameEn, ms.CentroidLat, ms.CentroidLong, ms.AreaKm2, ms.Boundary " +
+                                         " FROM dbo.MapSheetProjects l JOIN dbo.MapSheets ms ON ms.ID = l.SheetID " +
+                                         " WHERE l.ProjectCode IN (" + string.Join(",", names.ToArray()) + ") ORDER BY l.ProjectCode, ms.SheetNo ";
                     DataTable objSheets = new DataTable();
                     new SqlDataAdapter(objCmd).Fill(objSheets);
                     foreach (DataRow sr in objSheets.Rows)
@@ -2996,21 +2997,24 @@ namespace Sazmanyar.GIS
 
         #region MapSheets (وب‌پارت ShowAllMapSheetInfo)
 
-        /// <summary>نتیجهء یک بار Import برگه‌ها</summary>
+        /// <summary>نتیجهء یک بار Import برگه‌ها (مدل دو جدولی: MapSheets + MapSheetProjects)</summary>
         public class MapSheetsImportResult
         {
             public Guid Batch;
-            public int Inserted;
-            public int Updated;
-            public int Skipped;
+            public int SheetsInserted;                             // برگه‌های جدید
+            public int SheetsUpdated;                              // برگه‌هایی که هندسه/نامشان بازنویسی شد
+            public int Inserted;                                   // اتصال‌های جدید (برگه‌ـ‌پروژه)
+            public int Updated;                                    // اتصال‌های بازنویسی‌شده
+            public int Skipped;                                    // اتصال‌های تکراری که رد شدند
             public int Failed;
-            public int Unlinked;                                   // برگه‌هایی که کدشان در PWAInfo نیست
-            public List<string> Messages = new List<string>();     // پیام هر برگه به ترتیب فایل
+            public int Unlinked;                                   // رکوردهای بدون کد یا با کدی که در PWAInfo نیست
+            public List<string> Messages = new List<string>();     // پیام هر رکورد به ترتیب فایل
         }
 
         /// <summary>
-        /// رکوردهای خوانده‌شده از Shapefile را در dbo.MapSheets ثبت می‌کند (upsert روی SheetScale + SheetNo).
-        /// bOverwrite=false: برگهء تکراری رد می‌شود؛ true: بازنویسی می‌شود (ImportBatch به Batch جدید تغییر می‌کند).
+        /// رکوردهای خوانده‌شده از Shapefile را ثبت می‌کند:
+        ///   1) برگه: upsert روی (SheetScale, SheetNo). برگهء موجود فقط با bOverwrite بازنویسی می‌شود.
+        ///   2) اتصال: اگر رکورد ProjectCode دارد، upsert روی (SheetID, ProjectCode). اتصال موجود بدون bOverwrite رد می‌شود.
         /// کد پروژه‌ای که در PWAInfo نباشد خطا نیست؛ فقط در پیام‌ها علامت می‌خورد تا به کارفرما گزارش شود.
         /// </summary>
         public static MapSheetsImportResult ImportMapSheets(List<MapSheetRecord> records, bool bOverwrite, string strSourceFile, string strImportedBy)
@@ -3025,35 +3029,33 @@ namespace Sazmanyar.GIS
                 {
                     objSqlConnection.Open();
 
-                    SqlCommand cmdExists = new SqlCommand("SELECT ID FROM dbo.MapSheets WHERE SheetScale = @Scale AND SheetNo = @SheetNo", objSqlConnection);
-                    cmdExists.Parameters.Add("@Scale", SqlDbType.Int);
-                    cmdExists.Parameters.Add("@SheetNo", SqlDbType.NVarChar, 20);
+                    SqlCommand cmdSheetExists = new SqlCommand("SELECT ID FROM dbo.MapSheets WHERE SheetScale = @Scale AND SheetNo = @SheetNo", objSqlConnection);
+                    cmdSheetExists.Parameters.Add("@Scale", SqlDbType.Int);
+                    cmdSheetExists.Parameters.Add("@SheetNo", SqlDbType.NVarChar, 20);
+
+                    SqlCommand cmdLinkExists = new SqlCommand("SELECT ID FROM dbo.MapSheetProjects WHERE SheetID = @SheetID AND ProjectCode = @Code", objSqlConnection);
+                    cmdLinkExists.Parameters.Add("@SheetID", SqlDbType.Int);
+                    cmdLinkExists.Parameters.Add("@Code", SqlDbType.VarChar, 20);
 
                     SqlCommand cmdPwa = new SqlCommand("SELECT COUNT(*) FROM dbo.PWAInfo WHERE ProjectCode = @Code", objSqlConnection);
                     cmdPwa.Parameters.Add("@Code", SqlDbType.VarChar, 20);
 
-                    string strCols = " SheetNo, SheetScale, SheetSeries, SheetQuarter, SourceSheetID, SheetNameEn, SheetNameFa, " +
-                                     " ProjectCode, ProjectName, Contractor, Supervisor, Geologist, " +
-                                     " Boundary, VertexCount, CentroidLat, CentroidLong, MinLat, MinLong, MaxLat, MaxLong, AreaKm2, " +
-                                     " ExtraAttributes, SourceFile, SourceLayer, SourceCrs, ImportBatch, ImportedAt, ImportedBy ";
-                    string strVals = " @SheetNo, @SheetScale, @SheetSeries, @SheetQuarter, @SourceSheetID, @SheetNameEn, @SheetNameFa, " +
-                                     " @ProjectCode, @ProjectName, @Contractor, @Supervisor, @Geologist, " +
-                                     " @Boundary, @VertexCount, @CentroidLat, @CentroidLong, @MinLat, @MinLong, @MaxLat, @MaxLong, @AreaKm2, " +
-                                     " @ExtraAttributes, @SourceFile, @SourceLayer, @SourceCrs, @ImportBatch, GETDATE(), @ImportedBy ";
-                    SqlCommand cmdInsert = new SqlCommand("INSERT INTO dbo.MapSheets (" + strCols + ") VALUES (" + strVals + ")", objSqlConnection);
-
-                    SqlCommand cmdUpdate = new SqlCommand(
+                    // ---- برگه ----
+                    SqlCommand cmdSheetInsert = new SqlCommand(
+                        "INSERT INTO dbo.MapSheets (SheetNo, SheetScale, SheetSeries, SheetQuarter, SourceSheetID, SheetNameEn, SheetNameFa, " +
+                        " Boundary, VertexCount, CentroidLat, CentroidLong, MinLat, MinLong, MaxLat, MaxLong, AreaKm2, " +
+                        " SourceFile, SourceLayer, SourceCrs, ImportBatch, ImportedAt, ImportedBy) " +
+                        " VALUES (@SheetNo, @SheetScale, @SheetSeries, @SheetQuarter, @SourceSheetID, @SheetNameEn, @SheetNameFa, " +
+                        " @Boundary, @VertexCount, @CentroidLat, @CentroidLong, @MinLat, @MinLong, @MaxLat, @MaxLong, @AreaKm2, " +
+                        " @SourceFile, @SourceLayer, @SourceCrs, @ImportBatch, GETDATE(), @ImportedBy); SELECT CAST(SCOPE_IDENTITY() AS INT);", objSqlConnection);
+                    SqlCommand cmdSheetUpdate = new SqlCommand(
                         "UPDATE dbo.MapSheets SET SheetSeries=@SheetSeries, SheetQuarter=@SheetQuarter, SourceSheetID=@SourceSheetID, " +
-                        " SheetNameEn=@SheetNameEn, SheetNameFa=@SheetNameFa, ProjectCode=@ProjectCode, ProjectName=@ProjectName, " +
-                        " Contractor=@Contractor, Supervisor=@Supervisor, Geologist=@Geologist, Boundary=@Boundary, VertexCount=@VertexCount, " +
+                        " SheetNameEn=@SheetNameEn, SheetNameFa=@SheetNameFa, Boundary=@Boundary, VertexCount=@VertexCount, " +
                         " CentroidLat=@CentroidLat, CentroidLong=@CentroidLong, MinLat=@MinLat, MinLong=@MinLong, MaxLat=@MaxLat, MaxLong=@MaxLong, " +
-                        " AreaKm2=@AreaKm2, ExtraAttributes=@ExtraAttributes, SourceFile=@SourceFile, SourceLayer=@SourceLayer, SourceCrs=@SourceCrs, " +
-                        " ImportBatch=@ImportBatch, ImportedBy=@ImportedBy, UpdatedAt=GETDATE() " +
-                        " WHERE ID=@ID", objSqlConnection);
-
-                    // @ID فقط برای UPDATE؛ اگر روی INSERT هم تعریف شود ولی مقدار نگیرد، SqlClient خطای «parameter not supplied» می‌دهد
-                    cmdUpdate.Parameters.Add("@ID", SqlDbType.Int);
-                    foreach (SqlCommand cmd in new[] { cmdInsert, cmdUpdate })
+                        " AreaKm2=@AreaKm2, SourceFile=@SourceFile, SourceLayer=@SourceLayer, SourceCrs=@SourceCrs, " +
+                        " ImportBatch=@ImportBatch, ImportedBy=@ImportedBy, UpdatedAt=GETDATE() WHERE ID=@ID", objSqlConnection);
+                    cmdSheetUpdate.Parameters.Add("@ID", SqlDbType.Int);
+                    foreach (SqlCommand cmd in new[] { cmdSheetInsert, cmdSheetUpdate })
                     {
                         cmd.Parameters.Add("@SheetNo", SqlDbType.NVarChar, 20);
                         cmd.Parameters.Add("@SheetScale", SqlDbType.Int);
@@ -3062,11 +3064,6 @@ namespace Sazmanyar.GIS
                         cmd.Parameters.Add("@SourceSheetID", SqlDbType.BigInt);
                         cmd.Parameters.Add("@SheetNameEn", SqlDbType.NVarChar, 100);
                         cmd.Parameters.Add("@SheetNameFa", SqlDbType.NVarChar, 100);
-                        cmd.Parameters.Add("@ProjectCode", SqlDbType.VarChar, 20);
-                        cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 200);
-                        cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar, 100);
-                        cmd.Parameters.Add("@Supervisor", SqlDbType.NVarChar, 100);
-                        cmd.Parameters.Add("@Geologist", SqlDbType.NVarChar, 100);
                         cmd.Parameters.Add("@Boundary", SqlDbType.NVarChar, -1);
                         cmd.Parameters.Add("@VertexCount", SqlDbType.Int);
                         cmd.Parameters.Add("@CentroidLat", SqlDbType.Decimal);
@@ -3076,7 +3073,6 @@ namespace Sazmanyar.GIS
                         cmd.Parameters.Add("@MaxLat", SqlDbType.Decimal);
                         cmd.Parameters.Add("@MaxLong", SqlDbType.Decimal);
                         cmd.Parameters.Add("@AreaKm2", SqlDbType.Decimal);
-                        cmd.Parameters.Add("@ExtraAttributes", SqlDbType.NVarChar, -1);
                         cmd.Parameters.Add("@SourceFile", SqlDbType.NVarChar, 255);
                         cmd.Parameters.Add("@SourceLayer", SqlDbType.NVarChar, 100);
                         cmd.Parameters.Add("@SourceCrs", SqlDbType.NVarChar, 200);
@@ -3090,88 +3086,126 @@ namespace Sazmanyar.GIS
                         }
                     }
 
+                    // ---- اتصال ----
+                    SqlCommand cmdLinkInsert = new SqlCommand(
+                        "INSERT INTO dbo.MapSheetProjects (SheetID, ProjectCode, ProjectName, Contractor, Supervisor, Geologist, ExtraAttributes, " +
+                        " SourceFile, SourceLayer, ImportBatch, ImportedAt, ImportedBy) " +
+                        " VALUES (@SheetID, @Code, @ProjectName, @Contractor, @Supervisor, @Geologist, @ExtraAttributes, " +
+                        " @SourceFile, @SourceLayer, @ImportBatch, GETDATE(), @ImportedBy)", objSqlConnection);
+                    SqlCommand cmdLinkUpdate = new SqlCommand(
+                        "UPDATE dbo.MapSheetProjects SET ProjectName=@ProjectName, Contractor=@Contractor, Supervisor=@Supervisor, Geologist=@Geologist, " +
+                        " ExtraAttributes=@ExtraAttributes, SourceFile=@SourceFile, SourceLayer=@SourceLayer, ImportBatch=@ImportBatch, " +
+                        " ImportedBy=@ImportedBy, UpdatedAt=GETDATE() WHERE ID=@ID", objSqlConnection);
+                    cmdLinkUpdate.Parameters.Add("@ID", SqlDbType.Int);
+                    foreach (SqlCommand cmd in new[] { cmdLinkInsert, cmdLinkUpdate })
+                    {
+                        cmd.Parameters.Add("@SheetID", SqlDbType.Int);
+                        cmd.Parameters.Add("@Code", SqlDbType.VarChar, 20);
+                        cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 200);
+                        cmd.Parameters.Add("@Contractor", SqlDbType.NVarChar, 100);
+                        cmd.Parameters.Add("@Supervisor", SqlDbType.NVarChar, 100);
+                        cmd.Parameters.Add("@Geologist", SqlDbType.NVarChar, 100);
+                        cmd.Parameters.Add("@ExtraAttributes", SqlDbType.NVarChar, -1);
+                        cmd.Parameters.Add("@SourceFile", SqlDbType.NVarChar, 255);
+                        cmd.Parameters.Add("@SourceLayer", SqlDbType.NVarChar, 100);
+                        cmd.Parameters.Add("@ImportBatch", SqlDbType.UniqueIdentifier);
+                        cmd.Parameters.Add("@ImportedBy", SqlDbType.NVarChar, 100);
+                    }
+
                     foreach (MapSheetRecord rec in records)
                     {
                         try
                         {
-                            // وضعیت اتصال به PWA
-                            string strLink = "";
-                            if (string.IsNullOrEmpty(rec.ProjectCode))
+                            // 1) برگه
+                            cmdSheetExists.Parameters["@Scale"].Value = rec.SheetScale;
+                            cmdSheetExists.Parameters["@SheetNo"].Value = rec.SheetNo;
+                            object oSheetId = cmdSheetExists.ExecuteScalar();
+                            int nSheetId;
+                            string strSheetAction;
+                            if (oSheetId == null || oSheetId == DBNull.Value)
                             {
-                                res.Unlinked++;
-                                strLink = " | بدون کد پروژه";
+                                FillSheetParams(cmdSheetInsert, rec, strSourceFile, strImportedBy, res.Batch);
+                                nSheetId = Convert.ToInt32(cmdSheetInsert.ExecuteScalar());
+                                res.SheetsInserted++;
+                                strSheetAction = "برگه ثبت شد";
                             }
                             else
                             {
-                                cmdPwa.Parameters["@Code"].Value = rec.ProjectCode;
-                                int nPwa = Convert.ToInt32(cmdPwa.ExecuteScalar());
-                                if (nPwa == 0)
+                                nSheetId = Convert.ToInt32(oSheetId);
+                                if (bOverwrite)
                                 {
-                                    res.Unlinked++;
-                                    strLink = " | کد " + rec.ProjectCode + " در PWAInfo نیست";
+                                    FillSheetParams(cmdSheetUpdate, rec, strSourceFile, strImportedBy, res.Batch);
+                                    cmdSheetUpdate.Parameters["@ID"].Value = nSheetId;
+                                    cmdSheetUpdate.ExecuteNonQuery();
+                                    res.SheetsUpdated++;
+                                    strSheetAction = "برگه بازنویسی شد";
                                 }
                                 else
                                 {
-                                    strLink = " | متصل به PWAInfo (" + nPwa + " سطر)";
+                                    strSheetAction = "برگه از قبل موجود بود";
                                 }
                             }
 
-                            cmdExists.Parameters["@Scale"].Value = rec.SheetScale;
-                            cmdExists.Parameters["@SheetNo"].Value = rec.SheetNo;
-                            object oId = cmdExists.ExecuteScalar();
-
-                            SqlCommand cmd;
-                            string strAction;
-                            if (oId == null || oId == DBNull.Value)
+                            // 2) اتصال به پروژه
+                            string strWarn = rec.Warnings.Count > 0 ? " | " + string.Join(" ", rec.Warnings.ToArray()) : "";
+                            if (string.IsNullOrEmpty(rec.ProjectCode))
                             {
-                                cmd = cmdInsert;
-                                strAction = "ثبت شد";
+                                res.Unlinked++;
+                                res.Messages.Add(rec.Label + ": " + strSheetAction + " | بدون کد پروژه (به هیچ پروژه‌ای وصل نشد)" + strWarn);
+                                continue;
+                            }
+
+                            cmdPwa.Parameters["@Code"].Value = rec.ProjectCode;
+                            int nPwa = Convert.ToInt32(cmdPwa.ExecuteScalar());
+                            string strLink;
+                            if (nPwa == 0)
+                            {
+                                res.Unlinked++;
+                                strLink = " | کد " + rec.ProjectCode + " در PWAInfo نیست";
+                            }
+                            else
+                            {
+                                strLink = " | متصل به PWAInfo (" + nPwa + " سطر)";
+                            }
+
+                            cmdLinkExists.Parameters["@SheetID"].Value = nSheetId;
+                            cmdLinkExists.Parameters["@Code"].Value = rec.ProjectCode;
+                            object oLinkId = cmdLinkExists.ExecuteScalar();
+                            SqlCommand cmdLink;
+                            string strLinkAction;
+                            if (oLinkId == null || oLinkId == DBNull.Value)
+                            {
+                                cmdLink = cmdLinkInsert;
+                                strLinkAction = "پروژه " + rec.ProjectCode + " به برگه وصل شد";
                             }
                             else if (bOverwrite)
                             {
-                                cmd = cmdUpdate;
-                                cmd.Parameters["@ID"].Value = Convert.ToInt32(oId);
-                                strAction = "بازنویسی شد";
+                                cmdLink = cmdLinkUpdate;
+                                cmdLink.Parameters["@ID"].Value = Convert.ToInt32(oLinkId);
+                                strLinkAction = "اتصال پروژه " + rec.ProjectCode + " بازنویسی شد";
                             }
                             else
                             {
                                 res.Skipped++;
-                                res.Messages.Add(rec.Label + ": از قبل وجود دارد؛ رد شد (برای بازنویسی گزینهء مربوطه را فعال کنید)." + strLink);
+                                res.Messages.Add(rec.Label + ": " + strSheetAction + " | اتصال پروژه " + rec.ProjectCode + " از قبل وجود دارد؛ رد شد (برای بازنویسی گزینهء مربوطه را فعال کنید)" + strLink + strWarn);
                                 continue;
                             }
 
-                            cmd.Parameters["@SheetNo"].Value = rec.SheetNo;
-                            cmd.Parameters["@SheetScale"].Value = rec.SheetScale;
-                            cmd.Parameters["@SheetSeries"].Value = NullIfEmpty(rec.SheetSeries);
-                            cmd.Parameters["@SheetQuarter"].Value = NullIfEmpty(rec.SheetQuarter);
-                            cmd.Parameters["@SourceSheetID"].Value = rec.SourceSheetID.HasValue ? (object)rec.SourceSheetID.Value : DBNull.Value;
-                            cmd.Parameters["@SheetNameEn"].Value = NullIfEmpty(rec.SheetNameEn);
-                            cmd.Parameters["@SheetNameFa"].Value = NullIfEmpty(rec.SheetNameFa);
-                            cmd.Parameters["@ProjectCode"].Value = NullIfEmpty(rec.ProjectCode);
-                            cmd.Parameters["@ProjectName"].Value = NullIfEmpty(rec.ProjectName);
-                            cmd.Parameters["@Contractor"].Value = NullIfEmpty(rec.Contractor);
-                            cmd.Parameters["@Supervisor"].Value = NullIfEmpty(rec.Supervisor);
-                            cmd.Parameters["@Geologist"].Value = NullIfEmpty(rec.Geologist);
-                            cmd.Parameters["@Boundary"].Value = rec.BoundaryJson;
-                            cmd.Parameters["@VertexCount"].Value = rec.Boundary.Count;
-                            cmd.Parameters["@CentroidLat"].Value = rec.CentroidLat;
-                            cmd.Parameters["@CentroidLong"].Value = rec.CentroidLong;
-                            cmd.Parameters["@MinLat"].Value = rec.MinLat;
-                            cmd.Parameters["@MinLong"].Value = rec.MinLong;
-                            cmd.Parameters["@MaxLat"].Value = rec.MaxLat;
-                            cmd.Parameters["@MaxLong"].Value = rec.MaxLong;
-                            cmd.Parameters["@AreaKm2"].Value = rec.AreaKm2;
-                            cmd.Parameters["@ExtraAttributes"].Value = NullIfEmpty(rec.ExtraAttributesJson);
-                            cmd.Parameters["@SourceFile"].Value = NullIfEmpty(strSourceFile);
-                            cmd.Parameters["@SourceLayer"].Value = NullIfEmpty(rec.SourceLayer);
-                            cmd.Parameters["@SourceCrs"].Value = NullIfEmpty(rec.SourceCrs);
-                            cmd.Parameters["@ImportBatch"].Value = res.Batch;
-                            cmd.Parameters["@ImportedBy"].Value = NullIfEmpty(strImportedBy);
-                            cmd.ExecuteNonQuery();
+                            cmdLink.Parameters["@SheetID"].Value = nSheetId;
+                            cmdLink.Parameters["@Code"].Value = rec.ProjectCode;
+                            cmdLink.Parameters["@ProjectName"].Value = NullIfEmpty(rec.ProjectName);
+                            cmdLink.Parameters["@Contractor"].Value = NullIfEmpty(rec.Contractor);
+                            cmdLink.Parameters["@Supervisor"].Value = NullIfEmpty(rec.Supervisor);
+                            cmdLink.Parameters["@Geologist"].Value = NullIfEmpty(rec.Geologist);
+                            cmdLink.Parameters["@ExtraAttributes"].Value = NullIfEmpty(rec.ExtraAttributesJson);
+                            cmdLink.Parameters["@SourceFile"].Value = NullIfEmpty(strSourceFile);
+                            cmdLink.Parameters["@SourceLayer"].Value = NullIfEmpty(rec.SourceLayer);
+                            cmdLink.Parameters["@ImportBatch"].Value = res.Batch;
+                            cmdLink.Parameters["@ImportedBy"].Value = NullIfEmpty(strImportedBy);
+                            cmdLink.ExecuteNonQuery();
 
-                            if (cmd == cmdInsert) { res.Inserted++; } else { res.Updated++; }
-                            string strWarn = rec.Warnings.Count > 0 ? " | " + string.Join(" ", rec.Warnings.ToArray()) : "";
-                            res.Messages.Add(rec.Label + ": " + strAction + strLink + strWarn);
+                            if (cmdLink == cmdLinkInsert) { res.Inserted++; } else { res.Updated++; }
+                            res.Messages.Add(rec.Label + ": " + strSheetAction + " | " + strLinkAction + strLink + strWarn);
                         }
                         catch (Exception exRow)
                         {
@@ -3192,6 +3226,31 @@ namespace Sazmanyar.GIS
             return res;
         }
 
+        private static void FillSheetParams(SqlCommand cmd, MapSheetRecord rec, string strSourceFile, string strImportedBy, Guid gBatch)
+        {
+            cmd.Parameters["@SheetNo"].Value = rec.SheetNo;
+            cmd.Parameters["@SheetScale"].Value = rec.SheetScale;
+            cmd.Parameters["@SheetSeries"].Value = NullIfEmpty(rec.SheetSeries);
+            cmd.Parameters["@SheetQuarter"].Value = NullIfEmpty(rec.SheetQuarter);
+            cmd.Parameters["@SourceSheetID"].Value = rec.SourceSheetID.HasValue ? (object)rec.SourceSheetID.Value : DBNull.Value;
+            cmd.Parameters["@SheetNameEn"].Value = NullIfEmpty(rec.SheetNameEn);
+            cmd.Parameters["@SheetNameFa"].Value = NullIfEmpty(rec.SheetNameFa);
+            cmd.Parameters["@Boundary"].Value = rec.BoundaryJson;
+            cmd.Parameters["@VertexCount"].Value = rec.Boundary.Count;
+            cmd.Parameters["@CentroidLat"].Value = rec.CentroidLat;
+            cmd.Parameters["@CentroidLong"].Value = rec.CentroidLong;
+            cmd.Parameters["@MinLat"].Value = rec.MinLat;
+            cmd.Parameters["@MinLong"].Value = rec.MinLong;
+            cmd.Parameters["@MaxLat"].Value = rec.MaxLat;
+            cmd.Parameters["@MaxLong"].Value = rec.MaxLong;
+            cmd.Parameters["@AreaKm2"].Value = rec.AreaKm2;
+            cmd.Parameters["@SourceFile"].Value = NullIfEmpty(strSourceFile);
+            cmd.Parameters["@SourceLayer"].Value = NullIfEmpty(rec.SourceLayer);
+            cmd.Parameters["@SourceCrs"].Value = NullIfEmpty(rec.SourceCrs);
+            cmd.Parameters["@ImportBatch"].Value = gBatch;
+            cmd.Parameters["@ImportedBy"].Value = NullIfEmpty(strImportedBy);
+        }
+
         private static object NullIfEmpty(string s)
         {
             if (s == null) { return DBNull.Value; }
@@ -3200,10 +3259,10 @@ namespace Sazmanyar.GIS
         }
 
         private const string MAPSHEETS_SELECT_COLUMNS =
-            " ID, SheetNo, SheetScale, SheetSeries, SheetQuarter, SourceSheetID, SheetNameEn, SheetNameFa, " +
+            " ID, LinkID, SheetNo, SheetScale, SheetSeries, SheetQuarter, SourceSheetID, SheetNameEn, SheetNameFa, " +
             " ProjectCode, SheetProjectName, Contractor, Supervisor, Geologist, " +
             " Boundary, VertexCount, CentroidLat, CentroidLong, MinLat, MinLong, MaxLat, MaxLong, AreaKm2, " +
-            " SourceFile, SourceLayer, SourceCrs, ImportBatch, ImportedAt, ImportedBy, UpdatedAt, " +
+            " SourceFile, SourceLayer, SourceCrs, LinkSourceFile, ImportBatch, ImportedAt, ImportedBy, UpdatedAt, " +
             " PwaRowCount, PwaID, ProjectName, Status, PlannedProgress, ActualProgress, AchievementPct, " +
             " StartDateJ, FinishDateJ, PlannedStartJ, PlannedFinishJ, ProjectType, Region, ExecutionMethod, " +
             " ProjectManager, ProjectSupervisor, PwaLat, PwaLong, TahaghoghCategory ";
@@ -3211,15 +3270,15 @@ namespace Sazmanyar.GIS
         // ستون‌هایی که در شرط جستجوی پیشرفتهء برگه‌ها مجازند (شناسهء فیلترهای Filter\js\demo_widgetsMapSheet.js = ستون‌های vw_MapSheetsProjects)
         private static readonly string[] MAPSHEETS_FILTER_COLUMNS = new string[] {
             "SheetNo", "SheetNameFa", "SheetNameEn", "SheetSeries", "SheetQuarter", "SheetScale", "SourceSheetID",
-            "Contractor", "Supervisor", "Geologist", "AreaKm2", "ImportedAt", "SourceFile", "SourceLayer", "SheetProjectName",
+            "Contractor", "Supervisor", "Geologist", "AreaKm2", "ImportedAt", "SourceFile", "SourceLayer", "LinkSourceFile", "SheetProjectName", "LinkID",
             "PwaID", "PwaRowCount", "ProjectCode", "ProjectName", "ProjectType", "Region", "Status", "ExecutionMethod", "TahaghoghCategory",
             "PlannedProgress", "ActualProgress", "AchievementPct", "StartDate", "FinishDate", "PlannedStart", "PlannedFinish",
             "ProjectManager", "ProjectSupervisor", "OrgLevel1", "OrgLevel2", "TotalCost" };
 
         /// <summary>
-        /// برگه‌ها به همراه اطلاعات پروژهء متصل (نمای vw_MapSheetsProjects). هر فیلتر خالی = بدون فیلتر.
-        /// strRegion: منطقهء پروژهء متصل؛ مقدار ویژهء *NOPWA* = فقط برگه‌های بدون پروژه در PWAInfo.
-        /// strSheet: بخشی از شمارهء برگه یا نام برگه (LIKE)؛ strImportBatch: GUID یک Import.
+        /// جفت‌های برگه‌ـ‌پروژه به همراه اطلاعات پروژهء PWA (نمای vw_MapSheetsProjects). هر فیلتر خالی = بدون فیلتر.
+        /// strRegion: منطقهء پروژهء متصل؛ مقدار ویژهء *NOPWA* = فقط اتصال‌هایی که کدشان در PWAInfo نیست.
+        /// strSheet: بخشی از شمارهء برگه یا نام برگه (LIKE)؛ strImportBatch: GUID یک بارگذاری (اتصال‌ها).
         /// strCondition: شرط query-builder صفحهء FilterMapSheet.html (همان قرارداد PWAInfo: کوتیشن #@# و تاریخ شمسی با پیشوند DDDDDDDDDDD).
         /// </summary>
         public static DataTable FetchMapSheets(string strRegion, string strSheet, string strImportBatch, string strCondition)
@@ -3242,7 +3301,7 @@ namespace Sazmanyar.GIS
                                     (bOnlyUnlinked ? "   AND PwaID IS NULL " : "   AND (@Region = N'' OR Region = @Region) ") +
                                     (bHasBatch ? "   AND ImportBatch = @Batch " : "") +
                                     (strExtra.Length > 0 ? "   AND ( " + strExtra + " ) " : "") +
-                                    " ORDER BY SheetScale, SheetNo ";
+                                    " ORDER BY SheetScale, SheetNo, ProjectCode ";
                     SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
                     objCmd.Parameters.Add("@Sheet", SqlDbType.NVarChar, 100).Value = (strSheet ?? "").Trim();
                     objCmd.Parameters.Add("@Region", SqlDbType.NVarChar, 50).Value = bOnlyUnlinked ? "" : strRegionValue;
@@ -3263,7 +3322,7 @@ namespace Sazmanyar.GIS
             return objDatatable;
         }
 
-        /// <summary>ستون PwaRows (JSON آرایهء سطرهای PWAInfo با همان کد) را به جدول برگه‌ها اضافه می‌کند؛ برگهء بدون کد یا بدون سطر: []</summary>
+        /// <summary>ستون PwaRows (JSON آرایهء سطرهای PWAInfo با همان کد) را به جدول برگه‌ها اضافه می‌کند؛ بدون کد یا بدون سطر: []</summary>
         private static void AttachPwaRows(DataTable objSheets, SqlConnection objSqlConnection)
         {
             if (!objSheets.Columns.Contains("PwaRows")) { objSheets.Columns.Add("PwaRows", typeof(string)); }
@@ -3324,7 +3383,11 @@ namespace Sazmanyar.GIS
             }
         }
 
-        /// <summary>خلاصهء هر Import (برای فهرست ادمین)؛ جدیدترین اول</summary>
+        /// <summary>
+        /// خلاصهء هر بارگذاری (برای فهرست ادمین)؛ جدیدترین اول. برگه‌ها و اتصال‌های یک بارگذاری همان ImportBatch را دارند.
+        /// Sheets = تعداد برگه‌های درگیر، Links = تعداد اتصال پروژه، WithoutCode = برگه‌های این بارگذاری که هیچ پروژه‌ای ندارند،
+        /// NotInPwa = اتصال‌هایی که کدشان در PWAInfo نیست.
+        /// </summary>
         public static DataTable FetchMapSheetsImportBatches()
         {
             DataTable objDatatable = new DataTable();
@@ -3333,13 +3396,20 @@ namespace Sazmanyar.GIS
                 using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
                 {
                     objSqlConnection.Open();
-                    string Strsql = " SELECT ImportBatch, MIN(ImportedAt) AS ImportedAt, MAX(ImportedBy) AS ImportedBy, MAX(SourceFile) AS SourceFile, " +
-                                    "        MAX(SourceLayer) AS SourceLayer, COUNT(*) AS Sheets, " +
-                                    "        SUM(CASE WHEN ProjectCode IS NULL THEN 1 ELSE 0 END) AS WithoutCode, " +
-                                    "        SUM(CASE WHEN ProjectCode IS NOT NULL AND NOT EXISTS (SELECT 1 FROM dbo.PWAInfo p WHERE p.ProjectCode = m.ProjectCode) THEN 1 ELSE 0 END) AS NotInPwa " +
-                                    " FROM dbo.MapSheets m " +
-                                    " GROUP BY ImportBatch " +
-                                    " ORDER BY MIN(ImportedAt) DESC ";
+                    string Strsql =
+                        " SELECT u.ImportBatch, MIN(u.ImportedAt) AS ImportedAt, MAX(u.ImportedBy) AS ImportedBy, MAX(u.SourceFile) AS SourceFile, MAX(u.SourceLayer) AS SourceLayer, " +
+                        "        COUNT(DISTINCT u.SheetID) AS Sheets, SUM(u.IsLink) AS Links, SUM(u.WithoutCode) AS WithoutCode, SUM(u.NotInPwa) AS NotInPwa " +
+                        " FROM ( " +
+                        "   SELECT ms.ImportBatch, ms.ImportedAt, ms.ImportedBy, ms.SourceFile, ms.SourceLayer, ms.ID AS SheetID, 0 AS IsLink, " +
+                        "          CASE WHEN NOT EXISTS (SELECT 1 FROM dbo.MapSheetProjects l WHERE l.SheetID = ms.ID) THEN 1 ELSE 0 END AS WithoutCode, 0 AS NotInPwa " +
+                        "   FROM dbo.MapSheets ms " +
+                        "   UNION ALL " +
+                        "   SELECT mp.ImportBatch, mp.ImportedAt, mp.ImportedBy, mp.SourceFile, mp.SourceLayer, mp.SheetID, 1, 0, " +
+                        "          CASE WHEN NOT EXISTS (SELECT 1 FROM dbo.PWAInfo p WHERE p.ProjectCode = mp.ProjectCode) THEN 1 ELSE 0 END " +
+                        "   FROM dbo.MapSheetProjects mp " +
+                        " ) u " +
+                        " GROUP BY u.ImportBatch " +
+                        " ORDER BY MIN(u.ImportedAt) DESC ";
                     SqlDataAdapter objSqlDataAdapter = new SqlDataAdapter(Strsql, objSqlConnection);
                     objSqlDataAdapter.Fill(objDatatable);
                     objSqlConnection.Close();
@@ -3352,7 +3422,10 @@ namespace Sazmanyar.GIS
             return objDatatable;
         }
 
-        /// <summary>حذف همهء برگه‌های یک Import (برای برگرداندن یک بارگذاری اشتباه)؛ تعداد سطرهای حذف‌شده</summary>
+        /// <summary>
+        /// حذف یک بارگذاری: اتصال‌های آن حذف می‌شوند و برگه‌هایی که با همان بارگذاری ساخته شده‌اند و دیگر هیچ اتصالی ندارند هم پاک می‌شوند
+        /// (برگه‌ای که از بارگذاری دیگری آمده یا هنوز پروژهء دیگری روی آن است می‌ماند). خروجی: تعداد اتصال + برگهء حذف‌شده؛ 1- = خطا
+        /// </summary>
         public static int DeleteMapSheetsImportBatch(string strImportBatch)
         {
             int nResult = -1;
@@ -3363,9 +3436,13 @@ namespace Sazmanyar.GIS
                 using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
                 {
                     objSqlConnection.Open();
-                    SqlCommand objCmd = new SqlCommand("DELETE FROM dbo.MapSheets WHERE ImportBatch = @Batch", objSqlConnection);
+                    SqlCommand objCmd = new SqlCommand(
+                        " DELETE FROM dbo.MapSheetProjects WHERE ImportBatch = @Batch; " +
+                        " DECLARE @n INT = @@ROWCOUNT; " +
+                        " DELETE FROM dbo.MapSheets WHERE ImportBatch = @Batch AND NOT EXISTS (SELECT 1 FROM dbo.MapSheetProjects l WHERE l.SheetID = MapSheets.ID); " +
+                        " SELECT @n + @@ROWCOUNT; ", objSqlConnection);
                     objCmd.Parameters.Add("@Batch", SqlDbType.UniqueIdentifier).Value = gBatch;
-                    nResult = objCmd.ExecuteNonQuery();
+                    nResult = Convert.ToInt32(objCmd.ExecuteScalar());
                     objSqlConnection.Close();
                 }
             }

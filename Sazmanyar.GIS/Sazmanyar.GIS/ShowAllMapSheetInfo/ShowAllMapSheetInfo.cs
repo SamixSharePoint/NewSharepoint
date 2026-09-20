@@ -74,6 +74,24 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
             }
         }
 
+        private bool _ShowSheetAreas = false;
+        [WebBrowsable(true)]
+        [WebDisplayName("نمایش سطح برگه‌ها به‌صورت پیش‌فرض؟")]
+        [WebDescription("غیرفعال (پیش‌فرض): فقط پین برگه‌ها؛ سطح فقط برای برگهء انتخاب‌شده کشیده می‌شود. فعال: سطح همهء برگه‌ها. کاربر با چک‌باکس «سطح برگه‌ها» در ریبون می‌تواند عوضش کند.")]
+        [Personalizable(PersonalizationScope.Shared)]
+        [Category("تنظیمات ویژه")]
+        public bool ShowSheetAreas
+        {
+            get
+            {
+                return _ShowSheetAreas;
+            }
+            set
+            {
+                _ShowSheetAreas = value;
+            }
+        }
+
         protected override void CreateChildControls()
         {
             if (this.Page.Header == null)
@@ -86,6 +104,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
                 ShowAllMapSheetInfoUserControl objUserControl = (ShowAllMapSheetInfoUserControl)Page.LoadControl(ascxPath);
                 objUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                 objUserControl.ShowRegistrationPanel = ShowRegistrationPanel;
+                objUserControl.ShowSheetAreas = ShowSheetAreas;
                 Controls.Add(objUserControl);
             }
             catch (Exception ex)

@@ -17,7 +17,9 @@
       * پنل جستجو: فهرست برگه‌ها با چک‌باکس نمایش/مخفی، همه / معکوس / هیچ
       * جستجوی پیشرفته: FilterMapSheet.html داخل fancybox؛ شرط SQL به وب‌متد FetchMapSheets می‌رود
     رفتار نقشه:
-      * هر برگه یک چندضلعی واقعی (از Boundary ذخیره‌شده) + یک پین روی مرکز برگه
+      * هر برگه یک پین روی مرکز برگه؛ سطح واقعی برگه (Boundary) پیش‌فرض فقط برای برگهء انتخاب‌شده کشیده می‌شود
+        (چک‌باکس «سطح برگه‌ها» در ریبون / خاصیت وب‌پارت ShowSheetAreas: نمایش سطح همهء برگه‌ها)
+      * هر برگه یک بار (چند پروژه روی یک برگه = یک پین با نشان تعداد؛ سطرهای نما به ازای هر جفت برگه‌ـ‌پروژه ادغام می‌شوند)
       * رنگ = دستهء تحقق میانگین همهء سطرهای PWAInfo با کد آن برگه (ستون PwaRows؛ پروژهء چندنوعی = چند سطر، همان فرمول
         pwaCategory در ShowAllProjectInfo)؛ دستهء ششم «بدون پروژه»: خاکستری‌آبی
       * پنجرهء اطلاعات: یک سطر = بدون تب؛ چند سطر = یک تب برای هر سطر (برچسب تب: نوع پروژه) مثل پین‌های ShowAllProjectInfo
@@ -445,6 +447,7 @@
     document.onkeypress = stopRKey;
 
     var X = jQuery;
+    var msShowAreas = <%= ShowSheetAreas ? "true" : "false" %>;   // سطح همهء برگه‌ها کشیده شود؟ (وگرنه فقط برگهء انتخاب‌شده)
     var availableTags = [];            // برچسب برگه‌ها برای پیشنهاد خودکار («7352-1 - راور»)
     var bVaziyatSelect = false;        // آیا برگهء معتبری انتخاب شده؟
     var currentSheet = "";
@@ -548,17 +551,49 @@
     }
 
     // سطرهای PWAInfo یک برگه (ستون PwaRows: JSON)؛ یک بار پارس و روی خود شیء کش می‌شود
+    // سطرهای PWA یک سطر نما (یک جفت برگه‌ـ‌پروژه)
+    function msLinkRows(link) {
+        if (link._linkRows) { return link._linkRows; }
+        var rows = [];
+        try { rows = JSON.parse(link.PwaRows || '[]'); } catch (e) { rows = []; }
+        if (!rows || !rows.length) {
+            // سازگاری: اگر ستون PwaRows نبود، همان سطر اول نما
+            if (link.PwaID != null && link.PwaID !== '') { rows = [link]; } else { rows = []; }
+        }
+        for (var i = 0; i < rows.length; i++) { rows[i]._link = link; }   // برای نمایش مجری/ناظر همان اتصال در تب
+        link._linkRows = rows;
+        return rows;
+    }
+
+    // همهء سطرهای PWA یک برگه (روی همهء اتصال‌هایش)؛ یک بار ساخته و روی خود شیء کش می‌شود
     function msPwaRows(s) {
         if (!s) { return []; }
         if (s._pwaRows) { return s._pwaRows; }
+        var links = s._links || [s];
         var rows = [];
-        try { rows = JSON.parse(s.PwaRows || '[]'); } catch (e) { rows = []; }
-        if (!rows || !rows.length) {
-            // سازگاری: اگر ستون PwaRows نبود، همان سطر اول نما
-            if (s.PwaID != null && s.PwaID !== '') { rows = [s]; } else { rows = []; }
-        }
+        for (var i = 0; i < links.length; i++) { rows = rows.concat(msLinkRows(links[i])); }
         s._pwaRows = rows;
         return rows;
+    }
+
+    // کدهای پروژهء یک برگه که در PWAInfo پیدا نشدند
+    function msUnlinkedCodes(s) {
+        var links = s._links || [s], out = [];
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].ProjectCode && msLinkRows(links[i]).length == 0) { out.push(links[i].ProjectCode); }
+        }
+        return out;
+    }
+
+    // سطرهای نما (یک سطر برای هر جفت برگه‌ـ‌پروژه) را به یک شیء برای هر برگه ادغام می‌کند: شیء = اولین سطر + _links
+    function msGroupBySheet(rows) {
+        var by = {}, out = [];
+        for (var i = 0; i < rows.length; i++) {
+            var key = String(rows[i].ID);
+            if (!by[key]) { by[key] = rows[i]; rows[i]._links = []; out.push(rows[i]); }
+            by[key]._links.push(rows[i]);
+        }
+        return out;
     }
 
     // دستهء تحقق یک مجموعه سطر PWA: میانگین درصد تحقق و پیشرفت واقعی (همان pwaCategory در ShowAllProjectInfo)؛ بدون سطر = 0
@@ -651,7 +686,7 @@
         availableTags = [];
         var unlinked = 0;
         for (var i = 0; i < rows.length; i++) {
-            var r = rows[i];
+            var r = rows[i];   // سطر نما = یک اتصال
             msAddDistinct(msLists.types, r.ProjectType);
             msAddDistinct(msLists.regions, r.Region);
             msAddDistinct(msLists.contractors, r.Contractor);
@@ -809,10 +844,11 @@
         return pts;
     }
 
-    function DrawMapSheets(rows) {
+    function DrawMapSheets(rowsRaw) {
         var listHtml = "";
         var nLinked = 0, nUnlinked = 0, nProjects = 0;
         var codes = {};
+        var rows = msGroupBySheet(rowsRaw);   // یک شیء برای هر برگه
 
         for (var i = 0; i < rows.length; i++) {
             var s = rows[i];
@@ -822,16 +858,21 @@
 
             var cat = msCategory(s);
             var color = MS_CAT[cat].hex;
-            if (cat == 0) { nUnlinked++; } else { nLinked++; if (!codes[s.ProjectCode]) { codes[s.ProjectCode] = true; nProjects++; } }
+            if (cat == 0) { nUnlinked++; } else { nLinked++; }
+            for (var lk = 0; lk < s._links.length; lk++) {
+                var pc = s._links[lk].ProjectCode;
+                if (pc && !codes[pc] && msLinkRows(s._links[lk]).length > 0) { codes[pc] = true; nProjects++; }
+            }
 
             gsheets.push(s);
             var idx = gsheets.length - 1;
 
-            // سطح برگه
+            // سطح برگه: همیشه ساخته می‌شود (برای محدوده و انتخاب)؛ فقط اگر «سطح برگه‌ها» روشن باشد از اول کشیده می‌شود
             var poly = new GPolygon(pts, color, 2, 0.9, color, gisAreaOpacity(null), { clickable: true });
             poly.pwaColor = color;
             gpolys.push(poly);
             map.addOverlay(poly);
+            if (!msShowAreas) { poly.hide(); }
 
             // پین مرکز برگه: آیکون «برگهء نقشه» با رنگ دسته؛ چند سطر PWA = دستهء برگه با نشان تعداد
             var prows = msPwaRows(s);
@@ -857,9 +898,13 @@
                 });
             })(idx, center);
 
+            var nCodes = 0;
+            for (var c2 in codes) { if (codes.hasOwnProperty(c2)) { nCodes++; } }
+            var sheetCodes = 0;
+            for (var lk2 = 0; lk2 < s._links.length; lk2++) { if (msLinkRows(s._links[lk2]).length > 0) { sheetCodes++; } }
             var sub = (cat == 0)
-                ? (s.ProjectCode ? 'کد ' + s.ProjectCode + ' در PWA نیست' : 'بدون کد پروژه')
-                : String(prows[0].ProjectName || '') + (prows.length > 1 ? ' - ' + prows.length + ' نوع' : '');
+                ? (msUnlinkedCodes(s).length ? 'کد ' + msUnlinkedCodes(s).join('، ') + ' در PWA نیست' : 'بدون کد پروژه')
+                : (sheetCodes > 1 ? sheetCodes + ' پروژه' : String(prows[0].ProjectName || '')) + (prows.length > sheetCodes ? ' - ' + prows.length + ' سطر' : '');
             listHtml += gisResultItem('area', 'Sheet', idx, 'toggleSheet', color, 'gpolys', msSheetTitle(s) + ' [' + sub + ']');
 
             var b = poly.getBounds();
@@ -945,6 +990,8 @@
             }
             var mk = gmarkers[msSel.idx];
             if (mk) { try { mk.setImage(mk.pwaImage); } catch (e) { } }
+            // اگر سطح‌ها خاموش‌اند، سطح برگهء انتخاب‌شده دوباره پنهان می‌شود
+            if (poly && !msShowAreas) { try { poly.hide(); } catch (e) { } }
         }
         var els = document.querySelectorAll('.gis-root .pwa-marker-selected');
         for (var i = 0; i < els.length; i++) { els[i].className = els[i].className.replace(/\s*pwa-marker-selected/g, ''); }
@@ -959,8 +1006,9 @@
         msClearSelection();
         msSel.idx = idx;
 
-        // سطح: خط دور ضخیم آبی + چند ضربان شفافیت، سپس ثابت روی حالت پررنگ‌تر
+        // سطح: خط دور ضخیم آبی + چند ضربان شفافیت، سپس ثابت روی حالت پررنگ‌تر (اگر سطح‌ها خاموش‌اند فقط همین یکی دیده می‌شود)
         var poly = gpolys[idx];
+        try { poly.show(); } catch (e) { }
         var base = gisAreaOpacity(null);
         var hi = Math.min(0.85, base + 0.3);
         try { poly.setStrokeStyle({ color: MS_SEL_STROKE, weight: 4, opacity: 1 }); } catch (e) { }
@@ -1029,6 +1077,12 @@
         html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + msVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + msVal(r.PlannedFinishJ) + "</td></tr>";
         html += "<tr><td class='lbl'>نحوه اجرا:</td><td>" + msVal(r.ExecutionMethod) + "</td><td class='lbl'>مدیر پروژه:</td><td>" + msVal(r.ProjectManager) + "</td></tr>";
         html += "<tr><td class='lbl'>ناظر پروژه:</td><td colspan='3'>" + msVal(r.ProjectSupervisor) + "</td></tr>";
+        // مشخصات همین پروژه روی همین برگه به روایت فایل کارفرما (فقط وقتی برگه چند پروژه دارد؛ وگرنه در بخش برگه آمده)
+        var lk = r._link;
+        if (lk && lk._sheetLinks !== 1 && (lk.Contractor || lk.Supervisor || lk.Geologist)) {
+            html += "<tr><td class='lbl'>مجری (فایل):</td><td>" + msVal(lk.Contractor) + "</td><td class='lbl'>ناظر (فایل):</td><td>" + msVal(lk.Supervisor) + "</td></tr>";
+            if (lk.Geologist) { html += "<tr><td class='lbl'>زمین‌شناس:</td><td colspan='3'>" + msVal(lk.Geologist) + "</td></tr>"; }
+        }
         html += "</table>";
         return html;
     }
@@ -1059,16 +1113,22 @@
         html += "<tr><td class='lbl'>شماره برگه:</td><td><b>" + msVal(s.SheetNo) + "</b></td><td class='lbl'>برگه مادر / ربع:</td><td>" + msVal(s.SheetSeries) + " / " + msVal(s.SheetQuarter) + "</td></tr>";
         html += "<tr><td class='lbl'>نام فارسی:</td><td>" + msVal(s.SheetNameFa) + "</td><td class='lbl'>نام انگلیسی:</td><td>" + msVal(s.SheetNameEn) + "</td></tr>";
         html += "<tr><td class='lbl'>مساحت:</td><td>" + (s.AreaKm2 ? gisEscapeHtml(String(Math.round(msNum(s.AreaKm2)))) + " km²" : "-") + "</td><td class='lbl'>مرکز:</td><td>" + msVal(s.CentroidLat) + " , " + msVal(s.CentroidLong) + "</td></tr>";
-        html += "<tr><td class='lbl'>مجری:</td><td>" + msVal(s.Contractor) + "</td><td class='lbl'>ناظر:</td><td>" + msVal(s.Supervisor) + "</td></tr>";
-        html += "<tr><td class='lbl'>زمین‌شناس:</td><td colspan='3'>" + msVal(s.Geologist) + "</td></tr>";
-        if (s.SheetProjectName) {
-            html += "<tr><td class='lbl'>عنوان در فایل کارفرما:</td><td colspan='3' class='wrap'>" + msVal(s.SheetProjectName) + "</td></tr>";
+        var links = s._links || [s];
+        if (links.length == 1) {
+            html += "<tr><td class='lbl'>مجری:</td><td>" + msVal(s.Contractor) + "</td><td class='lbl'>ناظر:</td><td>" + msVal(s.Supervisor) + "</td></tr>";
+            html += "<tr><td class='lbl'>زمین‌شناس:</td><td colspan='3'>" + msVal(s.Geologist) + "</td></tr>";
+            if (s.SheetProjectName) {
+                html += "<tr><td class='lbl'>عنوان در فایل کارفرما:</td><td colspan='3' class='wrap'>" + msVal(s.SheetProjectName) + "</td></tr>";
+            }
         }
         html += "</table></div>";
 
         var rows = msPwaRows(s);
-        html += "<div class='pwa-item'><div class='pwa-name'><span class='pwa-badge' style='background:" + MS_CAT[cat].hex + "' title='" + MS_CAT[cat].title + "'></span>پروژه در PWA" +
-            (rows.length > 1 ? " <small>(" + rows.length + " سطر / نوع - کد " + gisEscapeHtml(s.ProjectCode) + ")</small>" : "") + "</div>";
+        var unlinkedCodes = msUnlinkedCodes(s);
+        var sheetCodes = links.length - unlinkedCodes.length;
+        html += "<div class='pwa-item'><div class='pwa-name'><span class='pwa-badge' style='background:" + MS_CAT[cat].hex + "' title='" + MS_CAT[cat].title + "'></span>" +
+            (sheetCodes > 1 ? sheetCodes + " پروژه در PWA روی این برگه" : "پروژه در PWA") +
+            (rows.length > 1 ? " <small>(" + rows.length + " سطر / نوع)</small>" : "") + "</div>";
         if (rows.length == 1) {
             html += BuildProjectDetailHtml(rows[0], true);
         }
@@ -1092,7 +1152,7 @@
                     label = label + ' (' + typeSeen[label] + ')';
                 }
                 html += "<a href='javascript:void(0);' class='pwa-tab" + (i == 0 ? " is-active" : "") + "' data-idx='" + i + "'" +
-                    " onclick=\"msShowTab('" + tabId + "', " + i + ");\" title='" + gisEscapeHtml(r.ProjectName) + "'>" +
+                    " onclick=\"msShowTab('" + tabId + "', " + i + ");\" title='" + gisEscapeHtml(r.ProjectName) + (r.ProjectCode ? ' - ' + gisEscapeHtml(r.ProjectCode) : '') + "'>" +
                     "<span class='pwa-badge' style='background:" + MS_CAT[rcat].hex + "'></span>" + gisEscapeHtml(label) + "</a>";
             }
             html += "</div>";
@@ -1101,11 +1161,11 @@
             }
             html += "</div>";
         }
-        else if (s.ProjectCode) {
-            html += "<div class='gis-hint'>کد پروژه «" + gisEscapeHtml(s.ProjectCode) + "» در PWAInfo پیدا نشد؛ باید با کارفرما بررسی شود.</div>";
-        }
-        else {
+        else if (unlinkedCodes.length == 0) {
             html += "<div class='gis-hint'>در فایل کارفرما کد پروژه (P_Code) برای این برگه خالی است.</div>";
+        }
+        if (unlinkedCodes.length > 0) {
+            html += "<div class='gis-hint'>کد پروژه «" + gisEscapeHtml(unlinkedCodes.join('، ')) + "» در PWAInfo پیدا نشد؛ باید با کارفرما بررسی شود.</div>";
         }
         html += "</div>";
 
@@ -1177,7 +1237,15 @@
         if (!m || !p) { return; }
         if (m.pwaUserHidden) { m.hide(); p.hide(); return; }
         if (m.pwaClustered) { m.hide(); } else { m.show(); }
-        if (m.pwaClustered && hidePoly) { p.hide(); } else { p.show(); }
+        // سطح: فقط وقتی «سطح برگه‌ها» روشن است (و در سطح دور خوشه‌بندی پنهان نشده) یا برگه انتخاب‌شده است
+        var showPoly = (msShowAreas && !(m.pwaClustered && hidePoly)) || msSel.idx == idx;
+        if (showPoly) { p.show(); } else { p.hide(); }
+    }
+
+    // چک‌باکس «سطح برگه‌ها» در ریبون
+    function msToggleAreas(checked) {
+        msShowAreas = !!checked;
+        msRebuildClusters();
     }
 
     // خوشه‌بندی سادهء فاصله‌ای (greedy): هر نقطه به اولین خوشه‌ای می‌رود که هستهء آن در آستانه است
@@ -1426,6 +1494,9 @@
                             </div>
                             <div class="gis-topbar-aside">
                                 <div class="gis-opacity" title="شفافیت داخل سطح برگه‌ها روی نقشه">
+                                    <label class="gis-field-label" style="cursor: pointer;" title="خاموش: فقط پین برگه‌ها؛ سطح فقط برای برگهء انتخاب‌شده کشیده می‌شود. روشن: سطح همهء برگه‌ها">
+                                        <input type="checkbox" id="chkSheetAreas" <%= ShowSheetAreas ? "checked=\"checked\"" : "" %> onchange="msToggleAreas(this.checked);" style="vertical-align: middle; margin: 0 0 0 4px;" />سطح برگه‌ها
+                                    </label>
                                     <span class="gis-field-label">شفافیت سطح‌ها:</span>
                                     <input type="range" id="gisAreaOpacity" min="5" max="100" step="5" value="35" oninput="gisApplyAreaOpacity(this.value);" onchange="gisApplyAreaOpacity(this.value);" />
                                     <span id="gisAreaOpacityValue" class="gis-opacity-value">خودکار</span>
@@ -1466,7 +1537,7 @@
                                         <div class="ms-hint">
                                             ZIP باید فایل‌های <b>shp</b>، <b>dbf</b>، <b>prj</b> و <b>cpg</b> یک لایهء Polygon را داشته باشد.
                                             ستون <b>P_Code</b> جدول صفت‌ها کلید اتصال به پروژه‌های PWA و ستون <b>N50</b> شمارهء برگه است.
-                                            مختصات UTM هنگام ثبت به عرض/طول جغرافیایی تبدیل می‌شود.
+                                            هر برگه یک بار ثبت می‌شود و می‌تواند چند پروژه داشته باشد؛ مختصات UTM هنگام ثبت به عرض/طول جغرافیایی تبدیل می‌شود.
                                         </div>
                                         <div class="ms-field">
                                             <label for="<%= fupZip.ClientID %>">فایل ZIP کارفرما</label>
@@ -1493,8 +1564,8 @@
                                                     <tr>
                                                         <th>تاریخ</th>
                                                         <th>فایل / لایه</th>
-                                                        <th class="ms-num" title="تعداد برگه">برگه</th>
-                                                        <th class="ms-num" title="برگه‌هایی که کد پروژه ندارند یا کدشان در PWAInfo نیست">بدون پروژه</th>
+                                                        <th class="ms-num" title="تعداد برگه / تعداد اتصال پروژه">برگه / پروژه</th>
+                                                        <th class="ms-num" title="برگه‌های بدون پروژه + اتصال‌هایی که کدشان در PWAInfo نیست">بدون پروژه</th>
                                                         <th></th>
                                                     </tr>
                                             </HeaderTemplate>
@@ -1502,10 +1573,10 @@
                                                 <tr>
                                                     <td title='<%# Eval("ImportedBy") %>'><%# FormatDate(Eval("ImportedAt")) %></td>
                                                     <td><%# Server.HtmlEncode(Convert.ToString(Eval("SourceFile"))) %><br /><span class="gis-hint"><%# Server.HtmlEncode(Convert.ToString(Eval("SourceLayer"))) %></span></td>
-                                                    <td class="ms-num"><%# Eval("Sheets") %></td>
+                                                    <td class="ms-num"><%# Eval("Sheets") %> / <%# Eval("Links") %></td>
                                                     <td class='<%# BadClass(Eval("WithoutCode"), Eval("NotInPwa")) %>'><%# BadCount(Eval("WithoutCode"), Eval("NotInPwa")) %></td>
                                                     <td class="ms-num">
-                                                        <asp:LinkButton ID="lnkDelete" runat="server" CssClass="ms-btn-light ms-btn-danger" CommandName="DeleteBatch" CommandArgument='<%# Eval("ImportBatch") %>' OnClientClick='<%# "return confirm(\"همهء " + Eval("Sheets") + " برگهء این بارگذاری حذف شود؟\");" %>' ToolTip="حذف همهء برگه‌های این بارگذاری">حذف</asp:LinkButton>
+                                                        <asp:LinkButton ID="lnkDelete" runat="server" CssClass="ms-btn-light ms-btn-danger" CommandName="DeleteBatch" CommandArgument='<%# Eval("ImportBatch") %>' OnClientClick='<%# "return confirm(\"اتصال‌های این بارگذاری (" + Eval("Links") + " پروژه) و برگه‌هایی که بدون پروژه می‌مانند حذف شوند؟\");" %>' ToolTip="حذف همهء برگه‌های این بارگذاری">حذف</asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </ItemTemplate>
