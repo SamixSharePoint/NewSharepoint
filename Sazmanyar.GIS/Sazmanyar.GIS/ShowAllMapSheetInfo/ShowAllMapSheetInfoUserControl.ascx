@@ -204,6 +204,23 @@
         border-radius: 6px;
     }
 
+    /* شرح گفتاری فیلترهای فعال بالای شمارنده‌های پنل جستجو */
+    .gis-root .gis-filter-summary {
+        font-size: 12px;
+        line-height: 1.8;
+        color: #6b7280;
+        margin-bottom: 6px;
+        white-space: normal;
+    }
+
+    .gis-root .gis-filter-summary.is-active {
+        color: #1e3a8a;
+        background: #eff6ff;
+        border-right: 3px solid #2563eb;
+        border-radius: 6px;
+        padding: 4px 8px;
+    }
+
     .gis-root .gis-item.is-selected .gis-item-title {
         font-weight: bold;
         color: #1e3a8a;
@@ -429,11 +446,11 @@
         margin-bottom: 8px;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260917" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260917" type="text/javascript" charset="utf-8"></script>
+<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260921" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Fansy/css/jquery.fancybox-1.3.4.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Fansy/JS/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
@@ -456,6 +473,7 @@
 
     // ---- جستجوی پیشرفته (همان سازوکار ShowAllProjectInfo: صفحهء FilterMapSheet.html داخل fancybox، خروجی query-builder به‌صورت SQL) ----
     var SearchOption_MapSheet = null;   // { sql: "SELECT * FROM table WHERE ..." }
+    var SearchDescription_MapSheet = '';  // شرح گفتاری شرط‌ها (از صفحهء فیلتر می‌آید) برای نمایش در پنل جستجو
 
     function ShowSearchOptionMapSheet() {
         X.fancybox({
@@ -466,7 +484,7 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'iframe',
-            'href': '/_layouts/15/Sazmanyar.GIS/FilterMapSheet.html?v=20260920'
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterMapSheet.html?nc=' + new Date().getTime()
         });
     }
 
@@ -481,8 +499,9 @@
         return SearchOption_MapSheet;
     }
 
-    function setInformation_MapSheet(data) {
+    function setInformation_MapSheet(data, description) {
         SearchOption_MapSheet = data;
+        SearchDescription_MapSheet = description || '';
         return SearchOption_MapSheet;
     }
 
@@ -493,7 +512,23 @@
 
     function DeLSearchOption() {
         SearchOption_MapSheet = null;
+        SearchDescription_MapSheet = '';
         RefereshAllInMap();
+    }
+
+    // جملهء گفتاری فیلترهای فعال (کمبوی منطقه، فیلد برگه، شرط‌های جستجوی پیشرفته) بالای شمارنده‌های پنل جستجو
+    function msFilterSummary() {
+        var region = GetSelectedRegion();
+        var sheet = currentSheet;
+        var adv = (msGetSearchCondition().length > 0) ? SearchDescription_MapSheet : '';
+        var s;
+        if (region == '*NOPWA*') { s = 'برگه‌های بدون پروژه در PWA'; }
+        else if (region) { s = 'برگه‌های منطقهء «' + region + '»'; }
+        else { s = (sheet || adv) ? 'برگه‌هایی' : 'همهء برگه‌ها'; }
+        if (sheet) { s += ' که شماره یا نامشان شامل «' + sheet + '» است'; }
+        if (adv) { s += (sheet ? '، ' : ' ') + 'با شرط: ' + adv; }
+        var cls = (region || sheet || adv) ? 'gis-filter-summary is-active' : 'gis-filter-summary';
+        return '<div class="' + cls + '" title="فیلترهای اعمال‌شده روی فهرست و نقشه">' + gisEscapeHtml(s) + '</div>';
     }
 
     // فهرست‌های انتخابی صفحهء جستجوی پیشرفته (از برگه‌های بارگذاری‌شده ساخته می‌شوند)
@@ -819,6 +854,7 @@
             success: function (strHtmlOutput) {
                 var result = strHtmlOutput.d;
                 if (result == null || result.length == 0) {
+                    document.getElementById("divSearchCount").innerHTML = msFilterSummary();
                     document.getElementById('divSearchResult').innerHTML = '<div class="gis-msg">هیچ برگه‌ای جهت نمایش در لیست یافت نشد</div>';
                     map.centerAndZoomOnBounds(new GLatLngBounds(new GLatLng(39.027719, 44.736328), new GLatLng(26.745610, 62.050781)));
                     return;
@@ -913,7 +949,7 @@
         }
 
         divSearchResult_html = listHtml;
-        document.getElementById("divSearchCount").innerHTML = msCountChips(gsheets.length, nProjects, nUnlinked);
+        document.getElementById("divSearchCount").innerHTML = msFilterSummary() + msCountChips(gsheets.length, nProjects, nUnlinked);
         document.getElementById("divSearchResult").innerHTML = listHtml.length > 0 ? listHtml : '<div class="gis-msg">هیچ برگه‌ای جهت نمایش در لیست یافت نشد</div>';
 
         if (gsheets.length > 0) {

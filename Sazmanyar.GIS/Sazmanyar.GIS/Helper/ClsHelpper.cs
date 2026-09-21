@@ -3282,6 +3282,8 @@ namespace Sazmanyar.GIS
         /// strRegion: منطقهء پروژهء متصل؛ مقدار ویژهء *NOPWA* = فقط اتصال‌هایی که کدشان در PWAInfo نیست.
         /// strSheet: بخشی از شمارهء برگه یا نام برگه (LIKE)؛ strImportBatch: GUID یک بارگذاری (اتصال‌ها).
         /// strCondition: شرط query-builder صفحهء FilterMapSheet.html (همان قرارداد PWAInfo: کوتیشن #@# و تاریخ شمسی با پیشوند DDDDDDDDDDD).
+        /// شرط و منطقه روی همهء سطرهای PWA هر اتصال ارزیابی می‌شوند (EXISTS روی vw_MapSheetsProjectsAll با کلید LinkID):
+        /// اتصالی برمی‌گردد که دست‌کم یکی از سطرهای پروژه‌اش کل شرط را برآورده کند. خروجی همچنان یک سطر برای هر اتصال است.
         /// </summary>
         public static DataTable FetchMapSheets(string strRegion, string strSheet, string strImportBatch, string strCondition)
         {
@@ -3297,13 +3299,16 @@ namespace Sazmanyar.GIS
                 using (SqlConnection objSqlConnection = new SqlConnection(strDataBaseConnectionString()))
                 {
                     objSqlConnection.Open();
+                    // منطقه و شرط پیشرفته روی همهء سطرهای PWA اتصال (نمای All) با EXISTS؛ نام ستون‌های شرط بدون پیشوند به
+                    // جدول داخلی (a) بسته می‌شوند چون همهء ستون‌های مجاز در آن نما هستند
+                    string strAllExists = " EXISTS (SELECT 1 FROM dbo.vw_MapSheetsProjectsAll a WHERE a.LinkID = v.LinkID AND ( {0} )) ";
                     string Strsql = " SELECT " + MAPSHEETS_SELECT_COLUMNS +
-                                    " FROM dbo.vw_MapSheetsProjects " +
-                                    " WHERE (@Sheet = N'' OR SheetNo LIKE N'%' + @Sheet + N'%' OR SheetNameFa LIKE N'%' + @Sheet + N'%' OR SheetNameEn LIKE N'%' + @Sheet + N'%') " +
-                                    (bOnlyUnlinked ? "   AND PwaID IS NULL " : "   AND (@Region = N'' OR Region = @Region) ") +
-                                    (bHasBatch ? "   AND ImportBatch = @Batch " : "") +
-                                    (strExtra.Length > 0 ? "   AND ( " + strExtra + " ) " : "") +
-                                    " ORDER BY SheetScale, SheetNo, ProjectCode ";
+                                    " FROM dbo.vw_MapSheetsProjects v " +
+                                    " WHERE (@Sheet = N'' OR v.SheetNo LIKE N'%' + @Sheet + N'%' OR v.SheetNameFa LIKE N'%' + @Sheet + N'%' OR v.SheetNameEn LIKE N'%' + @Sheet + N'%') " +
+                                    (bOnlyUnlinked ? "   AND v.PwaID IS NULL " : "   AND (@Region = N'' OR " + string.Format(strAllExists, "a.Region = @Region") + ") ") +
+                                    (bHasBatch ? "   AND v.ImportBatch = @Batch " : "") +
+                                    (strExtra.Length > 0 ? "   AND " + string.Format(strAllExists, strExtra) : "") +
+                                    " ORDER BY v.SheetScale, v.SheetNo, v.ProjectCode ";
                     SqlCommand objCmd = new SqlCommand(Strsql, objSqlConnection);
                     objCmd.Parameters.Add("@Sheet", SqlDbType.NVarChar, 100).Value = (strSheet ?? "").Trim();
                     objCmd.Parameters.Add("@Region", SqlDbType.NVarChar, 50).Value = bOnlyUnlinked ? "" : strRegionValue;

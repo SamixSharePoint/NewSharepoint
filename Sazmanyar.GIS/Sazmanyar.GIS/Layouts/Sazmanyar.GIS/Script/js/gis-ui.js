@@ -1,4 +1,4 @@
-// توابع مشترک وب‌پارت‌های نقشهٔ GIS: ساخت ردیف نتایج، چیپ‌های شمارنده، وضعیت فیلد نام پروژه،
+﻿// توابع مشترک وب‌پارت‌های نقشهٔ GIS: ساخت ردیف نتایج، چیپ‌های شمارنده، وضعیت فیلد نام پروژه،
 // و اطلاع‌رسانی تغییر اندازهٔ نقشه. به متغیرهای سراسری هر کنترل (map، FillSugestion_Pishnahadi) در زمان اجرا تکیه می‌کند.
 
 var GIS_ICON_STATION = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
@@ -254,4 +254,42 @@ function gisCountChips(stations, routes, areas) {
     return '<span class="gis-chip" title="ایستگاه">' + GIS_ICON_STATION + ' ایستگاه <b>' + stations + '</b></span>' +
         '<span class="gis-chip" title="مسیر">' + GIS_ICON_ROUTE + ' مسیر <b>' + routes + '</b></span>' +
         '<span class="gis-chip" title="سطح">' + GIS_ICON_AREA + ' سطح <b>' + areas + '</b></span>';
+}
+
+
+// ==== شرح گفتاری فیلترهای فعال در پنل جستجو (قالب‌های ShowAllKoridorInfo) ====
+// صفحه‌های فیلتر (FilterInstgah/FilterMaseer/FilterSath) هنگام «جستجوی اطلاعات» علاوه بر SQL، شرح فارسی شرط‌ها را
+// می‌فرستند؛ قالب آن را با gisSetSearchDescription نگه می‌دارد و بالای شمارنده‌ها نشان می‌دهد.
+var gisSearchDescriptions = { Istgah: '', Maseer: '', Sath: '' };
+
+function gisSetSearchDescription(kind, text) {
+    gisSearchDescriptions[kind] = text || '';
+}
+
+function gisClearSearchDescriptions() {
+    gisSearchDescriptions = { Istgah: '', Maseer: '', Sath: '' };
+}
+
+// projectName / departmentName: فیلترهای ریبون (خالی = همه). شرط‌های سه صفحهء فیلتر با «یا» ترکیب می‌شوند (همان منطق سرور).
+function gisKoridorFilterSummary(projectName, departmentName) {
+    var project = String(projectName || '').replace(/#@#/g, "'").trim();
+    var department = String(departmentName || '').replace(/#@#/g, "'").trim();
+    var s;
+    if (project && department) { s = 'اطلاعات پروژهء «' + project + '» در دپارتمان «' + department + '»'; }
+    else if (project) { s = 'اطلاعات پروژهء «' + project + '»'; }
+    else if (department) { s = 'اطلاعات دپارتمان «' + department + '»'; }
+    else { s = 'همهء اطلاعات'; }
+
+    var parts = [];
+    var kinds = [['Istgah', 'ایستگاه‌هایی که '], ['Maseer', 'مسیرهایی که '], ['Sath', 'سطح‌هایی که ']];
+    for (var i = 0; i < kinds.length; i++) {
+        var opt = window['SearchOption_' + kinds[i][0]];
+        if (opt && opt.sql) {
+            var d = gisSearchDescriptions[kinds[i][0]];
+            parts.push(kinds[i][1] + (d ? d : 'شرط جستجوی پیشرفته دارند'));
+        }
+    }
+    if (parts.length) { s += '، فقط ' + parts.join(' یا '); }
+    var active = project || department || parts.length;
+    return '<div class="gis-filter-summary' + (active ? ' is-active' : '') + '" title="فیلترهای اعمال‌شده روی فهرست و نقشه">' + gisEscapeHtml(s) + '</div>';
 }

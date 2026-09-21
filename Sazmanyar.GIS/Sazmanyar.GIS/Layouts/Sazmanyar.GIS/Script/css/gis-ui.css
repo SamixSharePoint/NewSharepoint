@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ظاهر مشترک وب‌پارت‌های نقشهٔ GIS: پنل نتایج جستجو، نوار بالای نقشه، لیست پیشنهاد نام پروژه،
    پنجرهٔ اطلاعات (InfoWindow) و ردیف نقشه/پنل. توسط همهٔ کنترل‌های ShowAllKoridorInfo استفاده می‌شود.
    قاعده: هیچ font-family تعریف نمی‌شود؛ فونت از تم سایت ارث می‌رسد. */
@@ -1048,4 +1048,22 @@ body.gis-fullscreen-active #fancybox-loading {
         background: #eff4ff;
         border-color: #c7d7f7;
         color: #2f6fdd;
+    }
+
+
+/* ==== شرح گفتاری فیلترهای فعال بالای شمارنده‌های پنل جستجو ==== */
+.gis-root .gis-filter-summary {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #6b7280;
+    margin-bottom: 6px;
+    white-space: normal;
+}
+
+    .gis-root .gis-filter-summary.is-active {
+        color: #1e3a8a;
+        background: #eff6ff;
+        border-right: 3px solid #2563eb;
+        border-radius: 6px;
+        padding: 4px 8px;
     }

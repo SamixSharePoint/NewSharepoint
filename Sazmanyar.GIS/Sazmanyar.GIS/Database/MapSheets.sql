@@ -1,4 +1,4 @@
-/*
+﻿/*
     MapSheets + MapSheetProjects - برگه‌های نقشه و اتصال آن‌ها به پروژه‌های PWA
     ===================================================================
     نسخهء 2 - تاریخ: 1405/06/30 (2026-09-21)
@@ -12,6 +12,9 @@
                                 کلید طبیعی: برگه + کد پروژه. بارگذاری‌ها و به‌روزرسانی‌ها عمدتاً روی همین جدول اتفاق می‌افتد.
       * dbo.vw_MapSheetsProjects = یک سطر برای هر جفت برگه‌ـ‌پروژه + اولین سطر PWAInfo با همان کد (PwaRowCount تعداد
                                 سطرها). وب‌پارت‌ها فقط از این نما می‌خوانند، پس برگه‌های بدون اتصال هرگز نمایش داده نمی‌شوند.
+      * dbo.vw_MapSheetsProjectsAll = همان ستون‌ها ولی یک سطر برای هر «اتصال × سطر PWAInfo» (پروژهء چندنوعی چند سطر).
+                                فقط برای ارزیابی شرط جستجوی پیشرفته با EXISTS روی LinkID استفاده می‌شود، تا شرطی مثل
+                                «نوع پروژه = ژئوشیمی» روی همهء سطرهای پروژه بررسی شود نه فقط سطر اول.
 
     چرا این تقسیم؟ فایل راور (Database\Ravar-map) هر برگه را با یک پروژه داده بود، ولی در واقعیت روی یک برگه
     می‌تواند چند پروژه (ژئوشیمی، زمین‌شناسی...) با کدهای متفاوت باشد و یک پروژه چند برگه داشته باشد. نسخهء 1 این
@@ -22,7 +25,7 @@
         هر بارگذاری یک ImportBatch (GUID) دارد؛ حذف بارگذاری اتصال‌های آن را برمی‌دارد و برگه‌هایی را که دیگر اتصالی
         ندارند و از همان بارگذاری آمده‌اند پاک می‌کند.
       * Database\MapSheets_Seed_Ravar2.sql       : 11 برگهء واقعی راور (تست بدون ZIP)
-      * Database\MapSheets_Demo_FromPWAInfo.sql  : برگهء محاسبه‌شده برای همهء پروژه‌های PWAInfo (دمو)
+      * Database\MapSheets_AssignFromPWAInfo.sql : برگهء محاسبه‌شده برای همهء پروژه‌های PWAInfo (برچسب computed)
 
     نگاشت ستون‌های dbf (فایل Ravar2):
       برگه:   N50 -> SheetNo   NO50 -> SheetSeries   N1_4 -> SheetQuarter   ID -> SourceSheetID   EN_NAME_50 / name_farsi -> نام‌ها
@@ -43,6 +46,7 @@ GO
 ------------------------------------------------------------------
 IF OBJECT_ID(N'dbo.MapSheets', N'U') IS NOT NULL AND COL_LENGTH(N'dbo.MapSheets', N'ProjectCode') IS NOT NULL
 BEGIN
+    IF OBJECT_ID(N'dbo.vw_MapSheetsProjectsAll', N'V') IS NOT NULL DROP VIEW dbo.vw_MapSheetsProjectsAll;
     IF OBJECT_ID(N'dbo.vw_MapSheetsProjects', N'V') IS NOT NULL DROP VIEW dbo.vw_MapSheetsProjects;
     IF OBJECT_ID(N'dbo.MapSheets_v1', N'U') IS NOT NULL DROP TABLE dbo.MapSheets_v1;
     EXEC sp_rename N'dbo.MapSheets', N'MapSheets_v1';
@@ -186,6 +190,34 @@ FROM dbo.MapSheets ms
 JOIN dbo.MapSheetProjects mp ON mp.SheetID = ms.ID
 OUTER APPLY (SELECT COUNT(*) AS PwaRowCount FROM dbo.PWAInfo x WHERE x.ProjectCode = mp.ProjectCode) pwa
 OUTER APPLY (SELECT TOP 1 * FROM dbo.PWAInfo y WHERE y.ProjectCode = mp.ProjectCode ORDER BY y.ID) p;
+GO
+
+------------------------------------------------------------------
+-- 5) نمای کامل: یک سطر برای هر «اتصال × سطر PWAInfo» (LEFT JOIN تا اتصال بدون پروژه در PWA هم بماند)
+--    فقط برای شرط جستجوی پیشرفته (EXISTS روی LinkID در ClsHelpper.FetchMapSheets)
+------------------------------------------------------------------
+IF OBJECT_ID(N'dbo.vw_MapSheetsProjectsAll', N'V') IS NOT NULL
+    DROP VIEW dbo.vw_MapSheetsProjectsAll;
+GO
+
+CREATE VIEW dbo.vw_MapSheetsProjectsAll
+AS
+SELECT
+    ms.ID, mp.ID AS LinkID,
+    ms.SheetNo, ms.SheetScale, ms.SheetSeries, ms.SheetQuarter, ms.SourceSheetID, ms.SheetNameEn, ms.SheetNameFa,
+    mp.ProjectCode, mp.ProjectName AS SheetProjectName, mp.Contractor, mp.Supervisor, mp.Geologist, mp.ExtraAttributes,
+    ms.Boundary, ms.VertexCount, ms.CentroidLat, ms.CentroidLong, ms.MinLat, ms.MinLong, ms.MaxLat, ms.MaxLong, ms.AreaKm2,
+    ms.SourceFile, ms.SourceLayer, ms.SourceCrs,
+    mp.SourceFile AS LinkSourceFile, mp.ImportBatch, mp.ImportedAt, mp.ImportedBy, mp.UpdatedAt,
+    pwa.PwaRowCount,
+    p.ID AS PwaID, p.ProjectName, p.Status, p.PlannedProgress, p.ActualProgress, p.AchievementPct,
+    p.StartDateJ, p.StartDate, p.FinishDateJ, p.FinishDate, p.PlannedStartJ, p.PlannedStart, p.PlannedFinishJ, p.PlannedFinish, p.TotalCost,
+    p.ProjectType, p.Region, p.ExecutionMethod, p.ProjectManager, p.ProjectSupervisor, p.OrgLevel1, p.OrgLevel2,
+    p.Lat AS PwaLat, p.[Long] AS PwaLong, p.TahaghoghCategory
+FROM dbo.MapSheets ms
+JOIN dbo.MapSheetProjects mp ON mp.SheetID = ms.ID
+OUTER APPLY (SELECT COUNT(*) AS PwaRowCount FROM dbo.PWAInfo x WHERE x.ProjectCode = mp.ProjectCode) pwa
+LEFT JOIN dbo.PWAInfo p ON p.ProjectCode = mp.ProjectCode;
 GO
 
 /* =====================================================================

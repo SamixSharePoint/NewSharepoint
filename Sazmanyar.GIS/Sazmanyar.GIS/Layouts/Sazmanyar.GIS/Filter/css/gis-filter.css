@@ -1,3 +1,26 @@
+﻿/* ==== فونت صفحه‌های جستجوی پیشرفته: IRANSansWeb (فایل‌ها در Filter/fonts؛ اگر نباشند مرورگر به Tahoma می‌افتد) ==== */
+@font-face {
+    font-family: 'IRANSansWeb';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/IRANSansWeb.eot');
+    src: url('../fonts/IRANSansWeb.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/IRANSansWeb.woff2') format('woff2'),
+         url('../fonts/IRANSansWeb.woff') format('woff'),
+         url('../fonts/IRANSansWeb.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'IRANSansWeb';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/IRANSansWeb_Bold.eot');
+    src: url('../fonts/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/IRANSansWeb_Bold.woff2') format('woff2'),
+         url('../fonts/IRANSansWeb_Bold.woff') format('woff'),
+         url('../fonts/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
 @charset "UTF-8";
 /* ظاهر مشترک سه صفحهٔ تنظیمات جستجو (ایستگاه / مسیر / سطح) که داخل fancybox باز می‌شوند.
    روی Bootstrap 3 و jQuery QueryBuilder سوار است؛ فقط رنگ/فاصله/گوشه را هماهنگ با
@@ -339,4 +362,47 @@ body,
         left: 0;
         border-left: 0;
         border-right: 1px solid #d0d0d0;
+    }
+
+
+/* ---- کمبوی ستون/عملگر با Bootstrap-select (پلاگین bt-selectpicker، منو داخل body باز می‌شود) ---- */
+.bootstrap-select .dropdown-menu {
+    direction: rtl;
+    text-align: right;
+    font-size: 13px;
+}
+
+    .bootstrap-select .dropdown-menu li a {
+        text-align: right;
+        padding-right: 14px;
+    }
+
+    .bootstrap-select .dropdown-menu .bs-searchbox {
+        padding: 6px 8px;
+    }
+
+        .bootstrap-select .dropdown-menu .bs-searchbox .form-control {
+            direction: rtl;
+            text-align: right;
+            height: 30px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+    .bootstrap-select .dropdown-menu .no-results {
+        direction: rtl;
+        text-align: right;
+        padding: 4px 8px;
+        color: #6b7280;
+    }
+
+.query-builder .bootstrap-select > .btn.btn-default {
+    background: #fff;
+    color: #111827;
+    text-align: right;
+    padding-left: 26px;
+}
+
+    .query-builder .bootstrap-select > .btn.btn-default .filter-option {
+        text-align: right;
     }

@@ -121,9 +121,9 @@ function numberFilter(id, label) {
 }
 
 $('#builder-widgets').queryBuilder({
-    plugins: ['bt-tooltip-errors'],
+    plugins: gisQueryBuilderPlugins(),
 
-    filters: [
+    filters: gisSortFilters([
         // ---- مشخصات برگه ----
         textFilter('SheetNo', 'شماره برگه'),
         textFilter('SheetNameFa', 'نام برگه (فارسی)'),
@@ -162,7 +162,7 @@ $('#builder-widgets').queryBuilder({
         textFilter('ProjectSupervisor', 'ناظر پروژه (PWA)'),
         textFilter('OrgLevel1', 'سطح 1 سازمان'),
         textFilter('OrgLevel2', 'سطح 2 سازمان')
-    ]
+    ])
 });
 
 try {
@@ -185,7 +185,7 @@ $('#btn-set').on('click', function () {
 });
 
 $('#btn-Search').on('click', function () {
-    parent.setInformation_MapSheet($('#builder-widgets').queryBuilder('getSQL', false, true));
+    parent.setInformation_MapSheet($('#builder-widgets').queryBuilder('getSQL', false, true), gisDescribeBuilder($('#builder-widgets')));
     parent.ShowAllRoutInMap();
 });
 

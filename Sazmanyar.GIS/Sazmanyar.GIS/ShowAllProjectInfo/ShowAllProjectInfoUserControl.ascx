@@ -200,6 +200,23 @@
         color: #1e3a8a;
     }
 
+    /* شرح گفتاری فیلترهای فعال بالای شمارنده‌های پنل جستجو */
+    .gis-root .gis-filter-summary {
+        font-size: 12px;
+        line-height: 1.8;
+        color: #6b7280;
+        margin-bottom: 6px;
+        white-space: normal;
+    }
+
+    .gis-root .gis-filter-summary.is-active {
+        color: #1e3a8a;
+        background: #eff6ff;
+        border-right: 3px solid #2563eb;
+        border-radius: 6px;
+        padding: 4px 8px;
+    }
+
     /* نوار بالا: بخش «شفافیت ناحیه‌ها + راهنمای تحقق» همیشه در گوشهء چپ می‌ماند و به ردیف پایین نمی‌افتد؛
        اگر جا کم باشد فیلدهای سمت راست (دکمه‌ها، نوع، منطقه) داخل خودشان می‌شکنند، نه بخش چپ */
     .gis-root .gis-topbar {
@@ -260,11 +277,11 @@
         flex: none;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260917" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260917" type="text/javascript" charset="utf-8"></script>
+<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260921" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Fansy/css/jquery.fancybox-1.3.4.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Fansy/JS/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
@@ -287,6 +304,7 @@
 
     // ---- جستجوی پیشرفته (همان سازوکار قالب 1: صفحهء FilterProject.html داخل fancybox، خروجی query-builder به‌صورت SQL) ----
     var SearchOption_Project = null;   // { sql: "SELECT * FROM table WHERE ..." } که صفحهء فیلتر برمی‌گرداند
+    var SearchDescription_Project = '';  // شرح گفتاری شرط‌ها (از صفحهء فیلتر می‌آید) برای نمایش در پنل جستجو
 
     function ShowSearchOptionProject() {
         X.fancybox({
@@ -297,7 +315,7 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'iframe',
-            'href': '/_layouts/15/Sazmanyar.GIS/FilterProject.html?v=20260917'
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterProject.html?nc=' + new Date().getTime()
         });
     }
 
@@ -313,8 +331,9 @@
         return SearchOption_Project;
     }
 
-    function setInformation_Project(data) {
+    function setInformation_Project(data, description) {
         SearchOption_Project = data;
+        SearchDescription_Project = description || '';
         return SearchOption_Project;
     }
 
@@ -325,7 +344,22 @@
 
     function DeLSearchOption() {
         SearchOption_Project = null;
+        SearchDescription_Project = '';
         RefereshAllInMap();
+    }
+
+    // جملهء گفتاری فیلترهای فعال (نوع پروژه، منطقه، شرط‌های جستجوی پیشرفته) بالای شمارنده‌های پنل جستجو
+    function pwaFilterSummary() {
+        var type = GetSelectedProjectType();
+        var region = bVaziyatSelect ? currentRegion : '';
+        var adv = (pwaGetSearchCondition().length > 0) ? SearchDescription_Project : '';
+        var s = 'همهء پروژه‌ها';
+        if (type && region) { s = 'پروژه‌های «' + type + '» در منطقهء «' + region + '»'; }
+        else if (type) { s = 'پروژه‌های نوع «' + type + '»'; }
+        else if (region) { s = 'پروژه‌های منطقهء «' + region + '»'; }
+        if (adv) { s = (s == 'همهء پروژه‌ها' ? 'پروژه‌هایی' : s) + ' با شرط: ' + adv; }
+        var cls = (type || region || adv) ? 'gis-filter-summary is-active' : 'gis-filter-summary';
+        return '<div class="' + cls + '" title="فیلترهای اعمال‌شده روی فهرست و نقشه">' + gisEscapeHtml(s) + '</div>';
     }
 
     // فهرست نوع‌ها و منطقه‌ها برای فیلترهای انتخابی صفحهء جستجو
@@ -616,6 +650,7 @@
                 var result = strHtmlOutput.d;
                 if (result == null || result.length == 0) {
                     pwaLastRows = null;
+                    document.getElementById("divSearchCount").innerHTML = pwaFilterSummary();
                     document.getElementById('divSearchResult').innerHTML = '<div class="gis-msg">هیچ موردی جهت نمایش در لیست یافت نشد</div>';
                     map.centerAndZoomOnBounds(new GLatLngBounds(new GLatLng(39.027719, 44.736328), new GLatLng(26.745610, 62.050781)));
                     return;
@@ -836,7 +871,7 @@
         }
 
         divSearchResult_html = areaHtml + pinHtml;
-        document.getElementById("divSearchCount").innerHTML = pwaCountChips(regionOrder.length, pointOrder.length, nProjects);
+        document.getElementById("divSearchCount").innerHTML = pwaFilterSummary() + pwaCountChips(regionOrder.length, pointOrder.length, nProjects);
         document.getElementById("divSearchResult").innerHTML = divSearchResult_html;
 
         if (!bKeepView && (regionOrder.length > 0 || pointOrder.length > 0)) {

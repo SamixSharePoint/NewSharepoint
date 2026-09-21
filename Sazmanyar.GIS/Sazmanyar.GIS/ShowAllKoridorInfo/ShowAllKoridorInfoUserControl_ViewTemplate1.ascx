@@ -21,13 +21,13 @@
     }
 
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260915" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921" />
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Fansy/css/jquery.fancybox-1.3.4.css" />
 <link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/GoogleMap/EWindow.css" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260915" type="text/javascript" charset="utf-8"></script>
+<script src="/_layouts/15/Sazmanyar.GIS/Script/js/gis-ui.js?v=20260921" type="text/javascript" charset="utf-8"></script>
 <script src="/_layouts/15/Sazmanyar.GIS/Fansy/JS/jquery.fancybox-1.3.4.js" type="text/javascript"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/GISBase.js"></script>
 <script type="text/javascript" src="/_layouts/15/Sazmanyar.GIS/GoogleMap/EWindow.js"></script>
@@ -288,15 +288,18 @@
         return SearchOption_Sath;
     }
 
-    function setInformation_Istgah(data) {
+    function setInformation_Istgah(data, description) {
+        gisSetSearchDescription('Istgah', description);
         return SearchOption_Istgah = data;
     };
 
-    function setInformation_Sath(data) {
+    function setInformation_Sath(data, description) {
+        gisSetSearchDescription('Sath', description);
         return SearchOption_Sath = data;
     };
 
-    function setInformation_Maseer(data) {
+    function setInformation_Maseer(data, description) {
+        gisSetSearchDescription('Maseer', description);
         return SearchOption_Maseer = data;
     };
 
@@ -447,7 +450,7 @@
                     }
 
                     map.centerAndZoomOnBounds(bounds);
-                    document.getElementById("divSearchCount").innerHTML = gisCountChips(gmarkers.length, gpolys.length, ggans.length);
+                    document.getElementById("divSearchCount").innerHTML = gisKoridorFilterSummary(NameProjeh, NameDepartment) + gisCountChips(gmarkers.length, gpolys.length, ggans.length);
                     document.getElementById("divSearchResult").innerHTML = divSearchResult_html;
                     FetchRecursiveAllCoridorInfoFromDataBase(NameProjeh, NameDepartment, Condition, PageSize, PageIndex + 1);
 
@@ -455,7 +458,7 @@
                 else {
 
                     if (PageIndex == 1) {
-                        document.getElementById("divSearchCount").innerHTML = '';
+                        document.getElementById("divSearchCount").innerHTML = gisKoridorFilterSummary(NameProjeh, NameDepartment);
                         document.getElementById('divSearchResult').innerHTML = '<div class="gis-msg">هیچ موردی جهت نمایش در لیست یافت نشد</div>';
                     }
                 }
@@ -2138,7 +2141,7 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'iframe',
-            'href': '/_layouts/15/Sazmanyar.GIS/FilterInstgah.html?v=20260915'
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterInstgah.html?nc=' + new Date().getTime()
         });
 
     }
@@ -2153,7 +2156,7 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'iframe',
-            'href': '/_layouts/15/Sazmanyar.GIS/FilterMaseer.html?v=20260915'
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterMaseer.html?nc=' + new Date().getTime()
         });
 
     }
@@ -2167,12 +2170,13 @@
             'transitionIn': 'none',
             'transitionOut': 'none',
             'type': 'iframe',
-            'href': '/_layouts/15/Sazmanyar.GIS/FilterSath.html?v=20260915'
+            'href': '/_layouts/15/Sazmanyar.GIS/FilterSath.html?nc=' + new Date().getTime()
         });
 
     }
 
     function DeLSearchOption() {
+        gisClearSearchDescriptions();
         SearchOption_Istgah = null;
         SearchOption_Maseer = null;
         SearchOption_Sath = null;

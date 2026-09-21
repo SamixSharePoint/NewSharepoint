@@ -1,11 +1,13 @@
-/*
-    MapSheets_Demo_FromPWAInfo - ساخت برگه‌های نمایشی (دمو) از روی مختصات تقریبی PWAInfo
+﻿/*
+    MapSheets_AssignFromPWAInfo - جایگذاری همهء پروژه‌های PWAInfo در برگهء 1:50000 خودشان
     ==========================================================================================
-    نسخهء 2 (مدل دو جدولی) - تاریخ: 1405/06/30 (2026-09-21)
+    نسخهء 3 (مدل دو جدولی) - تاریخ: 1405/06/30 (2026-09-21)
 
-    هدف: تا وقتی کارفرما Shapefile واقعی همهء طرح‌ها را نفرستاده، برای هر پروژهء PWAInfo که Lat/Long دارد،
-          برگهء 1:50000 دربرگیرندهء آن نقطه محاسبه می‌شود؛ برگه (اگر نباشد) در dbo.MapSheets و اتصال پروژه در
-          dbo.MapSheetProjects ثبت می‌شود. چند پروژه در یک برگه = یک برگه با چند اتصال.
+    هدف: هیچ نقطه‌ای بدون برگه نماند. برای هر پروژهء PWAInfo که Lat/Long دارد، برگهء 1:50000 دربرگیرندهء آن نقطه
+          محاسبه می‌شود؛ برگه (اگر نباشد) در dbo.MapSheets و اتصال پروژه در dbo.MapSheetProjects ثبت می‌شود.
+          چند پروژه در یک برگه = یک برگه با چند اتصال. برگه/اتصال‌هایی که کارفرما با Shapefile فرستاده دست نمی‌خورند.
+    برچسب منبع (@Label) روی همهء سطرهای این اسکریپت می‌نشیند تا بعداً، وقتی دادهء واقعی کارفرما رسید، بشود
+    فقط سطرهای محاسبه‌شده را با دستور انتهای اسکریپت حذف کرد.
 
     قاعدهء شبکهء برگه‌های ایران (از 11 برگهء واقعی راور استخراج و با برگهء تهران 6261 کنترل شد):
       * برگهء 1:100000 چهاررقمی است: دو رقم اول ستون (طول)، دو رقم دوم ردیف (عرض)، هر کدام با گام نیم درجه
@@ -15,7 +17,9 @@
     قواعد:
       * هر کد پروژه یک بار (پروژهء چندنوعی چند سطر دارد؛ اولین سطر مبنا است).
       * برگه‌ای که از قبل هست (مثلاً از فایل واقعی راور) دست نمی‌خورد؛ کدی که از قبل به برگه‌ای وصل است دوباره وصل نمی‌شود.
-      * همهء سطرهای دمو (برگه و اتصال) با SourceLayer = 'demo' علامت می‌خورند تا با دستور انتهای اسکریپت قابل حذف باشند.
+      * همهء سطرهای این اسکریپت (برگه و اتصال) با SourceLayer = @Label علامت می‌خورند تا با دستور انتهای اسکریپت قابل حذف باشند.
+      * پروژه‌های بدون Lat/Long یا بدون ProjectCode جایگذاری نمی‌شوند و در گزارش آخر فهرست می‌شوند
+        (اتصال در MapSheetProjects به کد پروژه نیاز دارد).
       * نام فارسی برگه = بخش «محل» از نام پروژه (بعد از خط تیره، بدون کد) - فقط برای نمایش؛ نام رسمی برگه نیست.
         اگر چند پروژه در یک برگه بیفتند، نام اولین پروژه (به ترتیب کد) روی برگه می‌نشیند.
 
@@ -26,6 +30,8 @@
 SET NOCOUNT ON;
 
 DECLARE @Batch UNIQUEIDENTIFIER = NEWID();
+DECLARE @Label NVARCHAR(100) = N'computed';                                   -- برچسب منبع سطرهای محاسبه‌شده (SourceLayer)
+DECLARE @SourceFile NVARCHAR(255) = N'محاسبه از مختصات تقریبی PWAInfo';
 
 ------------------------------------------------------------------
 -- 1) یک سطر برای هر کد پروژه که مختصات دارد + محاسبهء برگه
@@ -104,12 +110,12 @@ SELECT
     c.MinLat, c.MinLong, c.MaxLat, c.MaxLong,
     -- مساحت تقریبی: 15 دقیقه عرض (27.6 km) در 15 دقیقه طول (27.8 km * cos عرض)
     CAST(0.25 * 110.57 * 0.25 * 111.32 * COS(RADIANS((c.MinLat + c.MaxLat) / 2)) AS DECIMAL(12,3)),
-    N'DEMO - محاسبه از مختصات تقریبی PWAInfo', N'demo', N'GCS_WGS_1984', @Batch, N'demo script'
+    @SourceFile, @Label, N'GCS_WGS_1984', @Batch, N'assign script'
 FROM #Cand c
 WHERE c.ProjectCode = (SELECT MIN(x.ProjectCode) FROM #Cand x WHERE x.SheetNo = c.SheetNo)     -- یک سطر برای هر برگه
   AND NOT EXISTS (SELECT 1 FROM dbo.MapSheets m WHERE m.SheetScale = 50000 AND m.SheetNo = c.SheetNo);
 
-PRINT N'برگه‌های دمو ثبت‌شده: ' + CAST(@@ROWCOUNT AS NVARCHAR(10));
+PRINT N'برگه‌های ثبت‌شده: ' + CAST(@@ROWCOUNT AS NVARCHAR(10));
 
 ------------------------------------------------------------------
 -- 3) اتصال‌ها: هر کد پروژه به برگه‌اش، مگر از قبل به برگه‌ای وصل باشد
@@ -119,17 +125,28 @@ INSERT INTO dbo.MapSheetProjects
      SourceFile, SourceLayer, ImportBatch, ImportedBy)
 SELECT
     m.ID, c.ProjectCode, c.ProjectName, c.ProjectManager, c.ProjectSupervisor, NULL,
-    N'{"demo":"1","source":"PWAInfo Lat/Long"}',
-    N'DEMO - محاسبه از مختصات تقریبی PWAInfo', N'demo', @Batch, N'demo script'
+    N'{"computed":"1","source":"PWAInfo Lat/Long"}',
+    @SourceFile, @Label, @Batch, N'assign script'
 FROM #Cand c
 JOIN dbo.MapSheets m ON m.SheetScale = 50000 AND m.SheetNo = c.SheetNo
 WHERE NOT EXISTS (SELECT 1 FROM dbo.MapSheetProjects l WHERE l.ProjectCode = c.ProjectCode);
 
-PRINT N'اتصال‌های دمو ثبت‌شده: ' + CAST(@@ROWCOUNT AS NVARCHAR(10)) + N'  (ImportBatch = ' + CAST(@Batch AS NVARCHAR(40)) + N')';
+PRINT N'اتصال‌های ثبت‌شده: ' + CAST(@@ROWCOUNT AS NVARCHAR(10)) + N'  (ImportBatch = ' + CAST(@Batch AS NVARCHAR(40)) + N')';
 
 ------------------------------------------------------------------
--- 4) گزارش کنترلی: به تفکیک منطقه، و برگه‌های چندپروژه‌ای
+-- 4) گزارش کنترلی
 ------------------------------------------------------------------
+-- 4a) سطرهای PWAInfo که هنوز به هیچ برگه‌ای وصل نیستند و علت آن
+SELECT p.ID, p.ProjectName, p.ProjectCode, p.Region, p.Lat, p.[Long],
+       CASE WHEN p.ProjectCode IS NULL OR LTRIM(RTRIM(p.ProjectCode)) = '' THEN N'بدون کد پروژه'
+            WHEN p.Lat IS NULL OR p.[Long] IS NULL THEN N'بدون مختصات'
+            WHEN NOT (p.Lat BETWEEN 25 AND 40 AND p.[Long] BETWEEN 44 AND 63.5) THEN N'مختصات خارج از ایران'
+            ELSE N'نامشخص' END AS Reason
+FROM dbo.PWAInfo p
+WHERE NOT EXISTS (SELECT 1 FROM dbo.MapSheetProjects l WHERE l.ProjectCode = p.ProjectCode)
+ORDER BY Reason, p.Region, p.ProjectName;
+
+-- 4b) به تفکیک منطقه، و برگه‌های چندپروژه‌ای
 SELECT c.Region,
        COUNT(*) AS Projects,
        SUM(CASE WHEN l.ID IS NOT NULL THEN 1 ELSE 0 END) AS WithSheet,
@@ -141,7 +158,7 @@ ORDER BY c.Region;
 
 SELECT m.SheetNo, m.SheetNameFa, COUNT(*) AS Projects
 FROM dbo.MapSheets m JOIN dbo.MapSheetProjects l ON l.SheetID = m.ID
-WHERE l.SourceLayer = N'demo'
+WHERE l.SourceLayer = @Label
 GROUP BY m.SheetNo, m.SheetNameFa HAVING COUNT(*) > 1
 ORDER BY Projects DESC;
 
@@ -149,8 +166,8 @@ DROP TABLE #Cand;
 GO
 
 /* ------------------------------------------------------------------
-   حذف همهء داده‌های دمو (برگه‌ها و اتصال‌های واقعی کارفرما دست نمی‌خورند):
-   DELETE FROM dbo.MapSheetProjects WHERE SourceLayer = N'demo';
-   DELETE FROM dbo.MapSheets WHERE SourceLayer = N'demo'
+   حذف همهء سطرهای محاسبه‌شده (برگه‌ها و اتصال‌های واقعی کارفرما دست نمی‌خورند):
+   DELETE FROM dbo.MapSheetProjects WHERE SourceLayer = N'computed';
+   DELETE FROM dbo.MapSheets WHERE SourceLayer = N'computed'
      AND NOT EXISTS (SELECT 1 FROM dbo.MapSheetProjects l WHERE l.SheetID = MapSheets.ID);
    ------------------------------------------------------------------ */

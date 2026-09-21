@@ -111,9 +111,9 @@ function textFilter(id, label) {
 }
 
 $('#builder-widgets').queryBuilder({
-    plugins: ['bt-tooltip-errors'],
+    plugins: gisQueryBuilderPlugins(),
 
-    filters: [
+    filters: gisSortFilters([
         textFilter('ProjectName', 'نام پروژه'),
         textFilter('ProjectCode', 'کد پروژه'),
         selectizeFilter('ProjectType', 'نوع پروژه', TypeValue, 'string', ['equal', 'not_equal', 'contains']),
@@ -132,7 +132,7 @@ $('#builder-widgets').queryBuilder({
         textFilter('ProjectSupervisor', 'ناظر پروژه'),
         textFilter('OrgLevel1', 'سطح 1 سازمان'),
         textFilter('OrgLevel2', 'سطح 2 سازمان')
-    ]
+    ])
 });
 
 try {
@@ -155,7 +155,7 @@ $('#btn-set').on('click', function () {
 });
 
 $('#btn-Search').on('click', function () {
-    parent.setInformation_Project($('#builder-widgets').queryBuilder('getSQL', false, true));
+    parent.setInformation_Project($('#builder-widgets').queryBuilder('getSQL', false, true), gisDescribeBuilder($('#builder-widgets')));
     parent.ShowAllRoutInMap();
 });
 
