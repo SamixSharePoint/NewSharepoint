@@ -56,10 +56,10 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
             }
         }
 
-        private bool _ShowRegistrationPanel = true;
+        private bool _ShowRegistrationPanel = false;
         [WebBrowsable(true)]
         [WebDisplayName("نمایش پنل ثبت برگه (بارگذاری ZIP)؟")]
-        [WebDescription("فعال: دکمهء «ثبت برگه» در ریبون و پنل بارگذاری Shapefile نمایش داده می‌شود (ادمین). غیرفعال: فقط نمایش و جستجو (کاربر نهایی).")]
+        [WebDescription("غیرفعال (پیش‌فرض): فقط نمایش و جستجو (کاربر نهایی). فعال: دکمهء «ثبت برگه» در ریبون و پنل بارگذاری Shapefile نمایش داده می‌شود (ادمین).")]
         [Personalizable(PersonalizationScope.Shared)]
         [Category("تنظیمات ویژه")]
         public bool ShowRegistrationPanel

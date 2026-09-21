@@ -2891,7 +2891,9 @@ namespace Sazmanyar.GIS
                         names.Add(prm);
                         objCmd.Parameters.Add(prm, SqlDbType.VarChar, 20).Value = codes[i];
                     }
-                    objCmd.CommandText = " SELECT l.ProjectCode, ms.SheetNo, ms.SheetScale, ms.SheetNameFa, ms.SheetNameEn, ms.CentroidLat, ms.CentroidLong, ms.AreaKm2, ms.Boundary " +
+                    objCmd.CommandText = " SELECT l.ProjectCode, ms.SheetNo, ms.SheetScale, ms.SheetSeries, ms.SheetQuarter, ms.SheetNameFa, ms.SheetNameEn, " +
+                                         "        ms.CentroidLat, ms.CentroidLong, ms.AreaKm2, ms.Boundary, ms.SourceFile, ms.SourceLayer, ms.SourceCrs, " +
+                                         "        l.ProjectName AS LinkProjectName, l.Contractor, l.Supervisor, l.Geologist " +
                                          " FROM dbo.MapSheetProjects l JOIN dbo.MapSheets ms ON ms.ID = l.SheetID " +
                                          " WHERE l.ProjectCode IN (" + string.Join(",", names.ToArray()) + ") ORDER BY l.ProjectCode, ms.SheetNo ";
                     DataTable objSheets = new DataTable();

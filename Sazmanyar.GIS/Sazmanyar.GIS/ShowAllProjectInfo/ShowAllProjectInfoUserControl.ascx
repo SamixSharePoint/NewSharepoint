@@ -1030,11 +1030,37 @@
         html += "<tr><td class='lbl'>شروع:</td><td>" + pwaVal(r.StartDateJ) + "</td><td class='lbl'>پایان:</td><td>" + pwaVal(r.FinishDateJ) + "</td></tr>";
         html += "<tr><td class='lbl'>شروع برنامه‌ای:</td><td>" + pwaVal(r.PlannedStartJ) + "</td><td class='lbl'>پایان برنامه‌ای:</td><td>" + pwaVal(r.PlannedFinishJ) + "</td></tr>";
         html += "<tr><td class='lbl'>مدیر پروژه:</td><td>" + pwaVal(r.ProjectManager) + "</td><td class='lbl'>ناظر پروژه:</td><td>" + pwaVal(r.ProjectSupervisor) + "</td></tr>";
-        var sheets = pwaSheets(r);
-        if (sheets.length > 0) {
-            html += "<tr><td class='lbl'>برگه" + (sheets.length > 1 ? " (" + sheets.length + ")" : "") + ":</td><td colspan='3' style='white-space:normal'>" + gisEscapeHtml(pwaSheetLabel(sheets)) + "</td></tr>";
-        }
         html += "</table>";
+        // مشخصات کامل برگه(های) واقعی این پروژه - همان بخش «مشخصات برگه» در ShowAllMapSheetInfo
+        var sheets = pwaSheets(r);
+        for (var si = 0; si < sheets.length; si++) {
+            html += BuildSheetBlockHtml(sheets[si]);
+        }
+        return html;
+    }
+
+    function pwaScale(v) {
+        var n = pwaNum(v);
+        if (n <= 0) { return '-'; }
+        return '1:' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // بلوک یک برگهء واقعی داخل پنجرهء پین: شماره، مادر/ربع، نام‌ها، مساحت، مرکز، مجری/ناظر/زمین‌شناس به روایت فایل کارفرما، منبع
+    function BuildSheetBlockHtml(sh) {
+        var title = 'برگه ' + String(sh.SheetNo || '') + (sh.SheetNameFa ? ' - ' + sh.SheetNameFa : (sh.SheetNameEn ? ' - ' + sh.SheetNameEn : ''));
+        var html = "<div class='pwa-item'><div class='pwa-name'>" + gisEscapeHtml(title) + " <small>(" + pwaScale(sh.SheetScale) + ")</small></div><table>";
+        html += "<tr><td class='lbl'>شماره برگه:</td><td><b>" + pwaVal(sh.SheetNo) + "</b></td><td class='lbl'>برگه مادر / ربع:</td><td>" + pwaVal(sh.SheetSeries) + " / " + pwaVal(sh.SheetQuarter) + "</td></tr>";
+        html += "<tr><td class='lbl'>نام فارسی:</td><td>" + pwaVal(sh.SheetNameFa) + "</td><td class='lbl'>نام انگلیسی:</td><td>" + pwaVal(sh.SheetNameEn) + "</td></tr>";
+        html += "<tr><td class='lbl'>مساحت:</td><td>" + (sh.AreaKm2 ? gisEscapeHtml(String(Math.round(pwaNum(sh.AreaKm2)))) + " km²" : "-") + "</td><td class='lbl'>مرکز:</td><td>" + pwaVal(sh.CentroidLat) + " , " + pwaVal(sh.CentroidLong) + "</td></tr>";
+        if (sh.Contractor || sh.Supervisor || sh.Geologist) {
+            html += "<tr><td class='lbl'>مجری (فایل):</td><td>" + pwaVal(sh.Contractor) + "</td><td class='lbl'>ناظر (فایل):</td><td>" + pwaVal(sh.Supervisor) + "</td></tr>";
+            if (sh.Geologist) { html += "<tr><td class='lbl'>زمین‌شناس:</td><td colspan='3'>" + pwaVal(sh.Geologist) + "</td></tr>"; }
+        }
+        if (sh.LinkProjectName) {
+            html += "<tr><td class='lbl'>عنوان در فایل کارفرما:</td><td colspan='3' style='white-space:normal'>" + pwaVal(sh.LinkProjectName) + "</td></tr>";
+        }
+        html += "<tr><td class='lbl'>منبع:</td><td colspan='3' style='white-space:normal'>" + pwaVal(sh.SourceFile) + (sh.SourceLayer ? " / " + gisEscapeHtml(sh.SourceLayer) : "") + (sh.SourceCrs ? " - " + gisEscapeHtml(sh.SourceCrs) : "") + "</td></tr>";
+        html += "</table></div>";
         return html;
     }
 

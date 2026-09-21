@@ -20,7 +20,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
     {
         #region Variables
         public string InitializeLatLngCamaSemicalonSeperated = "";
-        public bool ShowRegistrationPanel = true;
+        public bool ShowRegistrationPanel = false;
         public bool ShowSheetAreas = false;
         #endregion
 
