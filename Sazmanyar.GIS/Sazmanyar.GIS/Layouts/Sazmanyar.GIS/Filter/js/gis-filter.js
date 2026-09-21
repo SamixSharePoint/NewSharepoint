@@ -174,3 +174,24 @@ function gisDescribeBuilder($builder) {
         return '';
     }
 }
+
+
+// ==== خاموش‌کردن پیشنهادهای خودکار مرورگر روی ورودی‌های شرط ====
+// مرورگر مقادیر تایپ‌شدهء قبلی را زیر فیلدهای متنی/تاریخ نشان می‌دهد و روی تقویم می‌افتد؛ کاربر را به انتخاب اشتباه می‌کشاند.
+// روی هر ورودی شرط (متن، عدد، تاریخ) و کادر جستجوی کمبوها autocomplete=off گذاشته می‌شود.
+jQuery(function ($) {
+    function gisNoAutocomplete($root) {
+        $root.find('input').not('[type=checkbox],[type=radio]').each(function () {
+            this.setAttribute('autocomplete', 'off');
+            this.setAttribute('autocorrect', 'off');
+            this.setAttribute('spellcheck', 'false');
+        });
+    }
+    var $b = $('#builder-widgets');
+    $b.on('afterCreateRuleInput.queryBuilder afterUpdateRuleValue.queryBuilder', function (e, rule) {
+        if (rule && rule.$el) { gisNoAutocomplete(rule.$el); }
+    });
+    // کادر جستجوی Bootstrap-select (کمبوی ستون/عملگر) داخل body باز می‌شود
+    $(document).on('shown.bs.select', function () { gisNoAutocomplete($('.bootstrap-select')); });
+    $(document).on('focusin', 'input', function () { if (!this.getAttribute('autocomplete')) { gisNoAutocomplete($(this).parent()); } });
+});

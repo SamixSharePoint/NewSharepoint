@@ -49,6 +49,8 @@
     .gis-iw-pwa {
         max-height: 380px;
         overflow-y: auto;
+        overflow-x: hidden;
+        padding-left: 6px;
         min-width: 360px;
         direction: rtl;
         text-align: right;
@@ -446,7 +448,7 @@
         margin-bottom: 8px;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921c" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
@@ -1211,7 +1213,7 @@
     }
 
     // ==== خوشه‌بندی وابسته به زوم ====
-    var msClusterEnabled = true;
+    var msClusterEnabled = <%= EnableClustering ? "true" : "false" %>;   // پیش‌فرض از خاصیت وب‌پارت EnableClustering
     var msZoomFull = 10;                 // از این زوم به بعد هر برگه جدا نمایش داده می‌شود
     var msClusterMarkers = [];           // نشانگرهای خوشه که الان روی نقشه‌اند
     var MS_CLUSTER_PX = 44;              // فاصلهء پیکسلی ادغام در سطح دور
@@ -1542,7 +1544,7 @@
                                     <input type="range" id="msZoomFull" min="6" max="14" step="1" value="10" oninput="msApplyZoomFull(this.value);" onchange="msApplyZoomFull(this.value); msRebuildClusters();" />
                                     <span id="msZoomFullValue" class="gis-opacity-value">10</span>
                                     <label class="gis-field-label" style="cursor: pointer;" title="برگه‌های نزدیک به هم در زوم‌های دور یک نشانگر شمارنده می‌شوند؛ کلیک روی آن زوم می‌کند">
-                                        <input type="checkbox" id="chkCluster" checked="checked" onchange="msClusterEnabled = this.checked; msRebuildClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی
+                                        <input type="checkbox" id="chkCluster" <%= EnableClustering ? "checked=\"checked\"" : "" %> onchange="msClusterEnabled = this.checked; msRebuildClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی
                                     </label>
                                 </div>
                                 <div class="gis-legend" title="رنگ برگه = درصد تحقق پروژهء متصل در PWA">

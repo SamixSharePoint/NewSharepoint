@@ -73,6 +73,24 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
             }
         }
 
+        private bool _EnableClustering = true;
+        [WebBrowsable(true)]
+        [WebDisplayName("خوشه‌بندی پین‌ها به‌صورت پیش‌فرض فعال باشد؟")]
+        [WebDescription("فعال (پیش‌فرض): پین‌های نزدیک به هم در هر زوم یک نشانگر شمارنده می‌شوند. غیرفعال: همهء پین‌ها جدا. کاربر با چک‌باکس «خوشه‌بندی پین‌ها» در ریبون می‌تواند عوضش کند.")]
+        [Personalizable(PersonalizationScope.Shared)]
+        [Category("تنظیمات ویژه")]
+        public bool EnableClustering
+        {
+            get
+            {
+                return _EnableClustering;
+            }
+            set
+            {
+                _EnableClustering = value;
+            }
+        }
+
         protected override void CreateChildControls()
         {
             if (this.Page.Header == null)
@@ -85,6 +103,7 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
                 ShowAllProjectInfoUserControl objUserControl = (ShowAllProjectInfoUserControl)Page.LoadControl(ascxPath);
                 objUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                 objUserControl.ShowSheetAreas = ShowSheetAreas;
+                objUserControl.EnableClustering = EnableClustering;
                 Controls.Add(objUserControl);
             }
             catch (Exception ex)

@@ -331,6 +331,10 @@
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\bootstrap.min.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\docs.min.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\css\gis-filter.css" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\fonts\IRANSansWeb.eot" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\fonts\IRANSansWeb.ttf" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\fonts\IRANSansWeb.woff" />
+    <Content Include="Layouts\Sazmanyar.GIS\Filter\fonts\IRANSansWeb.woff2" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\css\gis-ui.css" />
     <Content Include="Layouts\Sazmanyar.GIS\Script\js\gis-ui.js" />
     <Content Include="Layouts\Sazmanyar.GIS\Filter\js\demo_widgetsMapSheet.js" />

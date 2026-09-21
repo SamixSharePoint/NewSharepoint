@@ -43,6 +43,8 @@
     .gis-iw-pwa {
         max-height: 360px;
         overflow-y: auto;
+        overflow-x: hidden;
+        padding-left: 6px;
         min-width: 340px;
         direction: rtl;
         text-align: right;
@@ -277,7 +279,7 @@
         flex: none;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921" />
+<link rel="stylesheet" type="text/css" href="/_layouts/15/Sazmanyar.GIS/Script/css/gis-ui.css?v=20260921c" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <link href="/_layouts/15/Sazmanyar.GIS/Script/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
 <script src="/_layouts/15/Sazmanyar.GIS/Script/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
@@ -1380,7 +1382,7 @@
     // بدون خوشه/پین نمی‌ماند، و موقعیت نشانگر خوشه همیشه روی یکی از پین‌های واقعی (Medoid) است، نه میانگین
     // ریاضی، تا همیشه داخل شکل ناحیهء خودش بیفتد.
     // کلیک روی خوشه: زوم به داخل؛ در بیشترین زوم: فهرست پروژه‌های خوشه. با هر تغییر زوم دوباره محاسبه می‌شود.
-    var pwaClusterEnabled = true;
+    var pwaClusterEnabled = <%= EnableClustering ? "true" : "false" %>;   // پیش‌فرض از خاصیت وب‌پارت EnableClustering
     var pwaClusterMarkers = [];          // نشانگرهای خوشه که الان روی نقشه‌اند
     var PWA_CLUSTER_PX = 40;             // فاصلهء پیکسلی ادغام
     var PWA_MAX_CLUSTER_ZOOM = 13;       // از این زوم به بعد کلیک روی خوشه فهرست را نشان می‌دهد (کاشی‌های آفلاین تا 14)
@@ -1644,7 +1646,7 @@
                                     <input type="range" id="gisClusterKm" min="20" max="200" step="10" value="70" oninput="pwaApplyClusterKm(this.value);" onchange="pwaApplyClusterKm(this.value); pwaRedraw();" />
                                     <span id="gisClusterKmValue" class="gis-opacity-value">70 km</span>
                                     <label class="gis-field-label" style="cursor: pointer;" title="پین‌های نزدیک به هم در هر زوم یک نشانگر شمارنده می‌شوند؛ کلیک روی آن زوم می‌کند">
-                                        <input type="checkbox" id="chkClusterPins" checked="checked" onchange="pwaClusterEnabled = this.checked; pwaRebuildMarkerClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی پین‌ها
+                                        <input type="checkbox" id="chkClusterPins" <%= EnableClustering ? "checked=\"checked\"" : "" %> onchange="pwaClusterEnabled = this.checked; pwaRebuildMarkerClusters();" style="vertical-align: middle; margin: 0 0 0 4px;" />خوشه‌بندی پین‌ها
                                     </label>
                                 </div>
                                 <div class="gis-legend" title="درصد تحقق پروژه (میانگین در پین و ناحیه)">

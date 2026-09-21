@@ -11,6 +11,7 @@ namespace Sazmanyar.GIS.ShowAllProjectInfo
         #region Variables
         public string InitializeLatLngCamaSemicalonSeperated = "";
         public bool ShowSheetAreas = false;
+        public bool EnableClustering = true;
         #endregion
 
         #region Events

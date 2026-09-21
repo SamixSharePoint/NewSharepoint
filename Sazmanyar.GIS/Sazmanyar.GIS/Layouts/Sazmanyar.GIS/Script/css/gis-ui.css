@@ -303,11 +303,37 @@
     border-radius: 12px;
     box-shadow: 0 6px 22px rgba(0, 0, 0, .18);
     background: #fff;
+    /* موتور آفلاین با استایل inline حدود 15px حاشیه دور محتوا می‌گذارد؛ همان حاشیهء سفیدی که «کادر بیرونی» به نظر می‌رسد.
+       صفر می‌شود و فاصلهء داخلی روی خود محتوا (.gis-iw) است تا محتوا و حباب یک کادر باشند. */
+    padding: 0 !important;
+    overflow: hidden !important;
 }
 
 .gm-style .gm-style-iw-d {
     overflow: auto !important;
     background: #fff;
+}
+
+/* موتور آفلاین داخل .gm-style-iw یک div با overflow:auto (inline) می‌گذارد و محتوای ما (.gis-iw-pwa) هم خودش اسکرول
+   دارد؛ دو قاب اسکرول تودرتو یک «کادر داخل کادر» می‌سازند. این‌جا قاب داخلی موتور بی‌اثر می‌شود تا فقط یک اسکرول بماند. */
+.gm-style .gm-style-iw > div {
+    overflow: hidden !important;
+}
+
+/* راهنماهای داخل پنجرهء اطلاعات باید بشکنند، نه اسکرول افقی بسازند */
+.gis-iw .gis-hint {
+    white-space: normal;
+    line-height: 1.7;
+}
+
+/* اسکرول باریک و کم‌رنگ برای محتوای پنجره (مرورگرهای WebKit) */
+.gis-iw::-webkit-scrollbar {
+    width: 6px;
+}
+
+.gis-iw::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
 }
 
 /* padding روی خود محتواست تا موتور نقشه آن را در اندازه‌گیری پنجره حساب کند و چیزی بیرون نزند؛
@@ -321,8 +347,9 @@
     line-height: 1.7;
     unicode-bidi: embed;
     box-sizing: border-box;
-    padding: 6px 8px 4px;
+    padding: 10px 12px 8px;
     display: inline-block;
+    vertical-align: top;
 }
 
     .gis-iw table {

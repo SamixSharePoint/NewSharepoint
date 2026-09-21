@@ -22,6 +22,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
         public string InitializeLatLngCamaSemicalonSeperated = "";
         public bool ShowRegistrationPanel = false;
         public bool ShowSheetAreas = false;
+        public bool EnableClustering = false;
         #endregion
 
         #region Events

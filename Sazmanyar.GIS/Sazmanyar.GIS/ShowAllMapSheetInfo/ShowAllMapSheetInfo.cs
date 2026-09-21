@@ -92,6 +92,24 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
             }
         }
 
+        private bool _EnableClustering = false;
+        [WebBrowsable(true)]
+        [WebDisplayName("خوشه‌بندی برگه‌ها به‌صورت پیش‌فرض فعال باشد؟")]
+        [WebDescription("غیرفعال (پیش‌فرض): هر برگه در همهء زوم‌ها جدا نمایش داده می‌شود. فعال: خوشه‌بندی سه‌سطحی وابسته به زوم. کاربر با چک‌باکس «خوشه‌بندی» در ریبون می‌تواند عوضش کند.")]
+        [Personalizable(PersonalizationScope.Shared)]
+        [Category("تنظیمات ویژه")]
+        public bool EnableClustering
+        {
+            get
+            {
+                return _EnableClustering;
+            }
+            set
+            {
+                _EnableClustering = value;
+            }
+        }
+
         protected override void CreateChildControls()
         {
             if (this.Page.Header == null)
@@ -105,6 +123,7 @@ namespace Sazmanyar.GIS.ShowAllMapSheetInfo
                 objUserControl.InitializeLatLngCamaSemicalonSeperated = InitializeLatLngCamaSemicalonSeperated;
                 objUserControl.ShowRegistrationPanel = ShowRegistrationPanel;
                 objUserControl.ShowSheetAreas = ShowSheetAreas;
+                objUserControl.EnableClustering = EnableClustering;
                 Controls.Add(objUserControl);
             }
             catch (Exception ex)

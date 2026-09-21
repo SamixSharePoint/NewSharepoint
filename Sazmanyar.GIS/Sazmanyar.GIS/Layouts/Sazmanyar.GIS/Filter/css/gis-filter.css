@@ -1,4 +1,5 @@
-﻿/* ==== فونت صفحه‌های جستجوی پیشرفته: IRANSansWeb (فایل‌ها در Filter/fonts؛ اگر نباشند مرورگر به Tahoma می‌افتد) ==== */
+﻿@charset "UTF-8";
+/* ==== فونت صفحه‌های جستجوی پیشرفته: IRANSansWeb (Filter/fonts، فقط وزن معمولی؛ ضخیم از همان ساخته می‌شود). اگر فایل‌ها نباشند مرورگر به Tahoma می‌افتد ==== */
 @font-face {
     font-family: 'IRANSansWeb';
     font-style: normal;
@@ -10,18 +11,6 @@
          url('../fonts/IRANSansWeb.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'IRANSansWeb';
-    font-style: normal;
-    font-weight: 700;
-    src: url('../fonts/IRANSansWeb_Bold.eot');
-    src: url('../fonts/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/IRANSansWeb_Bold.woff2') format('woff2'),
-         url('../fonts/IRANSansWeb_Bold.woff') format('woff'),
-         url('../fonts/IRANSansWeb_Bold.ttf') format('truetype');
-}
-
-@charset "UTF-8";
 /* ظاهر مشترک سه صفحهٔ تنظیمات جستجو (ایستگاه / مسیر / سطح) که داخل fancybox باز می‌شوند.
    روی Bootstrap 3 و jQuery QueryBuilder سوار است؛ فقط رنگ/فاصله/گوشه را هماهنگ با
    پنل‌های نقشه می‌کند و به id/کلاس‌هایی که اسکریپت‌ها به آن‌ها وابسته‌اند دست نمی‌زند. */
